@@ -16,13 +16,13 @@
                 </div>
             </form>
         </div>
-        <div class="pt-2">
+        <div class="pt-1">
             <!-- Default box -->
             <div class="card collapsed-card">
                 <div class="card-header">
-                    <h3 class="card-title">Training</h3>
-
-
+                    <h3 class="card-title">
+                        Training
+                    </h3>
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
                             title="Collapse">
@@ -32,7 +32,14 @@
                 <div class="card-body p-0" style="display: none;">
                     <div class="card collapsed-card">
                         <div class="card-header">
-                            <h3 class="card-title">Culture</h3>
+                            <h3 class="card-title">
+                                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <?php foreach ($jenis as $key => $value) : ?>
+                                    <option id="category" value="<?= $value->jenis_training ?>">
+                                        <?= $value->jenis_training ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </h3>
 
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse"
@@ -41,7 +48,7 @@
                             </div>
                         </div>
                         <div class="card-body p-0" style="display: none;">
-                            <table class="table table-striped projects">
+                            <table id="example" class="display" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th style="width: 1%">

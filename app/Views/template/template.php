@@ -10,6 +10,8 @@
 
         <script src="https://kit.fontawesome.com/90e89a2bd2.js" crossorigin="anonymous"></script>
 
+
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
         <!-- Font Awesome Icons -->
         <link rel="stylesheet" href="<?= base_url() ?>/AdminLTE/plugins/fontawesome-free/css/all.min.css">
         <!-- IonIcons -->
@@ -236,6 +238,9 @@ to get the desired effect
         <script src="<?= base_url() ?>/AdminLTE/plugins/chart.js/Chart.min.js"></script>
         <script src="<?= base_url() ?>/AdminLTE/dist/js/demo.js"></script>
         <script src="<?= base_url() ?>/AdminLTE/dist/js/pages/dashboard3.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
     </body>
 
 </html>

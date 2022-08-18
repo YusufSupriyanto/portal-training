@@ -19,11 +19,18 @@ class C_ListTraining extends BaseController
     }
     public function index()
     {
+        $get =  $this->training->getCategory();
 
+
+        $category = $this->request->getVar('category');
+
+        $categories = $this->training->getList($category);
         $data = [
             'tittle' => 'List Training',
-            // 'training' => $this->training->getList()
+            'jenis' => $get,
+            'training' => $categories,
         ];
+
         return view('admin/list_training', $data);
     }
 

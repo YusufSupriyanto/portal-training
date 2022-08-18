@@ -27,4 +27,10 @@ class Test extends BaseController
         $data = $this->training->getList($category);
         dd($data);
     }
+
+    public function getCategories()
+    {
+        $data = $this->training->getCategory();
+        dd($data);
+    }
 }
