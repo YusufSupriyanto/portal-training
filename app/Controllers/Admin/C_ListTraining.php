@@ -20,23 +20,28 @@ class C_ListTraining extends BaseController
     public function index()
     {
         $get =  $this->training->getCategory();
-
-
-        $category = $this->request->getVar('category');
-
+        $category = $this->request->getVar('filter');
         $categories = $this->training->getList($category);
+
+        if ($categories) {
+            $list = $categories;
+        } else {
+            $list = $this->training->getAll();
+        }
         $data = [
             'tittle' => 'List Training',
             'jenis' => $get,
-            'training' => $categories,
+            'training' => $list,
         ];
-
         return view('admin/list_training', $data);
     }
 
     public function import()
     {
         $file = $this->request->getFile('file');
+        if ($file == "") {
+            return redirect()->to('/list_training');
+        }
         $ext = $file->getClientExtension();
         if ($ext == 'xls') {
             $render = new
@@ -50,7 +55,9 @@ class C_ListTraining extends BaseController
         $sheet = $spreadsheet->getActiveSheet()->toArray();
 
 
+
         for ($i = 1; $i < count($sheet); $i++) {
+            // var_dump($sheet[$i][1]);
             $data = [
                 'judul_training' => $sheet[$i][1],
                 'jenis_training' => $sheet[$i][2],
@@ -60,8 +67,8 @@ class C_ListTraining extends BaseController
 
             ];
             $this->training->save($data);
-
-            return redirect()->to('/list_training');
         }
+        session()->setFlashdata('import', 'Data Berhasil Di Import');
+        return redirect()->to('/list_training');
     }
 }

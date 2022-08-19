@@ -36,7 +36,7 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 //test
-$routes->get('/test', 'Test::getCategories');
+$routes->get('/test', 'Test::getAlls');
 
 
 
@@ -51,6 +51,10 @@ $routes->get('/home', 'Home::index');
 $routes->get('/list_training', 'Admin\C_ListTraining::index');
 //list training
 $routes->post('/import', 'Admin\C_ListTraining::import');
+
+
+//Form TNA
+$routes->get('/tna', 'Admin\C_Tna::index');
 
 
 /*

@@ -26,9 +26,17 @@ class M_ListTraining extends Model
         return $query;
     }
 
+
     public  function getList($category)
     {
-        $list =  $this->select()->where('jenis_training', $category);
-        return $list->get()->getResult();
+        $list =  $this->select()->where('jenis_training', $category)->get();
+        return $list->getResult();
+    }
+
+
+    public function getAll()
+    {
+        $data = $this->select('*')->get();
+        return $data->getResult();
     }
 }

@@ -11,7 +11,7 @@
         <script src="https://kit.fontawesome.com/90e89a2bd2.js" crossorigin="anonymous"></script>
 
 
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+        <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"> -->
         <!-- Font Awesome Icons -->
         <link rel="stylesheet" href="<?= base_url() ?>/AdminLTE/plugins/fontawesome-free/css/all.min.css">
         <!-- IonIcons -->
@@ -145,13 +145,14 @@ to get the desired effect
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="./index2.html" class="nav-link">
+                                        <a href="" class="nav-link ">
                                             <i class="fas  fa-list-alt nav-icon"></i>
                                             <p>Our Schedule</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="./index3.html" class="nav-link ">
+                                        <a href="<?= base_url() ?>/tna" class="nav-link <?php if ($page == 'tna') : echo 'active';
+                                                                                    endif; ?>">
                                             <i class="fas fa-edit nav-icon"></i>
                                             <p>Form TNA</p>
                                         </a>
@@ -238,9 +239,10 @@ to get the desired effect
         <script src="<?= base_url() ?>/AdminLTE/plugins/chart.js/Chart.min.js"></script>
         <script src="<?= base_url() ?>/AdminLTE/dist/js/demo.js"></script>
         <script src="<?= base_url() ?>/AdminLTE/dist/js/pages/dashboard3.js"></script>
-        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-        <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-
+        <!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script> -->
+        <script src="<?= base_url() ?>/sweet/sweetalert2.all.min.js"></script>
+        <script src="<?= base_url() ?>/sweet/training.js"></script>
     </body>
 
 </html>
