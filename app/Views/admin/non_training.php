@@ -43,15 +43,15 @@
                 </div>
             </div>
             <div class="text-center">
-                <img class="profile-user-img img-fluid img-circle" style="width:128px;height:128px;"
-                    src="<?= $categories->path  ?>" alt="User profile picture">
+                <img class="profile-user-img img-fluid img-circle" src="<?= $categories->path  ?>"
+                    alt="User profile picture">
             </div>
 
             <h3 class="profile-username text-center m-3 text-bold"><?= $categories->category ?></h3>
 
             <p class="text-muted text-left m-3"><?= $categories->deskripsi ?></p>
             <a href="<?= base_url() ?>/detail/<?= $categories->category ?>"
-                class="btn btn-primary btn-lg "><b>Detail</b></a>
+                class="btn btn-primary btn-sm"><b>Detail</b></a>
 
         </div>
 

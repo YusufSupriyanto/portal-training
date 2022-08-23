@@ -42,9 +42,16 @@ class Login extends BaseController
                 'bagian' => $row->bagian,
                 'level' => $row->level,
             );
-            session()->set($data);
-            session()->setFlashdata('message', 'Login Berhasil');
-            return redirect()->to('/home');
+
+            if ($data['level'] == 'USER') {
+                session()->set($data);
+                session()->setFlashdata('message', 'Login Berhasil');
+                return redirect()->to('/home_user');
+            } else {
+                session()->set($data);
+                session()->setFlashdata('message', 'Login Berhasil');
+                return redirect()->to('/home');
+            }
         }
         // session()->setFlashdata('message', 'Password Salah');
         return redirect()->to('/');

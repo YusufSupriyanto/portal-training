@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\M_Categories;
 use App\Models\M_ListTraining;
 use App\Models\UserModel;
 
@@ -11,10 +12,13 @@ class Test extends BaseController
     private UserModel $userModel;
     private M_ListTraining $training;
 
+    private M_Categories $category;
+
     public function __construct()
     {
         $this->userModel = new UserModel();
         $this->training = new M_ListTraining();
+        $this->category = new M_Categories();
     }
     public function test()
     {
@@ -30,14 +34,13 @@ class Test extends BaseController
 
     public function getCategories()
     {
-        $data = $this->training->getCategory();
+        $data = $this->category->getAllCategory();
         dd($data);
     }
 
 
-    public function getAlls()
+    public function alls()
     {
-        $data = $this->training->getAll();
-        dd($data);
+        // $data =  $this->training->
     }
 }

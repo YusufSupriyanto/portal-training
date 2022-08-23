@@ -36,7 +36,7 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 //test
-$routes->get('/test', 'Test::getAlls');
+$routes->get('/test', 'Test::getCategories');
 
 
 
@@ -48,13 +48,37 @@ $routes->get('/logout', 'Login::logout');
 
 //Home
 $routes->get('/home', 'Home::index');
-$routes->get('/list_training', 'Admin\C_ListTraining::index');
+
+
+//categories
+
+
 //list training
+$routes->get('/list_training', 'Admin\C_ListTraining::index');
+$routes->get('/non_training', 'Admin\C_ListTraining::nonTraining');
+$routes->get('/detail/(:any)', 'Admin\C_ListTraining::detail/$1');
+$routes->post('/addCategory', 'Admin\C_ListTraining::addCategory');
 $routes->post('/import', 'Admin\C_ListTraining::import');
+$routes->post('/import2', 'Admin\C_ListTraining::import2');
+$routes->delete('/delete/(:num)', 'Admin\C_ListTraining::delete/$1');
+$routes->get('/update/(:num)', 'Admin\C_ListTraining::update/$1');
+$routes->post('/edit/(:num)', 'Admin\C_ListTraining::edit/$1');
+
+
+//User
+$routes->get('/user', 'Admin\C_User::index');
+$routes->post('/addUser', 'Admin\C_User::addUser');
 
 
 //Form TNA
 $routes->get('/tna', 'Admin\C_Tna::index');
+
+//Home User
+$routes->get('/home_user', 'User\Home::index');
+
+$routes->get('/tna_user', 'User\FormTna::index');
+
+
 
 
 /*

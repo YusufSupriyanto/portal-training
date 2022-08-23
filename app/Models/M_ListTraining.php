@@ -21,9 +21,8 @@ class M_ListTraining extends Model
 
     public function getCategory()
     {
-        $this->select('jenis_training')->distinct();
-        $query =  $this->get()->getResult();
-        return $query;
+        $this->select('jenis_training,deskripsi')->distinct();
+        return $this->get()->getResult();
     }
 
 

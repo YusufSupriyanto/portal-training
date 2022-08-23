@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use PhpParser\Node\Stmt\Return_;
 
 class UserModel extends Model
 {
@@ -17,6 +18,17 @@ class UserModel extends Model
         $this->where('username', $username);
         $data = $this->get()->getRow();
         return $data;
+    }
+
+
+    public function getAllUser($id = false)
+    {
+        if ($id == false) {
+            $this->select()->where('level', 'USER');
+            return $this->get()->getResult();
+        }
+
+        return $this->where(['id_user' => $id])->first();
     }
 
     function M_test()

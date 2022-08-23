@@ -1,4 +1,4 @@
-<?= $this->extend('/template/template') ?>
+<?= $this->extend('/template/templateuser') ?>
 
 <?= $this->section('content') ?>
 <div class="card m-3">
@@ -17,15 +17,12 @@
                 <tr>
                     <th>No</th>
                     <th>Nama</th>
-                    <th>Jabatan</th>
-                    <th>Golongan</th>
+                    <th>Status</th>
+                    <th>Divisi</th>
+                    <th>Departemen</th>
                     <th>Seksi</th>
-                    <th>Jenis Training</th>
-                    <th>Kategori Training</th>
-                    <th>Training</th>
-                    <th>Metode</th>
-                    <th>Rencana Training</th>
-                    <th>Tujuan Training</th>
+                    <th>Bagian</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
