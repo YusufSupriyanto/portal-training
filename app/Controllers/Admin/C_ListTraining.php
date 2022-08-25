@@ -124,7 +124,7 @@ class C_ListTraining extends BaseController
             ];
             $this->nontraining->save($data);
         }
-        session()->setFlashdata('import', 'Data Berhasil Di Import');
+        session()->setFlashdata('success', 'Data Berhasil Di Import');
         return redirect()->to('/non_training');
     }
 
@@ -160,7 +160,7 @@ class C_ListTraining extends BaseController
             ];
             $this->training->save($data);
         }
-        session()->setFlashdata('import', 'Data Berhasil Di Import');
+        session()->setFlashdata('success', 'Data Berhasil Di Import');
         return redirect()->to('/list_training');
     }
 
@@ -192,14 +192,14 @@ class C_ListTraining extends BaseController
             ];
             $this->category->save($data);
         }
-        session()->setFlashdata('import', 'Data Berhasil Di Import');
+        session()->setFlashdata('success', 'Data Berhasil Di Import');
         return redirect()->to('/list_training');
     }
 
     public function delete($id)
     {
         $this->category->delete($id);
-        session()->setFlashdata('delete', 'Category berhasil di Hapus');
+        session()->setFlashdata('success', 'Category berhasil di Hapus');
         return redirect()->to('/list_training');
     }
 }

@@ -1,16 +1,14 @@
 <?= $this->extend('/template/template') ?>
 
 <?= $this->section('content') ?>
+<div class="success" data-success="<?= session()->get('success'); ?>"></div>
 <div class="card m-3">
     <div class="card-header">
         <!-- <h3 class="card-title">User</h3> -->
         <div class="card-tools">
             <div class="card-tools">
                 <div class="card flex-row-reverse">
-                    <div class="m">
-                        <button type="button" class="btn btn-block btn-danger btn-sm h-100">Add User</button>
-                    </div>
-                    <div class="mr-3">
+                    <div class="">
                         <form action="<?= base_url() ?>/addUser" method="post" enctype="multipart/form-data">
                             <div class="input-group">
 
@@ -55,8 +53,13 @@
                     <td><?= $users->status ?></td>
                     <td>
                         <div class="row">
-                            <a type="button" class="btn btn-danger btn-sm">Delete</a>
-                            <a type="button" class="btn btn-warning btn-sm"><i class="fa fa-fw fa-edit"></i></a>
+                            <form action="<?= base_url() ?>\delete\user\<?= $users->id_user ?>" method="post">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="btn btn-danger btn-sm btn-delete"><i
+                                        class="fa fa-fw fa-trash"></i></button>
+                            </form>
+                            <a href="<?= base_url() ?>\update\user\<?= $users->id_user ?>" type="button"
+                                class="btn btn-warning btn-sm mt-2"><i class="fa fa-fw fa-edit"></i></a>
                         </div>
                     </td>
                     </td>

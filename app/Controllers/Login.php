@@ -39,6 +39,7 @@ class Login extends BaseController
                 'log' => true,
                 'nama' => $row->nama,
                 'username' => $row->username,
+                'departemen' => $row->departemen,
                 'bagian' => $row->bagian,
                 'level' => $row->level,
             );

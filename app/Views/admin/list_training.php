@@ -1,7 +1,7 @@
 <?= $this->extend('/template/template') ?>
 
 <?= $this->section('content') ?>
-<div class="import" data-import="<?= session()->get('import'); ?>"></div>
+<div class="success" data-success="<?= session()->get('success'); ?>"></div>
 <div class="card-tools p-3">
     <div class="card flex-row-reverse">
         <div class="m">
@@ -38,7 +38,7 @@
                 <div class="pl-2">
                     <form action="<?= base_url() ?>/delete/<?= $categories->id_categories  ?>" method="POST">
                         <input type="hidden" name="_method" value="DELETE">
-                        <button type="submit" class="btn btn-danger btn-sm btn-category">Delete</button>
+                        <button type="submit" class="btn btn-danger btn-sm btn-delete">Delete</button>
                     </form>
                 </div>
             </div>

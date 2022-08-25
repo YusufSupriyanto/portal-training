@@ -3,7 +3,7 @@ $(document).ready(function() {
 });
 
 
-const list = $('.import').data('import')
+const list = $('.success').data('success')
 if (list) {
     Swal.fire({
         title: list,
@@ -17,7 +17,7 @@ $(document).ready(function() {
 });
 
 
-$('.btn-category').on('click', function(e) {
+$('.btn-delete').on('click', function(e) {
     e.preventDefault();
     const href = $(this).parents('form');
     Swal.fire({
@@ -27,7 +27,7 @@ $('.btn-category').on('click', function(e) {
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Hapus Akun!'
+        confirmButtonText: 'Hapus Data!'
     }).then((result) => {
         if (result.isConfirmed) {
             href.submit();
@@ -38,4 +38,8 @@ $('.btn-category').on('click', function(e) {
 //user
 $(document).ready(function() {
     $('#user-table').DataTable();
+});
+
+$(document).ready(function() {
+    $('#member').DataTable();
 });

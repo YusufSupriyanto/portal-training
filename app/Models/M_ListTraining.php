@@ -38,4 +38,17 @@ class M_ListTraining extends Model
         $data = $this->select('*')->get();
         return $data->getResult();
     }
+
+
+    public function getTna($judul_training)
+    {
+        $this->select()->where('judul_training', $judul_training);
+        return $this->get()->getResult();
+    }
+
+    public function getIdTraining($id = false)
+    {
+
+        return $this->where(['id_training' => $id])->first();
+    }
 }

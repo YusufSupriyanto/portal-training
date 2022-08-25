@@ -31,6 +31,15 @@ class UserModel extends Model
         return $this->where(['id_user' => $id])->first();
     }
 
+
+    public function filter($bagian, $departemen = false)
+    {
+        if ($bagian == "BOD") {
+            $this->select()->where('bagian', 'KADEPT');
+            return $this->get()->getResult();
+        }
+    }
+
     function M_test()
     {
         $data = $this->get();

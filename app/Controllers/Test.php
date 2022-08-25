@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Controllers\User\FormTna;
 use App\Models\M_Categories;
 use App\Models\M_ListTraining;
 use App\Models\UserModel;
@@ -14,11 +15,14 @@ class Test extends BaseController
 
     private M_Categories $category;
 
+    private FormTna $tna;
+
     public function __construct()
     {
         $this->userModel = new UserModel();
         $this->training = new M_ListTraining();
         $this->category = new M_Categories();
+        $this->tna = new FormTna();
     }
     public function test()
     {
@@ -39,8 +43,9 @@ class Test extends BaseController
     }
 
 
-    public function alls()
-    {
-        // $data =  $this->training->
-    }
+    // public function testAjaxTna()
+    // {
+    //     $this
+
+    // }
 }

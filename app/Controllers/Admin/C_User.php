@@ -57,11 +57,47 @@ class C_User extends BaseController
                 'password' => password_hash($sheet[$i][9], PASSWORD_DEFAULT),
                 'level' => $sheet[$i][10],
 
-
             ];
             $this->user->save($data);
         }
-        session()->setFlashdata('import', 'Data Berhasil Di Import');
+        session()->setFlashdata('success', 'Data Berhasil Di Import');
+        return redirect()->to('/user');
+    }
+
+
+    public function update($id)
+    {
+        $data = [
+            'tittle' => 'Edit User',
+            'user' => $this->user->getAllUser($id)
+        ];
+
+        return view('admin/edituser', $data);
+    }
+
+    public function edit($id)
+    {
+        $data = [
+            'id_user' => $id,
+            'npk' => $this->request->getVar('npk'),
+            'nama' => $this->request->getVar('nama'),
+            'status' => $this->request->getVar('status'),
+            'divisi' => $this->request->getVar('divisi'),
+            'departemen' => $this->request->getVar('departemen'),
+            'bagian' => $this->request->getVar('bagian'),
+        ];
+
+        $this->user->save($data);
+        session()->setFlashdata('success', 'Data Berhasil Di Update');
+        return redirect()->to('/user');
+    }
+
+
+    public function delete($id)
+    {
+
+        $this->user->delete($id);
+        session()->setFlashdata('success', 'Data Berhasil Di Hapus');
         return redirect()->to('/user');
     }
 }

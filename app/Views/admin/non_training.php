@@ -38,7 +38,7 @@
                 <div class="pl-2">
                     <form action="<?= base_url() ?>/delete/<?= $categories->id_categories  ?>" method="POST">
                         <input type="hidden" name="_method" value="DELETE">
-                        <button type="submit" class="btn btn-danger btn-sm btn-category">Delete</button>
+                        <button type="submit" class="btn btn-danger btn-sm btn-delete">Delete</button>
                     </form>
                 </div>
             </div>

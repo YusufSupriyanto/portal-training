@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="overflow-auto">
 
     <head>
         <meta charset="utf-8">
@@ -9,7 +9,7 @@
         <title><?= $tittle ?></title>
 
         <script src="https://kit.fontawesome.com/90e89a2bd2.js" crossorigin="anonymous"></script>
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
         <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
         <!-- Font Awesome Icons -->
@@ -133,7 +133,7 @@ to get the desired effect
 
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-chart-pie"></i>
+                                    <i class="fa fa-fw fa-list"></i>
                                     <p>
                                         List Pengembangan
                                         <i class="right fas fa-angle-left"></i>
@@ -141,15 +141,15 @@ to get the desired effect
                                 </a>
                                 <ul class="nav nav-treeview" style="display: none;">
                                     <li class="nav-item">
-                                        <a href="<?= base_url() ?>/list_training" class="nav-link  <?php if ($page == 'list_training') : echo 'active';
-                                                                                                endif; ?>">
+                                        <a href="<?= base_url() ?>/list_training_user" class="nav-link  <?php if ($page == 'list_training_user') : echo 'active';
+                                                                                                    endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Training</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="<?= base_url() ?>/non_training" class="nav-link <?php if ($page == 'non_training') : echo 'active';
-                                                                                                endif; ?>">
+                                        <a href="<?= base_url() ?>/non_training_user" class="nav-link <?php if ($page == 'non_training_user') : echo 'active';
+                                                                                                    endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Non Training</p>
                                         </a>
@@ -166,15 +166,15 @@ to get the desired effect
                                 </a>
                                 <ul class="nav nav-treeview" style="display: none;">
                                     <li class="nav-item">
-                                        <a href="<?= base_url() ?>/tna_user" class="nav-link  <?php if ($page == 'list_training') : echo 'active';
-                                                                                            endif; ?>">
+                                        <a href="<?= base_url() ?>/data_member" class="nav-link  <?php if ($page == 'list_training') : echo 'active';
+                                                                                                endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Form TNA</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="<?= base_url() ?>/non_training" class="nav-link <?php if ($page == 'non_training') : echo 'active';
-                                                                                                endif; ?>">
+                                        <a href="" class="nav-link <?php if ($page == 'non_training') : echo 'active';
+                                                                endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Form IDP</p>
                                         </a>
@@ -234,6 +234,8 @@ to get the desired effect
         <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
         <script src="<?= base_url() ?>/sweet/sweetalert2.all.min.js"></script>
         <script src="<?= base_url() ?>/sweet/training.js"></script>
+        <script src="<?= base_url() ?>/sweet/setup.js"></script>
+
     </body>
 
 </html>
