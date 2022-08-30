@@ -173,6 +173,13 @@ to get the desired effect
                                         </a>
                                     </li>
                                     <li class="nav-item">
+                                        <a href="<?= base_url() ?>/status_tna" class="nav-link  <?php if ($page == 'status_tna') : echo 'active';
+                                                                                            endif; ?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Status TNA</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
                                         <a href="" class="nav-link <?php if ($page == 'non_training') : echo 'active';
                                                                 endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>

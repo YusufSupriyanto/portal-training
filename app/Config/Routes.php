@@ -98,6 +98,8 @@ $routes->get('/form_tna/(:num)', 'User\FormTna::TnaUser/$1');
 $routes->get('/User/FormTna', 'User\FormTna::AjaxTna');
 $routes->post('/User/FormTna', 'User\FormTna::AjaxTna');
 $routes->post('/tna/form/(:num)/(:num)', 'User\FormTna::TnaForm/$1/$2');
+$routes->post('/tna/send', 'User\FormTna::TnaSend');
+$routes->get('/status_tna', 'User\FormTna::status');
 
 
 /*

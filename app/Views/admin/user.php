@@ -33,6 +33,7 @@
                 <tr>
                     <th>Nama</th>
                     <th>Status</th>
+                    <th>DIC</th>
                     <th>Divisi</th>
                     <th>Departemen</th>
                     <th>Seksi</th>
@@ -46,6 +47,7 @@
                 <tr>
                     <td><?= $users->nama ?></td>
                     <td><?= $users->status ?></td>
+                    <td><?= $users->dic ?></td>
                     <td><?= $users->divisi ?></td>
                     <td><?= $users->departemen ?></td>
                     <td><?= $users->seksi ?></td>

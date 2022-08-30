@@ -43,19 +43,21 @@ class C_User extends BaseController
 
 
 
+
         for ($i = 1; $i < count($sheet); $i++) {
             // var_dump($sheet[$i][1]);
             $data = [
                 'npk' => $sheet[$i][1],
                 'nama' => $sheet[$i][2],
                 'status' => $sheet[$i][3],
-                'divisi' => $sheet[$i][4],
-                'departemen' => $sheet[$i][5],
-                'seksi' => $sheet[$i][6],
-                'bagian' => $sheet[$i][7],
-                'username' => $sheet[$i][8],
-                'password' => password_hash($sheet[$i][9], PASSWORD_DEFAULT),
-                'level' => $sheet[$i][10],
+                'dic' => $sheet[$i][4],
+                'divisi' => $sheet[$i][5],
+                'departemen' => $sheet[$i][6],
+                'seksi' => $sheet[$i][7],
+                'bagian' => $sheet[$i][8],
+                'username' => $sheet[$i][9],
+                'password' => password_hash($sheet[$i][10], PASSWORD_DEFAULT),
+                'level' => $sheet[$i][11],
 
             ];
             $this->user->save($data);

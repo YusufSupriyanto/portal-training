@@ -37,8 +37,11 @@ class Login extends BaseController
         if (password_verify($password, $row->password)) {
             $data = array(
                 'log' => true,
+                'id' => $row->id_user,
                 'nama' => $row->nama,
                 'username' => $row->username,
+                'dic' => $row->dic,
+                'divisi' => $row->divisi,
                 'departemen' => $row->departemen,
                 'bagian' => $row->bagian,
                 'level' => $row->level,

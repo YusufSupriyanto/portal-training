@@ -21,11 +21,13 @@ class FormTna extends BaseController
     }
     public function index()
     {
-        $bagian = session()->get('bagian');
-        $user = $this->user->filter($bagian);
+        $id = session()->get('id');
+        $user = $this->user->filter($id);
+        $tna = $this->tna->getAllTna();
         $data = [
             'tittle' => 'Data Member',
-            'user' => $user
+            'user' => $user,
+            'tna' => $tna
         ];
         return view('user/datamember', $data);
     }
@@ -35,15 +37,33 @@ class FormTna extends BaseController
     {
         $user = $this->user->getAllUser($id);
         $trainings = $this->training->getAll();
+        $tna = $this->tna->getAllTna($id);
 
 
         $data = [
             'tittle' => 'TRAINING NEED ANALYSIS',
             'user' => $user,
-            'training' => $trainings
+            'training' => $trainings,
+            'tna' => $tna
         ];
         return view('user/formtna', $data);
     }
+
+    public function status()
+    {
+        $data = [
+            'tittle' => 'Status TNA',
+        ];
+        return view('user/statustna', $data);
+    }
+
+    public function TnaSend()
+    {
+        $data =  $_POST['training'];
+        var_dump($data[0]);
+    }
+
+
 
     public function AjaxTna()
     {
@@ -58,7 +78,7 @@ class FormTna extends BaseController
         $user = $this->user->getAllUser($id_user);
         $jenis_trainng = $this->training->getIdTraining($id_training);
 
-
+        // dd($jenis_trainng);
         $data = [
             'id_user' => $id_user,
             'id_training' => $id_training,
@@ -78,8 +98,9 @@ class FormTna extends BaseController
             'status' => 'save',
 
         ];
-        // $this->tna->save($data);
-
-        return redirect()->to('\form_tna\(:num)');
+        // dd($data);
+        $this->tna->save($data);
+        session()->setFlashdata('success', 'TNA Berhasil Disimpan');
+        return redirect()->to('/form_tna/' . $id_user);
     }
 }

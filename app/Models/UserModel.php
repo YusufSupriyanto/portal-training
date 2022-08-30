@@ -11,7 +11,7 @@ class UserModel extends Model
     protected $table      = 'user';
     protected $primaryKey = 'id_user';
     // protected $useAutoIncrement = true;
-    protected $allowedFields = ['npk', 'nama', 'status', 'divisi', 'departemen', 'seksi', 'bagian', 'username', 'password', 'level'];
+    protected $allowedFields = ['npk', 'nama', 'status', 'dic', 'divisi', 'departemen', 'seksi', 'bagian', 'username', 'password', 'level'];
 
     function get_data_login($username)
     {
@@ -32,10 +32,22 @@ class UserModel extends Model
     }
 
 
-    public function filter($bagian, $departemen = false)
+    public function filter($id)
     {
-        if ($bagian == "BOD") {
-            $this->select()->where('bagian', 'KADEPT');
+        $data = $this->getAllUser($id);
+
+        if ($data['bagian'] == "BOD") {
+            $this->select()->where('bagian', 'KADIV')->where('dic', $data['dic']);
+            return $this->get()->getResult();
+        } elseif ($data['bagian'] == "KADIV") {
+            $this->select()->where('bagian', 'KADEPT')->where('divisi', $data['divisi']);
+            return $this->get()->getResult();
+        } elseif ($data['bagian']  == "KADEPT") {
+            $bagian = ['KASIE', 'STAFF 4UP', 'STAFF'];
+            $this->select()->whereIn('bagian', $bagian)->where('departemen', $data['departemen']);
+            return $this->get()->getResult();
+        } else {
+            $this->select()->where('id_user', $id);
             return $this->get()->getResult();
         }
     }

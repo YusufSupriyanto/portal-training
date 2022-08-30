@@ -1,6 +1,7 @@
 <?= $this->extend('/template/templateuser') ?>
 
 <?= $this->section('content') ?>
+<div class="success" data-success="<?= session()->get('success'); ?>"></div>
 <div class="card m-3 overflow-auto">
     <div class="card-header d-flex justify-content-center">
         <h3 class="card-title"><?= $tittle  ?></h3>
@@ -60,7 +61,8 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <input type="month" id="rencana" name="rencana">
+                                        <input class="datepicker" data-date-format="mm/dd/yyyy" name="rencana"
+                                            type="date">
                                     </td>
                                     <td><textarea name="tujuan"></textarea></td>
                                     <td><textarea name="notes"></textarea></td>
@@ -80,11 +82,53 @@
             <button class="btn btn-primary "><i class="fa fa-fw fa-save"></i></button>
         </div>
     </form>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Data Form TNA</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body p-0">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Training</th>
+                        <th>Jenis Training</th>
+                        <th>Kategori Training</th>
+                        <th>Metode Training</th>
+                        <th>Rencana Training</th>
+                        <th>Tujuan Training</th>
+                        <th>Notes</th>
+                        <th>Estimasi Budget</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($tna as $Forms) : ?>
+                    <tr>
+                        <td><?= $Forms->training ?></td>
+                        <td><?= $Forms->jenis_training ?></td>
+                        <td><?= $Forms->kategori_training ?></td>
+                        <td><?= $Forms->metode_training ?></td>
+                        <td><?= $Forms->rencana_training ?></td>
+                        <td><?= $Forms->tujuan_training ?></td>
+                        <td><?= $Forms->notes ?></td>
+                        <td><?= $Forms->biaya ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <button class="btn btn"></button>
+        </div>
+        <!-- /.card-body -->
+    </div>
 </div>
+
 <script>
 $(function() {
-    $('.datepicker').datepicker({
-        format: 'mm-yyyy'
+    $('#datepicker').datepicker({
+        format: 'mm/dd/yyyy',
+        startDate: '-3d'
     });
 });
 
@@ -104,7 +148,10 @@ $("#training").on('change', function() {
         },
         success: function(data) {
 
+
             console.log(data.jenis_training);
+
+
             $("#jenis_training").html(
                 `<span>${data.jenis_training}</span>`
             );
@@ -112,8 +159,7 @@ $("#training").on('change', function() {
                 `<span>${data.biaya}</span>`
             );
             $("#form-tna").attr('action',
-                '<?= base_url() ?>/tna/form/<?= $user['id_user']  ?>/' + id_training);
-
+                '<?= base_url() ?>/tna/form/<?= $user['id_user']  ?>/' + data.id_training);
         }
 
     })
