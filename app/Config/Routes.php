@@ -73,8 +73,10 @@ $routes->get('/update/user/(:num)', 'Admin\C_User::update/$1');
 $routes->post('/edit/user/(:num)', 'Admin\C_User::edit/$1');
 
 
-//Form TNA
+//Form TNA ADMIN
 $routes->get('/tna', 'Admin\C_Tna::index');
+$routes->post('/accept_admin', 'Admin\C_Tna::accept');
+$routes->get('/accept_admin', 'Admin\C_Tna::accept');
 
 
 
@@ -100,6 +102,7 @@ $routes->post('/User/FormTna', 'User\FormTna::AjaxTna');
 $routes->post('/tna/form/(:num)/(:num)', 'User\FormTna::TnaForm/$1/$2');
 $routes->post('/tna/send', 'User\FormTna::TnaSend');
 $routes->get('/status_tna', 'User\FormTna::status');
+
 
 
 /*

@@ -23,7 +23,7 @@ class FormTna extends BaseController
     {
         $id = session()->get('id');
         $user = $this->user->filter($id);
-        $tna = $this->tna->getAllTna();
+        $tna = $this->tna->getTnaFilter($id);
         $data = [
             'tittle' => 'Data Member',
             'user' => $user,
@@ -37,7 +37,7 @@ class FormTna extends BaseController
     {
         $user = $this->user->getAllUser($id);
         $trainings = $this->training->getAll();
-        $tna = $this->tna->getAllTna($id);
+        $tna = $this->tna->getUserTna($id);
 
 
         $data = [
@@ -60,7 +60,15 @@ class FormTna extends BaseController
     public function TnaSend()
     {
         $data =  $_POST['training'];
-        var_dump($data[0]);
+        for ($i = 0; $i < count($data); $i++) {
+            $update = $this->tna->getAllTna($data[$i]);
+            $tna = [
+                'id_tna' => $update[0]->id_tna,
+                'status' => 'wait'
+            ];
+            $this->tna->save($tna);
+        }
+        return redirect()->to('/data_member');
     }
 
 

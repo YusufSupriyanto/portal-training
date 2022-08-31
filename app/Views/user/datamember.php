@@ -41,7 +41,7 @@
     </div>
     <!-- /.card-body -->
 </div>
-<div class="card overflow-auto">
+<div class="card overflow-auto m-3">
     <div class="card-header">
         <h3 class="card-title">Data Form TNA</h3>
     </div>
@@ -75,7 +75,7 @@
                         <td><?= $Forms->notes ?></td>
                         <td><?= $Forms->biaya ?></td>
                     </tr>
-                    <input type="hidden" value="<?= $Forms->id_training ?>" name="training[]">
+                    <input type="hidden" value="<?= $Forms->id_tna ?>" name="training[]">
                     <?php endforeach; ?>
                 </tbody>
             </table>
