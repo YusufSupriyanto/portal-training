@@ -67,6 +67,13 @@ class M_Tna extends Model
         return $this->get()->getResult();
     }
 
+
+    public function getIdTna()
+    {
+        $this->select();
+        return $this->get()->getLastRow();
+    }
+
     // public function sendAdmin($id)
     // {
     //     for ($i = 0; $i > count($id); $i++) {

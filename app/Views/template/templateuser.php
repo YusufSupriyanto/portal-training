@@ -179,6 +179,15 @@ to get the desired effect
                                             <p>Status TNA</p>
                                         </a>
                                     </li>
+                                    <?php if (session()->get('bagian') == 'KADIV') : ?>
+                                    <li class="nav-item">
+                                        <a href="<?= base_url() ?>/approve_tna" class="nav-link  <?php if ($page == 'approve_tna') : echo 'active';
+                                                                                                    endif; ?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Approve TNA</p>
+                                        </a>
+                                    </li>
+                                    <?php endif; ?>
                                     <li class="nav-item">
                                         <a href="" class="nav-link <?php if ($page == 'non_training') : echo 'active';
                                                                 endif; ?>">

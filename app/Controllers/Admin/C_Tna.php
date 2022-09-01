@@ -28,14 +28,14 @@ class C_Tna extends BaseController
 
     public function accept()
     {
-        $tna = $this->request->getPost('btn-accept');
-        dd($tna);
+
         $data = [
-            'id_tna' => $tna[0]->id_tna,
+            'id_tna' => $tna = $this->request->getPost('id_tna'),
             'biaya_actual' => $this->request->getVar('actual'),
             'status' => 'Accept'
         ];
 
-        dd($data);
+        $this->tna->save($data);
+        echo json_encode($data);
     }
 }

@@ -102,6 +102,7 @@ $routes->post('/User/FormTna', 'User\FormTna::AjaxTna');
 $routes->post('/tna/form/(:num)/(:num)', 'User\FormTna::TnaForm/$1/$2');
 $routes->post('/tna/send', 'User\FormTna::TnaSend');
 $routes->get('/status_tna', 'User\FormTna::status');
+$routes->get('/approve_tna', 'User\FormTna::approve');
 
 
 

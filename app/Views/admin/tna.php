@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
 <div class="card m-3">
     <div class="card-header">
-        <h3 class="card-title">TNA Yang Telah Di isi</h3>
+        <h3 class="card-title">Daftar Tna</h3>
     </div>
     <!-- /.card-header -->
     <div class="card-body table-responsive p-0">
@@ -72,7 +72,9 @@ $("#btn-accept").on('click', function() {
             id_tna: id_tna,
             biaya_actual: biaya_actual
         },
-        success: function(data) {}
+        success: function(data) {
+
+        }
 
     })
 })

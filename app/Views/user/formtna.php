@@ -155,6 +155,7 @@ $("#training").on('change', function() {
             $("#jenis_training").html(
                 `<span>${data.jenis_training}</span>`
             );
+
             $("#biaya").html(
                 `<span>${data.biaya}</span>`
             );

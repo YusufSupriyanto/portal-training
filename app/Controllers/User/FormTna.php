@@ -3,6 +3,7 @@
 namespace App\Controllers\User;
 
 use App\Controllers\BaseController;
+use App\Models\M_Approval;
 use App\Models\M_ListTraining;
 use App\Models\M_Tna;
 use App\Models\UserModel;
@@ -13,11 +14,14 @@ class FormTna extends BaseController
     private M_ListTraining $training;
     private M_Tna $tna;
 
+    private M_Approval $approval;
+
     public function __construct()
     {
         $this->training = new M_ListTraining();
         $this->user = new UserModel();
         $this->tna = new M_Tna();
+        $this->approval = new M_Approval();
     }
     public function index()
     {
@@ -55,6 +59,14 @@ class FormTna extends BaseController
             'tittle' => 'Status TNA',
         ];
         return view('user/statustna', $data);
+    }
+
+    public function approve()
+    {
+        $data = [
+            'tittle' => 'Approve TNA',
+        ];
+        return view('user/approvetna', $data);
     }
 
     public function TnaSend()
@@ -107,7 +119,15 @@ class FormTna extends BaseController
 
         ];
         // dd($data);
+
+        $id  = $this->tna->getIdTna();
+
+        $data2 = [
+            'id_tna' => $id->id_tna,
+            'id_user' => $id->id_user
+        ];
         $this->tna->save($data);
+        $this->approval->save($data2);
         session()->setFlashdata('success', 'TNA Berhasil Disimpan');
         return redirect()->to('/form_tna/' . $id_user);
     }
