@@ -23,16 +23,17 @@
             </tr>
             </thead>
             <tbody>
+                <?php foreach ($status as $statuses) : ?>
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td><?= $statuses['nama'] ?></td>
+                    <td><?= $statuses['training'] ?></td>
+                    <td><?= $statuses['jenis_training'] ?></td>
+                    <td><?= $statuses['kategori_training'] ?></td>
+                    <td><?= $statuses['metode_training'] ?></td>
+                    <td><?= $statuses['rencana_training'] ?></td>
+                    <td><?= $statuses['tujuan_training'] ?></td>
+                    <td><?= $statuses['notes'] ?></td>
+                    <td><?= $statuses['biaya_actual'] ?></td>
                     <td>
                         <div class="d-flex flex-row">
                             <button style="width:100px;" class="btn btn-secondary btn-sm mr-1"><i
@@ -44,6 +45,7 @@
                         </div>
                     </td>
                 </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
     </div>

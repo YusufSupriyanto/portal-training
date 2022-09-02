@@ -77,6 +77,8 @@ $routes->post('/edit/user/(:num)', 'Admin\C_User::edit/$1');
 $routes->get('/tna', 'Admin\C_Tna::index');
 $routes->post('/accept_admin', 'Admin\C_Tna::accept');
 $routes->get('/accept_admin', 'Admin\C_Tna::accept');
+$routes->post('/reject_admin', 'Admin\C_Tna::reject');
+$routes->get('/kadiv_status', 'Admin\C_Tna::kadivStatus');
 
 
 
@@ -102,7 +104,9 @@ $routes->post('/User/FormTna', 'User\FormTna::AjaxTna');
 $routes->post('/tna/form/(:num)/(:num)', 'User\FormTna::TnaForm/$1/$2');
 $routes->post('/tna/send', 'User\FormTna::TnaSend');
 $routes->get('/status_tna', 'User\FormTna::status');
-$routes->get('/approve_tna', 'User\FormTna::approve');
+$routes->get('/request_tna', 'User\FormTna::requestTna');
+$routes->post('/accept_kadiv', 'User\FormTna::acceptKadiv');
+$routes->post('/reject_kadiv', 'User\FormTna::rejectKadiv');
 
 
 

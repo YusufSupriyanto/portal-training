@@ -61,11 +61,73 @@ class M_Tna extends Model
         }
     }
 
-    public function getStatusWait()
+
+    public function getStatusWaitAdmin()
     {
         $this->select()->where('status', 'wait');
+        $this->join('approval', 'approval.id_tna = tna.id_tna');
         return $this->get()->getResult();
     }
+
+    public function getStatusWaitUser($bagian, $member)
+    {
+        if ($bagian == 'BOD') {
+            $status = ['wait', 'accept'];
+            $this->select()->where('dic', $member)->whereIn('status', $status);
+            $this->join('approval', 'approval.id_tna = tna.id_tna');
+            return $this->get()->getResultArray();
+        } elseif ($bagian == 'KADIV') {
+            $status = ['wait', 'accept'];
+            $this->select()->where('divisi', $member)->whereIn('status', $status);
+            $this->join('approval', 'approval.id_tna = tna.id_tna');
+            return $this->get()->getResultArray();
+        } elseif ($bagian == 'KADEPT') {
+            $status = ['wait', 'accept'];
+            $this->select()->where('departemen', $member)->whereIn('status', $status);
+            $this->join('approval', 'approval.id_tna = tna.id_tna');
+            return $this->get()->getResultArray();
+        } else {
+            return  $status  =  array();
+        }
+
+        // $status = ['wait', 'accept'];
+        // $this->select()->whereIn('status', $status);
+        // return $this->get()->getResultArray();
+    }
+
+
+    //function untuk menampilkan data tna yang sudah di accept
+    public function getKadivStatus()
+    {
+        $this->select()->where('status', 'accept');
+        $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_1', null)->orWhere('status_approval_1', 'reject');
+        return $this->get()->getResultArray();
+    }
+
+
+    //function get Request Tna
+    public function getRequestTna($bagian, $member)
+    {
+        if ($bagian == 'BOD') {
+            $status = ['wait', 'accept'];
+            $this->select()->where('dic', $member)->whereIn('status', $status);
+            $this->join('approval', 'approval.id_tna = tna.id_tna');
+            return $this->get()->getResultArray();
+        } elseif ($bagian == 'KADIV') {
+            $status = [null, 'reject'];
+            $this->select()->where('divisi', $member)->where('status', 'accept');
+            $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_1', null);
+            return $this->get()->getResultArray();
+        } elseif ($bagian == 'KADEPT') {
+            $status = [null, 'reject'];
+            $this->select()->where('departemen', $member)->where('status', 'accept')->whereIn('status_approval_1', $status);
+            $this->join('approval', 'approval.id_tna = tna.id_tna');
+            return $this->get()->getResultArray();
+        } else {
+            return  $status  =  array();
+        }
+    }
+
 
 
     public function getIdTna()

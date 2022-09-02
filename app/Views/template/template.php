@@ -174,6 +174,13 @@ to get the desired effect
                                         </a>
                                     </li>
                                     <li class="nav-item">
+                                        <a href="<?= base_url() ?>/kadiv_status" class="nav-link  <?php if ($page == 'kadiv_status') : echo 'active';
+                                                                                                endif; ?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>KADIV Status</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
                                         <a href="<?= base_url() ?>/non_training" class="nav-link <?php if ($page == 'non_training') : echo 'active';
                                                                                                 endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
@@ -207,7 +214,24 @@ to get the desired effect
                                     </li>
                                 </ul>
                             </li>
-
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="fa fa-fw fa-trash"></i>
+                                    <p>
+                                        TNA Reject
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview" style="display: none;">
+                                    <li class="nav-item">
+                                        <a href="<?= base_url() ?>/tna_ditolak" class="nav-link  <?php if ($page == 'tna_diolak') : echo 'active';
+                                                                                                endif; ?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>TNA Ditolak</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
                         </ul>
                     </nav>
                     <!-- /.sidebar-menu -->

@@ -23,6 +23,8 @@ class FormTna extends BaseController
         $this->tna = new M_Tna();
         $this->approval = new M_Approval();
     }
+
+    //function untuk menamplilkan data member dengan user yang akan di daftarkan tna
     public function index()
     {
         $id = session()->get('id');
@@ -36,7 +38,7 @@ class FormTna extends BaseController
         return view('user/datamember', $data);
     }
 
-
+    //function untuk menampilkan data user dan akan di daftarkan tna
     public function TnaUser($id)
     {
         $user = $this->user->getAllUser($id);
@@ -53,10 +55,28 @@ class FormTna extends BaseController
         return view('user/formtna', $data);
     }
 
+    //function untuk status tna yang sudah dikirim ke admin
     public function status()
     {
+        $bagian = session()->get('bagian');
+        $dic = session()->get('dic');
+        $divisi = session()->get('divisi');
+        $departemen = session()->get('departemen');
+
+        if ($bagian == 'BOD') {
+            $status =  $this->tna->getStatusWaitUser($bagian, $dic);
+        } elseif ($bagian == 'KADIV') {
+            $status =  $this->tna->getStatusWaitUser($bagian, $divisi);
+        } elseif ($bagian == 'KADEPT') {
+            $status = $this->tna->getStatusWaitUser($bagian, $departemen);
+        } else {
+            $status  =  array();
+        }
+
+        // dd($status);
         $data = [
             'tittle' => 'Status TNA',
+            'status' => $status,
         ];
         return view('user/statustna', $data);
     }
@@ -68,6 +88,9 @@ class FormTna extends BaseController
         ];
         return view('user/approvetna', $data);
     }
+
+
+    //function untuk mengupdate status tna ke wait
 
     public function TnaSend()
     {
@@ -93,6 +116,7 @@ class FormTna extends BaseController
         echo json_encode($jenis_trainng);
     }
 
+    //function untuk save tna
     public function TnaForm($id_user, $id_training)
     {
         $user = $this->user->getAllUser($id_user);
@@ -119,6 +143,7 @@ class FormTna extends BaseController
 
         ];
         // dd($data);
+        $this->tna->save($data);
 
         $id  = $this->tna->getIdTna();
 
@@ -126,9 +151,59 @@ class FormTna extends BaseController
             'id_tna' => $id->id_tna,
             'id_user' => $id->id_user
         ];
-        $this->tna->save($data);
         $this->approval->save($data2);
         session()->setFlashdata('success', 'TNA Berhasil Disimpan');
         return redirect()->to('/form_tna/' . $id_user);
+    }
+
+
+    public function requestTna()
+    {
+        $bagian = session()->get('bagian');
+        $dic = session()->get('dic');
+        $divisi = session()->get('divisi');
+        $departemen = session()->get('departemen');
+
+        if ($bagian == 'BOD') {
+            $status = $this->tna->getRequestTna($bagian, $dic);
+        } elseif ($bagian == 'KADIV') {
+            $status =  $this->tna->getRequestTna($bagian, $divisi);
+        } elseif ($bagian == 'KADEPT') {
+            $status = $this->tna->getRequestTna($bagian, $departemen);
+        } else {
+            $status  =  array();
+        }
+        $data = [
+            'tittle' => 'Request Tna',
+            'status' => $status
+        ];
+        return view('user/requestuser', $data);
+    }
+
+
+    //function accept kadiv
+    public function acceptKadiv()
+    {
+        $approve = $this->approval->getIdApproval($this->request->getPost('id_tna'));
+        $data = [
+            'id_approval' => $approve['id_approval'],
+            'id_tna' => $this->request->getPost('id_tna'),
+            'id_user' => $this->request->getPost('id_user'),
+            'status_approval_1' => 'accept'
+        ];
+        $this->approval->save($data);
+        echo json_encode($data);
+    }
+    public function rejectKadiv()
+    {
+        $approve = $this->approval->getIdApproval($this->request->getPost('id_tna'));
+        $data = [
+            'id_approval' => $approve['id_approval'],
+            'id_tna' => $this->request->getPost('id_tna'),
+            'id_user' => $this->request->getPost('id_user'),
+            'status_approval_1' => 'reject'
+        ];
+        $this->approval->save($data);
+        echo json_encode($data);
     }
 }

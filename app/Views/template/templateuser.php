@@ -181,10 +181,10 @@ to get the desired effect
                                     </li>
                                     <?php if (session()->get('bagian') == 'KADIV') : ?>
                                     <li class="nav-item">
-                                        <a href="<?= base_url() ?>/approve_tna" class="nav-link  <?php if ($page == 'approve_tna') : echo 'active';
+                                        <a href="<?= base_url() ?>/request_tna" class="nav-link  <?php if ($page == 'approve_tna') : echo 'active';
                                                                                                     endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>Approve TNA</p>
+                                            <p>Request TNA</p>
                                         </a>
                                     </li>
                                     <?php endif; ?>
