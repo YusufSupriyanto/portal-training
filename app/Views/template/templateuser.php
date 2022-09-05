@@ -130,7 +130,24 @@ to get the desired effect
                             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
 
-
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="fa fa-fw fa-home"></i>
+                                    <p>
+                                        Home
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview" style="display: none;">
+                                    <li class="nav-item">
+                                        <a href="<?= base_url() ?>/list_training_user" class="nav-link  <?php if ($page == 'list_training_user') : echo 'active';
+                                                                                                    endif; ?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Training</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
                                     <i class="fa fa-fw fa-list"></i>
@@ -179,7 +196,7 @@ to get the desired effect
                                             <p>Status TNA</p>
                                         </a>
                                     </li>
-                                    <?php if (session()->get('bagian') == 'KADIV') : ?>
+                                    <?php if (session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'BOD') : ?>
                                     <li class="nav-item">
                                         <a href="<?= base_url() ?>/request_tna" class="nav-link  <?php if ($page == 'approve_tna') : echo 'active';
                                                                                                     endif; ?>">
@@ -193,6 +210,33 @@ to get the desired effect
                                                                 endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Form IDP</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="fa fa-fw fa-calendar-check-o"></i>
+                                    <p>
+                                        Our Schedule
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview" style="display: none;">
+                                    <li class="nav-item">
+                                        <a href="<?= base_url() ?>/Personal_schedule" class="nav-link  <?php if ($page == 'member_schedule') : echo 'active';
+                                                                                                    endif; ?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Personal Schedule Training</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <ul class="nav nav-treeview" style="display: none;">
+                                    <li class="nav-item">
+                                        <a href="<?= base_url() ?>/member_schedule" class="nav-link  <?php if ($page == 'member_schedule') : echo 'active';
+                                                                                                    endif; ?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Member Schedule Training</p>
                                         </a>
                                     </li>
                                 </ul>

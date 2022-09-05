@@ -51,4 +51,24 @@
     </div>
 </div>
 <!-- /.card-body -->
+
+<script>
+var id_tna = $('#tna').val();
+var id_user = $('#user').val();
+
+$.ajax({
+    type: 'post',
+    url: "<?= base_url(); ?>/tna_user_status",
+    async: true,
+    dataType: "json",
+    data: {
+        id_tna: id_tna,
+        id_user: id_user
+    },
+    success: function(data) {
+
+    }
+
+})
+</script>
 <?= $this->endSection() ?>

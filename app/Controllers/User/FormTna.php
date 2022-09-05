@@ -126,6 +126,7 @@ class FormTna extends BaseController
         $data = [
             'id_user' => $id_user,
             'id_training' => $id_training,
+            'dic' => $user['dic'],
             'divisi' => $user['divisi'],
             'departemen' => $user['departemen'],
             'nama' => $user['nama'],
@@ -177,7 +178,10 @@ class FormTna extends BaseController
             'tittle' => 'Request Tna',
             'status' => $status
         ];
-        return view('user/requestuser', $data);
+        if (session()->get('bagian') == 'KADIV') {
+            return view('user/requestuser', $data);
+        }
+        return view('user/requestuserbod', $data);
     }
 
 
@@ -202,6 +206,32 @@ class FormTna extends BaseController
             'id_tna' => $this->request->getPost('id_tna'),
             'id_user' => $this->request->getPost('id_user'),
             'status_approval_1' => 'reject'
+        ];
+        $this->approval->save($data);
+        echo json_encode($data);
+    }
+
+    public function acceptBod()
+    {
+        $approve = $this->approval->getIdApproval($this->request->getPost('id_tna'));
+        $data = [
+            'id_approval' => $approve['id_approval'],
+            'id_tna' => $this->request->getPost('id_tna'),
+            'id_user' => $this->request->getPost('id_user'),
+            'status_approval_3' => 'accept'
+        ];
+        $this->approval->save($data);
+        echo json_encode($data);
+    }
+
+    public function rejectBod()
+    {
+        $approve = $this->approval->getIdApproval($this->request->getPost('id_tna'));
+        $data = [
+            'id_approval' => $approve['id_approval'],
+            'id_tna' => $this->request->getPost('id_tna'),
+            'id_user' => $this->request->getPost('id_user'),
+            'status_approval_3' => 'reject'
         ];
         $this->approval->save($data);
         echo json_encode($data);

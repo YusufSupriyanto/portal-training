@@ -33,10 +33,7 @@ class C_Tna extends BaseController
     public function accept()
     {
 
-        $approve = $this->approval->getIdApproval($this->request->getPost('id_tna'));
-
         $data = [
-            'id_approval' => $approve['id_approval'],
             'id_tna' => $this->request->getPost('id_tna'),
             'biaya_actual' => $this->request->getVar('actual'),
             'metode_training' => $this->request->getVar('metode'),
@@ -50,9 +47,8 @@ class C_Tna extends BaseController
 
     public function reject()
     {
-        $approve = $this->approval->getIdApproval($this->request->getPost('id_tna'));
+
         $data = [
-            'id_approval' => $approve['id_approval'],
             'id_tna' =>  $this->request->getPost('id_tna'),
             'biaya_actual' => $this->request->getVar('actual'),
             'metode_training' => $this->request->getVar('metode'),
@@ -72,5 +68,64 @@ class C_Tna extends BaseController
             'tna' => $tna
         ];
         return view('admin/tnakadiv', $data);
+    }
+
+
+    public function kadivAccept()
+    {
+
+
+        $status = $this->tna->getKadivAccept();
+
+        $data = [
+            'tittle' => 'Kadiv accept',
+            'status' => $status
+        ];
+        return view('admin/kadivaccept', $data);
+    }
+
+    public function acceptAdmin()
+    {
+
+        $approve = $this->approval->getIdApproval($this->request->getPost('id_tna'));
+        $data1 = [
+            'id_tna' => $this->request->getPost('id_tna'),
+            'biaya_actual' => $this->request->getPost('biaya_actual'),
+        ];
+
+        $data = [
+            'id_approval' => $approve['id_approval'],
+            'status_approval_2' => 'accept'
+        ];
+
+        $this->tna->save($data1);
+        $this->approval->save($data);
+        echo json_encode($data);
+    }
+
+    public function rejectAdmin()
+    {
+
+        $approve = $this->approval->getIdApproval($this->request->getPost('id_tna'));
+        $data1 = [
+            'id_tna' => $this->request->getPost('id_tna'),
+            'biaya_actual' => $this->request->getPost('biaya_actual'),
+        ];
+
+        $data = [
+            'id_approval' => $approve['id_approval'],
+            'status_approval_2' => 'reject'
+        ];
+
+        $this->tna->save($data1);
+        $this->approval->save($data);
+        echo json_encode($data);
+    }
+
+    public function detailTna()
+    {
+        $id_tna = $this->request->getPost('id_tna');
+        $data = $this->tna->getAllTna($id_tna);
+        echo json_encode($data);
     }
 }

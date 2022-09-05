@@ -181,6 +181,13 @@ to get the desired effect
                                         </a>
                                     </li>
                                     <li class="nav-item">
+                                        <a href="<?= base_url() ?>/kadiv_accept" class="nav-link  <?php if ($page == 'kadiv_accept') : echo 'active';
+                                                                                                endif; ?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>KADIV Accept</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
                                         <a href="<?= base_url() ?>/non_training" class="nav-link <?php if ($page == 'non_training') : echo 'active';
                                                                                                 endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>

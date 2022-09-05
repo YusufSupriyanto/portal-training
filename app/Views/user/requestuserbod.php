@@ -1,29 +1,26 @@
 <?= $this->extend('/template/templateuser') ?>
 
 <?= $this->section('content') ?>
-<div class="card m-3">
+<div class="card overflow-auto m-3">
     <div class="card-header">
         <h3 class="card-title"><?= $tittle ?></h3>
     </div>
     <!-- /.card-header -->
-    <div class="card-body table-responsive p-0">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Nama</th>
-                    <th>Jabatan</th>
-                    <th>Golongan</th>
-                    <th>Seksi</th>
-                    <th>Jenis Training</th>
-                    <th>Kategori Training</th>
-                    <th>Training</th>
-                    <th>Metode</th>
-                    <th>Rencana Training</th>
-                    <th>Tujuan Training</th>
-                    <th>Planing Budget</th>
-                    <th>Actual Budget</th>
-                    <th>Status</th>
-                </tr>
+    <div class="card-body p-0 overflow-auto">
+        <table class="table table-striped overflow-auto">
+            <thead></thead>
+            <tr>
+                <th>Nama</th>
+                <th>Training</th>
+                <th>Jenis Training</th>
+                <th>Kategori Training</th>
+                <th>Metode Training</th>
+                <th>Rencana Training</th>
+                <th>Tujuan Training</th>
+                <th>Notes</th>
+                <th>Estimasi Budget</th>
+                <th>status</th>
+            </tr>
             </thead>
             <tbody>
                 <?php foreach ($status as $statuses) : ?>
@@ -38,7 +35,7 @@
                     <td><?= $statuses['notes'] ?></td>
                     <td><?= $statuses['biaya_actual'] ?></td>
                     <td>
-                        <button type="button" class="btn btn-success btn-sm " style="width:100px;" id="kadiv-accept"><i
+                        <button type="button" class="btn btn-success btn-sm " style="width:100px;" id="bod-accept"><i
                                 class="fa fa-fw fa-check"></i>Accept</button>
                         <input type="hidden" id="tna" value="<?= $statuses['id_tna'] ?>">
                         <input type="hidden" id="user" value="<?= $statuses['id_user'] ?>">
@@ -52,29 +49,55 @@
             </tbody>
         </table>
     </div>
-    <!-- /.card-body -->
 </div>
 <script>
 //for change TNA 
-$("#btn-accept").on('click', function() {
-    var id_tna = $('#accept').val();
-    var biaya_actual = $('#biaya').val();
+$("#bod-accept").on('click', function() {
+    var id_tna = $('#tna').val();
+    var id_user = $('#user').val();
+
     console.log(id_tna);
-    console.log(biaya_actual);
+    console.log(id_user);
     $.ajax({
         type: 'post',
-        url: "<?= base_url(); ?>/accept_admin",
+        url: "<?= base_url(); ?>/accept_bod",
         async: true,
         dataType: "json",
         data: {
             id_tna: id_tna,
-            biaya_actual: biaya_actual
+            id_user: id_user
         },
         success: function(data) {
+            window.location.reload()
 
         }
 
     })
+
+})
+
+//for reject tna
+$("#btn-reject").on('click', function() {
+    var id_tna = $('#tna').val();
+    var id_user = $('#user').val();
+    console.log(id_tna);
+    console.log(id_user);
+    $.ajax({
+        type: 'post',
+        url: "<?= base_url(); ?>/reject_bod",
+        async: true,
+        dataType: "json",
+        data: {
+            id_tna: id_tna,
+            id_user: id_user
+        },
+        success: function(data) {
+            window.location.reload()
+
+        }
+
+    })
+
 })
 </script>
 <?= $this->endSection() ?>
