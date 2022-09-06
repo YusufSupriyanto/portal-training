@@ -22,7 +22,7 @@
                 <th>status</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="kadiv-verify">
                 <?php foreach ($status as $statuses) : ?>
                 <tr>
                     <td><?= $statuses['nama'] ?></td>
@@ -39,65 +39,39 @@
                                 class="fa fa-fw fa-check"></i>Accept</button>
                         <input type="hidden" id="tna" value="<?= $statuses['id_tna'] ?>">
                         <input type="hidden" id="user" value="<?= $statuses['id_user'] ?>">
-                        <button type="button" class="btn btn-danger btn-sm mt-1 " style="width:100px;"
-                            id="btn-reject"><i class="fa fa-fw fa-close"></i>Reject</button>
-                        <input type="hidden" id="reject" value="<?= $statuses['id_tna'] ?>">
-                        <input type="hidden" id="user" value="<?= $statuses['id_user'] ?>">
+                        <a href="javascript:;" class="kadiv-verify btn btn-danger btn-sm mt-1 " style="width:100px;"
+                            data-reject-kadiv="<?= $statuses['id_tna']  ?>"><i class="fa fa-fw fa-close"></i>Reject</a>
                     </td>
                 </tr>
+                <div class=" modal fade" id="rejectKadiv" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Masukan Alasan Di Reject</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="d-flex flex-column">
+                                    <label for="alasan">Alasan</label>
+                                    <textarea id="alasan" class="mt-1" name="alasan"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <a id="kadiv-reject" href="javascript:;" class="btn btn-danger btn-sm mt-1"
+                                    style="width:100px;color:white;"
+                                    onclick="reject_kadiv(<?= $statuses['id_tna'] ?>) "><i
+                                        class=" fa fa-fw fa-close"></i>Reject</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <?php endforeach; ?>
             </tbody>
         </table>
+
     </div>
 </div>
-<script>
-//for change TNA 
-$("#kadiv-accept").on('click', function() {
-    var id_tna = $('#tna').val();
-    var id_user = $('#user').val();
-
-    console.log(id_tna);
-    console.log(id_user);
-    $.ajax({
-        type: 'post',
-        url: "<?= base_url(); ?>/accept_kadiv",
-        async: true,
-        dataType: "json",
-        data: {
-            id_tna: id_tna,
-            id_user: id_user
-        },
-        success: function(data) {
-            window.location.reload()
-
-        }
-
-    })
-
-})
-
-//for reject tna
-$("#btn-reject").on('click', function() {
-    var id_tna = $('#tna').val();
-    var id_user = $('#user').val();
-    console.log(id_tna);
-    console.log(id_user);
-    $.ajax({
-        type: 'post',
-        url: "<?= base_url(); ?>/reject_kadiv",
-        async: true,
-        dataType: "json",
-        data: {
-            id_tna: id_tna,
-            id_user: id_user
-        },
-        success: function(data) {
-            window.location.reload()
-
-        }
-
-    })
-
-})
-</script>
 <?= $this->endSection() ?>

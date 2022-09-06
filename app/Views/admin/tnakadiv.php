@@ -11,39 +11,27 @@
             <thead>
                 <tr>
                     <th>Nama</th>
-                    <th>Jabatan</th>
-                    <th>Golongan</th>
-                    <th>Seksi</th>
-                    <th>Jenis Training</th>
-                    <th>Kategori Training</th>
+                    <th>Departemen</th>
                     <th>Training</th>
-                    <th>Metode</th>
                     <th>Rencana Training</th>
-                    <th>Tujuan Training</th>
                     <th>Planing Budget</th>
                     <th>Actual Budget</th>
                     <th>Status</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="status-kadiv">
                 <?php foreach ($tna as $tnas) : ?>
                 <tr>
-                    <td><input readonly value="<?= $tnas['nama'] ?>"></td>
-                    <td><input readonly value="<?= $tnas['departemen'] ?>"></td>
-                    <td><input readonly value="<?= $tnas['golongan'] ?>"></td>
-                    <td><input readonly value="<?= $tnas['seksi'] ?>"></td>
-                    <td><input readonly value="<?= $tnas['jenis_training'] ?>"></td>
-                    <td><input readonly value="<?= $tnas['kategori_training'] ?>"></td>
-                    <td><input readonly value="<?= $tnas['training'] ?>"></td>
-                    <td><input readonly value="<?= $tnas['metode_training'] ?>"></td>
-                    <td><input readonly value="<?= $tnas['rencana_training'] ?>"></td>
-                    <td><input readonly value="<?= $tnas['tujuan_training'] ?>"></td>
-                    <td><input readonly value="<?= $tnas['biaya'] ?>"></td>
-                    <td><input id="biaya"></td>
+                    <td><?= $tnas['nama'] ?></td>
+                    <td><?= $tnas['departemen'] ?></td>
+                    <td><?= $tnas['training'] ?></td>
+                    <td><?= $tnas['rencana_training'] ?></td>
+                    <td><?= $tnas['biaya'] ?></td>
+                    <td><?= $tnas['biaya_actual'] ?></td>
                     <td>
-
-                        <button type="button" class="btn btn-danger btn-sm mt-1 " style="width:100px;"
-                            id="btn-reject"><i class="fa fa-fw fa-close"></i>Reject</button>
+                        <a href=" javascript:;" class="item-edit" data-reject="<?= $tnas['id_tna'] ?>"
+                            style="color:white;"><button class="btn btn-danger btn-sm mt-1" style="width:100px;"><i
+                                    class=" fa fa-fw fa-close"></i>Reject</button></a>
                     </td>
                 </tr>
                 <?php endforeach; ?>
@@ -51,38 +39,27 @@
         </table>
     </div>
     <!-- /.card-body -->
+    <div class=" modal fade" id="detail-reject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Detail Reject Training</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex flex-column">
+                        <label for="alasan">Alasan</label>
+                        <textarea id="alasan" class="alasan" name="alasan" readonly></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<script>
-//for accept tna
-$("#btn-accept").on('click', function() {
-    var id_tna = $('#accept').val();
-    var biaya_actual = $('#biaya').val();
-    console.log(id_tna);
-    console.log(biaya_actual);
-    $.ajax({
-        type: 'post',
-        url: "<?= base_url(); ?>/accept_admin",
-        async: true,
-        dataType: "json",
-        data: {
-            id_tna: id_tna,
-            biaya_actual: biaya_actual
-        },
-        success: function(data) {
-            window.location.reload()
-
-        }
-
-    })
-})
-
-
-//for reject tna
-$("#btn-reject").on('click', function() {
-    var id_tna = $('#reject').val();
-    var biaya_actual = $('#biaya').val();
-    console.log(id_tna);
-    console.log(biaya_actual);
-})
-</script>
 <?= $this->endSection() ?>

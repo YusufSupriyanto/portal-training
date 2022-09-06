@@ -61,11 +61,12 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <input class="datepicker" data-date-format="mm/dd/yyyy" name="rencana"
+                                        <input class="datepicker" data-date-format="mm-dd-yyyy" name="rencana"
                                             type="date">
                                     </td>
                                     <td><textarea name="tujuan"></textarea></td>
-                                    <td><textarea name="notes"></textarea></td>
+                                    <td><textarea name="notes" placeholder="Permintaan Khusus "></textarea></textarea>
+                                    </td>
                                     <td>
                                         <div id="biaya"></div>
                                     </td>

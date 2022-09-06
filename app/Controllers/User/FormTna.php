@@ -203,8 +203,7 @@ class FormTna extends BaseController
         $approve = $this->approval->getIdApproval($this->request->getPost('id_tna'));
         $data = [
             'id_approval' => $approve['id_approval'],
-            'id_tna' => $this->request->getPost('id_tna'),
-            'id_user' => $this->request->getPost('id_user'),
+            'alasan' => $this->request->getPost('alasan'),
             'status_approval_1' => 'reject'
         ];
         $this->approval->save($data);

@@ -141,4 +141,12 @@ class M_Tna extends Model
         $this->select();
         return $this->get()->getLastRow();
     }
+
+    public function getDetailReject($id)
+    {
+        $this->select('tna.*,approval.*,user.bagian')->where('tna.id_tna', $id);
+        $this->join('approval', 'approval.id_tna = tna.id_tna');
+        $this->join('user', 'user.id_user = tna.id_user');
+        return $this->get()->getResultArray();
+    }
 }

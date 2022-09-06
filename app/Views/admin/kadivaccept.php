@@ -11,15 +11,9 @@
             <thead>
                 <tr>
                     <th>Nama</th>
-                    <th>Jabatan</th>
-                    <th>Golongan</th>
-                    <th>Seksi</th>
-                    <th>Jenis Training</th>
-                    <th>Kategori Training</th>
+                    <th>Departemen</th>
                     <th>Training</th>
-                    <th>Metode</th>
                     <th>Rencana Training</th>
-                    <th>Tujuan Training</th>
                     <th>Planing Budget</th>
                     <th>Actual Budget</th>
                     <th>Status</th>
@@ -30,14 +24,8 @@
                 <tr>
                     <td><input value="<?= $tnas['nama'] ?>"></td>
                     <td><input value="<?= $tnas['departemen'] ?>"></td>
-                    <td><input value="<?= $tnas['golongan'] ?>"></td>
-                    <td><input value="<?= $tnas['seksi'] ?>"></td>
-                    <td><input value="<?= $tnas['jenis_training'] ?>"></td>
-                    <td><input value="<?= $tnas['kategori_training'] ?>"></td>
                     <td><input value="<?= $tnas['training'] ?>"></td>
-                    <td><input value="<?= $tnas['metode_training'] ?>"></td>
                     <td><input value="<?= $tnas['rencana_training'] ?>"></td>
-                    <td><input value="<?= $tnas['tujuan_training'] ?>"></td>
                     <td><input value="<?= $tnas['biaya'] ?>"></td>
                     <td><input id="biaya"></td>
                     <td>

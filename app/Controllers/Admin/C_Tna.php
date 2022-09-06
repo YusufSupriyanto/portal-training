@@ -32,15 +32,12 @@ class C_Tna extends BaseController
 
     public function accept()
     {
-
         $data = [
             'id_tna' => $this->request->getPost('id_tna'),
-            'biaya_actual' => $this->request->getVar('actual'),
-            'metode_training' => $this->request->getVar('metode'),
-            'rencana_training' => $this->request->getVar('rencana_training'),
+            'biaya_actual' => $this->request->getPost('biaya_actual'),
+            'rencana_training' => $this->request->getPost('rencana_training'),
             'status' => 'accept'
         ];
-
         $this->tna->save($data);
         echo json_encode($data);
     }
@@ -50,9 +47,8 @@ class C_Tna extends BaseController
 
         $data = [
             'id_tna' =>  $this->request->getPost('id_tna'),
-            'biaya_actual' => $this->request->getVar('actual'),
-            'metode_training' => $this->request->getVar('metode'),
-            'rencana_training' => $this->request->getVar('rencana_training'),
+            'biaya_actual' => $this->request->getPost('biaya_actual'),
+            'rencana_training' => $this->request->getPost('rencana_training'),
             'status' => 'reject'
         ];
         $this->tna->save($data);
@@ -126,6 +122,13 @@ class C_Tna extends BaseController
     {
         $id_tna = $this->request->getPost('id_tna');
         $data = $this->tna->getAllTna($id_tna);
+        echo json_encode($data);
+    }
+
+    public function detailReject()
+    {
+        $id = $this->request->getPost('id_tna');
+        $data = $this->approval->getIdApproval($id);
         echo json_encode($data);
     }
 }
