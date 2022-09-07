@@ -86,6 +86,7 @@ class C_Tna extends BaseController
         $approve = $this->approval->getIdApproval($this->request->getPost('id_tna'));
         $data1 = [
             'id_tna' => $this->request->getPost('id_tna'),
+            'rencana_training' => $this->request->getPost('rencana_training'),
             'biaya_actual' => $this->request->getPost('biaya_actual'),
         ];
 
@@ -110,6 +111,7 @@ class C_Tna extends BaseController
 
         $data = [
             'id_approval' => $approve['id_approval'],
+            'alasan' => $this->request->getPost('alasan'),
             'status_approval_2' => 'reject'
         ];
 

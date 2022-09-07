@@ -23,7 +23,8 @@
             </tr>
             </thead>
             <tbody id="kadiv-verify">
-                <?php foreach ($status as $statuses) : ?>
+                <?php $i = 0;
+                foreach ($status as $statuses) : ?>
                 <tr>
                     <td><?= $statuses['nama'] ?></td>
                     <td><?= $statuses['training'] ?></td>
@@ -35,15 +36,19 @@
                     <td><?= $statuses['notes'] ?></td>
                     <td><?= $statuses['biaya_actual'] ?></td>
                     <td>
-                        <button type="button" class="btn btn-success btn-sm " style="width:100px;" id="kadiv-accept"><i
-                                class="fa fa-fw fa-check"></i>Accept</button>
-                        <input type="hidden" id="tna" value="<?= $statuses['id_tna'] ?>">
-                        <input type="hidden" id="user" value="<?= $statuses['id_user'] ?>">
-                        <a href="javascript:;" class="kadiv-verify btn btn-danger btn-sm mt-1 " style="width:100px;"
-                            data-reject-kadiv="<?= $statuses['id_tna']  ?>"><i class="fa fa-fw fa-close"></i>Reject</a>
+
+                        <a onclick="AcceptKadiv(<?= $i ?>)" id="accept-kadiv<?= $i ?>" href="javascript:;"
+                            class="btn btn-success btn-sm " style="width:100px;color:white;"
+                            data-accept-kadiv="<?= $statuses['id_tna'] ?>"><i class=" fa fa-fw fa-check"></i>Accept</a>
+                        <input type="hidden" id="accept-kadiv-input<?= $i ?>" value="<?= $statuses['id_tna'] ?>">
+                        <a id="reject-kadiv<?= $i ?>" href="javascript:;"
+                            class="kadiv-verify btn btn-danger btn-sm mt-1 " style="width:100px;"
+                            data-reject-kadiv="<?= $statuses['id_tna']  ?>" onclick="Kadiv_verify(<?= $i ?>)"><i
+                                class="fa fa-fw fa-close"></i>Reject</a>
+                        <input type="hidden" id="reject-kadiv-input<?= $i ?>" value="<?= $statuses['id_tna'] ?>">
                     </td>
                 </tr>
-                <div class=" modal fade" id="rejectKadiv" tabindex="-1" role="dialog"
+                <div class=" modal fade" id="rejectKadiv<?= $i ?>" tabindex="-1" role="dialog"
                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -56,22 +61,24 @@
                             <div class="modal-body">
                                 <div class="d-flex flex-column">
                                     <label for="alasan">Alasan</label>
-                                    <textarea id="alasan" class="mt-1" name="alasan"></textarea>
+                                    <textarea id="alasan<?= $i ?>" class="mt-1" name="alasan<?= $i ?>"></textarea>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <a id="kadiv-reject" href="javascript:;" class="btn btn-danger btn-sm mt-1"
-                                    style="width:100px;color:white;"
-                                    onclick="reject_kadiv(<?= $statuses['id_tna'] ?>) "><i
+                                <a id="kadiv-reject<?= $i ?>" href="javascript:;" class="btn btn-danger btn-sm mt-1"
+                                    style="width:100px;color:white;" onclick="reject_kadiv(<?= $i ?>) "><i
                                         class=" fa fa-fw fa-close"></i>Reject</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <?php endforeach; ?>
+                <?php $i++;
+                endforeach; ?>
             </tbody>
         </table>
-
     </div>
 </div>
+<script>
+
+</script>
 <?= $this->endSection() ?>

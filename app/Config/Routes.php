@@ -113,7 +113,6 @@ $routes->get('/status_tna', 'User\FormTna::status');
 $routes->get('/request_tna', 'User\FormTna::requestTna');
 $routes->post('/accept_kadiv', 'User\FormTna::acceptKadiv');
 $routes->post('/reject_kadiv', 'User\FormTna::rejectKadiv');
-$routes->get('/reject_kadiv', 'User\FormTna::rejectKadiv');
 $routes->post('/accept_bod', 'User\FormTna::acceptBod');
 $routes->post('/reject_bod', 'User\FormTna::rejectBod');
 

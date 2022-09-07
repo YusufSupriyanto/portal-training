@@ -124,7 +124,6 @@
         <!-- /.card-body -->
     </div>
 </div>
-
 <script>
 $(function() {
     $('#datepicker').datepicker({

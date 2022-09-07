@@ -9,7 +9,7 @@
         <title><?= $tittle ?></title>
 
         <script src="https://kit.fontawesome.com/90e89a2bd2.js" crossorigin="anonymous"></script>
-        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
         <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
         <!-- Font Awesome Icons -->
@@ -295,8 +295,8 @@ to get the desired effect
         <script src="<?= base_url() ?>/sweet/sweetalert2.all.min.js"></script>
         <script src="<?= base_url() ?>/sweet/training.js"></script>
         <script src="<?= base_url() ?>/sweet/setup.js"></script>
-        <?= view('asset/kadivaccept') ?>
 
+        <?= view('asset/request_tna') ?>
     </body>
 
 </html>

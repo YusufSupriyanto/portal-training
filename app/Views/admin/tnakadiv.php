@@ -29,9 +29,15 @@
                     <td><?= $tnas['biaya'] ?></td>
                     <td><?= $tnas['biaya_actual'] ?></td>
                     <td>
+                        <?php if ($tnas['status_approval_1'] == 'reject') : ?>
                         <a href=" javascript:;" class="item-edit" data-reject="<?= $tnas['id_tna'] ?>"
                             style="color:white;"><button class="btn btn-danger btn-sm mt-1" style="width:100px;"><i
                                     class=" fa fa-fw fa-close"></i>Reject</button></a>
+                        <?php else : ?>
+                        <a href=" javascript:;" class="" data-reject="<?= $tnas['id_tna'] ?>"
+                            style="color:white;"><button class="btn btn-secondary btn-sm mt-1" style="width:100px;"><i
+                                    class=" fa fa-fw fa-hourglass-start"></i>Wait</button></a>
+                        <?php endif; ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>

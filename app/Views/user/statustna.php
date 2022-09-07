@@ -19,7 +19,9 @@
                 <th>Tujuan Training</th>
                 <th>Notes</th>
                 <th>Estimasi Budget</th>
-                <th>status</th>
+                <th>Approval KADIV</th>
+                <th>Approval Admin</th>
+                <th>Approval BOD</th>
             </tr>
             </thead>
             <tbody>
@@ -35,14 +37,57 @@
                     <td><?= $statuses['notes'] ?></td>
                     <td><?= $statuses['biaya_actual'] ?></td>
                     <td>
-                        <div class="d-flex flex-row">
+                        <?php if ($statuses['status_approval_1'] == NULL) : ?>
+                        <button style="width:100px;" class="btn btn-secondary btn-sm mt-1"><i
+                                class="fa fa-fw fa-clock-o" disabled></i><span>Wait</span></button>
+                        <?php elseif ($statuses['status_approval_1'] == 'accept') : ?>
+                        <button style="width:100px;" class="btn btn-success btn-sm mt-1"><i class="fa fa-fw fa-check"
+                                disabled></i><span>Accept</span></button>
+                        <?php else : ?>
+                        <a href=" javascript:;" class="item-edit" data-reject="" style="color:white;"><button
+                                class="btn btn-danger btn-sm mt-1" style="width:100px;"><i class=" fa fa-fw fa-close"
+                                    disabled></i>Reject</button></a>
+                        <?php endif; ?>
+                    </td>
+                    <td>
+                        <?php if ($statuses['status_approval_2'] == NULL) : ?>
+                        <button style="width:100px;" class="btn btn-secondary btn-sm mt-1"><i
+                                class="fa fa-fw fa-clock-o" disabled></i><span>Wait</span></button>
+                        <?php elseif ($statuses['status_approval_2'] == 'accept') : ?>
+                        <button style="width:100px;" class="btn btn-success btn-sm mt-1"><i class="fa fa-fw fa-check"
+                                disabled></i><span>Accept</span></button>
+                        <?php else : ?>
+                        <a href=" javascript:;" class="item-edit" data-reject="" style="color:white;"><button
+                                class="btn btn-danger btn-sm mt-1" style="width:100px;"><i class=" fa fa-fw fa-close"
+                                    disabled></i>Reject</button></a>
+                        <?php endif; ?>
+                    </td>
+                    <td>
+
+
+                        <?php if ($statuses['status_approval_3'] == NULL) : ?>
+                        <button style="width:100px;" class="btn btn-secondary btn-sm mt-1"><i
+                                class="fa fa-fw fa-clock-o" disabled></i><span>Wait</span></button>
+                        <?php elseif ($statuses['status_approval_3'] == 'accept') : ?>
+                        <button style="width:100px;" class="btn btn-success btn-sm mt-1"><i class="fa fa-fw fa-check"
+                                disabled></i><span>Accept</span></button>
+                        <?php else : ?>
+                        <a href=" javascript:;" class="item-edit" data-reject="" style="color:white;"><button
+                                class="btn btn-danger btn-sm mt-1" style="width:100px;"><i class=" fa fa-fw fa-close"
+                                    disabled></i>Reject</button></a>
+                        <?php endif; ?>
+
+
+
+
+                        <!-- <div class="d-flex flex-row">
                             <button style="width:100px;" class="btn btn-secondary btn-sm mr-1"><i
                                     class="fa fa-fw fa-clock-o"></i><span>Wait</span></button>
                             <button style="width:100px;" class="btn btn-secondary btn-sm mr-1"><i
                                     class="fa fa-fw fa-clock-o"></i><span>Wait</span></button>
                             <button style="width:100px;" class="btn btn-secondary btn-sm "><i
                                     class="fa fa-fw fa-clock-o"></i><span>Wait</span></button>
-                        </div>
+                        </div> -->
                     </td>
                 </tr>
                 <?php endforeach; ?>

@@ -16,14 +16,14 @@
                 <th>Kategori Training</th>
                 <th>Metode Training</th>
                 <th>Rencana Training</th>
-                <th>Tujuan Training</th>
-                <th>Notes</th>
-                <th>Estimasi Budget</th>
+                <th>Budget</th>
+                <th>Actual Budget</th>
                 <th>status</th>
             </tr>
             </thead>
-            <tbody>
-                <?php foreach ($status as $statuses) : ?>
+            <tbody id="bod-verify">
+                <?php $i = 0;
+                foreach ($status as $statuses) : ?>
                 <tr>
                     <td><?= $statuses['nama'] ?></td>
                     <td><?= $statuses['training'] ?></td>
@@ -31,73 +31,47 @@
                     <td><?= $statuses['kategori_training'] ?></td>
                     <td><?= $statuses['metode_training'] ?></td>
                     <td><?= $statuses['rencana_training'] ?></td>
-                    <td><?= $statuses['tujuan_training'] ?></td>
-                    <td><?= $statuses['notes'] ?></td>
+                    <td><?= $statuses['biaya'] ?></td>
                     <td><?= $statuses['biaya_actual'] ?></td>
                     <td>
-                        <button type="button" class="btn btn-success btn-sm " style="width:100px;" id="bod-accept"><i
-                                class="fa fa-fw fa-check"></i>Accept</button>
-                        <input type="hidden" id="tna" value="<?= $statuses['id_tna'] ?>">
-                        <input type="hidden" id="user" value="<?= $statuses['id_user'] ?>">
-                        <button type="button" class="btn btn-danger btn-sm mt-1 " style="width:100px;"
-                            id="btn-reject"><i class="fa fa-fw fa-close"></i>Reject</button>
-                        <input type="hidden" id="reject" value="<?= $statuses['id_tna'] ?>">
-                        <input type="hidden" id="user" value="<?= $statuses['id_user'] ?>">
+                        <a onclick="AcceptBod(<?= $i ?>)" id="accept-bod<?= $i ?>" href="javascript:;"
+                            class="btn btn-success btn-sm " style="width:100px;color:white;"
+                            data-accept-kadiv="<?= $statuses['id_tna'] ?>"><i class=" fa fa-fw fa-check"></i>Accept</a>
+                        <input type="hidden" id="accept-bod-input<?= $i ?>" value="<?= $statuses['id_tna'] ?>">
+                        <a onclick="verify_bod(<?= $i ?>)" id="reject-bod<?= $i ?>" href="javascript:;"
+                            class="bod-verify btn btn-danger btn-sm mt-1 " style="width:100px;"><i
+                                class="fa fa-fw fa-close"></i>Reject</a>
+                        <input type="hidden" id="reject-bod-input<?= $i ?>" value="<?= $statuses['id_tna'] ?>">
                     </td>
                 </tr>
-                <?php endforeach; ?>
+                <div class=" modal fade" id="rejectBod<?= $i ?>" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Masukan Alasan Di Reject</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="d-flex flex-column">
+                                    <label for="alasan">Alasan</label>
+                                    <textarea id="alasan<?= $i ?>" class="mt-1" name="alasan<?= $i ?>"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <a id="admin-reject<?= $i ?>" href="javascript:;" class="btn btn-danger btn-sm mt-1"
+                                    style="width:100px;color:white;" onclick="Reject_Bod(<?= $i ?>) "><i
+                                        class=" fa fa-fw fa-close"></i>Reject</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php $i++;
+                endforeach; ?>
             </tbody>
         </table>
     </div>
 </div>
-<script>
-//for change TNA 
-$("#bod-accept").on('click', function() {
-    var id_tna = $('#tna').val();
-    var id_user = $('#user').val();
-
-    console.log(id_tna);
-    console.log(id_user);
-    $.ajax({
-        type: 'post',
-        url: "<?= base_url(); ?>/accept_bod",
-        async: true,
-        dataType: "json",
-        data: {
-            id_tna: id_tna,
-            id_user: id_user
-        },
-        success: function(data) {
-            window.location.reload()
-
-        }
-
-    })
-
-})
-
-//for reject tna
-$("#btn-reject").on('click', function() {
-    var id_tna = $('#tna').val();
-    var id_user = $('#user').val();
-    console.log(id_tna);
-    console.log(id_user);
-    $.ajax({
-        type: 'post',
-        url: "<?= base_url(); ?>/reject_bod",
-        async: true,
-        dataType: "json",
-        data: {
-            id_tna: id_tna,
-            id_user: id_user
-        },
-        success: function(data) {
-            window.location.reload()
-
-        }
-
-    })
-
-})
-</script>
 <?= $this->endSection() ?>
