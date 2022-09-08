@@ -38,43 +38,43 @@
                     <td><?= $statuses['biaya_actual'] ?></td>
                     <td>
                         <?php if ($statuses['status_approval_1'] == NULL) : ?>
-                        <button style="width:100px;" class="btn btn-secondary btn-sm mt-1"><i
-                                class="fa fa-fw fa-clock-o" disabled></i><span>Wait</span></button>
+                        <div class="d-flex justify-content-center"
+                            style="background-color:grey;width:50;border:1px;border-radius:2px;color:white;">Wait</div>
                         <?php elseif ($statuses['status_approval_1'] == 'accept') : ?>
-                        <button style="width:100px;" class="btn btn-success btn-sm mt-1"><i class="fa fa-fw fa-check"
-                                disabled></i><span>Accept</span></button>
+                        <div class="d-flex justify-content-center"
+                            style="background-color:green;width:50;border:1px;border-radius:2px;color:white;">Accept
+                        </div>
                         <?php else : ?>
-                        <a href=" javascript:;" class="item-edit" data-reject="" style="color:white;"><button
-                                class="btn btn-danger btn-sm mt-1" style="width:100px;"><i class=" fa fa-fw fa-close"
-                                    disabled></i>Reject</button></a>
+                        <div class="d-flex justify-content-center"
+                            style="background-color:red;width:50px;border:1px;border-radius:2px;color:white;">Reject
+                        </div>
                         <?php endif; ?>
                     </td>
                     <td>
                         <?php if ($statuses['status_approval_2'] == NULL) : ?>
-                        <button style="width:100px;" class="btn btn-secondary btn-sm mt-1"><i
-                                class="fa fa-fw fa-clock-o" disabled></i><span>Wait</span></button>
+                        <div class="d-flex justify-content-center"
+                            style="background-color:grey;width:50;border:1px;border-radius:2px;color:white;">Wait</div>
                         <?php elseif ($statuses['status_approval_2'] == 'accept') : ?>
-                        <button style="width:100px;" class="btn btn-success btn-sm mt-1"><i class="fa fa-fw fa-check"
-                                disabled></i><span>Accept</span></button>
+                        <div class="d-flex justify-content-center"
+                            style="background-color:green;width:50px;border:1px;border-radius:2px;color:white;">Accept
+                        </div>
                         <?php else : ?>
-                        <a href=" javascript:;" class="item-edit" data-reject="" style="color:white;"><button
-                                class="btn btn-danger btn-sm mt-1" style="width:100px;"><i class=" fa fa-fw fa-close"
-                                    disabled></i>Reject</button></a>
+                        <div class="d-flex justify-content-center"
+                            style="background-color:red;width:50;border:1px;border-radius:2px;color:white;">Reject</div>
                         <?php endif; ?>
                     </td>
                     <td>
 
-
                         <?php if ($statuses['status_approval_3'] == NULL) : ?>
-                        <button style="width:100px;" class="btn btn-secondary btn-sm mt-1"><i
-                                class="fa fa-fw fa-clock-o" disabled></i><span>Wait</span></button>
+                        <div class="d-flex justify-content-center"
+                            style="background-color:grey;width:50;border:1px;border-radius:2px;color:white;">Wait</div>
                         <?php elseif ($statuses['status_approval_3'] == 'accept') : ?>
-                        <button style="width:100px;" class="btn btn-success btn-sm mt-1"><i class="fa fa-fw fa-check"
-                                disabled></i><span>Accept</span></button>
+                        <div class="d-flex justify-content-center"
+                            style="background-color:green;width:50;border:1px;border-radius:2px;color:white;">Accept
+                        </div>
                         <?php else : ?>
-                        <a href=" javascript:;" class="item-edit" data-reject="" style="color:white;"><button
-                                class="btn btn-danger btn-sm mt-1" style="width:100px;"><i class=" fa fa-fw fa-close"
-                                    disabled></i>Reject</button></a>
+                        <div class="d-flex justify-content-center"
+                            style="background-color:red;width:50;border:1px;border-radius:2px;color:white;">Reject</div>
                         <?php endif; ?>
 
 

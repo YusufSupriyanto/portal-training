@@ -175,9 +175,9 @@ to get the desired effect
                             </li>
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
-                                    <i class="fas fa-edit nav-icon"></i>
+                                    <i class="fa-solid fa-chalkboard-user"></i>
                                     <p>
-                                        TNA
+                                        Training
                                         <i class="right fas fa-angle-left"></i>
                                     </p>
                                 </a>
@@ -186,14 +186,14 @@ to get the desired effect
                                         <a href="<?= base_url() ?>/data_member" class="nav-link  <?php if ($page == 'list_training') : echo 'active';
                                                                                                 endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>Form TNA</p>
+                                            <p>Form Training</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="<?= base_url() ?>/status_tna" class="nav-link  <?php if ($page == 'status_tna') : echo 'active';
                                                                                             endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>Status TNA</p>
+                                            <p>Status Training</p>
                                         </a>
                                     </li>
                                     <?php if (session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'BOD') : ?>
@@ -201,7 +201,7 @@ to get the desired effect
                                         <a href="<?= base_url() ?>/request_tna" class="nav-link  <?php if ($page == 'approve_tna') : echo 'active';
                                                                                                     endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>Request TNA</p>
+                                            <p>Request Training</p>
                                         </a>
                                     </li>
                                     <?php endif; ?>
@@ -224,7 +224,7 @@ to get the desired effect
                                 </a>
                                 <ul class="nav nav-treeview" style="display: none;">
                                     <li class="nav-item">
-                                        <a href="<?= base_url() ?>/Personal_schedule" class="nav-link  <?php if ($page == 'member_schedule') : echo 'active';
+                                        <a href="<?= base_url() ?>/Personal_schedule" class="nav-link  <?php if ($page == 'personal_schedule') : echo 'active';
                                                                                                     endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Personal Schedule Training</p>

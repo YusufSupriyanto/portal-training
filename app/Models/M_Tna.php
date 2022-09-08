@@ -47,10 +47,10 @@ class M_Tna extends Model
         $user = $this->user->getAllUser($id);
 
         if ($user['bagian'] == 'BOD') {
-            $this->select()->where('departemen', $user['departemen'])->where('status', 'save');
+            $this->select()->where('dic', $user['dic'])->where('status', 'save');
             return $this->get()->getResult();
         } elseif ($user['bagian'] == 'KADIV') {
-            $this->select()->where('departemen', $user['departemen'])->where('status', 'save');
+            $this->select()->where('divisi', $user['divisi'])->where('status', 'save');
             return $this->get()->getResult();
         } elseif ($user['bagian'] == 'KADEPT') {
             $this->select()->where('departemen', $user['departemen'])->where('status', 'save');
@@ -78,6 +78,7 @@ class M_Tna extends Model
             $this->join('user', 'user.id_user = tna.id_user')->where('bagian', 'KADIV');
             return $this->get()->getResultArray();
         } elseif ($bagian == 'KADIV') {
+            $jabatan = ['KADIV'];
             $status = ['wait', 'accept'];
             $this->select('tna.*,approval.*,user.bagian')->where('tna.divisi', $member)->whereIn('tna.status', $status);
             $this->join('approval', 'approval.id_tna = tna.id_tna');
@@ -100,7 +101,7 @@ class M_Tna extends Model
     public function getKadivStatus()
     {
         $this->select()->where('status', 'accept');
-        $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_1', null)->orWhere('status_approval_1', 'reject');
+        $this->join('approval', 'approval.id_tna = tna.id_tna'); //->where('status_approval_1', null)->orWhere('status_approval_1', 'reject')
         return $this->get()->getResultArray();
     }
 
@@ -109,8 +110,7 @@ class M_Tna extends Model
     public function getRequestTna($bagian, $member)
     {
         if ($bagian == 'BOD') {
-            $status = ['wait', 'accept'];
-            $this->select()->where('dic', $member)->whereIn('status', $status)->where('status_approval_1', 'accept')->where('status_approval_2', 'accept')->where('status_approval_3', null);
+            $this->select()->where('dic', $member)->where('status', 'accept')->where('status_approval_1', 'accept')->where('status_approval_2', 'accept')->where('status_approval_3', null);
             $this->join('approval', 'approval.id_tna = tna.id_tna');
             return $this->get()->getResultArray();
         } elseif ($bagian == 'KADIV') {
@@ -148,5 +148,13 @@ class M_Tna extends Model
         $this->join('approval', 'approval.id_tna = tna.id_tna');
         $this->join('user', 'user.id_user = tna.id_user');
         return $this->get()->getResultArray();
+    }
+
+
+    public function getDateTraining()
+    {
+        $this->select();
+        $this->join('approval', 'approval.id_tna = tna.id_tna');
+        return $this->get()->getResult();
     }
 }

@@ -75,6 +75,7 @@ $routes->post('/edit/user/(:num)', 'Admin\C_User::edit/$1');
 
 //Form TNA ADMIN
 $routes->get('/tna', 'Admin\C_Tna::index');
+$routes->get('/training_monthly', 'Admin\C_Tna::trainingMonthly');
 $routes->post('/accept_admin', 'Admin\C_Tna::accept');
 // $routes->get('/accept_admin/(:num)', 'Admin\C_Tna::accept/$1');
 $routes->post('/reject_admin', 'Admin\C_Tna::reject');
@@ -116,6 +117,8 @@ $routes->post('/reject_kadiv', 'User\FormTna::rejectKadiv');
 $routes->post('/accept_bod', 'User\FormTna::acceptBod');
 $routes->post('/reject_bod', 'User\FormTna::rejectBod');
 
+//Our Schedule User
+$routes->get('/member_schedule', 'User\OurSchedule::member');
 
 
 /*

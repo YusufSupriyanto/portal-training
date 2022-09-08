@@ -50,7 +50,8 @@ class FormTna extends BaseController
             'tittle' => 'TRAINING NEED ANALYSIS',
             'user' => $user,
             'training' => $trainings,
-            'tna' => $tna
+            'tna' => $tna,
+            'validation' => \Config\Services::validation(),
         ];
         return view('user/formtna', $data);
     }
@@ -94,16 +95,39 @@ class FormTna extends BaseController
 
     public function TnaSend()
     {
-        $data =  $_POST['training'];
-        for ($i = 0; $i < count($data); $i++) {
-            $update = $this->tna->getAllTna($data[$i]);
-            $tna = [
-                'id_tna' => $update[0]->id_tna,
-                'status' => 'wait'
-            ];
-            $this->tna->save($tna);
+        $bagian = session()->get('bagian');
+        if ($bagian == 'BOD') {
+            $data =  $_POST['training'];
+            for ($i = 0; $i < count($data); $i++) {
+                $update = $this->tna->getAllTna($data[$i]);
+                $tna = [
+                    'id_tna' => $update[0]->id_tna,
+                    'status' => 'wait',
+
+                ];
+                $approvals = $this->approval->getIdApproval($update[0]->id_tna);
+
+                $dataApproval = [
+                    'id_approval' => $approvals['id_approval'],
+                    'status_approval_1' => 'accept',
+                ];
+                $this->tna->save($tna);
+                $this->approval->save($dataApproval);
+            }
+            return redirect()->to('/data_member');
+        } else {
+            $data =  $_POST['training'];
+            for ($i = 0; $i < count($data); $i++) {
+                $update = $this->tna->getAllTna($data[$i]);
+                $tna = [
+                    'id_tna' => $update[0]->id_tna,
+                    'status' => 'wait',
+
+                ];
+                $this->tna->save($tna);
+            }
+            return redirect()->to('/data_member');
         }
-        return redirect()->to('/data_member');
     }
 
 
@@ -119,6 +143,12 @@ class FormTna extends BaseController
     //function untuk save tna
     public function TnaForm($id_user, $id_training)
     {
+        if (!$this->validate([
+            'tujuan' => 'required'
+        ])) {
+            $validation = \Config\Services::validation();
+            return redirect()->to('/form_tna/' . $id_user)->withInput()->with('validation', $validation);
+        }
         $user = $this->user->getAllUser($id_user);
         $jenis_trainng = $this->training->getIdTraining($id_training);
 

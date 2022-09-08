@@ -30,6 +30,20 @@ class C_Tna extends BaseController
         return view('admin/tna', $data);
     }
 
+
+    public function trainingMonthly()
+    {
+
+        $date = $this->tna->getDateTraining();
+        dd($date);
+
+        $data = [
+            'tittle' => 'Form TNA',
+            'date' => $date
+        ];
+        return view('admin/trainingmonthly', $data);
+    }
+
     public function accept()
     {
         $data = [
@@ -84,16 +98,28 @@ class C_Tna extends BaseController
     {
 
         $approve = $this->approval->getIdApproval($this->request->getPost('id_tna'));
+        $biaya_actual = (int) $this->request->getPost('biaya_actual');
+        if ($biaya_actual <= 2500000) {
+            $data = [
+                'id_approval' => $approve['id_approval'],
+                'status_approval_2' => 'accept',
+                'status_approval_3' => 'accept'
+            ];
+        } else {
+            $data = [
+                'id_approval' => $approve['id_approval'],
+                'status_approval_2' => 'accept',
+            ];
+        }
+
         $data1 = [
             'id_tna' => $this->request->getPost('id_tna'),
             'rencana_training' => $this->request->getPost('rencana_training'),
             'biaya_actual' => $this->request->getPost('biaya_actual'),
         ];
 
-        $data = [
-            'id_approval' => $approve['id_approval'],
-            'status_approval_2' => 'accept'
-        ];
+        // $fulldata = array_merge($data, $data1);
+
 
         $this->tna->save($data1);
         $this->approval->save($data);

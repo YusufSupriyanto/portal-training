@@ -160,9 +160,9 @@ to get the desired effect
                             </li>
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
-                                    <i class="fas fa-edit nav-icon"></i>
+                                    <i class="fa-solid fa-chalkboard-user"></i>
                                     <p>
-                                        TNA
+                                        Training
                                         <i class="right fas fa-angle-left"></i>
                                     </p>
                                 </a>
@@ -171,21 +171,28 @@ to get the desired effect
                                         <a href="<?= base_url() ?>/tna" class="nav-link  <?php if ($page == 'list_training') : echo 'active';
                                                                                         endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>Form TNA</p>
+                                            <p>Daftar Training</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="<?= base_url() ?>/kadiv_status" class="nav-link  <?php if ($page == 'kadiv_status') : echo 'active';
                                                                                                 endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>KADIV Status</p>
+                                            <p>Kadiv Status Approval</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="<?= base_url() ?>/kadiv_accept" class="nav-link  <?php if ($page == 'kadiv_accept') : echo 'active';
+                                        <a href="<?= base_url() ?>/training_monthly" class="nav-link  <?php if ($page == 'training_monthly') : echo 'active';
+                                                                                                    endif; ?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Training Monthly</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="<?= base_url() ?>/training_fixed" class="nav-link  <?php if ($page == 'training_fixed') : echo 'active';
                                                                                                 endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>KADIV Accept</p>
+                                            <p>Training Fixed</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">

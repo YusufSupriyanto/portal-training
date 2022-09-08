@@ -33,10 +33,14 @@
                         <a href=" javascript:;" class="item-edit" data-reject="<?= $tnas['id_tna'] ?>"
                             style="color:white;"><button class="btn btn-danger btn-sm mt-1" style="width:100px;"><i
                                     class=" fa fa-fw fa-close"></i>Reject</button></a>
+                        <?php elseif ($tnas['status_approval_1'] == 'accept') : ?>
+                        <div class="d-flex justify-content-center"
+                            style="background-color:green;width:100px;border:1px;border-radius:2px;color:white;">Accept
+                        </div>
                         <?php else : ?>
-                        <a href=" javascript:;" class="" data-reject="<?= $tnas['id_tna'] ?>"
-                            style="color:white;"><button class="btn btn-secondary btn-sm mt-1" style="width:100px;"><i
-                                    class=" fa fa-fw fa-hourglass-start"></i>Wait</button></a>
+                        <div class="d-flex justify-content-center sm"
+                            style="background-color:grey;width:100px;border:1px;border-radius:2px;color:white;">Wait
+                        </div>
                         <?php endif; ?>
                     </td>
                 </tr>
