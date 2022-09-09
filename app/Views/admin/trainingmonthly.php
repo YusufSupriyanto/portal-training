@@ -17,11 +17,20 @@
                     <th>Reject</th>
                 </tr>
             </thead>
-            <?php $i = 0;
+            <?php
+
+            use Faker\Provider\Base;
+
+            $i = 0;
             foreach ($date as $dates) : ?>
             <tr>
-                <td><a href=""><?= $dates->rencana_training ?></a></td>
-                <td></td>
+                <td><a
+                        href="<?= base_url() ?>/kadiv_accept/<?= $dates->rencana_training ?>"><?= $dates->rencana_training ?></a>
+                    <input type="hidden" id="date<?= $i ?>" value="<?= $dates->rencana_training ?>">
+                </td>
+                <td>
+                    <div id="jumlah_training<?= $i ?>"></div>
+                </td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -34,4 +43,29 @@
     </div>
     <!-- /.card-body -->
 </div>
+<script>
+// $(document).ready(function(i) {
+//     const date = $('#date' + i).val()
+//     console.log(date)
+// $("#jumlah_training" + i).html(
+//     `<span>${date}</span>`
+// );
+// });
+
+// $.ajax({
+//     type: 'post',
+//     url: "<?= base_url(); ?>/sum_training",
+//     async: true,
+//     dataType: "json",
+//     data: {
+//         id_tna: id_tna,
+//     },
+//     success: function(data) {
+//         jQuery.noConflict()
+//         window.location.reload()
+
+//     }
+
+// })
+</script>
 <?= $this->endSection() ?>

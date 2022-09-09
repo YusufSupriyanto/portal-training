@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use PHPSQLParser\Test\Creator\count_distinctTest;
 
 class M_Tna extends Model
 {
@@ -129,10 +130,10 @@ class M_Tna extends Model
     }
 
 
-    public function getKadivAccept()
+    public function getKadivAccept($date)
     {
-        $this->select()->where('status', 'accept');
-        $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_1', 'accept')->where('status_approval_2', null);
+        $this->select()->where('status', 'accept')->where('rencana_training', $date);
+        $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_1', 'accept');
         return $this->get()->getResultArray();
     }
 
@@ -150,11 +151,42 @@ class M_Tna extends Model
         return $this->get()->getResultArray();
     }
 
-
     public function getDateTraining()
     {
-        $this->select();
+        $this->select('tna.rencana_training,tna.training,approval.status_approval_1,approval.status_approval_2,approval.status_approval_3')->distinct();
         $this->join('approval', 'approval.id_tna = tna.id_tna');
         return $this->get()->getResult();
+    }
+
+
+    // public function getDateTraining()
+    // {
+    //     $this->select('rencana_training, Count(training) as jumlah')->distinct();
+    //     $this->join('approval', 'approval.id_tna = tna.id_tna');
+    //     return $this->get()->getResult();
+    // }
+
+    // S
+
+    // public function getJumlahTraining($date)
+    // {
+    //     $this->selectCount('training')->distinct()->where('rencana_training', $date);
+    //     $this->join('approval', 'approval.id_tna = tna.id_tna');
+    //     return $this->get()->getResult();
+    // }
+
+
+    public function getJumlahTraining($date)
+    {
+        $this->select('training')->distinct('training')->where('rencana_training', $date);
+        $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_1', 'accept');
+        return $this->get()->getResultArray();
+    }
+
+    public function getTrainingDitolak()
+    {
+        $this->select();
+        $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_1', 'reject')->orWhere('status_approval_2', 'reject')->orWhere('status_approval_3', 'reject');
+        return $this->get()->getResultArray();
     }
 }

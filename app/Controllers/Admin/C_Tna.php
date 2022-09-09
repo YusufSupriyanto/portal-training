@@ -34,14 +34,16 @@ class C_Tna extends BaseController
     public function trainingMonthly()
     {
 
+        // $date = '2022-09-30';
+        // $jumlah = $this->tna->getJumlahTraining($date);
         $date = $this->tna->getDateTraining();
         dd($date);
 
-        $data = [
-            'tittle' => 'Form TNA',
-            'date' => $date
-        ];
-        return view('admin/trainingmonthly', $data);
+        // $data = [
+        //     'tittle' => 'Form TNA',
+        //     'date' => $date
+        // ];
+        // return view('admin/trainingmonthly', $data);
     }
 
     public function accept()
@@ -81,11 +83,10 @@ class C_Tna extends BaseController
     }
 
 
-    public function kadivAccept()
+    public function kadivAccept($date)
     {
 
-
-        $status = $this->tna->getKadivAccept();
+        $status = $this->tna->getKadivAccept($date);
 
         $data = [
             'tittle' => 'Kadiv accept',
@@ -158,5 +159,16 @@ class C_Tna extends BaseController
         $id = $this->request->getPost('id_tna');
         $data = $this->approval->getIdApproval($id);
         echo json_encode($data);
+    }
+
+    public function TrainingDitolak()
+    {
+        $reject = $this->tna->getTrainingDitolak();
+
+        $data = [
+            'tittle' => 'Training Di Reject',
+            'training' => $reject
+        ];
+        return view('admin/trainingreject', $data);
     }
 }

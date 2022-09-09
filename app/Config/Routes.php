@@ -80,12 +80,13 @@ $routes->post('/accept_admin', 'Admin\C_Tna::accept');
 // $routes->get('/accept_admin/(:num)', 'Admin\C_Tna::accept/$1');
 $routes->post('/reject_admin', 'Admin\C_Tna::reject');
 $routes->get('/kadiv_status', 'Admin\C_Tna::kadivStatus');
-$routes->get('/kadiv_accept', 'Admin\C_Tna::kadivAccept');
+$routes->get('/kadiv_accept/(:any)', 'Admin\C_Tna::kadivAccept/$1');
 $routes->post('/accept_adminfixed', 'Admin\C_Tna::acceptAdmin');
 $routes->post('/reject_adminfixed', 'Admin\C_Tna::rejectAdmin');
 $routes->post('/detail_tna', 'Admin\C_Tna::detailTna');
 $routes->post('/detail_reject', 'Admin\C_Tna::detailReject');
 $routes->get('/detail_reject', 'Admin\C_Tna::detailReject');
+$routes->get('/training_ditolak', 'Admin\C_Tna::TrainingDitolak');
 
 
 

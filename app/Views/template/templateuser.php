@@ -42,12 +42,6 @@ to get the desired effect
                     <li class="nav-item">
                         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
                     </li>
-                    <li class="nav-item d-none d-sm-inline-block">
-                        <a href="index3.html" class="nav-link">Home</a>
-                    </li>
-                    <li class="nav-item d-none d-sm-inline-block">
-                        <a href="#" class="nav-link">Contact</a>
-                    </li>
                 </ul>
 
                 <!-- SEARCH FORM -->
@@ -241,7 +235,13 @@ to get the desired effect
                                     </li>
                                 </ul>
                             </li>
-
+                            <li class="nav-item">
+                                <a href="<?= base_url() ?>/contac_us" class="nav-link  <?php if ($page == 'contac_us') : echo 'active';
+                                                                                    endif; ?>">
+                                    <i class="fa fa-fw  fa-phone"></i>
+                                    <p>Contac Us</p>
+                                </a>
+                            </li>
                         </ul>
                     </nav>
                     <!-- /.sidebar-menu -->

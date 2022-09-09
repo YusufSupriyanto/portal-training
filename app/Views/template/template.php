@@ -9,7 +9,7 @@
         <title><?= $tittle ?></title>
 
         <script src="https://kit.fontawesome.com/90e89a2bd2.js" crossorigin="anonymous"></script>
-        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 
 
@@ -131,9 +131,17 @@ to get the desired effect
                             data-accordion="false">
                             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-
-
                             <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="fa fa-fw fa-home"></i>
+                                    <p>
+                                        Home
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item has-treeview">
+
                                 <a href="#" class="nav-link">
                                     <i class="fa fa-fw fa-list"></i>
                                     <p>
@@ -233,16 +241,16 @@ to get the desired effect
                                 <a href="#" class="nav-link">
                                     <i class="fa fa-fw fa-trash"></i>
                                     <p>
-                                        TNA Reject
+                                        Training Reject
                                         <i class="right fas fa-angle-left"></i>
                                     </p>
                                 </a>
                                 <ul class="nav nav-treeview" style="display: none;">
                                     <li class="nav-item">
-                                        <a href="<?= base_url() ?>/tna_ditolak" class="nav-link  <?php if ($page == 'tna_diolak') : echo 'active';
-                                                                                                endif; ?>">
+                                        <a href="<?= base_url() ?>/training_ditolak" class="nav-link  <?php if ($page == 'tna_diolak') : echo 'active';
+                                                                                                    endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>TNA Ditolak</p>
+                                            <p>Daftar Training Di Reject</p>
                                         </a>
                                     </li>
                                 </ul>
@@ -300,7 +308,6 @@ to get the desired effect
         <script src="<?= base_url() ?>/sweet/sweetalert2.all.min.js"></script>
         <script src="<?= base_url() ?>/sweet/training.js"></script>
         <?= view('asset/admintna') ?>
-
 
     </body>
 
