@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
-use PHPSQLParser\Test\Creator\count_distinctTest;
 
 class M_Tna extends Model
 {
@@ -132,8 +131,8 @@ class M_Tna extends Model
 
     public function getKadivAccept($date)
     {
-        $this->select()->where('status', 'accept')->where('rencana_training', $date);
-        $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_1', 'accept');
+        $this->select()->where('rencana_training', $date);
+        $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_1', 'accept')->where('status_approval_2', null);
         return $this->get()->getResultArray();
     }
 
@@ -176,17 +175,65 @@ class M_Tna extends Model
     // }
 
 
-    public function getJumlahTraining($date)
+    public function getTrainingMonthly()
     {
-        $this->select('training')->distinct('training')->where('rencana_training', $date);
-        $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_1', 'accept');
-        return $this->get()->getResultArray();
+        $sql =    $this->query("select tna.rencana_training as 'Planing Training', count(distinct tna.training) as 'Jumlah Training',count(distinct approval.status_approval_2) as 'Admin Approval',count(distinct approval.status_approval_3) as 'BOD Approval'
+            from tna join approval on approval.id_tna = tna.id_tna  group by tna.rencana_training")->getResultArray();
+
+        return $sql;
     }
 
     public function getTrainingDitolak()
     {
         $this->select();
         $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_1', 'reject')->orWhere('status_approval_2', 'reject')->orWhere('status_approval_3', 'reject');
+        return $this->get()->getResultArray();
+    }
+
+    public function getAtmp()
+    {
+        $this->select('tna.*,approval.*,user.bagian,user.npk');
+        $this->join('approval', 'approval.id_tna = tna.id_tna');
+        $this->join('user', 'user.id_user = tna.id_user')->where('status_approval_3', 'accept');
+        return $this->get()->getResultArray();
+    }
+
+    public function getMemberSchedule($bagian, $member)
+    {
+        if ($bagian == 'BOD') {
+            $this->select('tna.*,approval.*,user.bagian')->where('tna.dic', $member);
+            $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept');
+            $this->join('user', 'user.id_user = tna.id_user')->where('bagian', 'KADIV');
+            return $this->get()->getResultArray();
+        } elseif ($bagian == 'KADIV') {
+            $this->select('tna.*,approval.*,user.bagian')->where('tna.divisi', $member);
+            $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept');
+            $this->join('user', 'user.id_user = tna.id_user')->where('bagian', 'KADEPT');
+            return $this->get()->getResultArray();
+        } elseif ($bagian == 'KADEPT') {
+            $jabatan = ['STAFF', 'STAFF 4UP', 'KASIE'];
+            $this->select('tna.*,approval.*,user.bagian')->where('tna.departemen', $member);
+            $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept');
+            $this->join('user', 'user.id_user = tna.id_user')->whereIn('bagian', $jabatan);
+            return $this->get()->getResultArray();
+        } else {
+            return  $status  =  array();
+        }
+    }
+
+    public function getPersonalSchedule($id)
+    {
+        $this->select('tna.*,approval.*,user.bagian,user.id_user')->where('user.id_user', $id);
+        $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept');
+        $this->join('user', 'user.id_user = tna.id_user');
+        return $this->get()->getResultArray();
+    }
+
+    public function getDataHome()
+    {
+        $this->select('tna.training,tna.rencana_training');
+        $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept');
+        $this->join('user', 'user.id_user = tna.id_user');
         return $this->get()->getResultArray();
     }
 }

@@ -13,8 +13,8 @@
                     <th>Planing Training</th>
                     <th>Jumlah Training</th>
                     <th>Admin Approval</th>
-                    <th>Bod Approval</th>
-                    <th>Reject</th>
+                    <th>BOD Approval</th>
+                    <th style="color:red;">Reject</th>
                 </tr>
             </thead>
             <?php
@@ -22,18 +22,18 @@
             use Faker\Provider\Base;
 
             $i = 0;
-            foreach ($date as $dates) : ?>
+            foreach ($training as $dates) : ?>
             <tr>
                 <td><a
-                        href="<?= base_url() ?>/kadiv_accept/<?= $dates->rencana_training ?>"><?= $dates->rencana_training ?></a>
-                    <input type="hidden" id="date<?= $i ?>" value="<?= $dates->rencana_training ?>">
+                        href="<?= base_url() ?>/kadiv_accept/<?= $dates['Planing Training'] ?>"><?php $newDate = date('F Y', strtotime($dates['Planing Training']));
+                                                                                                    echo $newDate   ?></a>
                 </td>
                 <td>
-                    <div id="jumlah_training<?= $i ?>"></div>
+                    <?= $dates['Jumlah Training'] ?>
                 </td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td><?= $dates['Admin Approval'] ?></td>
+                <td><?= $dates['BOD Approval'] ?></td>
+                <td> <?= $dates['Jumlah Training'] - $dates['BOD Approval']   ?></td>
             </tr>
             <?php $i++;
             endforeach; ?>
@@ -43,29 +43,4 @@
     </div>
     <!-- /.card-body -->
 </div>
-<script>
-// $(document).ready(function(i) {
-//     const date = $('#date' + i).val()
-//     console.log(date)
-// $("#jumlah_training" + i).html(
-//     `<span>${date}</span>`
-// );
-// });
-
-// $.ajax({
-//     type: 'post',
-//     url: "<?= base_url(); ?>/sum_training",
-//     async: true,
-//     dataType: "json",
-//     data: {
-//         id_tna: id_tna,
-//     },
-//     success: function(data) {
-//         jQuery.noConflict()
-//         window.location.reload()
-
-//     }
-
-// })
-</script>
 <?= $this->endSection() ?>

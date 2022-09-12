@@ -136,7 +136,6 @@ to get the desired effect
                                     <i class="fa fa-fw fa-home"></i>
                                     <p>
                                         Home
-                                        <i class="right fas fa-angle-left"></i>
                                     </p>
                                 </a>
                             </li>

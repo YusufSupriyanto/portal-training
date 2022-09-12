@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
 <div class="card m-3">
     <div class="card-header">
-        <h3 class="card-title">Daftar Tna</h3>
+        <h3 class="card-title"><?= $tittle ?></h3>
     </div>
     <!-- /.card-header -->
     <div class="card-body table-responsive p-0">

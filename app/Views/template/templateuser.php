@@ -20,6 +20,8 @@
         <link rel="stylesheet" href="<?= base_url() ?>/AdminLTE/dist/css/adminlte.min.css">
         <!-- Google Font: Source Sans Pro -->
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css">
     </head>
     <!--
 BODY TAG OPTIONS:
@@ -124,24 +126,15 @@ to get the desired effect
                             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
 
-                            <li class="nav-item has-treeview">
-                                <a href="#" class="nav-link">
-                                    <i class="fa fa-fw fa-home"></i>
-                                    <p>
-                                        Home
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
+
+                            <li class="nav-item">
+                                <a href="<?= base_url() ?>/home_user" class="nav-link  <?php if ($page == 'home_user') : echo 'active';
+                                                                                    endif; ?>">
+                                    <i class="fa fa-fw  fa-home"></i>
+                                    <p>Home</p>
                                 </a>
-                                <ul class="nav nav-treeview" style="display: none;">
-                                    <li class="nav-item">
-                                        <a href="<?= base_url() ?>/list_training_user" class="nav-link  <?php if ($page == 'list_training_user') : echo 'active';
-                                                                                                    endif; ?>">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Training</p>
-                                        </a>
-                                    </li>
-                                </ul>
                             </li>
+
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
                                     <i class="fa fa-fw fa-list"></i>
@@ -218,22 +211,24 @@ to get the desired effect
                                 </a>
                                 <ul class="nav nav-treeview" style="display: none;">
                                     <li class="nav-item">
-                                        <a href="<?= base_url() ?>/Personal_schedule" class="nav-link  <?php if ($page == 'personal_schedule') : echo 'active';
+                                        <a href="<?= base_url() ?>/personal_schedule" class="nav-link  <?php if ($page == 'personal_schedule') : echo 'active';
                                                                                                     endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Personal Schedule Training</p>
                                         </a>
                                     </li>
                                 </ul>
+                                <?php if (session()->get('bagian') == 'KADEPT' || session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'BOD') : ?>
                                 <ul class="nav nav-treeview" style="display: none;">
                                     <li class="nav-item">
                                         <a href="<?= base_url() ?>/member_schedule" class="nav-link  <?php if ($page == 'member_schedule') : echo 'active';
-                                                                                                    endif; ?>">
+                                                                                                        endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Member Schedule Training</p>
                                         </a>
                                     </li>
                                 </ul>
+                                <?php endif; ?>
                             </li>
                             <li class="nav-item">
                                 <a href="<?= base_url() ?>/contac_us" class="nav-link  <?php if ($page == 'contac_us') : echo 'active';

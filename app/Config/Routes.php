@@ -87,6 +87,7 @@ $routes->post('/detail_tna', 'Admin\C_Tna::detailTna');
 $routes->post('/detail_reject', 'Admin\C_Tna::detailReject');
 $routes->get('/detail_reject', 'Admin\C_Tna::detailReject');
 $routes->get('/training_ditolak', 'Admin\C_Tna::TrainingDitolak');
+$routes->get('/training_fixed', 'Admin\C_Tna::TrainingFix');
 
 
 
@@ -97,6 +98,8 @@ $routes->get('/training_ditolak', 'Admin\C_Tna::TrainingDitolak');
 
 //Home User
 $routes->get('/home_user', 'User\Home::index');
+$routes->post('/data_home', 'User\Home::DataHome');
+$routes->get('/data_home', 'User\Home::DataHome');
 
 
 //Training List
@@ -120,6 +123,7 @@ $routes->post('/reject_bod', 'User\FormTna::rejectBod');
 
 //Our Schedule User
 $routes->get('/member_schedule', 'User\OurSchedule::member');
+$routes->get('/personal_schedule', 'User\OurSchedule::personal');
 
 
 /*
