@@ -10,6 +10,6 @@ class Home extends BaseController
         $data = [
             'tittle' => 'Portal Training & Development'
         ];
-        return view('template/template', $data);
+        return view('admin/home', $data);
     }
 }

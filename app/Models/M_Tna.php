@@ -231,9 +231,22 @@ class M_Tna extends Model
 
     public function getDataHome()
     {
-        $this->select('tna.training,tna.rencana_training');
+        $this->select('tna.training,tna.rencana_training,tna.kategori_training')->distinct();
         $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept');
         $this->join('user', 'user.id_user = tna.id_user');
+        return $this->get()->getResultArray();
+    }
+
+    public function getDataJadwalHome($date)
+    {
+        $this->select('training as Training,COUNT(training) as Pendaftar')->where('rencana_training', $date);
+        $this->groupBy('training');
+        return $this->get()->getResultArray();
+    }
+
+    public function getJadwalHomeVer($training, $date)
+    {
+        $this->select('kategori_training,rencana_training')->where('rencana_training', $date)->where('training', $training);
         return $this->get()->getResultArray();
     }
 }

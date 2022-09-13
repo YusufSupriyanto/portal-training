@@ -1,13 +1,22 @@
 <?= $this->extend('/template/templateuser') ?>
 
 <?= $this->section('content') ?>
-<div class="card m-3">
-
-    <div id='calendar'></div>
-
+<div class="card m-3 d-flex justify-content-center">
+    <div class="w-100 p-3">
+        <div id='calendar'></div>
+    </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
 <script>
+// document.addEventListener('DOMContentLoaded', function() {
+//     var calendarEl = document.getElementById('calendar');
+//     var calendar = new FullCalendar.Calendar(calendarEl, {
+//         initialView: 'dayGridMonth'
+//     });
+//     calendar.render();
+// });
 $(document).ready(function() {
+
     $.ajax({
         type: 'post',
         url: "<?= base_url(); ?>/data_home",
@@ -17,27 +26,26 @@ $(document).ready(function() {
         success: function(data) {
             console.log(data)
             jQuery.noConflict()
-            $('#calendar').fullCalendar('renderEvent', {
-                editable: true,
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                height: 500,
                 selectable: true,
-                selectHelper: true,
-                header: {
-                    left: 'prev,next today',
-                    center: 'tittle',
-                    right: 'month,agendaWeek,agendaDay'
-                },
-                buttonText: {
-                    today: 'today',
-                    month: 'month',
-                    week: 'week',
-                    day: 'day'
-                },
-                events: data
-            })
+                events: data,
+                eventClick: function(info) {
+                    info.jsEvent.preventDefault(); // don't let the browser navigate
+
+                    if (info.event.url) {
+                        window.open(info.event.url);
+                    }
+                }
+
+
+            });
+            calendar.render();
         }
 
     })
-
-});
+})
 </script>
 <?= $this->endSection() ?>

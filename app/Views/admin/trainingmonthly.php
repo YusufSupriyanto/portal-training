@@ -25,7 +25,7 @@
             foreach ($training as $dates) : ?>
             <tr>
                 <td><a
-                        href="<?= base_url() ?>/kadiv_accept/<?= $dates['Planing Training'] ?>"><?php $newDate = date('F Y', strtotime($dates['Planing Training']));
+                        href="<?= base_url() ?>/kadiv_accept/<?= $dates['Planing Training'] ?>"><?php $newDate = date('F d, Y', strtotime($dates['Planing Training']));
                                                                                                     echo $newDate   ?></a>
                 </td>
                 <td>

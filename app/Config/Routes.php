@@ -42,52 +42,52 @@ $routes->get('/test', 'Test::testAjaxTna');
 
 
 //login
-$routes->get('/', 'Login::index');
-$routes->post('/verify', 'Login::validation');
-$routes->get('/logout', 'Login::logout');
+$routes->get('/', 'Login::index', ['filter' => 'NAuth']);
+$routes->post('/verify', 'Login::validation', ['filter' => 'NAuth']);
+$routes->get('/logout', 'Login::logout', ['filter' => 'Auth']);
 
 //Home
-$routes->get('/home', 'Home::index');
+$routes->get('/home', 'Home::index', ['filter' => 'Auth']);
 
 
 //categories
 
 
 //list training
-$routes->get('/list_training', 'Admin\C_ListTraining::index');
-$routes->get('/non_training', 'Admin\C_ListTraining::nonTraining');
-$routes->get('/detail/(:any)', 'Admin\C_ListTraining::detail/$1');
-$routes->post('/addCategory', 'Admin\C_ListTraining::addCategory');
-$routes->post('/import', 'Admin\C_ListTraining::import');
-$routes->post('/import2', 'Admin\C_ListTraining::import2');
-$routes->delete('/delete/(:num)', 'Admin\C_ListTraining::delete/$1');
-$routes->get('/update/(:num)', 'Admin\C_ListTraining::update/$1');
-$routes->post('/edit/(:num)', 'Admin\C_ListTraining::edit/$1');
+$routes->get('/list_training', 'Admin\C_ListTraining::index', ['filter' => 'Auth']);
+$routes->get('/non_training', 'Admin\C_ListTraining::nonTraining', ['filter' => 'Auth']);
+$routes->get('/detail/(:any)', 'Admin\C_ListTraining::detail/$1', ['filter' => 'Auth']);
+$routes->post('/addCategory', 'Admin\C_ListTraining::addCategory', ['filter' => 'Auth']);
+$routes->post('/import', 'Admin\C_ListTraining::import', ['filter' => 'Auth']);
+$routes->post('/import2', 'Admin\C_ListTraining::import2', ['filter' => 'Auth']);
+$routes->delete('/delete/(:num)', 'Admin\C_ListTraining::delete/$1', ['filter' => 'Auth']);
+$routes->get('/update/(:num)', 'Admin\C_ListTraining::update/$1', ['filter' => 'Auth']);
+$routes->post('/edit/(:num)', 'Admin\C_ListTraining::edit/$1', ['filter' => 'Auth']);
 
 
 //User Admin
-$routes->get('/user', 'Admin\C_User::index');
-$routes->post('/addUser', 'Admin\C_User::addUser');
-$routes->delete('/delete/user/(:num)', 'Admin\C_User::delete/$1');
-$routes->get('/update/user/(:num)', 'Admin\C_User::update/$1');
-$routes->post('/edit/user/(:num)', 'Admin\C_User::edit/$1');
+$routes->get('/user', 'Admin\C_User::index', ['filter' => 'Auth']);
+$routes->post('/addUser', 'Admin\C_User::addUser', ['filter' => 'Auth']);
+$routes->delete('/delete/user/(:num)', 'Admin\C_User::delete/$1', ['filter' => 'Auth']);
+$routes->get('/update/user/(:num)', 'Admin\C_User::update/$1', ['filter' => 'Auth']);
+$routes->post('/edit/user/(:num)', 'Admin\C_User::edit/$1', ['filter' => 'Auth']);
 
 
 //Form TNA ADMIN
-$routes->get('/tna', 'Admin\C_Tna::index');
-$routes->get('/training_monthly', 'Admin\C_Tna::trainingMonthly');
-$routes->post('/accept_admin', 'Admin\C_Tna::accept');
+$routes->get('/tna', 'Admin\C_Tna::index', ['filter' => 'Auth']);
+$routes->get('/training_monthly', 'Admin\C_Tna::trainingMonthly', ['filter' => 'Auth']);
+$routes->post('/accept_admin', 'Admin\C_Tna::accept', ['filter' => 'Auth']);
 // $routes->get('/accept_admin/(:num)', 'Admin\C_Tna::accept/$1');
-$routes->post('/reject_admin', 'Admin\C_Tna::reject');
-$routes->get('/kadiv_status', 'Admin\C_Tna::kadivStatus');
-$routes->get('/kadiv_accept/(:any)', 'Admin\C_Tna::kadivAccept/$1');
-$routes->post('/accept_adminfixed', 'Admin\C_Tna::acceptAdmin');
-$routes->post('/reject_adminfixed', 'Admin\C_Tna::rejectAdmin');
-$routes->post('/detail_tna', 'Admin\C_Tna::detailTna');
-$routes->post('/detail_reject', 'Admin\C_Tna::detailReject');
-$routes->get('/detail_reject', 'Admin\C_Tna::detailReject');
-$routes->get('/training_ditolak', 'Admin\C_Tna::TrainingDitolak');
-$routes->get('/training_fixed', 'Admin\C_Tna::TrainingFix');
+$routes->post('/reject_admin', 'Admin\C_Tna::reject', ['filter' => 'Auth']);
+$routes->get('/kadiv_status', 'Admin\C_Tna::kadivStatus', ['filter' => 'Auth']);
+$routes->get('/kadiv_accept/(:any)', 'Admin\C_Tna::kadivAccept/$1', ['filter' => 'Auth']);
+$routes->post('/accept_adminfixed', 'Admin\C_Tna::acceptAdmin', ['filter' => 'Auth']);
+$routes->post('/reject_adminfixed', 'Admin\C_Tna::rejectAdmin', ['filter' => 'Auth']);
+$routes->post('/detail_tna', 'Admin\C_Tna::detailTna', ['filter' => 'Auth']);
+$routes->post('/detail_reject', 'Admin\C_Tna::detailReject', ['filter' => 'Auth']);
+$routes->get('/detail_reject', 'Admin\C_Tna::detailReject', ['filter' => 'Auth']);
+$routes->get('/training_ditolak', 'Admin\C_Tna::TrainingDitolak', ['filter' => 'Auth']);
+$routes->get('/training_fixed', 'Admin\C_Tna::TrainingFix', ['filter' => 'Auth']);
 
 
 
@@ -97,33 +97,36 @@ $routes->get('/training_fixed', 'Admin\C_Tna::TrainingFix');
 
 
 //Home User
-$routes->get('/home_user', 'User\Home::index');
-$routes->post('/data_home', 'User\Home::DataHome');
-$routes->get('/data_home', 'User\Home::DataHome');
+$routes->get('/home_user', 'User\Home::index', ['filter' => 'Auth']);
+$routes->post('/data_home', 'User\Home::DataHome', ['filter' => 'Auth']);
+$routes->get('/data_home', 'User\Home::DataHome', ['filter' => 'Auth']);
+$routes->get('/jadwal/(:any)', 'User\Home::JadwalHome/$1', ['filter' => 'Auth']);
 
 
 //Training List
-$routes->get('/list_training_user', 'User\ListTraining::index');
-$routes->get('/detail_user/(:any)', 'User\ListTraining::detail/$1');
-$routes->get('/non_training_user', 'User\ListTraining::nonTrainingUser');
+$routes->get('/list_training_user', 'User\ListTraining::index', ['filter' => 'Auth']);
+$routes->get('/detail_user/(:any)', 'User\ListTraining::detail/$1', ['filter' => 'Auth']);
+$routes->get('/non_training_user', 'User\ListTraining::nonTrainingUser', ['filter' => 'Auth']);
 
 //TNA USER
-$routes->get('/data_member', 'User\FormTna::index');
-$routes->get('/form_tna/(:num)', 'User\FormTna::TnaUser/$1');
-$routes->get('/User/FormTna', 'User\FormTna::AjaxTna');
-$routes->post('/User/FormTna', 'User\FormTna::AjaxTna');
-$routes->post('/tna/form/(:num)/(:num)', 'User\FormTna::TnaForm/$1/$2');
-$routes->post('/tna/send', 'User\FormTna::TnaSend');
-$routes->get('/status_tna', 'User\FormTna::status');
-$routes->get('/request_tna', 'User\FormTna::requestTna');
-$routes->post('/accept_kadiv', 'User\FormTna::acceptKadiv');
-$routes->post('/reject_kadiv', 'User\FormTna::rejectKadiv');
-$routes->post('/accept_bod', 'User\FormTna::acceptBod');
-$routes->post('/reject_bod', 'User\FormTna::rejectBod');
+$routes->get('/data_member', 'User\FormTna::index', ['filter' => 'Auth']);
+$routes->get('/form_tna/(:num)', 'User\FormTna::TnaUser/$1', ['filter' => 'Auth']);
+$routes->get('/User/FormTna', 'User\FormTna::AjaxTna', ['filter' => 'Auth']);
+$routes->post('/User/FormTna', 'User\FormTna::AjaxTna', ['filter' => 'Auth']);
+$routes->post('/tna/form/(:num)/(:num)', 'User\FormTna::TnaForm/$1/$2', ['filter' => 'Auth']);
+$routes->post('/tna/send', 'User\FormTna::TnaSend', ['filter' => 'Auth']);
+$routes->get('/status_tna', 'User\FormTna::status', ['filter' => 'Auth']);
+$routes->get('/request_tna', 'User\FormTna::requestTna', ['filter' => 'Auth']);
+$routes->post('/accept_kadiv', 'User\FormTna::acceptKadiv', ['filter' => 'Auth']);
+$routes->post('/reject_kadiv', 'User\FormTna::rejectKadiv', ['filter' => 'Auth']);
+$routes->post('/accept_bod', 'User\FormTna::acceptBod', ['filter' => 'Auth']);
+$routes->post('/reject_bod', 'User\FormTna::rejectBod', ['filter' => 'Auth']);
 
 //Our Schedule User
-$routes->get('/member_schedule', 'User\OurSchedule::member');
-$routes->get('/personal_schedule', 'User\OurSchedule::personal');
+$routes->get('/member_schedule', 'User\OurSchedule::member', ['filter' => 'Auth']);
+$routes->get('/personal_schedule', 'User\OurSchedule::personal', ['filter' => 'Auth']);
+
+
 
 
 /*

@@ -10,6 +10,7 @@
 
         <script src="https://kit.fontawesome.com/90e89a2bd2.js" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
 
 
 
@@ -22,6 +23,7 @@
         <link rel="stylesheet" href="<?= base_url() ?>/AdminLTE/dist/css/adminlte.min.css">
         <!-- Google Font: Source Sans Pro -->
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css">
     </head>
     <!--
 BODY TAG OPTIONS:
@@ -43,12 +45,6 @@ to get the desired effect
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
-                    </li>
-                    <li class="nav-item d-none d-sm-inline-block">
-                        <a href="index3.html" class="nav-link">Home</a>
-                    </li>
-                    <li class="nav-item d-none d-sm-inline-block">
-                        <a href="#" class="nav-link">Contact</a>
                     </li>
                 </ul>
 
@@ -131,14 +127,15 @@ to get the desired effect
                             data-accordion="false">
                             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-                            <li class="nav-item has-treeview">
-                                <a href="#" class="nav-link">
-                                    <i class="fa fa-fw fa-home"></i>
-                                    <p>
-                                        Home
-                                    </p>
+
+                            <li class="nav-item">
+                                <a href="<?= base_url() ?>/home" class="nav-link  <?php if ($page == 'home') : echo 'active';
+                                                                                endif; ?>">
+                                    <i class="fa fa-fw  fa-home"></i>
+                                    <p>Home</p>
                                 </a>
                             </li>
+
                             <li class="nav-item has-treeview">
 
                                 <a href="#" class="nav-link">
