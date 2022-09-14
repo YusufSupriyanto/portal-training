@@ -235,6 +235,31 @@ to get the desired effect
                             </li>
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
+                                    <i class="fas fa-fw fa-user-plus"></i>
+                                    <p>
+                                        User
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview" style="display: none;">
+                                    <li class="nav-item">
+                                        <a href="<?= base_url() ?>/user" class="nav-link  <?php if ($page == 'user') : echo 'active';
+                                                                                        endif; ?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Detail User</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="<?= base_url() ?>/non_training" class="nav-link <?php if ($page == 'non_training') : echo 'active';
+                                                                                                endif; ?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Form IDP</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
                                     <i class="fa fa-fw fa-trash"></i>
                                     <p>
                                         Training Reject

@@ -20,19 +20,19 @@
                     <th>RENCANA TRAINING</th>
                 </tr>
             </thead>
-            <?php foreach ($schedule as $Atmps) : ?>
-            <tr>
-                <td><?= $Atmps['nama'] ?></td>
-                <td><?= $Atmps['departemen'] ?></td>
-                <td><?= $Atmps['training'] ?></td>
-                <td><?= $Atmps['jenis_training'] ?></td>
-                <td><?= $Atmps['kategori_training'] ?></td>
-                <td><?= $Atmps['metode_training'] ?></td>
-                <td><?= $Atmps['tujuan_training'] ?></td>
-                <td><?= $Atmps['rencana_training'] ?></td>
-            </tr>
-            <?php endforeach; ?>
             <tbody>
+                <?php foreach ($schedule as $Atmps) : ?>
+                <tr>
+                    <td><?= $Atmps['nama'] ?></td>
+                    <td><?= $Atmps['departemen'] ?></td>
+                    <td><?= $Atmps['training'] ?></td>
+                    <td><?= $Atmps['jenis_training'] ?></td>
+                    <td><?= $Atmps['kategori_training'] ?></td>
+                    <td><?= $Atmps['metode_training'] ?></td>
+                    <td><?= $Atmps['tujuan_training'] ?></td>
+                    <td><?= $Atmps['rencana_training'] ?></td>
+                    <?php endforeach; ?>
+                </tr>
             </tbody>
         </table>
     </div>

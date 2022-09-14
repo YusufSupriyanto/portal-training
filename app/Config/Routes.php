@@ -127,6 +127,10 @@ $routes->get('/member_schedule', 'User\OurSchedule::member', ['filter' => 'Auth'
 $routes->get('/personal_schedule', 'User\OurSchedule::personal', ['filter' => 'Auth']);
 
 
+//Evaluasi
+$routes->get('/evaluasi_reaksi', 'User\Evaluasi::index', ['filter' => 'Auth']);
+$routes->post('/send_evaluasi_reaksi', 'User\Evaluasi::SendEvaluasiReaksi', ['filter' => 'Auth']);
+
 
 
 /*

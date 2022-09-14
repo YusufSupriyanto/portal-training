@@ -230,6 +230,35 @@ to get the desired effect
                                 </ul>
                                 <?php endif; ?>
                             </li>
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="fa fa-fw  fa-file-text"></i>
+                                    <p>
+                                        Evaluation
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview" style="display: none;">
+                                    <li class="nav-item">
+                                        <a href="<?= base_url() ?>/evaluasi_reaksi" class="nav-link  <?php if ($page == 'evaluasi_reaksi') : echo 'active';
+                                                                                                    endif; ?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Evaluaksi Reaksi</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <?php if (session()->get('bagian') == 'KADEPT' || session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'BOD') : ?>
+                                <ul class="nav nav-treeview" style="display: none;">
+                                    <li class="nav-item">
+                                        <a href="<?= base_url() ?>/evaluasi_efektifitas" class="nav-link  <?php if ($page == 'evaluasi_efektifitas') : echo 'active';
+                                                                                                            endif; ?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Evaluasi Efektifitas</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <?php endif; ?>
+                            </li>
                             <li class="nav-item">
                                 <a href="<?= base_url() ?>/contac_us" class="nav-link  <?php if ($page == 'contac_us') : echo 'active';
                                                                                     endif; ?>">

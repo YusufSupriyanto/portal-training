@@ -4,6 +4,7 @@ namespace App\Controllers\User;
 
 use App\Controllers\BaseController;
 use App\Models\M_Approval;
+use App\Models\M_EvaluasiReaksi;
 use App\Models\M_ListTraining;
 use App\Models\M_Tna;
 use App\Models\UserModel;
@@ -15,6 +16,7 @@ class FormTna extends BaseController
     private M_Tna $tna;
 
     private M_Approval $approval;
+    private M_EvaluasiReaksi $evaluasiReaksi;
 
     public function __construct()
     {
@@ -22,6 +24,7 @@ class FormTna extends BaseController
         $this->user = new UserModel();
         $this->tna = new M_Tna();
         $this->approval = new M_Approval();
+        $this->evaluasiReaksi = new M_EvaluasiReaksi();
     }
 
     //function untuk menamplilkan data member dengan user yang akan di daftarkan tna
@@ -182,7 +185,11 @@ class FormTna extends BaseController
             'id_tna' => $id->id_tna,
             'id_user' => $id->id_user
         ];
+        $data3 = [
+            'id_tna' => $id->id_tna,
+        ];
         $this->approval->save($data2);
+        $this->evaluasiReaksi->save($data3);
         session()->setFlashdata('success', 'TNA Berhasil Disimpan');
         return redirect()->to('/form_tna/' . $id_user);
     }
