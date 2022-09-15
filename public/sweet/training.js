@@ -43,3 +43,7 @@ $(document).ready(function() {
 $(document).ready(function() {
     $('#member').DataTable();
 });
+
+$(document).ready(function() {
+    $('#personal-schedule').DataTable();
+});

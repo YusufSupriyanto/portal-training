@@ -26,10 +26,10 @@ class Home extends BaseController
     {
 
         $home =  $this->tna->getDataHome();
-        // var_dump($home);
+        // dd($home);
         $json = [];
         foreach ($home as $row) {
-            if ($row['rencana_training'] > date('dd-mm-yy')) {
+            if ($row['rencana_training'] >= date('dd-mm-yy')) {
                 $data = [
                     'title' => $row['kategori_training'],
                     'start' => $row['rencana_training'],

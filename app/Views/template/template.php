@@ -24,6 +24,12 @@
         <!-- Google Font: Source Sans Pro -->
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css">
+
+        <style>
+        body {
+            font-size: 15px;
+        }
+        </style>
     </head>
     <!--
 BODY TAG OPTIONS:
@@ -235,25 +241,36 @@ to get the desired effect
                             </li>
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
-                                    <i class="fas fa-fw fa-user-plus"></i>
+                                    <i class="fa fa-fw fa-calendar-check-o"></i>
                                     <p>
-                                        User
+                                        Schedule
                                         <i class="right fas fa-angle-left"></i>
                                     </p>
                                 </a>
                                 <ul class="nav nav-treeview" style="display: none;">
                                     <li class="nav-item">
-                                        <a href="<?= base_url() ?>/user" class="nav-link  <?php if ($page == 'user') : echo 'active';
-                                                                                        endif; ?>">
+                                        <a href="<?= base_url() ?>/schedule_training" class="nav-link  <?php if ($page == 'schedule_training') : echo 'active';
+                                                                                                    endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>Detail User</p>
+                                            <p>Schedule Training</p>
                                         </a>
                                     </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="fa fa-fw  fa-history"></i>
+                                    <p>
+                                        History
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview" style="display: none;">
                                     <li class="nav-item">
-                                        <a href="<?= base_url() ?>/non_training" class="nav-link <?php if ($page == 'non_training') : echo 'active';
-                                                                                                endif; ?>">
+                                        <a href="<?= base_url() ?>/history" class="nav-link  <?php if ($page == 'history') : echo 'active';
+                                                                                            endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>Form IDP</p>
+                                            <p>History Training</p>
                                         </a>
                                     </li>
                                 </ul>

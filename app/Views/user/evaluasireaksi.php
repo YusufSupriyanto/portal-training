@@ -7,18 +7,21 @@
             <h4>Evaluasi Program Pelatihan</h4>
         </div>
         <div class="card m-2 p-2">
+            <?php foreach ($data as $datas) : ?>
+            <input type="hidden" value="<?= $datas['id_tna'] ?>" name="id_tna">
             <label>
-                Nama Training<span> :<?= " " ?></span>
+                Nama Training<span> :<?= " " . $datas['training'] ?></span>
             </label>
             <label>
-                Nama<span> :<?= " " . $nama ?></span>
+                Nama<span> :<?= " " . $datas['nama'] ?></span>
             </label>
             <label>
-                Npk<span> :<?= " " . $npk ?></span>
+                Npk<span> :<?= " " . $datas['npk'] ?></span>
             </label>
             <label>
-                Dept<span> :<?= " " . $bagian ?></span>
+                Dept<span> :<?= " " . $datas['bagian'] ?></span>
             </label>
+            <?php endforeach; ?>
         </div>
 
         <table class="table table-striped">
@@ -188,39 +191,43 @@
             <label class="ml-2">Selama mengikuti training ini, insight (wawasan) apa yang anda dapatkan ?</label>
             <textarea class="form-control m-2" rows="3" placeholder="Enter ..." name="wawasan"></textarea>
         </div>
-        <div class="card m-3">
-            <label>Seberapa banyak anda mendapatkan pengetahuan/skill baru dari training ini ?</label>
-            <div class="form-group d-flex justify-content-between p-4">
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="skill[]" value="25>
+        <div class="d-flex flex-row">
+            <div class="card m-3">
+                <label class="ml-2">Seberapa banyak anda mendapatkan pengetahuan/skill baru dari training ini ?</label>
+                <div class="form-group d-flex justify-content-between p-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="skill[]" value="25>
                     <label class=" form-check-label">25</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="skill[]" value="50">
-                    <label class="form-check-label">50</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="skill[]" value="75>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="skill[]" value="50">
+                        <label class="form-check-label">50</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="skill[]" value="75>
                     <label class=" form-check-label">75</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="skill[]" value="100>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="skill[]" value="100>
                     <label class=" form-check-label">100</label>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="card m-3">
-            <label>Apakah anda akan merekomendasikan training ini kepada rekan kerja yang lain ?</label>
-            <div class="form-group d-flex justify-content-around p-4">
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="rekomendasi[]" value="true">
-                    <label class=" form-check-label">Ya</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="rekomendasi[]" value="false">
-                    <label class="form-check-label">Tidak</label>
+            <div class="card m-3">
+                <label class="ml-2">Apakah anda akan merekomendasikan training ini kepada rekan kerja yang lain
+                    ?</label>
+                <div class="form-group d-flex justify-content-around p-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="rekomendasi[]" value="true">
+                        <label class=" form-check-label">Ya</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="rekomendasi[]" value="false">
+                        <label class="form-check-label">Tidak</label>
+                    </div>
                 </div>
             </div>
+
         </div>
         <div class="form-group m-3">
             <label class="ml-2"> Training apa yang Anda butuhkan di masa yang akan datang, dan alasannya?</label>

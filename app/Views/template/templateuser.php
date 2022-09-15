@@ -22,6 +22,11 @@
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css">
+        <style>
+        body {
+            font-size: 15px;
+        }
+        </style>
     </head>
     <!--
 BODY TAG OPTIONS:
@@ -254,6 +259,35 @@ to get the desired effect
                                                                                                             endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Evaluasi Efektifitas</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <?php endif; ?>
+                            </li>
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="fa fa-fw  fa-history"></i>
+                                    <p>
+                                        History
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview" style="display: none;">
+                                    <li class="nav-item">
+                                        <a href="<?= base_url() ?>/personal_history" class="nav-link  <?php if ($page == 'personal_history') : echo 'active';
+                                                                                                    endif; ?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Personal History Training</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <?php if (session()->get('bagian') == 'KADEPT' || session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'BOD') : ?>
+                                <ul class="nav nav-treeview" style="display: none;">
+                                    <li class="nav-item">
+                                        <a href="<?= base_url() ?>/member_history" class="nav-link  <?php if ($page == 'member_history') : echo 'active';
+                                                                                                    endif; ?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Member History Training</p>
                                         </a>
                                     </li>
                                 </ul>

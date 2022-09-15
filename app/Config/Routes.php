@@ -89,7 +89,12 @@ $routes->get('/detail_reject', 'Admin\C_Tna::detailReject', ['filter' => 'Auth']
 $routes->get('/training_ditolak', 'Admin\C_Tna::TrainingDitolak', ['filter' => 'Auth']);
 $routes->get('/training_fixed', 'Admin\C_Tna::TrainingFix', ['filter' => 'Auth']);
 
+//schedule training
+$routes->get('/schedule_training', 'Admin\C_Schedule::index', ['filter' => 'Auth']);
+$routes->get('/schedule_action/(:num)', 'Admin\C_Schedule::askForEvaluation/$1', ['filter' => 'Auth']);
 
+//history
+$routes->get('/history', 'Admin\C_History::index', ['filter' => 'Auth']);
 
 //USER
 
@@ -129,10 +134,11 @@ $routes->get('/personal_schedule', 'User\OurSchedule::personal', ['filter' => 'A
 
 //Evaluasi
 $routes->get('/evaluasi_reaksi', 'User\Evaluasi::index', ['filter' => 'Auth']);
+$routes->get('/form_evaluasi/(:num)', 'User\Evaluasi::EvaluasiForm/$1', ['filter' => 'Auth']);
 $routes->post('/send_evaluasi_reaksi', 'User\Evaluasi::SendEvaluasiReaksi', ['filter' => 'Auth']);
 
-
-
+//history
+$routes->get('/personal_history', 'User\History::index', ['filter' => 'Auth']);
 /*
  * --------------------------------------------------------------------
  * Additional Routing

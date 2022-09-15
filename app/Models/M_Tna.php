@@ -9,7 +9,12 @@ class M_Tna extends Model
     protected $table      = 'tna';
     protected $primaryKey = 'id_tna';
     // protected $useAutoIncrement = true;
-    protected $allowedFields = ['id_user', 'id_training', 'dic', 'divisi', 'departemen', 'nama', 'jabatan', 'golongan', 'seksi', 'jenis_training', 'kategori_training', 'training', 'metode_training', 'rencana_training', 'tujuan_training', 'notes', 'biaya', 'biaya_actual', 'status'];
+    protected $allowedFields = [
+        'id_user', 'id_training', 'dic', 'divisi',
+        'departemen', 'nama', 'jabatan', 'golongan', 'seksi', 'jenis_training',
+        'kategori_training', 'training', 'vendor', 'metode_training', 'rencana_training',
+        'tujuan_training', 'notes', 'biaya', 'biaya_actual', 'status'
+    ];
 
 
     private UserModel $user;
@@ -17,6 +22,12 @@ class M_Tna extends Model
     public function __construct()
     {
         $this->user = new UserModel();
+    }
+
+
+    public function getTnaUser($id)
+    {
+        return $this->where('id_user', $id)->get()->getResultArray();
     }
 
     public function getAllTna($id = false)
@@ -249,4 +260,38 @@ class M_Tna extends Model
         $this->select('kategori_training,rencana_training')->where('rencana_training', $date)->where('training', $training);
         return $this->get()->getResultArray();
     }
+
+
+    public function getSchedule()
+    {
+        $this->select('tna.*,approval.*,user.bagian,user.id_user');
+        $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept')->where('status_training', null);
+        $this->join('user', 'user.id_user = tna.id_user');
+        return $this->get()->getResultArray();
+    }
+
+    public function getEvaluasiReaksi($id)
+    {
+        $this->select('tna.*,approval.*,user.bagian,user.id_user,evaluasi_reaksi.*')->where('user.id_user', $id);
+        $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept')->where('status_training', 1);
+        $this->join('user', 'user.id_user = tna.id_user');
+        $this->join('evaluasi_reaksi', 'evaluasi_reaksi.id_tna = tna.id_tna');
+        return $this->get()->getResultArray();
+    }
+
+    public function getDataForEvaluation($id)
+    {
+        $this->select('tna.*,approval.*,user.bagian,user.id_user,user.npk')->where('tna.id_tna', $id);
+        $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept');
+        $this->join('user', 'user.id_user = tna.id_user');
+        return $this->get()->getResultArray();
+    }
+
+    // public function getDataHistory($id)
+    // {
+    //     $this->select('tna.*,approval.*,user.bagian,user.id_user,user.npk')->where('tna.id_tna', $id);
+    //     $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept');
+    //     $this->join('user', 'user.id_user = tna.id_user');
+    //     return $this->get()->getResultArray();
+    // }
 }

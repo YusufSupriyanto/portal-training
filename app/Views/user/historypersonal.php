@@ -1,4 +1,4 @@
-<?= $this->extend('/template/template') ?>
+<?= $this->extend('/template/templateuser') ?>
 
 <?= $this->section('content') ?>
 <div class="card m-3">
@@ -11,19 +11,18 @@
             <thead>
                 <tr>
                     <th>Nama</th>
-                    <th>Jumlah Training</th>
+                    <th>Materi Training</th>
+                    <th>Waktu</th>
+                    <th>Sertifikat</th>
+                    <th>Penyelenggara</th>
+                    <th>Tempat</th>
+                    <th>Lulus/Tidak</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($user as $users) : ?>
-                <tr>
-                    <td><a href=""><?= $users->nama ?></a></td>
-                    <td></td>
-
-                </tr>
-                <?php endforeach; ?>
             </tbody>
         </table>
     </div>
     <!-- /.card-body -->
-</div <?= $this->endSection() ?>
+</div>
+<?= $this->endSection() ?>

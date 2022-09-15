@@ -28,11 +28,13 @@ class OurSchedule extends BaseController
     {
         $id  = session()->get('id');
         $schedule = $this->tna->getPersonalSchedule($id);
+
+        // dd($schedule);
         $data = [
             'tittle' => 'Jadwal Training Personal',
             'schedule' => $schedule
         ];
-        return view('user/memberschedule', $data);
+        return view('user/personalschedule', $data);
     }
     public function member()
     {

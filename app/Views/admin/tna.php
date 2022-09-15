@@ -17,6 +17,7 @@
                         <th>rencana_training</th>
                         <th>Planing Budget</th>
                         <th>Actual Budget</th>
+                        <th>Vendor</th>
                         <th>Status</th>
                     </tr>
                 </thead>
@@ -34,6 +35,11 @@
                             <div class="d-flex flex-row">
                                 <label for="biaya" class="h6">Rp.</label>
                                 <input type="text" id="biaya<?= $i ?>" name="biaya<?= $i ?>">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex flex-row">
+                                <input type="text" id="vendor<?= $i ?>" name="vendor<?= $i ?>">
                             </div>
                         </td>
                         <td>

@@ -1,9 +1,9 @@
-<?= $this->extend('/template/template') ?>
+<?= $this->extend('/template/templateuser') ?>
 
 <?= $this->section('content') ?>
 <div class="card m-3">
     <div class="card-header">
-        <h3 class="card-title">Annual Training Master Plan</h3>
+        <h3 class="card-title"><?= $tittle ?></h3>
     </div>
     <!-- /.card-header -->
     <div class="card-body table-responsive p-0">
@@ -11,7 +11,6 @@
             <thead>
                 <tr>
                     <th>NAMA</th>
-                    <th>NPK</th>
                     <th>DEPARTEMEN</th>
                     <th>JUDUL TRAINING</th>
                     <th>JENIS TRAINING</th>
@@ -19,13 +18,12 @@
                     <th>METODE TRAINING</th>
                     <th>TUJUAN TRAINING</th>
                     <th>RENCANA TRAINING</th>
-                    <th>BIAYA</th>
+                    <th>Keterangan</th>
                 </tr>
             </thead>
-            <?php foreach ($Atmp as $Atmps) : ?>
+            <?php foreach ($evaluasi as $Atmps) : ?>
             <tr>
                 <td><?= $Atmps['nama'] ?></td>
-                <td><?= $Atmps['npk'] ?></td>
                 <td><?= $Atmps['departemen'] ?></td>
                 <td><?= $Atmps['training'] ?></td>
                 <td><?= $Atmps['jenis_training'] ?></td>
@@ -33,7 +31,21 @@
                 <td><?= $Atmps['metode_training'] ?></td>
                 <td><?= $Atmps['tujuan_training'] ?></td>
                 <td><?= $Atmps['rencana_training'] ?></td>
-                <td>Rp<?= number_format($Atmps['biaya'], 2, ',', '.') ?></td>
+                <?php if ($Atmps['status_evaluasi'] == null) : ?>
+                <td>
+                    <div class="d-flex justify-content-center sm">
+                        <a href="<?= base_url() ?>/form_evaluasi/<?= $Atmps['id_tna'] ?>" class="btn btn-danger btn-sm"
+                            style="font-size:10px;">Belum Evaluasi</a>
+                    </div>
+                </td>
+                <?php else : ?>
+                <td>
+                    <div class="d-flex justify-content-center sm">
+                        <a href="<?= base_url() ?>/form_evaluasi_selesai/<?= $Atmps['id_tna'] ?>"
+                            class="btn btn-success btn-sm" style="font-size:10px;">Sudah Evaluasi</a>
+                    </div>
+                </td>
+                <?php endif; ?>
             </tr>
             <?php endforeach; ?>
             <tbody>

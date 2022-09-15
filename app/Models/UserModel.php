@@ -44,7 +44,7 @@ class UserModel extends Model
             return $this->get()->getResult();
         } elseif ($data['bagian']  == "KADEPT") {
             $bagian = ['KASIE', 'STAFF 4UP', 'STAFF'];
-            $this->select()->whereIn('bagian', $bagian)->where('departemen', $data['departemen']);
+            $this->select()->whereIn('bagian', $bagian)->where('departemen', $data['departemen'])->where('level', 'USER');
             return $this->get()->getResult();
         } else {
             $this->select()->where('id_user', $id);
