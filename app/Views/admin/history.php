@@ -1,13 +1,13 @@
 <?= $this->extend('/template/template') ?>
 
 <?= $this->section('content') ?>
-<div class="card m-3">
+<div class="card m-2">
     <div class="card-header">
         <h3 class="card-title"><?= $tittle ?></h3>
     </div>
     <!-- /.card-header -->
     <div class="card-body table-responsive p-0">
-        <table class="table table-hover">
+        <table class="table table-hover" id="History">
             <thead>
                 <tr>
                     <th>Nama</th>
@@ -15,15 +15,27 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($user as $users) : ?>
+                <?php
+                $i = 0;
+                foreach ($user as $users) : ?>
                 <tr>
-                    <td><a href=""><?= $users->nama ?></a></td>
-                    <td></td>
-
+                    <td>
+                        <form id="myform<?= $i ?>" action="<?= base_url() ?>/detail_history" method="post">
+                            <input type="hidden" name="history" value="<?= $users['id'] ?>" />
+                        </form>
+                        <a href="#"
+                            onclick="document.getElementById('myform<?= $i ?>').submit();"><?= $users['nama'] ?></a>
+                    </td>
+                    <td><?= $users['jumlah_training'] ?></td>
                 </tr>
-                <?php endforeach; ?>
+                <?php
+                    $i++;
+                endforeach; ?>
             </tbody>
         </table>
     </div>
     <!-- /.card-body -->
-</div <?= $this->endSection() ?>
+</div>
+
+
+<?= $this->endSection() ?>

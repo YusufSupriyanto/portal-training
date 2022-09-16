@@ -47,3 +47,7 @@ $(document).ready(function() {
 $(document).ready(function() {
     $('#personal-schedule').DataTable();
 });
+
+$(document).ready(function() {
+    $('#History').DataTable();
+});

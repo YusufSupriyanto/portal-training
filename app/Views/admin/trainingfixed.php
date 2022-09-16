@@ -33,7 +33,7 @@
                 <td><?= $Atmps['metode_training'] ?></td>
                 <td><?= $Atmps['tujuan_training'] ?></td>
                 <td><?= $Atmps['rencana_training'] ?></td>
-                <td>Rp<?= number_format($Atmps['biaya'], 2, ',', '.') ?></td>
+                <td>Rp<?= number_format($Atmps['biaya'], 0, ',', '.') ?></td>
             </tr>
             <?php endforeach; ?>
             <tbody>

@@ -5,6 +5,7 @@ namespace App\Controllers\User;
 use App\Controllers\BaseController;
 use App\Models\M_Approval;
 use App\Models\M_EvaluasiReaksi;
+use App\Models\M_History;
 use App\Models\M_ListTraining;
 use App\Models\M_Tna;
 use App\Models\UserModel;
@@ -14,9 +15,9 @@ class FormTna extends BaseController
     private UserModel $user;
     private M_ListTraining $training;
     private M_Tna $tna;
-
     private M_Approval $approval;
     private M_EvaluasiReaksi $evaluasiReaksi;
+    private M_History $history;
 
     public function __construct()
     {
@@ -25,6 +26,7 @@ class FormTna extends BaseController
         $this->tna = new M_Tna();
         $this->approval = new M_Approval();
         $this->evaluasiReaksi = new M_EvaluasiReaksi();
+        $this->history = new M_History();
     }
 
     //function untuk menamplilkan data member dengan user yang akan di daftarkan tna
@@ -42,12 +44,12 @@ class FormTna extends BaseController
     }
 
     //function untuk menampilkan data user dan akan di daftarkan tna
-    public function TnaUser($id)
+    public function TnaUser()
     {
+        $id = $this->request->getPost('member');
         $user = $this->user->getAllUser($id);
         $trainings = $this->training->getAll();
         $tna = $this->tna->getUserTna($id);
-
 
         $data = [
             'tittle' => 'TRAINING NEED ANALYSIS',
@@ -144,13 +146,16 @@ class FormTna extends BaseController
     }
 
     //function untuk save tna
-    public function TnaForm($id_user, $id_training)
+    public function TnaForm()
     {
+
+        $id_user = $this->request->getPost('id_user');
+        $id_training = $_POST['training'];
         if (!$this->validate([
             'tujuan' => 'required'
         ])) {
             $validation = \Config\Services::validation();
-            return redirect()->to('/form_tna/' . $id_user)->withInput()->with('validation', $validation);
+            return redirect()->to('/form_tna')->withInput()->with('validation', $validation);
         }
         $user = $this->user->getAllUser($id_user);
         $jenis_trainng = $this->training->getIdTraining($id_training);
@@ -188,10 +193,15 @@ class FormTna extends BaseController
         $data3 = [
             'id_tna' => $id->id_tna,
         ];
+        $data4 = [
+            'id_tna' => $id->id_tna
+        ];
         $this->approval->save($data2);
         $this->evaluasiReaksi->save($data3);
+        $this->history->save($data4);
+
         session()->setFlashdata('success', 'TNA Berhasil Disimpan');
-        return redirect()->to('/form_tna/' . $id_user);
+        return redirect()->to('/data_member');
     }
 
 

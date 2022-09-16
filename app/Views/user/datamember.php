@@ -20,11 +20,16 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($user as $users) : ?>
+                <?php $i = 0;
+                foreach ($user as $users) : ?>
                 <tr>
                     <td><?= $users->npk ?></td>
                     <td><?php if (session()->get('bagian') == 'BOD' || session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'KADEPT') : ?>
-                        <a href="<?= base_url() ?>\form_tna\<?= $users->id_user ?>"><?= $users->nama ?></a>
+                        <form action="<?= base_url() ?>\form_tna" id="dataform<?= $i ?>" method="post">
+                            <input type="hidden" name="member" id="member<?= $i ?>" value="<?= $users->id_user ?>">
+                        </form>
+                        <a href="#"
+                            onclick="document.getElementById('dataform<?= $i ?>').submit();"><?= $users->nama ?></a>
                         <?php else : ?>
                         <?= $users->nama ?>
                         <?php endif; ?>
@@ -35,7 +40,9 @@
                     <td><?= $users->bagian ?></td>
                     <td><?= $users->status ?></td>
                 </tr>
-                <?php endforeach; ?>
+                <?php
+                    $i++;
+                endforeach; ?>
             </tbody>
         </table>
     </div>

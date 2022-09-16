@@ -15,6 +15,7 @@ class M_History extends Model
 
     public function getIdHistory($id)
     {
-        return $this->where(['id_tna' => $id])->first();
+        $this->select()->where(['id_tna' => $id]);
+        return $this->get()->getResultArray();
     }
 }

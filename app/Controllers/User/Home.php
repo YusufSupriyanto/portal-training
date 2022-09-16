@@ -29,7 +29,9 @@ class Home extends BaseController
         // dd($home);
         $json = [];
         foreach ($home as $row) {
-            if ($row['rencana_training'] >= date('dd-mm-yy')) {
+            $date = date('Y-m-d');
+            $dateTraining = $row['rencana_training'];
+            if (strtotime($dateTraining) > strtotime($date)) {
                 $data = [
                     'title' => $row['kategori_training'],
                     'start' => $row['rencana_training'],
@@ -37,6 +39,7 @@ class Home extends BaseController
                     'color' => '#FFD700',
                     'url' => base_url('/jadwal/' . $row['rencana_training'])
                 ];
+                array_push($json, $data);
             } else {
                 $data = [
                     'title' => $row['kategori_training'],
@@ -45,11 +48,8 @@ class Home extends BaseController
                     'color' => 'green',
                     'url' => base_url('/jadwal/' . $row['rencana_training'])
                 ];
+                array_push($json, $data);
             }
-
-
-            // var_dump($data);
-            array_push($json, $data);
         }
         echo json_encode($json);
     }

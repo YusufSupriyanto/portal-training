@@ -52,6 +52,7 @@ class C_Tna extends BaseController
             'biaya_actual' => $this->request->getPost('biaya_actual'),
             'rencana_training' => $this->request->getPost('rencana_training'),
             'vendor' => $this->request->getPost('vendor'),
+            'tempat' => $this->request->getPost('tempat'),
             'status' => 'accept'
         ];
         // dd($data);

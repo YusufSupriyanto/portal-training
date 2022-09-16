@@ -12,7 +12,7 @@ class M_Tna extends Model
     protected $allowedFields = [
         'id_user', 'id_training', 'dic', 'divisi',
         'departemen', 'nama', 'jabatan', 'golongan', 'seksi', 'jenis_training',
-        'kategori_training', 'training', 'vendor', 'metode_training', 'rencana_training',
+        'kategori_training', 'training', 'vendor', 'tempat', 'metode_training', 'rencana_training',
         'tujuan_training', 'notes', 'biaya', 'biaya_actual', 'status'
     ];
 
@@ -27,7 +27,15 @@ class M_Tna extends Model
 
     public function getTnaUser($id)
     {
-        return $this->where('id_user', $id)->get()->getResultArray();
+        $this->selectCount('id_user')->where('id_user', $id);
+        return $this->get()->getResultArray();
+    }
+
+    public function getDetailHistory($id)
+    {
+        $this->select()->where('id_user', $id);
+        // $this->join('evaluasi_reaksi', 'evaluasi_reaksi.id_tna=tna.id_tna');
+        return $this->get()->getResultArray();
     }
 
     public function getAllTna($id = false)

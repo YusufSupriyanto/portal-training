@@ -95,6 +95,8 @@ $routes->get('/schedule_action/(:num)', 'Admin\C_Schedule::askForEvaluation/$1',
 
 //history
 $routes->get('/history', 'Admin\C_History::index', ['filter' => 'Auth']);
+$routes->post('/detail_history', 'Admin\C_History::DetailHistory', ['filter' => 'Auth']);
+$routes->post('/sertifikat_upload', 'Admin\C_History::SertifikatUpload', ['filter' => 'Auth']);
 
 //USER
 
@@ -115,10 +117,11 @@ $routes->get('/non_training_user', 'User\ListTraining::nonTrainingUser', ['filte
 
 //TNA USER
 $routes->get('/data_member', 'User\FormTna::index', ['filter' => 'Auth']);
-$routes->get('/form_tna/(:num)', 'User\FormTna::TnaUser/$1', ['filter' => 'Auth']);
+$routes->post('/form_tna', 'User\FormTna::TnaUser', ['filter' => 'Auth']);
+$routes->get('/form_tna', 'User\FormTna::TnaUser', ['filter' => 'Auth']);
 $routes->get('/User/FormTna', 'User\FormTna::AjaxTna', ['filter' => 'Auth']);
 $routes->post('/User/FormTna', 'User\FormTna::AjaxTna', ['filter' => 'Auth']);
-$routes->post('/tna/form/(:num)/(:num)', 'User\FormTna::TnaForm/$1/$2', ['filter' => 'Auth']);
+$routes->post('/save_form', 'User\FormTna::TnaForm', ['filter' => 'Auth']);
 $routes->post('/tna/send', 'User\FormTna::TnaSend', ['filter' => 'Auth']);
 $routes->get('/status_tna', 'User\FormTna::status', ['filter' => 'Auth']);
 $routes->get('/request_tna', 'User\FormTna::requestTna', ['filter' => 'Auth']);

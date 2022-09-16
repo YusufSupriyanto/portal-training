@@ -6,11 +6,12 @@
     <div class="card-header d-flex justify-content-center">
         <h3 class="card-title"><?= $tittle  ?></h3>
     </div>
-    <form method="post" action="" id="form-tna">
+    <form method="post" action="<?= base_url() ?>/save_form" id="form-tna">
         <div class="card card-primary card-outline">
             <div class="card-body box-profile overflow-auto">
                 <div class="card overflow-auto">
                     <div class="card-body p-1 m-1" style=" position:absolute;width:auto;">
+                        <input type="hidden" value="<?= $user['id_user'] ?>" name="id_user">
                         <h6>Nama :<?= "  " . $user['nama'] ?></h6>
                         <h6>Jabatan :<?= "  " . $user['bagian'] ?></h6>
                         <h6>Departemen :<?= "  " . $user['departemen'] ?></h6>
@@ -35,12 +36,14 @@
 
                                 <tr>
                                     <td>
+
                                         <select class="custom-select" name="training" id="training"
                                             style="width:300px;">
                                             <option selected>Choose...</option>
                                             <?php foreach ($training as $trainings) : ?>
                                             <option value="<?= $trainings->id_training ?>">
-                                                <?= $trainings->judul_training ?></option>
+                                                <?= $trainings->judul_training ?>
+                                            </option>
                                             <?php endforeach; ?>
                                         </select>
                                     </td>
@@ -81,7 +84,7 @@
                                             style="width:300px;"></textarea></textarea>
                                     </td>
                                     <td>
-                                        <h5 id="biaya"></h5>
+                                        <div style="width:100px;" id="biaya"></div>
                                     </td>
                                 </tr>
                             </tbody>
@@ -125,7 +128,7 @@
                         <td><?= $Forms->rencana_training ?></td>
                         <td><?= $Forms->tujuan_training ?></td>
                         <td><?= $Forms->notes ?></td>
-                        <td>Rp.<?= $Forms->biaya ?></td>
+                        <td>Rp<?= " " . number_format($Forms->biaya, 0, ',', '.')  ?></td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -138,12 +141,12 @@
     </div>
 </div>
 <script>
-$(function() {
-    $('#datepicker').datepicker({
-        format: 'mm/dd/yyyy',
-        startDate: '-3d'
-    });
-});
+// $(function() {
+//     $('#datepicker').datepicker({
+//         format: 'mm/dd/yyyy',
+//         startDate: '-3d'
+//     });
+// });
 
 
 //for change TNA 
@@ -164,16 +167,18 @@ $("#training").on('change', function() {
 
             console.log(data.jenis_training);
 
+            const format = data.biaya.toString().split('').reverse().join('');
+            const convert = format.match(/\d{1,3}/g);
+            const rupiah = 'Rp ' + convert.join('.').split('').reverse().join('')
+            console.log(rupiah)
 
             $("#jenis_training").html(
                 `<span>${data.jenis_training}</span>`
             );
 
             $("#biaya").html(
-                `<span>RP.${data.biaya}</span>`
+                `<span style="font-size:15px;">${rupiah}</span>`
             );
-            $("#form-tna").attr('action',
-                '<?= base_url() ?>/tna/form/<?= $user['id_user']  ?>/' + data.id_training);
         }
 
     })
