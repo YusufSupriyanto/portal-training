@@ -142,6 +142,8 @@ $routes->post('/send_evaluasi_reaksi', 'User\Evaluasi::SendEvaluasiReaksi', ['fi
 
 //history
 $routes->get('/personal_history', 'User\History::index', ['filter' => 'Auth']);
+$routes->get('/member_history', 'User\History::memberHistory', ['filter' => 'Auth']);
+$routes->post('/download_sertifikat', 'User\History::download', ['filter' => 'Auth']);
 /*
  * --------------------------------------------------------------------
  * Additional Routing

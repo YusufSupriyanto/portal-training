@@ -50,7 +50,7 @@ class C_History extends BaseController
         $id = $this->request->getPost('history');
 
         $history = $this->tna->getDetailHistory($id);
-        // dd($history);
+        // dd($history[0]);
 
         $data = [
             'tittle' => 'History Training',
@@ -63,16 +63,17 @@ class C_History extends BaseController
     {
 
         $id_tna = $_POST['history'];
-        $file = $this->request->getFile('file' . $id_tna);
+        $file = $this->request->getFile('file' . $id_tna[0]);
+        // $file = $_FILES['file' . $id_tna[0]];
         $keterangan = $_POST['keterangan'];
-        //  $file = $_FILES['file'];
-        dd($file);
+
         $id  = $this->history->getIdHistory($id_tna);
-        $file[0]->getName();
-        $file[0]->getClientExtension();
+        $file->getName();
+        $file->getClientExtension();
         $newName = $file->getRandomName();
+        // var_dump($newName);
         $file->move("../public/sertifikat", $newName);
-        $filepath = base_url() . "/sertifikat/" . $newName;
+        $filepath = "/sertifikat/" . $newName;
 
         $data = [
             'id_history' => $id[0]['id_history'],

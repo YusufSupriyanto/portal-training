@@ -73,6 +73,7 @@ class C_ListTraining extends BaseController
 
     public function edit($id)
     {
+
         $file = $this->request->getFile('file');
         $file->getName();
         $file->getClientExtension();

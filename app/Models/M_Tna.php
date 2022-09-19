@@ -34,7 +34,7 @@ class M_Tna extends Model
     public function getDetailHistory($id)
     {
         $this->select()->where('id_user', $id);
-        // $this->join('evaluasi_reaksi', 'evaluasi_reaksi.id_tna=tna.id_tna');
+        $this->join('history', 'history.id_tna=tna.id_tna');
         return $this->get()->getResultArray();
     }
 
@@ -292,6 +292,13 @@ class M_Tna extends Model
         $this->select('tna.*,approval.*,user.bagian,user.id_user,user.npk')->where('tna.id_tna', $id);
         $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept');
         $this->join('user', 'user.id_user = tna.id_user');
+        return $this->get()->getResultArray();
+    }
+
+    public function getDataHistory($id)
+    {
+        $this->select()->where('tna.id_tna', $id);
+        $this->join('history', 'history.id_tna = tna.id_tna');
         return $this->get()->getResultArray();
     }
 
