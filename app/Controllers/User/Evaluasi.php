@@ -5,16 +5,19 @@ namespace App\Controllers\User;
 use App\Controllers\BaseController;
 use App\Models\M_EvaluasiReaksi;
 use App\Models\M_Tna;
+use App\Models\UserModel;
 
 class Evaluasi extends BaseController
 {
 
     private M_Tna $tna;
     private M_EvaluasiReaksi $evaluasiReaksi;
+    private UserModel $user;
     public function __construct()
     {
         $this->tna = new M_Tna();
         $this->evaluasiReaksi = new M_EvaluasiReaksi();
+        $this->user = new UserModel();
     }
     public function index()
     {
@@ -103,22 +106,83 @@ class Evaluasi extends BaseController
             'kemampuan_menanggapi1' => $this->request->getPost('kemampuan_menanggapi1'),
             'kemampuan_menanggapi2' => $this->request->getPost('kemampuan_menanggapi2'),
             'kemampuan_menanggapi3' => $this->request->getPost('kemampuan_menanggapi3'),
-            'kemampuan_menanggapi4 ' => $this->request->getPost('kemampuan_menanggapi4'),
+            'kemampuan_menanggapi4' => $this->request->getPost('kemampuan_menanggapi4'),
             'kemampuan_menanggapi5' => $this->request->getPost('kemampuan_menanggapi5'),
             'kemampuan_mengendalikan1' => $this->request->getPost('kemampuan_mengendalikan1'),
-            'kemampuan_mengendalikan2 ' => $this->request->getPost('kemampuan_mengendalikan2'),
-            'kemampuan_mengendalikan3 ' => $this->request->getPost('kemampuan_mengendalikan3'),
-            'kemampuan_mengendalikan4 ' => $this->request->getPost('kemampuan_mengendalikan4'),
+            'kemampuan_mengendalikan2' => $this->request->getPost('kemampuan_mengendalikan2'),
+            'kemampuan_mengendalikan3' => $this->request->getPost('kemampuan_mengendalikan3'),
+            'kemampuan_mengendalikan4' => $this->request->getPost('kemampuan_mengendalikan4'),
             'kemampuan_mengendalikan5' => $this->request->getPost('kemampuan_mengendalikan5'),
             'harapan_instruktur' => $this->request->getPost('harapan_instruktur'),
+            'peningkatan_instruktur' => $this->request->getPost('peningkatan_instruktur'),
             'wawasan' => $this->request->getPost('wawasan'),
             'skill' => (int) $this->request->getPost('skill[0]'),
             'rekomendasi' => $this->request->getPost('rekomendasi[0]'),
             'kebutuhan' => $this->request->getPost('kebutuhan'),
             'status_evaluasi' => true,
         ];
+        // dd($data);
         $this->evaluasiReaksi->save($data);
         session()->setFlashdata('success', 'Data Berhasil Di Import');
         return redirect()->to('/evaluasi_reaksi');
+    }
+
+    public function DetailEvaluasiReaksi($id)
+    {
+
+        $evaluasi  = $this->tna->getDetailEvaluasiReaksi($id);
+        // $evaluasi = $this->tna->getDataForEvaluation($id);
+
+
+        $data = [
+            'tittle' => 'Evaluasi Reaksi',
+            'data' => $evaluasi
+        ];
+        return view('user/detailevaluasireaksi', $data);
+    }
+
+    public function EvaluasiMember()
+    {
+        $id = session()->get('id');
+
+        $user =  $this->user->filter($id);
+        $person = [];
+        for ($i = 0; $i < count($user); $i++) {
+            $users = [
+                'id' => $user[$i]->id_user,
+                'nama' => $user[$i]->nama
+            ];
+
+            array_push($person, $users);
+        }
+        // dd($user);
+
+        $data = [
+            'tittle' => 'Evaluasi Reaksi',
+            'user' => $person
+        ];
+        return view('user/evaluasireaksimember', $data);
+    }
+
+    public function detailEvaluasimember()
+    {
+        $id =  $this->request->getPost('evaluasi');
+        $evaluasi =  $this->tna->getEvaluasiReaksi($id);
+        // dd($evaluasi);
+
+        $data = [
+            'tittle' => 'Evaluasi Reaksi',
+            'evaluasi' => $evaluasi
+        ];
+        return view('user/daftarreaksi', $data);
+    }
+
+
+    public function DataEvaluasi()
+    {
+
+        $id_training = $this->request->getPost('id_training');
+        $evaluasi  = $this->tna->getDetailEvaluasiReaksi($id_training);
+        echo json_encode($evaluasi);
     }
 }

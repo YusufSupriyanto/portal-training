@@ -36,9 +36,10 @@
                             <input type="hidden" name="input[]" value="<?= $histories['id_tna'] ?>">
                             <button type=" submit" value="View" class="btn btn-success btn-sm">View</button>
                         </form>
+
                     </td>
                     <?php else : ?>
-                    <td>Sertifikat Belum Ada</td>
+                    <td>Sertifikat Sudah Dikirim</td>
                     <?php endif; ?>
                     <td><?= $histories['vendor'] ?></td>
                     <td><?= $histories['tempat'] ?></td>

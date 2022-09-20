@@ -309,4 +309,13 @@ class M_Tna extends Model
     //     $this->join('user', 'user.id_user = tna.id_user');
     //     return $this->get()->getResultArray();
     // }
+
+
+    public function getDetailEvaluasiReaksi($id)
+    {
+        $this->select('tna.*,user.bagian,user.id_user,user.npk,evaluasi_reaksi.*')->where('tna.id_tna', $id);
+        $this->join('user', 'user.id_user = tna.id_user');
+        $this->join('evaluasi_reaksi', 'evaluasi_reaksi.id_tna = tna.id_tna');
+        return $this->get()->getResultArray();
+    }
 }

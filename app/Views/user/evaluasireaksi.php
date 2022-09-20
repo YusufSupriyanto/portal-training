@@ -218,11 +218,11 @@
                     ?</label>
                 <div class="form-group d-flex justify-content-around p-4">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="rekomendasi[]" value="true">
+                        <input class="form-check-input" type="radio" name="rekomendasi[]" value="1">
                         <label class=" form-check-label">Ya</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="rekomendasi[]" value="false">
+                        <input class="form-check-input" type="radio" name="rekomendasi[]" value="2">
                         <label class="form-check-label">Tidak</label>
                     </div>
                 </div>

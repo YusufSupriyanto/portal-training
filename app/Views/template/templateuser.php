@@ -5,7 +5,6 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta http-equiv="X-Frame-Options" content="deny">
 
         <title><?= $tittle ?></title>
 
@@ -249,11 +248,20 @@ to get the desired effect
                                         <a href="<?= base_url() ?>/evaluasi_reaksi" class="nav-link  <?php if ($page == 'evaluasi_reaksi') : echo 'active';
                                                                                                     endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>Evaluaksi Reaksi</p>
+                                            <p>Evaluaksi Reaksi Personal</p>
                                         </a>
                                     </li>
                                 </ul>
                                 <?php if (session()->get('bagian') == 'KADEPT' || session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'BOD') : ?>
+                                <ul class="nav nav-treeview" style="display: none;">
+                                    <li class="nav-item">
+                                        <a href="<?= base_url() ?>/evaluasi_reaksi_member" class="nav-link  <?php if ($page == 'evaluasi_reaksi_member') : echo 'active';
+                                                                                                            endif; ?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Evaluaksi Reaksi Member</p>
+                                        </a>
+                                    </li>
+                                </ul>
                                 <ul class="nav nav-treeview" style="display: none;">
                                     <li class="nav-item">
                                         <a href="<?= base_url() ?>/evaluasi_efektifitas" class="nav-link  <?php if ($page == 'evaluasi_efektifitas') : echo 'active';

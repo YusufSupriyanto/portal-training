@@ -139,11 +139,16 @@ $routes->get('/personal_schedule', 'User\OurSchedule::personal', ['filter' => 'A
 $routes->get('/evaluasi_reaksi', 'User\Evaluasi::index', ['filter' => 'Auth']);
 $routes->get('/form_evaluasi/(:num)', 'User\Evaluasi::EvaluasiForm/$1', ['filter' => 'Auth']);
 $routes->post('/send_evaluasi_reaksi', 'User\Evaluasi::SendEvaluasiReaksi', ['filter' => 'Auth']);
+$routes->get('/form_evaluasi_selesai/(:num)', 'User\Evaluasi::DetailEvaluasiReaksi/$1', ['filter' => 'Auth']);
+$routes->post('/data_evaluasi', 'User\Evaluasi::DataEvaluasi', ['filter' => 'Auth']);
+$routes->get('/evaluasi_reaksi_member', 'User\Evaluasi::EvaluasiMember', ['filter' => 'Auth']);
+$routes->post('/detail_evaluasi_member', 'User\Evaluasi::detailEvaluasiMember', ['filter' => 'Auth']);
 
 //history
 $routes->get('/personal_history', 'User\History::index', ['filter' => 'Auth']);
 $routes->get('/member_history', 'User\History::memberHistory', ['filter' => 'Auth']);
 $routes->post('/download_sertifikat', 'User\History::download', ['filter' => 'Auth']);
+$routes->post('/detail_history_member', 'User\History::detailHistoryMember', ['filter' => 'Auth']);
 /*
  * --------------------------------------------------------------------
  * Additional Routing
