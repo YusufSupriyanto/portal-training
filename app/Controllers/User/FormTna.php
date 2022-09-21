@@ -4,6 +4,7 @@ namespace App\Controllers\User;
 
 use App\Controllers\BaseController;
 use App\Models\M_Approval;
+use App\Models\M_EvaluasiEfektifitas;
 use App\Models\M_EvaluasiReaksi;
 use App\Models\M_History;
 use App\Models\M_ListTraining;
@@ -17,6 +18,7 @@ class FormTna extends BaseController
     private M_Tna $tna;
     private M_Approval $approval;
     private M_EvaluasiReaksi $evaluasiReaksi;
+    private M_EvaluasiEfektifitas $efektivitas;
     private M_History $history;
 
     public function __construct()
@@ -27,6 +29,7 @@ class FormTna extends BaseController
         $this->approval = new M_Approval();
         $this->evaluasiReaksi = new M_EvaluasiReaksi();
         $this->history = new M_History();
+        $this->efektivitas = new M_EvaluasiEfektifitas();
     }
 
     //function untuk menamplilkan data member dengan user yang akan di daftarkan tna
@@ -196,9 +199,14 @@ class FormTna extends BaseController
         $data4 = [
             'id_tna' => $id->id_tna
         ];
+        $data5 = [
+            'id_tna' => $id->id_tna,
+            'id_user' => $id_user
+        ];
         $this->approval->save($data2);
         $this->evaluasiReaksi->save($data3);
         $this->history->save($data4);
+        $this->efektivitas->save($data5);
 
         session()->setFlashdata('success', 'TNA Berhasil Disimpan');
         return redirect()->to('/data_member');

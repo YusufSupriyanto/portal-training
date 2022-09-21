@@ -318,4 +318,13 @@ class M_Tna extends Model
         $this->join('evaluasi_reaksi', 'evaluasi_reaksi.id_tna = tna.id_tna');
         return $this->get()->getResultArray();
     }
+
+
+    public function getDataEfektivitas()
+    {
+        $this->select('tna.*,user.bagian,user.id_user,user.npk,evaluasi_efektivitas.status_efektivitas');
+        $this->join('user', 'user.id_user = tna.id_user');
+        $this->join('evaluasi_efektivitas', 'evaluasi_efektivitas.id_tna = tna.id_tna');
+        return $this->get()->getResultArray();
+    }
 }

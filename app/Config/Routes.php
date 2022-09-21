@@ -143,6 +143,9 @@ $routes->get('/form_evaluasi_selesai/(:num)', 'User\Evaluasi::DetailEvaluasiReak
 $routes->post('/data_evaluasi', 'User\Evaluasi::DataEvaluasi', ['filter' => 'Auth']);
 $routes->get('/evaluasi_reaksi_member', 'User\Evaluasi::EvaluasiMember', ['filter' => 'Auth']);
 $routes->post('/detail_evaluasi_member', 'User\Evaluasi::detailEvaluasiMember', ['filter' => 'Auth']);
+$routes->get('/evaluasi_efektifitas', 'User\EvaluasiEfektifitas::index', ['filter' => 'Auth']);
+$routes->get('/form_efektivitas/(:num)', 'User\EvaluasiEfektifitas::formEvaluasi/$1', ['filter' => 'Auth']);
+$routes->post('/save_efektivitas', 'User\EvaluasiEfektifitas::saveEfektivitas', ['filter' => 'Auth']);
 
 //history
 $routes->get('/personal_history', 'User\History::index', ['filter' => 'Auth']);
