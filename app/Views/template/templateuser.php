@@ -175,10 +175,17 @@ to get the desired effect
                                 </a>
                                 <ul class="nav nav-treeview" style="display: none;">
                                     <li class="nav-item">
-                                        <a href="<?= base_url() ?>/data_member" class="nav-link  <?php if ($page == 'list_training') : echo 'active';
+                                        <a href="<?= base_url() ?>/data_member" class="nav-link  <?php if ($page == 'data_member') : echo 'active';
                                                                                                 endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Form Training</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="<?= base_url() ?>/data_member_unplanned" class="nav-link  <?php if ($page == 'data_member_unplanned') : echo 'active';
+                                                                                                        endif; ?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Form Unplanned Training</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">

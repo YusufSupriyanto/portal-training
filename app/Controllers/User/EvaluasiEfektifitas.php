@@ -44,7 +44,6 @@ class EvaluasiEfektifitas extends BaseController
                 array_push($dataEvaluasifixed, $dataEvaluasiProcess);
             }
         }
-
         $data = [
             'tittle' => 'Evaluasi Efektifitas',
             'evaluasi' => $dataEvaluasifixed
@@ -55,6 +54,7 @@ class EvaluasiEfektifitas extends BaseController
     public function formEvaluasi($id)
     {
         $evaluation  = $this->tna->getDataForEvaluation($id);
+        dd($evaluation);
         $data = [
             'tittle' => 'Form Evaluasi Efektifitas',
             'evaluasi' => $evaluation
@@ -65,13 +65,16 @@ class EvaluasiEfektifitas extends BaseController
 
     public function saveEfektivitas()
     {
-        $id = $this->request->getVar('id_tna');
+        $id = $this->request->getPost('id_tna');
+        dd($id);
         $id_efektivitas =  $this->efektivitas->getIdEfektivitas($id);
-        // dd($id_efektivitas);
+        dd($id_efektivitas);
+        $pengetahuan = $_POST['pengetahuan'];
+        $keteranpilan = $_POST['keterampilan'];
         $data = [
             'id_efektivitas' => $id_efektivitas['id_efektivitas'],
-            'pengetahuan' => $pengetahuan =  $_POST['pengetahuan'],
-            'keteranpilan' => $pengetahuan =  $_POST['keterampilan'],
+            'pengetahuan' => $pengetahuan[0],
+            'keterampilan' =>  $keteranpilan[0],
             'performance' => $_POST['performance'],
             'perubahan' => $_POST['perubahan'],
             'pelatihan' => $_POST['pelatihan'],
@@ -97,7 +100,26 @@ class EvaluasiEfektifitas extends BaseController
             'keterangan5' => $this->request->getVar('keterangan5'),
             'status_efektivitas' => 1
         ];
+
+        // dd($data);
         $this->efektivitas->save($data);
         return redirect()->to('/evaluasi_efektifitas');
+    }
+
+    public function DetailEfektivitas($id)
+    {
+        $evaluation  = $this->tna->getDataForEvaluation($id);
+        $data = [
+            'tittle' => 'View Data Efektivitas',
+            'evaluasi' => $evaluation
+        ];
+        return view('user/detailefektivitas', $data);
+    }
+
+    public function DataEvaluasiEfektivitas()
+    {
+        $training = $this->request->getPost('id_training');
+        $data = $this->efektivitas->getIdEfektivitas($training);
+        echo json_encode($data);
     }
 }

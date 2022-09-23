@@ -48,8 +48,6 @@
     </div>
     <!-- /.card-body -->
 </div>
-
-<?php if (session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'BOD' || session()->get('bagian') == 'KADEPT') : ?>
 <div class="card overflow-auto m-3">
     <div class="card-header">
         <h3 class="card-title">Data Form TNA</h3>
@@ -95,5 +93,4 @@
     </form>
     <!-- /.card-body -->
 </div>
-<?php endif; ?>
 <?= $this->endSection() ?>

@@ -146,12 +146,18 @@ $routes->post('/detail_evaluasi_member', 'User\Evaluasi::detailEvaluasiMember', 
 $routes->get('/evaluasi_efektifitas', 'User\EvaluasiEfektifitas::index', ['filter' => 'Auth']);
 $routes->get('/form_efektivitas/(:num)', 'User\EvaluasiEfektifitas::formEvaluasi/$1', ['filter' => 'Auth']);
 $routes->post('/save_efektivitas', 'User\EvaluasiEfektifitas::saveEfektivitas', ['filter' => 'Auth']);
+$routes->get('/detail_efektivitas/(:num)', 'User\EvaluasiEfektifitas::DetailEfektivitas/$1', ['filter' => 'Auth']);
+$routes->post('/data_evaluasiEfektivitas', 'User\EvaluasiEfektifitas::DataEvaluasiEfektivitas', ['filter' => 'Auth']);
 
 //history
 $routes->get('/personal_history', 'User\History::index', ['filter' => 'Auth']);
 $routes->get('/member_history', 'User\History::memberHistory', ['filter' => 'Auth']);
 $routes->post('/download_sertifikat', 'User\History::download', ['filter' => 'Auth']);
 $routes->post('/detail_history_member', 'User\History::detailHistoryMember', ['filter' => 'Auth']);
+
+
+//unplanned trainining
+$routes->get('/data_member_unplanned', 'User\UnplannedTraining::index', ['filter' => 'Auth']);
 /*
  * --------------------------------------------------------------------
  * Additional Routing

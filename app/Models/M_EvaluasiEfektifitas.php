@@ -19,6 +19,7 @@ class M_EvaluasiEfektifitas extends Model
 
     public function getIdEfektivitas($id)
     {
-        return $this->where(['id_tna' => $id])->first();
+        $this->select()->where(['id_tna' => $id]);
+        return $this->get()->getResultArray();
     }
 }

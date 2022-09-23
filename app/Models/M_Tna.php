@@ -88,7 +88,7 @@ class M_Tna extends Model
         return $this->get()->getResult();
     }
 
-    public function getStatusWaitUser($bagian, $member)
+    public function getStatusWaitUser($bagian, $member, $id = null)
     {
         if ($bagian == 'BOD') {
             $status = ['wait', 'accept'];
@@ -111,9 +111,21 @@ class M_Tna extends Model
             $this->join('user', 'user.id_user = tna.id_user')->whereIn('bagian', $jabatan);
             return $this->get()->getResultArray();
         } else {
-            return  $status  =  array();
+            $this->select('tna.*,approval.*,user.bagian')->where('tna.id_user', $id);
+            $this->join('approval', 'approval.id_tna = tna.id_tna');
+            $this->join('user', 'user.id_user = tna.id_user');
+            return $this->get()->getResultArray();
         }
     }
+    // public function getStatusWaitMember($id)
+    // {
+
+
+    //     $this->select('tna.*,approval.*,user.bagian')->where('tna.id_user', $id);
+    //     $this->join('approval', 'approval.id_tna = tna.id_tna');
+    //     $this->join('user', 'user.id_user = tna.id_user');
+    //     return $this->get()->getResultArray();
+    // }
 
 
     //function untuk menampilkan data tna yang sudah di accept
@@ -322,7 +334,8 @@ class M_Tna extends Model
 
     public function getDataEfektivitas()
     {
-        $this->select('tna.*,user.bagian,user.id_user,user.npk,evaluasi_efektivitas.status_efektivitas');
+        $this->select('tna.*,user.bagian,approval.*,user.id_user,user.npk,evaluasi_efektivitas.status_efektivitas');
+        $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept');
         $this->join('user', 'user.id_user = tna.id_user');
         $this->join('evaluasi_efektivitas', 'evaluasi_efektivitas.id_tna = tna.id_tna');
         return $this->get()->getResultArray();

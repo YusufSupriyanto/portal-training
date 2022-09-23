@@ -67,6 +67,7 @@ class FormTna extends BaseController
     //function untuk status tna yang sudah dikirim ke admin
     public function status()
     {
+        $id =  session()->get('id');
         $bagian = session()->get('bagian');
         $dic = session()->get('dic');
         $divisi = session()->get('divisi');
@@ -79,7 +80,7 @@ class FormTna extends BaseController
         } elseif ($bagian == 'KADEPT') {
             $status = $this->tna->getStatusWaitUser($bagian, $departemen);
         } else {
-            $status  =  array();
+            $status =  $this->tna->getStatusWaitUser($bagian, $dic, $id);
         }
 
         // dd($status);
@@ -89,6 +90,13 @@ class FormTna extends BaseController
         ];
         return view('user/statustna', $data);
     }
+
+    // public function statusMember()
+    // {
+    //     $id = session()->get('id');
+    //     $data = $this->tna->getStatusWaitMember($id);
+    //     dd($data);
+    // }
 
     public function approve()
     {

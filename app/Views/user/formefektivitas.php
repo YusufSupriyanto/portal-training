@@ -136,13 +136,13 @@
             <h5>Kesimpulan</h5>
             <h6>A. pelatihan ini</h6>
             <div class="ml-3">
-                <input type="radio" class="form-check-input" id="radio1" name="optradio" value="4">Signifikan
+                <input type="radio" class="form-check-input" id="radio1" name="kesimpulan[]" value="4">Signifikan
                 untuk pekerjaan (Total Hasil : 4)<br>
-                <input type="radio" class="form-check-input" id="radio1" name="optradio" value="3">Bermanfaat
+                <input type="radio" class="form-check-input" id="radio1" name="kesimpulan[]" value="3">Bermanfaat
                 untuk pekerjaan (Total Hasil : 3-3,9)<br>
-                <input type="radio" class="form-check-input" id="radio1" name="optradio" value="2">Cukup
+                <input type="radio" class="form-check-input" id="radio1" name="kesimpulan[]" value="2">Cukup
                 bermanfaat untuk pekerjaan (Total Hasil : 2-2,9)<br>
-                <input type="radio" class="form-check-input" id="radio1" name="optradio" value="1">Kurang
+                <input type="radio" class="form-check-input" id="radio1" name="kesimpulan[]" value="1">Kurang
                 bermanfaat untuk pekerjaan (Total Hasil : 1-1,9)
             </div>
             <h6 class="mt-3">B. Apakah Ada Peningkatan Kopetensi Karyawan Setelah Pelatihan Ini</h6>
