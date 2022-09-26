@@ -26,7 +26,7 @@ class Home extends BaseController
     {
 
         $home =  $this->tna->getDataHome();
-        // dd($home);
+        // var_dump($home);
         $json = [];
         foreach ($home as $row) {
             $date = date('Y-m-d');

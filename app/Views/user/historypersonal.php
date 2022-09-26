@@ -32,10 +32,8 @@
                     </td>
                     <?php if ($histories['sertifikat'] != null) : ?>
                     <td>
-                        <form action="<?= base_url() ?>/download_sertifikat" method="post">
-                            <input type="hidden" name="input[]" value="<?= $histories['id_tna'] ?>">
-                            <button type=" submit" value="View" class="btn btn-success btn-sm">View</button>
-                        </form>
+                        <a href="<?= base_url() . $histories['sertifikat'] ?>" type="button"
+                            class="btn btn-success btn-sm">Download</a>
                     </td>
                     <?php else : ?>
                     <td>Sertifikat Belum Ada</td>

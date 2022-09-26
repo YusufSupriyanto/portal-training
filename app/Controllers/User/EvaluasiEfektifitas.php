@@ -54,7 +54,7 @@ class EvaluasiEfektifitas extends BaseController
     public function formEvaluasi($id)
     {
         $evaluation  = $this->tna->getDataForEvaluation($id);
-        dd($evaluation);
+        // dd($evaluation);
         $data = [
             'tittle' => 'Form Evaluasi Efektifitas',
             'evaluasi' => $evaluation
@@ -66,13 +66,13 @@ class EvaluasiEfektifitas extends BaseController
     public function saveEfektivitas()
     {
         $id = $this->request->getPost('id_tna');
-        dd($id);
+        // dd($id);
         $id_efektivitas =  $this->efektivitas->getIdEfektivitas($id);
-        dd($id_efektivitas);
+        // dd($id_efektivitas);
         $pengetahuan = $_POST['pengetahuan'];
         $keteranpilan = $_POST['keterampilan'];
         $data = [
-            'id_efektivitas' => $id_efektivitas['id_efektivitas'],
+            'id_efektivitas' => $id_efektivitas[0]['id_efektivitas'],
             'pengetahuan' => $pengetahuan[0],
             'keterampilan' =>  $keteranpilan[0],
             'performance' => $_POST['performance'],

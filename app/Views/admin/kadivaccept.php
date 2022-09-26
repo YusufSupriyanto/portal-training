@@ -7,7 +7,7 @@
     </div>
     <!-- /.card-header -->
     <div class="card-body table-responsive p-0">
-        <table class="table table-hover">
+        <table class="table table-hover" id="example">
             <thead>
                 <tr>
                     <th>Nama</th>
@@ -26,6 +26,7 @@
                     <td><?= $tnas['nama'] ?></td>
                     <td><?= $tnas['departemen'] ?></td>
                     <td><?= $tnas['training'] ?></td>
+                    <?php if ($tnas['status_approval_2'] == null) : ?>
                     <td><input type="date" value="<?= $tnas['rencana_training'] ?>" name="rencana-training<?= $i ?>"
                             id="rencana-training<?= $i ?>"></td>
                     <td>Rp.<?= $tnas['biaya'] ?></td>
@@ -47,6 +48,16 @@
                         <input type="hidden" id="reject-admin-input<?= $i ?>" value="<?= $tnas['id_tna'] ?>">
 
                     </td>
+                    <?php else : ?>
+                    <td><?= $tnas['rencana_training'] ?></td>
+                    <td>Rp<?= " " . number_format($tnas['biaya'], 0, ',', '.') ?></td>
+                    <td>
+                        Rp<?= " " . number_format($tnas['biaya_actual'], 0, ',', '.') ?>
+                    </td>
+                    <td>
+                        accept
+                    </td>
+                    <?php endif; ?>
                 </tr>
                 <div class=" modal fade" id="rejectAdmin<?= $i ?>" tabindex="-1" role="dialog"
                     aria-labelledby="exampleModalLabel" aria-hidden="true">

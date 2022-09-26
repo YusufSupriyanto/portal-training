@@ -12,7 +12,7 @@ class M_Tna extends Model
     protected $allowedFields = [
         'id_user', 'id_training', 'dic', 'divisi',
         'departemen', 'nama', 'jabatan', 'golongan', 'seksi', 'jenis_training',
-        'kategori_training', 'training', 'vendor', 'tempat', 'metode_training', 'rencana_training',
+        'kategori_training', 'training', 'vendor', 'tempat', 'metode_training', 'mulai_training', 'rencana_training',
         'tujuan_training', 'notes', 'biaya', 'biaya_actual', 'status'
     ];
 
@@ -162,8 +162,9 @@ class M_Tna extends Model
 
     public function getKadivAccept($date)
     {
+        $where =  ['accept', null];
         $this->select()->where('rencana_training', $date);
-        $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_1', 'accept')->where('status_approval_2', null);
+        $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_1', 'accept')->whereIn('status_approval_2', $where);
         return $this->get()->getResultArray();
     }
 
@@ -262,10 +263,16 @@ class M_Tna extends Model
 
     public function getDataHome()
     {
-        $this->select('tna.training,tna.rencana_training,tna.kategori_training')->distinct();
+        $this->select('tna.rencana_training,tna.kategori_training')->distinct();
         $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept');
         $this->join('user', 'user.id_user = tna.id_user');
         return $this->get()->getResultArray();
+        //         $sql = $this->query("select distinct(tna.rencana_training), tna.kategori_training
+        // from tna
+        // join approval on approval.id_tna = tna.id_tna 
+        // join [dbo].[user] on [dbo].[user].id_user = tna.id_user
+        // where approval.status_approval_3= 'accept'");
+        // return $sql;
     }
 
     public function getDataJadwalHome($date)

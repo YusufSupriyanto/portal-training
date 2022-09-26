@@ -53,17 +53,9 @@ class Evaluasi extends BaseController
 
 
         if (!$this->validate([
-            'harapan' => 'required',
-            'perbaikan_program' => 'required',
             'instruktur1' => 'required',
-            'instruktur2' => 'required',
-            'instruktur3' => 'required',
             'pengetahuan1' => 'required',
-            'pengetahuan2' => 'required',
-            'pengetahuan3' => 'required',
             'kemampuan1' => 'required',
-            'kemampuan2' => 'required',
-            'kemampuan3' => 'required',
             'wawasan' => 'required',
         ])) {
             $validation = \Config\Services::validation();

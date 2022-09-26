@@ -97,6 +97,7 @@ $routes->get('/schedule_action/(:num)', 'Admin\C_Schedule::askForEvaluation/$1',
 $routes->get('/history', 'Admin\C_History::index', ['filter' => 'Auth']);
 $routes->post('/detail_history', 'Admin\C_History::DetailHistory', ['filter' => 'Auth']);
 $routes->post('/sertifikat_upload', 'Admin\C_History::SertifikatUpload', ['filter' => 'Auth']);
+$routes->post('/upload_history', 'Admin\C_History::UploadHistory', ['filter' => 'Auth']);
 
 //USER
 
@@ -152,7 +153,7 @@ $routes->post('/data_evaluasiEfektivitas', 'User\EvaluasiEfektifitas::DataEvalua
 //history
 $routes->get('/personal_history', 'User\History::index', ['filter' => 'Auth']);
 $routes->get('/member_history', 'User\History::memberHistory', ['filter' => 'Auth']);
-$routes->post('/download_sertifikat', 'User\History::download', ['filter' => 'Auth']);
+$routes->get('/download_sertifikat/(:any)', 'User\History::download/$1', ['filter' => 'Auth']);
 $routes->post('/detail_history_member', 'User\History::detailHistoryMember', ['filter' => 'Auth']);
 
 

@@ -179,7 +179,7 @@ to get the desired effect
                                 </a>
                                 <ul class="nav nav-treeview" style="display: none;">
                                     <li class="nav-item">
-                                        <a href="<?= base_url() ?>/tna" class="nav-link  <?php if ($page == 'list_training') : echo 'active';
+                                        <a href="<?= base_url() ?>/tna" class="nav-link  <?php if ($page == 'tna') : echo 'active';
                                                                                         endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Daftar Training</p>

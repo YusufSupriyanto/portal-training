@@ -4,15 +4,27 @@
 <div class="card m-3 overflow-auto">
     <div class="card-header">
         <h3 class="card-title"><?= $tittle ?></h3>
+        <form action="<?= base_url() ?>/upload_history" method="post" enctype="multipart/form-data">
+            <div class="input-group">
+                <div class="custom-file">
+                    <input type="hidden" value="<?= $id ?>" name="id_user">
+                    <input type="file" class="custom-file-input" id="exampleInputFile" name="file">
+                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                </div>
+                <div class="input-group-append"></div>
+                <button type="submit" class="input-group-text" id="">Upload</button>
+            </div>
+        </form>
     </div>
     <!-- /.card-header -->
     <div class="card-body table-responsive p-0">
-        <table class="table table-hover overflow-auto">
+        <table class="table table-hover overflow-auto" id="example">
             <thead>
                 <tr>
                     <th>Nama</th>
                     <th>Materi Training</th>
-                    <th>Waktu</th>
+                    <th>Mulai</th>
+                    <th>Selesai</th>
                     <th>Sertifikat</th>
                     <th>Penyelenggara</th>
                     <th>Tempat</th>
@@ -29,6 +41,9 @@
                         <td><?= $histories['nama'] ?></td>
                         <td>
                             <h6 style="width:300px;"><?= $histories['training'] ?></h6>
+                        </td>
+                        <td>
+                            <h6 style="width:100px;"><?= $histories['mulai_training'] ?></h6>
                         </td>
                         <td>
                             <h6 style="width:100px;"><?= $histories['rencana_training'] ?></h6>

@@ -72,23 +72,22 @@ class History extends BaseController
         return view('user/memberhistory', $data);
     }
 
-    public function download()
+    public function download($id)
     {
-        header('X-Frame-Options: GOFORIT');
-        $id = $_POST['input'];
-        $sertifikat = $this->tna->getDataHistory($id[0]);
+        dd($id);
+        //$sertifikat = $this->tna->getDataHistory($id);
         // dd($sertifikat[0]['sertifikat']);
-        // header('Content-type: application/pdf');
-        // header('Content-Transfer-Encoding: binary');
-        // header('Accept-Ranges: bytes');
-        // readfile($sertifikat[0]['sertifikat']);
+        header('Content-type: application/pdf');
+        header('Content-Transfer-Encoding: binary');
+        header('Accept-Ranges: bytes');
+        // readfile(base_url() . "\public" . "$sertifikat[0]['sertifikat']");
 
         // var_dump($sertifikat[0]['sertifikat']);
-        $data = [
-            'tittle' => 'Sertifikat View',
-            'sertifikat' => $sertifikat[0]['sertifikat']
-        ];
-        return view('user/viewsertifikat', $data);
+        // $data = [
+        //     'tittle' => 'Sertifikat View',
+        //     'sertifikat' => $sertifikat[0]['sertifikat']
+        // ];
+        // return view('user/viewsertifikat', $data);
     }
 
 
