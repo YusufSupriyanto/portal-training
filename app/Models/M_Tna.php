@@ -162,9 +162,9 @@ class M_Tna extends Model
 
     public function getKadivAccept($date)
     {
-        $where =  ['accept', null];
+
         $this->select()->where('rencana_training', $date);
-        $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_1', 'accept')->whereIn('status_approval_2', $where);
+        $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_1', 'accept');
         return $this->get()->getResultArray();
     }
 

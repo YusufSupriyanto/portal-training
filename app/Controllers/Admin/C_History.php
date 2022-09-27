@@ -64,7 +64,9 @@ class C_History extends BaseController
     {
 
         $id_tna = $_POST['history'];
+        // dd($id_tna);
         $file = $this->request->getFile('file' . $id_tna[0]);
+        // dd($file);
         // $file = $_FILES['file' . $id_tna[0]];
         $keterangan = $_POST['keterangan'];
 

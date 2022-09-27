@@ -89,6 +89,7 @@ class C_Tna extends BaseController
     {
 
         $status = $this->tna->getKadivAccept($date);
+        //dd($status);
 
         $data = [
             'tittle' => 'Training Yang Di ACC KADIV',

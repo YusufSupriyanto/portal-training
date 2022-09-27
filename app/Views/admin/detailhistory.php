@@ -25,52 +25,76 @@
                     <th>Materi Training</th>
                     <th>Mulai</th>
                     <th>Selesai</th>
-                    <th>Sertifikat</th>
                     <th>Penyelenggara</th>
                     <th>Tempat</th>
-                    <th>Lulus/Tidak</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 <?php $i = 0;
                 foreach ($history as $histories) : ?>
-                <form action="<?= base_url() ?>/sertifikat_upload" method="post" id="form<?= $i ?>"
-                    enctype="multipart/form-data">
-                    <tr>
-                        <td><?= $histories['nama'] ?></td>
-                        <td>
-                            <h6 style="width:300px;"><?= $histories['training'] ?></h6>
-                        </td>
-                        <td>
-                            <h6 style="width:100px;"><?= $histories['mulai_training'] ?></h6>
-                        </td>
-                        <td>
-                            <h6 style="width:100px;"><?= $histories['rencana_training'] ?></h6>
-                        </td>
-                        <?php if ($histories['sertifikat'] == null) : ?>
-                        <td>
-                            <input type="file" name="file<?= $histories['id_tna']  ?>" Accept="Application/Pdf"
-                                id="file<?= $histories['id_tna'] ?>">
-                            <input type="hidden" name="history[]" id="history[]" value="<?= $histories['id_tna'] ?>">
-                        </td>
-                        <?php else : ?>
-                        <td>Sertifikat Sudah Dikirim</td>
-                        <?php endif; ?>
-                        <td><?= $histories['vendor'] ?></td>
-                        <td><?= $histories['tempat'] ?></td>
-                        <?php if ($histories['keterangan'] == null) : ?>
-                        <td><input type="text" name="keterangan[]"></td>
-                        <?php else : ?>
-                        <td><?= $histories['keterangan'] ?></td>
-                        <?php endif; ?>
-                        <td><button type="submit" class="btn btn-success btn-sm">Confirm</button></td>
-                    </tr>
-                </form>
-                <?php $i++;
+                <tr>
+                    <td>
+                        <input type="hidden" value=" <?= $histories['id_tna'] ?>">
+                        <?= $histories['nama'] ?>
+                    </td>
+                    <td>
+                        <h6 style="width:300px;"><?= $histories['training'] ?></h6>
+                    </td>
+                    <td>
+                        <h6 style="width:100px;"><?= $histories['mulai_training'] ?></h6>
+                    </td>
+                    <td>
+                        <h6 style="width:100px;"><?= $histories['rencana_training'] ?></h6>
+                    </td>
+
+                    <td><?= $histories['vendor'] ?></td>
+                    <td><?= $histories['tempat'] ?></td>
+
+                    <td><button type="button" class="btn btn-success btn-sm" data-toggle="modal"
+                            data-target="#exampleModal<?= $i ?>">
+                            Confirm
+                        </button>
+                    </td>
+                </tr>
+
+                <?php
                 endforeach; ?>
             </tbody>
         </table>
+        <div class="modal fade" id="exampleModal<?= $i ?>" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form action="<?= base_url() ?>/sertifikat_upload" method="post" id="form<?= $i ?>"
+                        enctype="multipart/form-data">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="file" name="file" Accept="Application/Pdf" id="file">
+                            <input type="hidden" name="history[]" id="history[]" value="">
+                            <input type="text" name="keterangan[]">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <?php $i++; ?>
     </div>
 </div>
+<script>
+function confirmation(i) {
+    console.log(i)
+    $('#form' + i).submit();
+}
+</script>
 <?= $this->endSection() ?>
