@@ -25,7 +25,7 @@
                 <tr>
                     <td><?= $users->npk ?></td>
                     <td><?php if (session()->get('bagian') == 'BOD' || session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'KADEPT') : ?>
-                        <form action="<?= base_url() ?>\form_tna" id="dataform<?= $i ?>" method="post">
+                        <form action="<?= base_url() ?>\form_unplanned" id="dataform<?= $i ?>" method="post">
                             <input type="hidden" name="member" id="member<?= $i ?>" value="<?= $users->id_user ?>">
                         </form>
                         <a href="#"
@@ -53,7 +53,7 @@
         <h3 class="card-title">Data Form TNA</h3>
     </div>
     <!-- /.card-header -->
-    <form method="post" action="<?= base_url() ?>\tna\send">
+    <form method="post" action="<?= base_url() ?>\send_unplanned">
         <div class="card-body p-0 overflow-auto">
             <table class="table table-striped overflow-auto">
                 <thead>

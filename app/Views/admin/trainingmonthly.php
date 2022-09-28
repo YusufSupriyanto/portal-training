@@ -18,16 +18,24 @@
                 </tr>
             </thead>
             <?php
-
-            use Faker\Provider\Base;
-
             $i = 0;
             foreach ($training as $dates) : ?>
             <tr>
-                <td><a
+                <?php $page = basename($_SERVER['PHP_SELF']);
+                    if ($page == 'training_monthly') : ?>
+                <td>
+                    <a
                         href="<?= base_url() ?>/kadiv_accept/<?= $dates['Planing Training'] ?>"><?php $newDate = date('F d, Y', strtotime($dates['Planing Training']));
-                                                                                                    echo $newDate   ?></a>
+                                                                                                        echo $newDate   ?></a>
                 </td>
+                <?php else : ?>
+                <td>
+                    <a
+                        href="<?= base_url() ?>/kadiv_accept_unplanned/<?= $dates['Planing Training'] ?>"><?php $newDate = date('F d, Y', strtotime($dates['Planing Training']));
+                                                                                                                    echo $newDate   ?></a>
+                </td>
+                <?php endif; ?>
+
                 <td>
                     <?= $dates['Jumlah Training'] ?>
                 </td>

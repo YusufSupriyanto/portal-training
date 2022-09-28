@@ -12,6 +12,7 @@
                 <div class="card overflow-auto">
                     <div class="card-body p-1 m-1" style=" position:absolute;width:auto;">
                         <input type="hidden" value="<?= $user['id_user'] ?>" name="id_user">
+                        <input type="hidden" value="<?= 0; ?>" name="deadline">
                         <h6>Nama :<?= "  " . $user['nama'] ?></h6>
                         <h6>Jabatan :<?= "  " . $user['bagian'] ?></h6>
                         <h6>Departemen :<?= "  " . $user['departemen'] ?></h6>

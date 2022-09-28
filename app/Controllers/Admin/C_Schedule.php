@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\M_Approval;
 use App\Models\M_EvaluasiReaksi;
 use App\Models\M_Tna;
+use App\Models\M_TnaUnplanned;
 
 class C_Schedule extends BaseController
 {
@@ -14,11 +15,14 @@ class C_Schedule extends BaseController
 
     private M_EvaluasiReaksi $reaksi;
 
+    private M_TnaUnplanned $unplanned;
+
     public function __construct()
     {
         $this->tna = new M_Tna();
         $this->approval = new M_Approval();
         $this->reaksi =  new M_EvaluasiReaksi();
+        $this->unplanned = new M_TnaUnplanned();
     }
     public function index()
     {
@@ -43,5 +47,30 @@ class C_Schedule extends BaseController
         $this->approval->save($data);
 
         return redirect()->to('/schedule_training');
+    }
+
+    public function unplannedSedule()
+    {
+        $schedule  = $this->unplanned->getSchedule();
+
+        $data = [
+            'tittle' => 'Schedule Training',
+            'schedule' => $schedule
+        ];
+        return view('admin/schedule', $data);
+    }
+
+    public function askForEvaluationUnplanned($id)
+    {
+        $true  = $this->approval->getIdApproval($id);
+        // dd($true);
+        $data = [
+            'id_approval' => $true['id_approval'],
+            'status_training' => true
+        ];
+
+        $this->approval->save($data);
+
+        return redirect()->to('/schedule_unplanned');
     }
 }

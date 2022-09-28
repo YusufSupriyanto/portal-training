@@ -197,10 +197,17 @@ to get the desired effect
                                     </li>
                                     <?php if (session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'BOD') : ?>
                                     <li class="nav-item">
-                                        <a href="<?= base_url() ?>/request_tna" class="nav-link  <?php if ($page == 'approve_tna') : echo 'active';
+                                        <a href="<?= base_url() ?>/request_tna" class="nav-link  <?php if ($page == 'request_tna') : echo 'active';
                                                                                                     endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Request Training</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="<?= base_url() ?>/request_unplanned" class="nav-link  <?php if ($page == 'request_unplanned') : echo 'active';
+                                                                                                        endif; ?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Request Training Unplanned</p>
                                         </a>
                                     </li>
                                     <?php endif; ?>

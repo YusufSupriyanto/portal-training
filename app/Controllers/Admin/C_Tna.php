@@ -4,7 +4,9 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use App\Models\M_Approval;
+use App\Models\M_Deadline;
 use App\Models\M_Tna;
+use App\Models\M_TnaUnplanned;
 use App\Models\UserModel;
 
 class C_Tna extends BaseController
@@ -13,22 +15,52 @@ class C_Tna extends BaseController
     private UserModel $user;
 
     private M_Approval $approval;
+
+    private M_TnaUnplanned $unplanned;
+
+
+
     public function __construct()
     {
         $this->tna = new M_Tna();
         $this->user = new UserModel();
         $this->approval = new M_Approval();
+        $this->unplanned = new M_TnaUnplanned();
     }
     public function index()
     {
         $tna = $this->tna->getStatusWaitAdmin();
 
+
+        //dd($deadline['deadline']);
         $data = [
             'tittle' => 'Form TNA',
-            'tna' => $tna
+            'tna' => $tna,
         ];
         return view('admin/tna', $data);
     }
+
+    // public function change()
+    // {
+    //     $id = $this->request->getVar('id_deadline');
+    //     $deadline = $this->request->getVar('deadline');
+
+    //     if ($deadline == 0) {
+    //         $data = [
+    //             'id_deadline' => $id,
+    //             'deadline' => 1
+    //         ];
+    //         $this->deadline->save($data);
+    //         return redirect()->to('/tna');
+    //     } else {
+    //         $data = [
+    //             'id_deadline' => $id,
+    //             'deadline' => 0
+    //         ];
+    //         $this->deadline->save($data);
+    //         return redirect()->to('/tna');
+    //     }
+    // }
 
 
     public function trainingMonthly()
@@ -89,8 +121,6 @@ class C_Tna extends BaseController
     {
 
         $status = $this->tna->getKadivAccept($date);
-        //dd($status);
-
         $data = [
             'tittle' => 'Training Yang Di ACC KADIV',
             'status' => $status

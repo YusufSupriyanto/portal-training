@@ -186,6 +186,13 @@ to get the desired effect
                                         </a>
                                     </li>
                                     <li class="nav-item">
+                                        <a href="<?= base_url() ?>/tna_unplanned" class="nav-link  <?php if ($page == 'tna_unplanned') : echo 'active';
+                                                                                                endif; ?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Daftar Training Unplanned</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
                                         <a href="<?= base_url() ?>/kadiv_status" class="nav-link  <?php if ($page == 'kadiv_status') : echo 'active';
                                                                                                 endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
@@ -193,10 +200,24 @@ to get the desired effect
                                         </a>
                                     </li>
                                     <li class="nav-item">
+                                        <a href="<?= base_url() ?>/status_unplanned" class="nav-link  <?php if ($page == 'status_unplanned') : echo 'active';
+                                                                                                    endif; ?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Kadiv Status Approval Unplanned</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
                                         <a href="<?= base_url() ?>/training_monthly" class="nav-link  <?php if ($page == 'training_monthly') : echo 'active';
                                                                                                     endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Training Monthly</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="<?= base_url() ?>/unplanned_monthly" class="nav-link  <?php if ($page == 'unplanned_monthly') : echo 'active';
+                                                                                                    endif; ?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Unplanned Monthly</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
@@ -254,6 +275,13 @@ to get the desired effect
                                                                                                     endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Schedule Training</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="<?= base_url() ?>/schedule_unplanned" class="nav-link  <?php if ($page == 'schedule_unplanned') : echo 'active';
+                                                                                                    endif; ?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Schedule Unplanned Training</p>
                                         </a>
                                     </li>
                                 </ul>

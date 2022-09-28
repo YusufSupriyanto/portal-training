@@ -77,6 +77,9 @@ $routes->post('/edit/user/(:num)', 'Admin\C_User::edit/$1', ['filter' => 'Auth']
 $routes->get('/tna', 'Admin\C_Tna::index', ['filter' => 'Auth']);
 $routes->get('/training_monthly', 'Admin\C_Tna::trainingMonthly', ['filter' => 'Auth']);
 $routes->post('/accept_admin', 'Admin\C_Tna::accept', ['filter' => 'Auth']);
+$routes->post('/change_training', 'Admin\C_Tna::change', ['filter' => 'Auth']);
+
+
 // $routes->get('/accept_admin/(:num)', 'Admin\C_Tna::accept/$1');
 $routes->post('/reject_admin', 'Admin\C_Tna::reject', ['filter' => 'Auth']);
 $routes->get('/kadiv_status', 'Admin\C_Tna::kadivStatus', ['filter' => 'Auth']);
@@ -98,6 +101,19 @@ $routes->get('/history', 'Admin\C_History::index', ['filter' => 'Auth']);
 $routes->post('/detail_history', 'Admin\C_History::DetailHistory', ['filter' => 'Auth']);
 $routes->post('/sertifikat_upload', 'Admin\C_History::SertifikatUpload', ['filter' => 'Auth']);
 $routes->post('/upload_history', 'Admin\C_History::UploadHistory', ['filter' => 'Auth']);
+
+
+//Unplanned Training
+$routes->get('/tna_unplanned', 'Admin\C_TnaUnplanned::index', ['filter' => 'Auth']);
+$routes->get('/status_unplanned', 'Admin\C_TnaUnplanned::kadivStatusUnplanned', ['filter' => 'Auth']);
+$routes->get('/unplanned_monthly', 'Admin\C_TnaUnplanned::unplannedMonthly', ['filter' => 'Auth']);
+$routes->get('/kadiv_accept_unplanned/(:any)', 'Admin\C_TnaUnplanned::kadivAccept/$1', ['filter' => 'Auth']);
+
+//unplanned Schedule admin
+$routes->get('/schedule_unplanned', 'Admin\C_Schedule::unplannedSedule', ['filter' => 'Auth']);
+$routes->get('/schedule_action_unplanned/(:num)', 'Admin\C_Schedule::askForEvaluationUnplanned/$1', ['filter' => 'Auth']);
+
+
 
 //USER
 
@@ -159,6 +175,13 @@ $routes->post('/detail_history_member', 'User\History::detailHistoryMember', ['f
 
 //unplanned trainining
 $routes->get('/data_member_unplanned', 'User\UnplannedTraining::index', ['filter' => 'Auth']);
+$routes->post('/form_unplanned', 'User\UnplannedTraining::TnaUserUnplanned', ['filter' => 'Auth']);
+$routes->post('/send_unplanned', 'User\FormTna::TnaSend', ['filter' => 'Auth']);
+$routes->get('/request_unplanned', 'User\UnplannedTraining::requestUnplanned', ['filter' => 'Auth']);
+
+
+
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

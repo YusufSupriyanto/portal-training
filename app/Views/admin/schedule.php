@@ -31,10 +31,19 @@
                 <td><?= $Atmps['metode_training'] ?></td>
                 <td><?= $Atmps['tujuan_training'] ?></td>
                 <td><?= $Atmps['rencana_training'] ?></td>
+                <?php $page = basename($_SERVER['PHP_SELF']);
+                    if ($page == 'schedule_training') : ?>
                 <td>
                     <a href="<?= base_url() ?>/schedule_action/<?= $Atmps['id_tna'] ?>" class="btn btn-success btn-sm"
                         style="font-size:10px;">Sudah Terlaksana</a>
                 </td>
+                <?php else : ?>
+                <td>
+                    <a href="<?= base_url() ?>/schedule_action_unplanned/<?= $Atmps['id_tna'] ?>"
+                        class="btn btn-success btn-sm" style="font-size:10px;">Sudah Terlaksana</a>
+                </td>
+                <?php endif; ?>
+
             </tr>
             <?php endforeach; ?>
             <tbody>

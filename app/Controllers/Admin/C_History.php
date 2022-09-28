@@ -63,18 +63,15 @@ class C_History extends BaseController
     public function SertifikatUpload()
     {
 
-        $id_tna = $_POST['history'];
-        // dd($id_tna);
-        $file = $this->request->getFile('file' . $id_tna[0]);
-        // dd($file);
-        // $file = $_FILES['file' . $id_tna[0]];
-        $keterangan = $_POST['keterangan'];
+        $id_tna = $this->request->getVar('history');
+        $file = $this->request->getFile('file');
+        $keterangan = $this->request->getVar('keterangan');
+
 
         $id  = $this->history->getIdHistory($id_tna);
         $file->getName();
         $file->getClientExtension();
         $newName = $file->getRandomName();
-        // var_dump($newName);
         $file->move("../public/sertifikat", $newName);
         $filepath = "/sertifikat/" . $newName;
 

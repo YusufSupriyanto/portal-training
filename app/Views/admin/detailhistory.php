@@ -35,7 +35,7 @@
                 foreach ($history as $histories) : ?>
                 <tr>
                     <td>
-                        <input type="hidden" value=" <?= $histories['id_tna'] ?>">
+                        <input type="hidden" id="id<?= $i ?>" value="<?= $histories['id_tna'] ?>">
                         <?= $histories['nama'] ?>
                     </td>
                     <td>
@@ -50,51 +50,76 @@
 
                     <td><?= $histories['vendor'] ?></td>
                     <td><?= $histories['tempat'] ?></td>
-
+                    <?php if ($histories['keterangan'] == null) : ?>
                     <td><button type="button" class="btn btn-success btn-sm" data-toggle="modal"
-                            data-target="#exampleModal<?= $i ?>">
+                            data-target="#exampleModal<?= $i ?>" onclick="upload(<?= $i ?>)">
                             Confirm
                         </button>
                     </td>
+                    <?php else : ?>
+                    <td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+                            data-target="#exampleModal<?= $i ?>" onclick="upload(<?= $i ?>)" style="width:65px;">
+                            Edit
+                        </button>
+                    </td>
+                    <?php endif; ?>
                 </tr>
-
-                <?php
+                <?php $i++;
                 endforeach; ?>
             </tbody>
         </table>
-        <div class="modal fade" id="exampleModal<?= $i ?>" tabindex="-1" role="dialog"
-            aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <form action="<?= base_url() ?>/sertifikat_upload" method="post" id="form<?= $i ?>"
                         enctype="multipart/form-data">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Upload Sertifikat</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <input type="file" name="file" Accept="Application/Pdf" id="file">
-                            <input type="hidden" name="history[]" id="history[]" value="">
-                            <input type="text" name="keterangan[]">
-
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Sertifikat</th>
+                                        <th scope="col">Keterangan Lulus/Tidak</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>
+                                            <input type="file" name="file" Accept="Application/Pdf" id="file">
+                                            <input type="hidden" name="history" id="history">
+                                        </th>
+                                        <td>
+                                            <input type="text" name="keterangan" id="keterangan">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            <button type="submit" class="btn btn-primary">Upload</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-        <?php $i++; ?>
     </div>
 </div>
 <script>
-function confirmation(i) {
+function upload(i) {
     console.log(i)
-    $('#form' + i).submit();
+    jQuery.noConflict()
+    $('#exampleModal').modal('show');
+    var id = $('#id' + i).val()
+    $('#exampleModal #history').val(id)
+
+
 }
 </script>
 <?= $this->endSection() ?>

@@ -4,6 +4,7 @@ namespace App\Controllers\User;
 
 use App\Controllers\BaseController;
 use App\Models\M_Approval;
+use App\Models\M_Deadline;
 use App\Models\M_EvaluasiEfektifitas;
 use App\Models\M_EvaluasiReaksi;
 use App\Models\M_History;
@@ -20,6 +21,7 @@ class FormTna extends BaseController
     private M_EvaluasiReaksi $evaluasiReaksi;
     private M_EvaluasiEfektifitas $efektivitas;
     private M_History $history;
+
 
     public function __construct()
     {
@@ -112,6 +114,8 @@ class FormTna extends BaseController
     public function TnaSend()
     {
         $bagian = session()->get('bagian');
+        $page = basename($_SERVER['PHP_SELF']);
+
         if ($bagian == 'BOD') {
             $data =  $_POST['training'];
             for ($i = 0; $i < count($data); $i++) {
@@ -130,7 +134,11 @@ class FormTna extends BaseController
                 $this->tna->save($tna);
                 $this->approval->save($dataApproval);
             }
-            return redirect()->to('/data_member');
+            if ($page == 'send') {
+                return redirect()->to('/data_member');
+            } else {
+                return redirect()->to('/data_member_unplanned');
+            }
         } else {
             $data =  $_POST['training'];
             for ($i = 0; $i < count($data); $i++) {
@@ -142,7 +150,11 @@ class FormTna extends BaseController
                 ];
                 $this->tna->save($tna);
             }
-            return redirect()->to('/data_member');
+            if ($page == 'send') {
+                return redirect()->to('/data_member');
+            } else {
+                return redirect()->to('/data_member_unplanned');
+            }
         }
     }
 
@@ -159,6 +171,14 @@ class FormTna extends BaseController
     //function untuk save tna
     public function TnaForm()
     {
+
+        // $deadline = $this->deadline->getIddeadline();
+        $deadline = $this->request->getVar('deadline');
+        if ($deadline == 0) {
+            $kelompok = 'training';
+        } else {
+            $kelompok = 'unplanned';
+        }
 
         $id_user = $this->request->getPost('id_user');
         $id_training = $_POST['training'];
@@ -190,6 +210,7 @@ class FormTna extends BaseController
             'notes' => $this->request->getVar('notes'),
             'biaya' => $jenis_trainng['biaya'],
             'status' => 'save',
+            'kelompok_training' => $kelompok
 
         ];
         // dd($data);
@@ -217,7 +238,11 @@ class FormTna extends BaseController
         $this->efektivitas->save($data5);
 
         session()->setFlashdata('success', 'TNA Berhasil Disimpan');
-        return redirect()->to('/data_member');
+        if ($kelompok == 'training') {
+            return redirect()->to('/data_member');
+        } else {
+            return redirect()->to('/data_member_unplanned');
+        }
     }
 
 
