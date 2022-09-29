@@ -114,6 +114,11 @@ $routes->get('/schedule_unplanned', 'Admin\C_Schedule::unplannedSedule', ['filte
 $routes->get('/schedule_action_unplanned/(:num)', 'Admin\C_Schedule::askForEvaluationUnplanned/$1', ['filter' => 'Auth']);
 
 
+//unplanned History Admin
+$routes->get('/history_unplanned', 'Admin\C_HistoryUnplanned::index', ['filter' => 'Auth']);
+$routes->post('/detail_historyunplan_admin', 'Admin\C_HistoryUnplanned::DetailHistory', ['filter' => 'Auth']);
+$routes->post('/sertifikat_upload_unplanned', 'Admin\C_HistoryUnplanned::SertifikatUpload', ['filter' => 'Auth']);
+
 
 //USER
 
@@ -180,6 +185,24 @@ $routes->post('/send_unplanned', 'User\FormTna::TnaSend', ['filter' => 'Auth']);
 $routes->get('/request_unplanned', 'User\UnplannedTraining::requestUnplanned', ['filter' => 'Auth']);
 
 
+//Unplanned Evaluation
+$routes->get('/evaluasi_reaksi_unplanned', 'User\EvaluasiUnplanned::index', ['filter' => 'Auth']);
+$routes->get('/form_evaluasi_unplanned/(:num)', 'User\EvaluasiUnplanned::EvaluasiForm/$1', ['filter' => 'Auth']);
+$routes->get('/form_unplanned_selesai/(:num)', 'User\EvaluasiUnplanned::DetailEvaluasiReaksi/$1', ['filter' => 'Auth']);
+$routes->get('/evaluasi_efektifitas_unplanned', 'User\EvaluasiEfektivitasUnplanned::index', ['filter' => 'Auth']);
+$routes->get('/form_efektivitas_unplanned/(:num)', 'User\EvaluasiEfektivitasUnplanned::formEvaluasi/$1', ['filter' => 'Auth']);
+$routes->post('/save_efektivitas_unplanned', 'User\EvaluasiEfektivitasUnplanned::saveEfektivitas', ['filter' => 'Auth']);
+$routes->get('/detail_efektivitas_unplanned/(:num)', 'User\EvaluasiEfektivitasUnplanned::DetailEfektivitas/$1', ['filter' => 'Auth']);
+$routes->post('/data_evaluasiEfektivitas', 'User\EvaluasiEfektifitas::DataEvaluasiEfektivitas', ['filter' => 'Auth']);
+
+
+//unplanned history
+$routes->get('/personal_history_unplanned', 'User\History::index', ['filter' => 'Auth']);
+$routes->get('/member_history_unplanned', 'User\History::memberHistory', ['filter' => 'Auth']);
+$routes->post('/detail_history_unplanned', 'User\HistoryUnplanned::detailHistoryMember', ['filter' => 'Auth']);
+
+//contac Us
+$routes->get('/contac_us', 'User\ContacUs::index', ['filter' => 'Auth']);
 
 
 /*

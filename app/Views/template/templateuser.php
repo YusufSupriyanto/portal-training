@@ -265,6 +265,13 @@ to get the desired effect
                                             <p>Evaluaksi Reaksi Personal</p>
                                         </a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a href="<?= base_url() ?>/evaluasi_reaksi_unplanned" class="nav-link  <?php if ($page == 'evaluasi_reaksi_unplanned') : echo 'active';
+                                                                                                            endif; ?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Evaluaksi Reaksi Unplanned</p>
+                                        </a>
+                                    </li>
                                 </ul>
                                 <?php if (session()->get('bagian') == 'KADEPT' || session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'BOD') : ?>
                                 <ul class="nav nav-treeview" style="display: none;">
@@ -282,6 +289,16 @@ to get the desired effect
                                                                                                             endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Evaluasi Efektifitas</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <ul class="nav nav-treeview" style="display: none;">
+                                    <li class="nav-item">
+                                        <a href="<?= base_url() ?>/evaluasi_efektifitas_unplanned"
+                                            class="nav-link  <?php if ($page == 'evaluasi_efektifitas_unplanned') : echo 'active';
+                                                                                                                    endif; ?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Evaluasi Efektifitas Unplanned</p>
                                         </a>
                                     </li>
                                 </ul>
@@ -303,6 +320,13 @@ to get the desired effect
                                             <p>Personal History Training</p>
                                         </a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a href="<?= base_url() ?>/personal_history_unplanned" class="nav-link  <?php if ($page == 'personal_history_unplanned') : echo 'active';
+                                                                                                            endif; ?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Personal History Unplanned</p>
+                                        </a>
+                                    </li>
                                 </ul>
                                 <?php if (session()->get('bagian') == 'KADEPT' || session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'BOD') : ?>
                                 <ul class="nav nav-treeview" style="display: none;">
@@ -311,6 +335,16 @@ to get the desired effect
                                                                                                     endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Member History Training</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <ul class="nav nav-treeview" style="display: none;">
+                                    <li class="nav-item">
+                                        <a href="<?= base_url() ?>/member_history_unplanned"
+                                            class="nav-link  <?php if ($page == 'member_history_unplanned') : echo 'active';
+                                                                                                                endif; ?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Member History Unplanned</p>
                                         </a>
                                     </li>
                                 </ul>

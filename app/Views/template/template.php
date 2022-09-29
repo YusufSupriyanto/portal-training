@@ -110,8 +110,8 @@ to get the desired effect
             <aside class="main-sidebar sidebar-dark-primary elevation-4">
                 <!-- Brand Logo -->
                 <a href="index3.html" class="brand-link">
-                    <img src="<?= base_url() ?>/AdminLTE/dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
-                        class="brand-image img-circle elevation-3" style="opacity: .8">
+                    <img src="<?= base_url() ?>/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+                        style="opacity: .8">
                     <span class="brand-text font-weight-light">Portal Training</span>
                 </a>
 
@@ -300,6 +300,15 @@ to get the desired effect
                                                                                             endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>History Training</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <ul class="nav nav-treeview" style="display: none;">
+                                    <li class="nav-item">
+                                        <a href="<?= base_url() ?>/history_unplanned" class="nav-link  <?php if ($page == 'history_-unplanned') : echo 'active';
+                                                                                                    endif; ?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>History Training Unplanned</p>
                                         </a>
                                     </li>
                                 </ul>

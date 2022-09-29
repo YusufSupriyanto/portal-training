@@ -31,6 +31,8 @@
                 <td><?= $Atmps['metode_training'] ?></td>
                 <td><?= $Atmps['tujuan_training'] ?></td>
                 <td><?= $Atmps['rencana_training'] ?></td>
+                <?php $page = basename($_SERVER['PHP_SELF']);
+                    if ($page == 'evaluasi_reaksi') : ?>
                 <?php if ($Atmps['status_evaluasi'] == null) : ?>
                 <td>
                     <div class="d-flex justify-content-center sm">
@@ -46,6 +48,24 @@
                     </div>
                 </td>
                 <?php endif; ?>
+                <?php else : ?>
+                <?php if ($Atmps['status_evaluasi'] == null) : ?>
+                <td>
+                    <div class="d-flex justify-content-center sm">
+                        <a href="<?= base_url() ?>/form_evaluasi_unplanned/<?= $Atmps['id_tna'] ?>"
+                            class="btn btn-danger btn-sm" style="font-size:10px;">Belum Evaluasi</a>
+                    </div>
+                </td>
+                <?php else : ?>
+                <td>
+                    <div class="d-flex justify-content-center sm">
+                        <a href="<?= base_url() ?>/form_unplanned_selesai/<?= $Atmps['id_tna'] ?>"
+                            class="btn btn-success btn-sm" style="font-size:10px;">Sudah Evaluasi</a>
+                    </div>
+                </td>
+                <?php endif; ?>
+                <?php endif; ?>
+
             </tr>
             <?php endforeach; ?>
             <tbody>

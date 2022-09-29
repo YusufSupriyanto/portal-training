@@ -2,31 +2,24 @@
 
 <?= $this->section('content') ?>
 <div class="success" data-success="<?= session()->get('success'); ?>"></div>
-<div class="card-tools p-3">
-    <div class="card flex-row-reverse">
-        <div class="m">
-            <button type="button" class="btn btn-block btn-danger btn-sm h-100">Add Category</button>
-        </div>
-        <div class="mr-3">
-            <form action="<?= base_url() ?>/addCategory" method="post" enctype="multipart/form-data">
-                <div class="input-group">
+<div class="card flex-row-reverse">
+    <div class="">
+        <form action="<?= base_url() ?>/addCategory" method="post" enctype="multipart/form-data">
+            <div class="input-group">
 
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="exampleInputFile" name="file">
-                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                    </div>
-                    <div class="input-group-append"></div>
-                    <button type="submit" class="input-group-text" id="">Upload</button>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="exampleInputFile" name="file">
+                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                 </div>
-            </form>
-        </div>
-
+                <div class="input-group-append"></div>
+                <button type="submit" class="input-group-text" id="">Upload</button>
+            </div>
+        </form>
     </div>
-
 </div>
 
 
-<div class="card p-3">
+<div class="card">
     <?php foreach ($jenis as $categories) : ?>
     <div class="card card-primary card-outline">
         <div class=" card-body box-profile">

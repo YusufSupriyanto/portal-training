@@ -1,8 +1,8 @@
 <?= $this->extend('/template/template') ?>
 
 <?= $this->section('content') ?>
-<div class="card m-3 d-flex justify-content-center">
-    <div class="w-100 p-3">
+<div class="card m-2 d-flex justify-content-center">
+    <div class="w-100 p-2">
         <div id='calender'></div>
     </div>
 </div>

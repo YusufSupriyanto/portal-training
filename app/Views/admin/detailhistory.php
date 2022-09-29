@@ -72,40 +72,47 @@
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
+                    <?php $page = basename($_SERVER['PHP_SELF']);
+                    if ($page == 'detail_history') : ?>
                     <form action="<?= base_url() ?>/sertifikat_upload" method="post" id="form<?= $i ?>"
                         enctype="multipart/form-data">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Upload Sertifikat</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Sertifikat</th>
-                                        <th scope="col">Keterangan Lulus/Tidak</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th>
-                                            <input type="file" name="file" Accept="Application/Pdf" id="file">
-                                            <input type="hidden" name="history" id="history">
-                                        </th>
-                                        <td>
-                                            <input type="text" name="keterangan" id="keterangan">
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Upload</button>
-                        </div>
-                    </form>
+                        <?php else : ?>
+                        <form action="<?= base_url() ?>/sertifikat_upload_unplanned" method="post" id="form<?= $i ?>"
+                            enctype="multipart/form-data">
+                            <div class="modal-header">
+                                <?php endif; ?>
+
+                                <h5 class="modal-title" id="exampleModalLabel">Upload Sertifikat</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Sertifikat</th>
+                                            <th scope="col">Keterangan Lulus/Tidak</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th>
+                                                <input type="file" name="file" Accept="Application/Pdf" id="file">
+                                                <input type="hidden" name="history" id="history">
+                                            </th>
+                                            <td>
+                                                <input type="text" name="keterangan" id="keterangan">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Upload</button>
+                            </div>
+                        </form>
                 </div>
             </div>
         </div>

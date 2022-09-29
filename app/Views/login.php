@@ -1,82 +1,74 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 
     <head>
+        <!-- Required meta tags -->
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title><?= $tittle ?></title>
-        <!-- Tell the browser to be responsive to screen width -->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
 
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="<?= base_url() ?>/AdminLTE/plugins/fontawesome-free/css/all.min.css">
-        <!-- Ionicons -->
-        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-        <!-- icheck bootstrap -->
-        <link rel="stylesheet" href="<?= base_url() ?>/AdminLTE/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-        <!-- Theme style -->
-        <link rel="stylesheet" href="<?= base_url() ?>/AdminLTE/dist/css/adminlte.min.css">
-        <!-- Google Font: Source Sans Pro -->
-        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+        <link rel="stylesheet" href="<?= base_url() ?>/login/fonts/icomoon/style.css">
+
+        <link rel="stylesheet" href="<?= base_url() ?>/login/css/owl.carousel.min.css">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="<?= base_url() ?>/login/css/bootstrap.min.css">
+
+        <!-- Style -->
+        <link rel="stylesheet" href="<?= base_url() ?>/login/css/style.css">
+
+        <title><?= $tittle ?></title>
     </head>
 
-    <body class="hold-transition login-page">
-        <div class="login-box">
-            <div class="login-logo">
-                <a href="<?= base_url() ?>/AdminLTE/index2.html"><b>Login</b> Account</a>
-            </div>
-            <!-- /.login-logo -->
-            <div class="card">
-                <div class="card-body login-card-body">
-                    <p class="login-box-msg">Sign in to start your session</p>
+    <body>
 
-                    <form action="<?= base_url() ?>/verify" method="post">
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Username" name="username">
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-envelope"></span>
+
+        <div class="d-lg-flex half">
+            <div class="bg order-1 order-md-2" style="background-image: url('/login/images/CBI.jpg');"></div>
+            <div class="contents order-2 order-md-1">
+
+                <div class="container">
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-md-7">
+                            <h3>Login to <strong>Portal Training</strong></h3>
+                            <p class="mb-4"></p>
+                            <form action="<?= base_url() ?>/verify" method="post">
+                                <div class="form-group first">
+                                    <label for="username">Username</label>
+                                    <input type="text" class="form-control" placeholder="your Username" id="username"
+                                        name="username">
                                 </div>
-                            </div>
-                        </div>
-                        <div class="input-group mb-3">
-                            <input type="password" class="form-control" placeholder="Password" name="password">
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-lock"></span>
+                                <div class="form-group last mb-3">
+                                    <label for="password">Password</label>
+                                    <input type="password" class="form-control" placeholder="Your Password"
+                                        id="password" name="password">
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="icheck-primary">
-                                    <input type="checkbox" id="remember">
-                                    <label for="remember">
-                                        Remember Me
+
+                                <div class="d-flex mb-5 align-items-center">
+                                    <label class="control control--checkbox mb-0"><span class="caption">Remember
+                                            me</span>
+                                        <input type="checkbox" checked="checked" />
+                                        <div class="control__indicator"></div>
                                     </label>
                                 </div>
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-4">
-                                <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-                            </div>
-                            <!-- /.col -->
+
+                                <input type="submit" value="Log In" class="btn btn-block btn-primary">
+
+                            </form>
                         </div>
-                    </form>
-                    <!-- /.social-auth-links -->
+                    </div>
                 </div>
-                <!-- /.login-card-body -->
             </div>
+
+
         </div>
-        <!-- /.login-box -->
 
-        <!-- jQuery -->
-        <script src="<?= base_url() ?>/AdminLTE/plugins/jquery/jquery.min.js"></script>
-        <!-- Bootstrap 4 -->
-        <script src="<?= base_url() ?>/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <!-- AdminLTE App -->
-        <script src="<?= base_url() ?>/AdminLTE/dist/js/adminlte.min.js"></script>
 
+
+        <script src="<?= base_url() ?>/login/js/jquery-3.3.1.min.js"></script>
+        <script src="<?= base_url() ?>/login/js/popper.min.js"></script>
+        <script src="<?= base_url() ?>/login/js/bootstrap.min.js"></script>
+        <script src="<?= base_url() ?>/login/js/main.js"></script>
     </body>
 
 </html>

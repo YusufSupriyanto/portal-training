@@ -27,6 +27,8 @@
                         <td><?= $evaluation['judul'] ?></td>
                         <td><?= $evaluation['jenis'] ?></td>
                         <td><?= $evaluation['tanggal'] ?></td>
+                        <?php $page = basename($_SERVER['PHP_SELF']);
+                            if ($page == 'evaluasi_efektivitas') : ?>
                         <?php if ($evaluation['status'] == null) : ?>
                         <td>
                             <a href="<?= base_url() ?>/form_efektivitas/<?= $evaluation['id_tna'] ?>"
@@ -39,6 +41,22 @@
                                 class="btn btn-success btn-sm" style="color:white">Sudah
                                 dievaluasi</a>
                         </td>
+                        <?php endif; ?>
+                        <?php else : ?>
+
+                        <?php if ($evaluation['status'] == null) : ?>
+                        <td>
+                            <a href="<?= base_url() ?>/form_efektivitas_unplanned/<?= $evaluation['id_tna'] ?>"
+                                class="btn btn-danger btn-sm" style="color:white">Belum
+                                dievaluasi</a>
+                        </td>
+                        <?php else : ?>
+                        <td>
+                            <a href="<?= base_url() ?>/detail_efektivitas_unplanned/<?= $evaluation['id_tna'] ?>"
+                                class="btn btn-success btn-sm" style="color:white">Sudah
+                                dievaluasi</a>
+                        </td>
+                        <?php endif; ?>
                         <?php endif; ?>
                     </tr>
                     <?php endforeach; ?>

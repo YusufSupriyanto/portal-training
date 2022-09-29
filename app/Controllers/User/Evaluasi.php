@@ -22,9 +22,6 @@ class Evaluasi extends BaseController
     public function index()
     {
         $id = session()->get('id');
-        // $nama = session()->get('nama');
-        // $bagian = session()->get('bagian');
-        // $npk = session()->get('npk');
 
         $evaluasi =  $this->tna->getEvaluasiReaksi($id);
         // dd($evaluasi);
