@@ -1,10 +1,17 @@
 <?= $this->extend('/template/templateuser') ?>
 
 <?= $this->section('content') ?>
-<div class="card m-3">
-    <div class="card-header">
-        <h3 class="card-title"><?= $tittle ?></h3>
+<div class="card m-1">
+    <div class="card-header ">
+        <div class="d-flex justify-content-between">
+            <h3 class="card-title"><?= $tittle ?>
+            </h3>
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModalCenter">
+                <i class="fa-solid fa-file"></i>
+            </button>
+        </div>
     </div>
+
     <!-- /.card-header -->
     <div class="card-body table-responsive p-0">
         <table class="table table-hover" id="member">
@@ -49,51 +56,65 @@
     <!-- /.card-body -->
 </div>
 
-<?php if (session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'BOD' || session()->get('bagian') == 'KADEPT') : ?>
-<div class="card overflow-auto m-3">
-    <div class="card-header">
-        <h3 class="card-title">Data Form TNA</h3>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <form method="post" action="<?= base_url() ?>\tna\send">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="card-body p-0 overflow-auto">
+                        <table class="table table-striped overflow-auto">
+                            <thead>
+                                <tr>
+                                    <th>Nama</th>
+                                    <th>Training</th>
+                                    <th>Jenis Training</th>
+                                    <th>Kategori Training</th>
+                                    <th>Metode Training</th>
+                                    <th>Start Training</th>
+                                    <th>End Training</th>
+                                    <th>Tujuan Training</th>
+                                    <th>Notes</th>
+                                    <th>Estimasi Budget</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($tna as $Forms) : ?>
+                                <tr>
+                                    <td><?= $Forms->nama ?></td>
+                                    <td><?= $Forms->training ?></td>
+                                    <td><?= $Forms->jenis_training ?></td>
+                                    <td><?= $Forms->kategori_training ?></td>
+                                    <td><?= $Forms->metode_training ?></td>
+                                    <td><?= $Forms->mulai_training ?></td>
+                                    <td><?= $Forms->rencana_training ?></td>
+                                    <td><?= $Forms->tujuan_training ?></td>
+                                    <td><?= $Forms->notes ?></td>
+                                    <td>
+                                        <div><?= "Rp " . number_format($Forms->biaya, 0, ',', '.') ?></div>
+                                    </td>
+                                </tr>
+                                <input type="hidden" value="<?= $Forms->id_tna ?>" name="training[]">
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary"><i class="fa fa-fw fa-send"></i>Kirim</button>
+                </div>
+            </div>
+        </form>
     </div>
-    <!-- /.card-header -->
-    <form method="post" action="<?= base_url() ?>\tna\send">
-        <div class="card-body p-0 overflow-auto">
-            <table class="table table-striped overflow-auto">
-                <thead>
-                    <tr>
-                        <th>Nama</th>
-                        <th>Training</th>
-                        <th>Jenis Training</th>
-                        <th>Kategori Training</th>
-                        <th>Metode Training</th>
-                        <th>Rencana Training</th>
-                        <th>Tujuan Training</th>
-                        <th>Notes</th>
-                        <th>Estimasi Budget</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($tna as $Forms) : ?>
-                    <tr>
-                        <td><?= $Forms->nama ?></td>
-                        <td><?= $Forms->training ?></td>
-                        <td><?= $Forms->jenis_training ?></td>
-                        <td><?= $Forms->kategori_training ?></td>
-                        <td><?= $Forms->metode_training ?></td>
-                        <td><?= $Forms->rencana_training ?></td>
-                        <td><?= $Forms->tujuan_training ?></td>
-                        <td><?= $Forms->notes ?></td>
-                        <td><?= $Forms->biaya ?></td>
-                    </tr>
-                    <input type="hidden" value="<?= $Forms->id_tna ?>" name="training[]">
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
-        <div class="card-footer clearfix d-flex justify-content-end pr-4">
-            <button style="width:100px;" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-send"></i>Kirim</button>
-        </div>
-    </form>
-    <!-- /.card-body -->
 </div>
-<?php endif; ?>
+
 <?= $this->endSection() ?>

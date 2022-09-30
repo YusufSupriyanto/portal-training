@@ -129,7 +129,7 @@ $routes->post('/sertifikat_upload_unplanned', 'Admin\C_HistoryUnplanned::Sertifi
 $routes->get('/home_user', 'User\Home::index', ['filter' => 'Auth']);
 $routes->post('/data_home', 'User\Home::DataHome', ['filter' => 'Auth']);
 $routes->get('/data_home', 'User\Home::DataHome', ['filter' => 'Auth']);
-$routes->get('/jadwal/(:any)', 'User\Home::JadwalHome/$1', ['filter' => 'Auth']);
+$routes->post('/jadwal', 'User\Home::JadwalHome', ['filter' => 'Auth']);
 
 
 //Training List
@@ -183,7 +183,11 @@ $routes->get('/data_member_unplanned', 'User\UnplannedTraining::index', ['filter
 $routes->post('/form_unplanned', 'User\UnplannedTraining::TnaUserUnplanned', ['filter' => 'Auth']);
 $routes->post('/send_unplanned', 'User\FormTna::TnaSend', ['filter' => 'Auth']);
 $routes->get('/request_unplanned', 'User\UnplannedTraining::requestUnplanned', ['filter' => 'Auth']);
+$routes->get('/status_tna_unplanned', 'User\UnplannedTraining::Status', ['filter' => 'Auth']);
 
+//unplanned schedule
+$routes->get('/personal_schedule_unplanned', 'User\OurSchedule::personal', ['filter' => 'Auth']);
+$routes->get('/member_schedule_unplanned', 'User\OurSchedule::member', ['filter' => 'Auth']);
 
 //Unplanned Evaluation
 $routes->get('/evaluasi_reaksi_unplanned', 'User\EvaluasiUnplanned::index', ['filter' => 'Auth']);

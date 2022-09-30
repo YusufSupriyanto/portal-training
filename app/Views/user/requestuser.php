@@ -1,7 +1,7 @@
 <?= $this->extend('/template/templateuser') ?>
 
 <?= $this->section('content') ?>
-<div class="card overflow-auto m-3">
+<div class="card overflow-auto m-1">
     <div class="card-header">
         <h3 class="card-title"><?= $tittle ?></h3>
     </div>
@@ -15,7 +15,8 @@
                 <th>Jenis Training</th>
                 <th>Kategori Training</th>
                 <th>Metode Training</th>
-                <th>Rencana Training</th>
+                <th>start Training</th>
+                <th>End Training</th>
                 <th>Tujuan Training</th>
                 <th>Notes</th>
                 <th>Estimasi Budget</th>
@@ -31,6 +32,7 @@
                     <td><?= $statuses['jenis_training'] ?></td>
                     <td><?= $statuses['kategori_training'] ?></td>
                     <td><?= $statuses['metode_training'] ?></td>
+                    <td><?= $statuses['mulai_training'] ?></td>
                     <td><?= $statuses['rencana_training'] ?></td>
                     <td><?= $statuses['tujuan_training'] ?></td>
                     <td><?= $statuses['notes'] ?></td>

@@ -1,7 +1,7 @@
 <?= $this->extend('/template/templateuser') ?>
 
 <?= $this->section('content') ?>
-<div class="card m-3">
+<div class="card m-1">
     <form method="post" action="<?= base_url() ?>/send_evaluasi_reaksi">
         <div class="d-flex justify-content-center">
             <h4>Evaluasi Program Pelatihan</h4>

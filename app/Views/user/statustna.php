@@ -1,7 +1,7 @@
 <?= $this->extend('/template/templateuser') ?>
 
 <?= $this->section('content') ?>
-<div class="card overflow-auto m-3">
+<div class="card overflow-auto m-1">
     <div class="card-header">
         <h3 class="card-title"><?= $tittle ?></h3>
     </div>
@@ -35,7 +35,10 @@
                     <td><?= $statuses['rencana_training'] ?></td>
                     <td><?= $statuses['tujuan_training'] ?></td>
                     <td><?= $statuses['notes'] ?></td>
-                    <td><?= $statuses['biaya_actual'] ?></td>
+                    <td>
+                        <div style="width:80px;"><?= "Rp " . number_format($statuses['biaya_actual'], 0, ',', '.') ?>
+                        </div>
+                    </td>
                     <td>
                         <?php if ($statuses['status_approval_1'] == NULL) : ?>
                         <div class="d-flex justify-content-center"
@@ -76,18 +79,6 @@
                         <div class="d-flex justify-content-center"
                             style="background-color:red;width:50;border:1px;border-radius:2px;color:white;">Reject</div>
                         <?php endif; ?>
-
-
-
-
-                        <!-- <div class="d-flex flex-row">
-                            <button style="width:100px;" class="btn btn-secondary btn-sm mr-1"><i
-                                    class="fa fa-fw fa-clock-o"></i><span>Wait</span></button>
-                            <button style="width:100px;" class="btn btn-secondary btn-sm mr-1"><i
-                                    class="fa fa-fw fa-clock-o"></i><span>Wait</span></button>
-                            <button style="width:100px;" class="btn btn-secondary btn-sm "><i
-                                    class="fa fa-fw fa-clock-o"></i><span>Wait</span></button>
-                        </div> -->
                     </td>
                 </tr>
                 <?php endforeach; ?>

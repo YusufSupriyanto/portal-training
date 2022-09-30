@@ -35,7 +35,7 @@
                             <form action="<?= base_url() ?>/verify" method="post">
                                 <div class="form-group first">
                                     <label for="username">Username</label>
-                                    <input type="text" class="form-control" placeholder="your Username" id="username"
+                                    <input type="text" class="form-control" placeholder="Your Username" id="username"
                                         name="username">
                                 </div>
                                 <div class="form-group last mb-3">

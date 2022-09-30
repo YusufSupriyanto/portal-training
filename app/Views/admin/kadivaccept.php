@@ -1,7 +1,7 @@
 <?= $this->extend('/template/template') ?>
 
 <?= $this->section('content') ?>
-<div class="card m-3">
+<div class="card m-1">
     <div class="card-header">
         <h3 class="card-title"><?= $tittle ?></h3>
     </div>
@@ -27,6 +27,8 @@
                     <td><?= $tnas['departemen'] ?></td>
                     <td><?= $tnas['training'] ?></td>
                     <?php if ($tnas['status_approval_2'] == null) : ?>
+                    <td><input type="date" value="<?= $tnas['mulai_training'] ?>" name="mulai-training<?= $i ?>"
+                            id="mulai-training<?= $i ?>"></td>
                     <td><input type="date" value="<?= $tnas['rencana_training'] ?>" name="rencana-training<?= $i ?>"
                             id="rencana-training<?= $i ?>"></td>
                     <td>Rp.<?= $tnas['biaya'] ?></td>

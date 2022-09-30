@@ -1,7 +1,7 @@
 <?= $this->extend('/template/template') ?>
 
 <?= $this->section('content') ?>
-<div class="card m-3 " style="font-size:15px;">
+<div class="card m-1 " style="font-size:15px;">
     <div class="card-header h6 d-flex">
 
         <h3 class="card-title">Daftar Training Need Analysis</h3>
@@ -16,7 +16,8 @@
                         <th>Nama</th>
                         <th>Departemen</th>
                         <th>Training</th>
-                        <th>rencana_training</th>
+                        <th>Start Training</th>
+                        <th>End Training</th>
                         <th>Planing Budget</th>
                         <th>Actual Budget</th>
                         <th>Vendor</th>
@@ -31,6 +32,8 @@
                         <td><?= $tnas->nama ?></td>
                         <td><?= $tnas->departemen ?></td>
                         <td><?= $tnas->training ?></td>
+                        <td><input type="date" value="<?= $tnas->mulai_training ?>" name="mulai-training<?= $i ?>"
+                                id="mulai-training<?= $i ?>"></td>
                         <td><input type="date" value="<?= $tnas->rencana_training ?>" name="rencana-training<?= $i ?>"
                                 id="rencana-training<?= $i ?>"></td>
                         <td>

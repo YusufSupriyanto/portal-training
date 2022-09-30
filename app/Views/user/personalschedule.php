@@ -1,7 +1,7 @@
 <?= $this->extend('/template/templateuser') ?>
 
 <?= $this->section('content') ?>
-<div class="card m-2">
+<div class="card m-1">
     <div class="card-header">
         <h3 class="card-title"><?= $tittle ?></h3>
     </div>
@@ -10,15 +10,16 @@
         <table class="table table-hover" id="personal-schedule">
             <thead>
                 <tr>
-                    <th>NAMA</th>
-                    <th>DEPARTEMEN</th>
-                    <th>JUDUL TRAINING</th>
-                    <th>JENIS TRAINING</th>
-                    <th>KATEGORI TRAINING</th>
-                    <th>METODE TRAINING</th>
-                    <th>TUJUAN TRAINING</th>
-                    <th>RENCANA TRAINING</th>
-                    <th>KETERANGAN TRAINING</th>
+                    <th>Nama</th>
+                    <th>Departemen</th>
+                    <th>Judul Training</th>
+                    <th>Jenis Training</th>
+                    <th>Kategori Training</th>
+                    <th>Metode Training</th>
+                    <th>Tujuan Training</th>
+                    <th>Start Training</th>
+                    <th>End Training</th>
+                    <th>Keterangan Training</th>
                 </tr>
             </thead>
             <?php foreach ($schedule as $Atmps) : ?>
@@ -30,6 +31,7 @@
                 <td><?= $Atmps['kategori_training'] ?></td>
                 <td><?= $Atmps['metode_training'] ?></td>
                 <td><?= $Atmps['tujuan_training'] ?></td>
+                <td><?= $Atmps['mulai_training'] ?></td>
                 <td><?= $Atmps['rencana_training'] ?></td>
                 <?php if ($Atmps['status_training'] == null) : ?>
                 <td>

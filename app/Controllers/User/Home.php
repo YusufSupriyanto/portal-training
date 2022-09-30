@@ -34,19 +34,19 @@ class Home extends BaseController
             if (strtotime($dateTraining) > strtotime($date)) {
                 $data = [
                     'title' => $row['kategori_training'],
-                    'start' => $row['rencana_training'],
+                    'start' => $row['mulai_training'],
                     'end' => $row['rencana_training'],
                     'color' => '#FFD700',
-                    'url' => base_url('/jadwal/' . $row['rencana_training'])
+                    // 'url' => base_url('/jadwal/' . $row['rencana_training'])
                 ];
                 array_push($json, $data);
             } else {
                 $data = [
                     'title' => $row['kategori_training'],
-                    'start' => $row['rencana_training'],
+                    'start' => $row['mulai_training'],
                     'end' => $row['rencana_training'],
                     'color' => 'green',
-                    'url' => base_url('/jadwal/' . $row['rencana_training'])
+                    // 'url' => base_url('/jadwal/' . $row['rencana_training'])
                 ];
                 array_push($json, $data);
             }
@@ -54,8 +54,9 @@ class Home extends BaseController
         echo json_encode($json);
     }
 
-    public function JadwalHome($date)
+    public function JadwalHome()
     {
+        $date = $this->request->getPost('start');
         $dataFix = [];
         $jadwal = $this->tna->getDataJadwalHome($date);
         foreach ($jadwal as $jadwals) {
@@ -71,12 +72,6 @@ class Home extends BaseController
             array_push($dataFix, $data);
         }
 
-        $newDate = date('F d, Y', strtotime($date));
-        $data = [
-            'tittle' => 'Jadwal Training',
-            'date' => $newDate,
-            'jadwal' => $dataFix
-        ];
-        return view('user/jadwalhome', $data);
+        echo json_encode($dataFix);
     }
 }

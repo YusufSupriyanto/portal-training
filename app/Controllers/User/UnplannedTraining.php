@@ -52,8 +52,8 @@ class UnplannedTraining extends BaseController
         $id = $this->request->getPost('member');
         $user = $this->user->getAllUser($id);
         $trainings = $this->training->getAll();
-        $tna = $this->tna->getUserTnaUnplanned($id);
-
+        $tna = $this->unplanned->getUserTnaUnplanned($id);
+        //  dd($tna);
         $data = [
             'tittle' => 'Unplanned Training',
             'user' => $user,
@@ -89,5 +89,31 @@ class UnplannedTraining extends BaseController
             return view('user/requestuser', $data);
         }
         return view('user/requestuserbod', $data);
+    }
+
+    public function status()
+    {
+        $id =  session()->get('id');
+        $bagian = session()->get('bagian');
+        $dic = session()->get('dic');
+        $divisi = session()->get('divisi');
+        $departemen = session()->get('departemen');
+
+        if ($bagian == 'BOD') {
+            $status =  $this->unplanned->getStatusWaitUser($bagian, $dic);
+        } elseif ($bagian == 'KADIV') {
+            $status =  $this->unplanned->getStatusWaitUser($bagian, $divisi);
+        } elseif ($bagian == 'KADEPT') {
+            $status = $this->unplanned->getStatusWaitUser($bagian, $departemen);
+        } else {
+            $status =  $this->unplanned->getStatusWaitUser($bagian, $dic, $id);
+        }
+
+        // dd($status);
+        $data = [
+            'tittle' => 'Status TNA',
+            'status' => $status,
+        ];
+        return view('user/statustna', $data);
     }
 }

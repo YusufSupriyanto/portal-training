@@ -191,7 +191,7 @@ class FormTna extends BaseController
         $user = $this->user->getAllUser($id_user);
         $jenis_trainng = $this->training->getIdTraining($id_training);
 
-        // dd($jenis_trainng);
+        // dd($id_user);
         $data = [
             'id_user' => $id_user,
             'id_training' => $id_training,
@@ -205,6 +205,7 @@ class FormTna extends BaseController
             'kategori_training' => $this->request->getVar('kategori'),
             'training' => $jenis_trainng['judul_training'],
             'metode_training' => $this->request->getVar('metode'),
+            'mulai_training' => $this->request->getVar('rencanaFirst'),
             'rencana_training' => $this->request->getVar('rencana'),
             'tujuan_training' => $this->request->getVar('tujuan'),
             'notes' => $this->request->getVar('notes'),
@@ -213,7 +214,7 @@ class FormTna extends BaseController
             'kelompok_training' => $kelompok
 
         ];
-        // dd($data);
+        //dd($data);
         $this->tna->save($data);
 
         $id  = $this->tna->getIdTna();

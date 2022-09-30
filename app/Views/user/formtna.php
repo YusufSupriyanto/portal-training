@@ -2,143 +2,153 @@
 
 <?= $this->section('content') ?>
 <div class="success" data-success="<?= session()->get('success'); ?>"></div>
-<div class="card m-3 overflow-auto">
+<div class="card m-1 overflow-auto">
     <div class="card-header d-flex justify-content-center">
         <h3 class="card-title"><?= $tittle  ?></h3>
+
     </div>
-    <form method="post" action="<?= base_url() ?>/save_form" id="form-tna">
-        <div class="card card-primary card-outline">
-            <div class="card-body box-profile overflow-auto">
-                <div class="card overflow-auto">
-                    <div class="card-body p-1 m-1" style=" position:absolute;width:auto;">
-                        <input type="hidden" value="<?= $user['id_user'] ?>" name="id_user">
-                        <input type="hidden" value="<?= 0; ?>" name="deadline">
-                        <h6>Nama :<?= "  " . $user['nama'] ?></h6>
-                        <h6>Jabatan :<?= "  " . $user['bagian'] ?></h6>
-                        <h6>Departemen :<?= "  " . $user['departemen'] ?></h6>
-                        <h6>Seksi :<?= "  " . $user['seksi'] ?></h6>
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body  p-0" style="margin-top:150px;">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Training</th>
-                                    <th>Jenis Training</th>
-                                    <th>Kategori Training</th>
-                                    <th>Metode Training</th>
-                                    <th>Rencana Training</th>
-                                    <th>Tujuan Training</th>
-                                    <th>Notes</th>
-                                    <th>Estimasi Budget</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                <tr>
-                                    <td>
-
-                                        <select class="custom-select" name="training" id="training"
-                                            style="width:300px;">
-                                            <option selected>Choose...</option>
-                                            <?php foreach ($training as $trainings) : ?>
-                                            <option value="<?= $trainings->id_training ?>">
-                                                <?= $trainings->judul_training ?>
-                                            </option>
-                                            <?php endforeach; ?>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <div id="jenis_training"></div>
-                                    </td>
-                                    <td>
-                                        <select class="custom-select" name="kategori" id="kategori"
-                                            style="width:100px;">
-                                            <option value="">Choose</option>
-                                            <option value="Internal">Internal</option>
-                                            <option value="External">External</option>
-                                            <option value="Inhouse">Inhouse</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <select class="custom-select" name="metode" id="metode" style="width:100px;">
-                                            <option value="">Choose</option>
-                                            <option value="Online">Online</option>
-                                            <option value="Offline">Offline</option>
-                                            <option value="Keduanya">Antara Keduanya</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <input class="datepicker custom-select" data-date-format="
-                                            mm-dd-yyyy" name="rencana" type="date">
-                                    </td>
-                                    <td>
-                                        <textarea
-                                            class="form-control <?= ($validation->hasError('tujuan')) ? 'is-invalid' : ''; ?> "
-                                            id="validationTextarea" placeholder="Required example textarea" required
-                                            name="tujuan" style="width:300px;"></textarea>
-                                        <div class="invalid-feedback">
-                                            <?= $validation->getError('tujuan'); ?>
-                                        </div>
-                                    </td>
-                                    <td><textarea class="form-control" name=" notes" placeholder="Permintaan Khusus "
-                                            style="width:300px;"></textarea></textarea>
-                                    </td>
-                                    <td>
-                                        <div style="width:100px;" id="biaya"></div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.card-body -->
-                </div>
-            </div>
-            <!-- /.card-body -->
-        </div>
-        <div class="card-footer clearfix d-flex justify-content-end">
-            <button class="btn btn-primary "><i class="fa fa-fw fa-save"></i></button>
-        </div>
-    </form>
-    <div class="card">
+    <!-- form -->
+    <div class="card card-primary m-3">
         <div class="card-header">
-            <h3 class="card-title">Data Form TNA</h3>
+            <h3 class="card-title">
+                <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#exampleModal">
+                    Training
+                </button>
+                <h6><input class="form-control" value="Nama                  :<?= "  " . $user['nama'] ?>" readonly>
+                </h6>
+                <h6><input class="form-control" value="Jabatan             :<?= "  " . $user['bagian'] ?>" readonly>
+                </h6>
+                <h6><input class="form-control" value="Departemen   :<?= "  " . $user['departemen'] ?>" readonly>
+                </h6>
+                <h6><input class="form-control" value="Seksi                   :<?= "  " . $user['seksi'] ?>" readonly>
+                </h6>
+            </h3>
         </div>
         <!-- /.card-header -->
-        <div class="card-body p-0">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Training</th>
-                        <th>Jenis Training</th>
-                        <th>Kategori Training</th>
-                        <th>Metode Training</th>
-                        <th>Rencana Training</th>
-                        <th>Tujuan Training</th>
-                        <th>Notes</th>
-                        <th>Estimasi Budget</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($tna as $Forms) : ?>
-                    <tr>
-                        <td><?= $Forms->training ?></td>
-                        <td><?= $Forms->jenis_training ?></td>
-                        <td><?= $Forms->kategori_training ?></td>
-                        <td><?= $Forms->metode_training ?></td>
-                        <td><?= $Forms->rencana_training ?></td>
-                        <td><?= $Forms->tujuan_training ?></td>
-                        <td><?= $Forms->notes ?></td>
-                        <td>Rp<?= " " . number_format($Forms->biaya, 0, ',', '.')  ?></td>
-                    </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+        <!-- form start -->
+        <form role="form" action="<?= base_url() ?>/save_form" method="post" id="form-tna">
+            <div class="card-body">
+                <div class="form-group">
+                    <input type="hidden" value="<?= $user['id_user'] ?>" name="id_user">
+                    <input type="hidden" value="<?= 0; ?>" name="deadline">
+                    <label>Training<span style="color:red;">*</span></label>
+                    <select class="form-control" name="training" id="training">
+                        <option selected>Choose...</option>
+                        <?php foreach ($training as $trainings) : ?>
+                        <option value="<?= $trainings->id_training ?>">
+                            <?= $trainings->judul_training ?>
+                        </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="jenis_training">Jenis Training<span style="color:red;">*</span></label>
+                    <input class="form-control" id="jenis_training" readonly></input>
+                </div>
+                <div class="form-group">
+                    <label>Kategori Training<span style="color:red;">*</span></label>
+                    <select class="form-control" name="kategori" id="kategori">
+                        <option value="">Choose</option>
+                        <option value="Internal">Internal</option>
+                        <option value="External">External</option>
+                        <option value="Inhouse">Inhouse</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Metode<span style="color:red;">*</span></label>
+                    <select class="custom-select" name="metode" id="metode">
+                        <option value="">Choose</option>
+                        <option value="Online">Online</option>
+                        <option value="Offline">Offline</option>
+                        <option value="Keduanya">Antara Keduanya</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="date">Start Training<span style="color:red;">*</span></label>
+                    <input class="datepicker custom-select" data-date-format="
+                                            mm-dd-yyyy" name="rencanaFirst" type="date" id="dateFirst">
+
+                </div>
+                <div class="form-group">
+                    <label for="date">End Training<span style="color:red;">*</span></label>
+                    <input class="datepicker custom-select" data-date-format="
+                                            mm-dd-yyyy" name="rencana" type="date" id="date">
+
+                </div>
+                <div class="form-group">
+                    <label>Tujuan<span style="color:red;">*</span></label>
+                    <textarea class="form-control <?= ($validation->hasError('tujuan')) ? 'is-invalid' : ''; ?> "
+                        id="validationTextarea" placeholder="Required example textarea" required
+                        name="tujuan"></textarea>
+                    <div class="invalid-feedback">
+                        <?= $validation->getError('tujuan'); ?>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Notes</label>
+                    <textarea class="form-control" name=" notes" placeholder="Permintaan Khusus"></textarea></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="biaya">Estimasi Budget<span style="color:red;">*</span></label>
+                    <input class="form-control" id="biaya" readonly></input>
+                </div>
+            </div>
+
+            <!-- /.card-body -->
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save</button>
+            </div>
+        </form>
+    </div>
+    <!-- endform -->
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped" id="example">
+                        <thead>
+                            <tr>
+                                <th>Training</th>
+                                <th>Jenis Training</th>
+                                <th>Kategori Training</th>
+                                <th>Metode Training</th>
+                                <th>Start Training</th>
+                                <th>End Training</th>
+                                <th>Tujuan Training</th>
+                                <th>Notes</th>
+                                <th>Estimasi Budget</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($tna as $Forms) : ?>
+                            <tr>
+                                <td><?= $Forms->training ?></td>
+                                <td><?= $Forms->jenis_training ?></td>
+                                <td><?= $Forms->kategori_training ?></td>
+                                <td><?= $Forms->metode_training ?></td>
+                                <td><?= $Forms->mulai_training ?></td>
+                                <td><?= $Forms->rencana_training ?></td>
+                                <td><?= $Forms->tujuan_training ?></td>
+                                <td><?= $Forms->notes ?></td>
+                                <td>Rp<?= " " . number_format($Forms->biaya, 0, ',', '.')  ?></td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
         </div>
-        <div>
-            <button class="btn btn"></button>
-        </div>
-        <!-- /.card-body -->
     </div>
 </div>
 <script>
@@ -173,13 +183,10 @@ $("#training").on('change', function() {
             const rupiah = 'Rp ' + convert.join('.').split('').reverse().join('')
             console.log(rupiah)
 
-            $("#jenis_training").html(
-                `<span>${data.jenis_training}</span>`
-            );
+            $("#jenis_training").val(data.jenis_training)
 
-            $("#biaya").html(
-                `<span style="font-size:15px;">${rupiah}</span>`
-            );
+
+            $("#biaya").val(rupiah)
         }
 
     })

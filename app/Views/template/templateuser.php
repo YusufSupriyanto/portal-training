@@ -106,8 +106,8 @@ to get the desired effect
             <aside class="main-sidebar sidebar-dark-primary elevation-4">
                 <!-- Brand Logo -->
                 <a href="index3.html" class="brand-link">
-                    <img src="<?= base_url() ?>/AdminLTE/dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
-                        class="brand-image img-circle elevation-3" style="opacity: .8">
+                    <img src="<?= base_url() ?>/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+                        style="opacity: .8">
                     <span class="brand-text font-weight-light">Portal Training</span>
                 </a>
 
@@ -195,6 +195,13 @@ to get the desired effect
                                             <p>Status Training</p>
                                         </a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a href="<?= base_url() ?>/status_tna_unplanned" class="nav-link  <?php if ($page == 'status_tna_unplanned') : echo 'active';
+                                                                                                        endif; ?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Status Training Unplanned</p>
+                                        </a>
+                                    </li>
                                     <?php if (session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'BOD') : ?>
                                     <li class="nav-item">
                                         <a href="<?= base_url() ?>/request_tna" class="nav-link  <?php if ($page == 'request_tna') : echo 'active';
@@ -233,7 +240,17 @@ to get the desired effect
                                         <a href="<?= base_url() ?>/personal_schedule" class="nav-link  <?php if ($page == 'personal_schedule') : echo 'active';
                                                                                                     endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>Personal Schedule Training</p>
+                                            <p>Schedule Training</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <ul class="nav nav-treeview" style="display: none;">
+                                    <li class="nav-item">
+                                        <a href="<?= base_url() ?>/personal_schedule_unplanned"
+                                            class="nav-link  <?php if ($page == 'personal_schedule_unplanned') : echo 'active';
+                                                                                                                endif; ?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Schedule Training Unplanned</p>
                                         </a>
                                     </li>
                                 </ul>
@@ -247,116 +264,126 @@ to get the desired effect
                                         </a>
                                     </li>
                                 </ul>
-                                <?php endif; ?>
-                            </li>
-                            <li class="nav-item has-treeview">
-                                <a href="#" class="nav-link">
-                                    <i class="fa fa-fw  fa-file-text"></i>
-                                    <p>
-                                        Evaluation
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-                                </a>
                                 <ul class="nav nav-treeview" style="display: none;">
                                     <li class="nav-item">
-                                        <a href="<?= base_url() ?>/evaluasi_reaksi" class="nav-link  <?php if ($page == 'evaluasi_reaksi') : echo 'active';
-                                                                                                    endif; ?>">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Evaluaksi Reaksi Personal</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="<?= base_url() ?>/evaluasi_reaksi_unplanned" class="nav-link  <?php if ($page == 'evaluasi_reaksi_unplanned') : echo 'active';
-                                                                                                            endif; ?>">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Evaluaksi Reaksi Unplanned</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <?php if (session()->get('bagian') == 'KADEPT' || session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'BOD') : ?>
-                                <ul class="nav nav-treeview" style="display: none;">
-                                    <li class="nav-item">
-                                        <a href="<?= base_url() ?>/evaluasi_reaksi_member" class="nav-link  <?php if ($page == 'evaluasi_reaksi_member') : echo 'active';
-                                                                                                            endif; ?>">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Evaluaksi Reaksi Member</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <ul class="nav nav-treeview" style="display: none;">
-                                    <li class="nav-item">
-                                        <a href="<?= base_url() ?>/evaluasi_efektifitas" class="nav-link  <?php if ($page == 'evaluasi_efektifitas') : echo 'active';
-                                                                                                            endif; ?>">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Evaluasi Efektifitas</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <ul class="nav nav-treeview" style="display: none;">
-                                    <li class="nav-item">
-                                        <a href="<?= base_url() ?>/evaluasi_efektifitas_unplanned"
-                                            class="nav-link  <?php if ($page == 'evaluasi_efektifitas_unplanned') : echo 'active';
-                                                                                                                    endif; ?>">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Evaluasi Efektifitas Unplanned</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <?php endif; ?>
-                            </li>
-                            <li class="nav-item has-treeview">
-                                <a href="#" class="nav-link">
-                                    <i class="fa fa-fw  fa-history"></i>
-                                    <p>
-                                        History
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview" style="display: none;">
-                                    <li class="nav-item">
-                                        <a href="<?= base_url() ?>/personal_history" class="nav-link  <?php if ($page == 'personal_history') : echo 'active';
-                                                                                                    endif; ?>">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Personal History Training</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="<?= base_url() ?>/personal_history_unplanned" class="nav-link  <?php if ($page == 'personal_history_unplanned') : echo 'active';
-                                                                                                            endif; ?>">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Personal History Unplanned</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <?php if (session()->get('bagian') == 'KADEPT' || session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'BOD') : ?>
-                                <ul class="nav nav-treeview" style="display: none;">
-                                    <li class="nav-item">
-                                        <a href="<?= base_url() ?>/member_history" class="nav-link  <?php if ($page == 'member_history') : echo 'active';
-                                                                                                    endif; ?>">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Member History Training</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <ul class="nav nav-treeview" style="display: none;">
-                                    <li class="nav-item">
-                                        <a href="<?= base_url() ?>/member_history_unplanned"
-                                            class="nav-link  <?php if ($page == 'member_history_unplanned') : echo 'active';
+                                        <a href="<?= base_url() ?>/member_schedule_unplanned"
+                                            class="nav-link  <?php if ($page == 'member_schedule_unplanned') : echo 'active';
                                                                                                                 endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>Member History Unplanned</p>
+                                            <p>Member Schedule Training Unplanned</p>
                                         </a>
                                     </li>
-                                </ul>
-                                <?php endif; ?>
                             </li>
-                            <li class="nav-item">
-                                <a href="<?= base_url() ?>/contac_us" class="nav-link  <?php if ($page == 'contac_us') : echo 'active';
-                                                                                    endif; ?>">
-                                    <i class="fa fa-fw  fa-phone"></i>
-                                    <p>Contac Us</p>
-                                </a>
-                            </li>
+
+                        </ul>
+                        <?php endif; ?>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="fa fa-fw  fa-file-text"></i>
+                                <p>
+                                    Evaluation
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview" style="display: none;">
+                                <li class="nav-item">
+                                    <a href="<?= base_url() ?>/evaluasi_reaksi" class="nav-link  <?php if ($page == 'evaluasi_reaksi') : echo 'active';
+                                                                                            endif; ?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Evaluaksi Reaksi Personal</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?= base_url() ?>/evaluasi_reaksi_unplanned" class="nav-link  <?php if ($page == 'evaluasi_reaksi_unplanned') : echo 'active';
+                                                                                                    endif; ?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Evaluaksi Reaksi Unplanned</p>
+                                    </a>
+                                </li>
+                            </ul>
+                            <?php if (session()->get('bagian') == 'KADEPT' || session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'BOD') : ?>
+                            <ul class="nav nav-treeview" style="display: none;">
+                                <li class="nav-item">
+                                    <a href="<?= base_url() ?>/evaluasi_reaksi_member" class="nav-link  <?php if ($page == 'evaluasi_reaksi_member') : echo 'active';
+                                                                                                    endif; ?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Evaluaksi Reaksi Member</p>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-treeview" style="display: none;">
+                                <li class="nav-item">
+                                    <a href="<?= base_url() ?>/evaluasi_efektifitas" class="nav-link  <?php if ($page == 'evaluasi_efektifitas') : echo 'active';
+                                                                                                    endif; ?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Evaluasi Efektifitas</p>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-treeview" style="display: none;">
+                                <li class="nav-item">
+                                    <a href="<?= base_url() ?>/evaluasi_efektifitas_unplanned" class="nav-link  <?php if ($page == 'evaluasi_efektifitas_unplanned') : echo 'active';
+                                                                                                            endif; ?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Evaluasi Efektifitas Unplanned</p>
+                                    </a>
+                                </li>
+                            </ul>
+                            <?php endif; ?>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="fa fa-fw  fa-history"></i>
+                                <p>
+                                    History
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview" style="display: none;">
+                                <li class="nav-item">
+                                    <a href="<?= base_url() ?>/personal_history" class="nav-link  <?php if ($page == 'personal_history') : echo 'active';
+                                                                                            endif; ?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Personal History Training</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?= base_url() ?>/personal_history_unplanned" class="nav-link  <?php if ($page == 'personal_history_unplanned') : echo 'active';
+                                                                                                    endif; ?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Personal History Unplanned</p>
+                                    </a>
+                                </li>
+                            </ul>
+                            <?php if (session()->get('bagian') == 'KADEPT' || session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'BOD') : ?>
+                            <ul class="nav nav-treeview" style="display: none;">
+                                <li class="nav-item">
+                                    <a href="<?= base_url() ?>/member_history" class="nav-link  <?php if ($page == 'member_history') : echo 'active';
+                                                                                            endif; ?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Member History Training</p>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-treeview" style="display: none;">
+                                <li class="nav-item">
+                                    <a href="<?= base_url() ?>/member_history_unplanned" class="nav-link  <?php if ($page == 'member_history_unplanned') : echo 'active';
+                                                                                                        endif; ?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Member History Unplanned</p>
+                                    </a>
+                                </li>
+                            </ul>
+                            <?php endif; ?>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url() ?>/contac_us" class="nav-link  <?php if ($page == 'contac_us') : echo 'active';
+                                                                            endif; ?>">
+                                <i class="fa fa-fw  fa-phone"></i>
+                                <p>Contac Us</p>
+                            </a>
+                        </li>
                         </ul>
                     </nav>
                     <!-- /.sidebar-menu -->

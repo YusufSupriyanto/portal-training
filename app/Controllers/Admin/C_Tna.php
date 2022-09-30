@@ -82,6 +82,7 @@ class C_Tna extends BaseController
         $data = [
             'id_tna' => $this->request->getPost('id_tna'),
             'biaya_actual' => $this->request->getPost('biaya_actual'),
+            'mulai_training' => $this->request->getPost('mulai_training'),
             'rencana_training' => $this->request->getPost('rencana_training'),
             'vendor' => $this->request->getPost('vendor'),
             'tempat' => $this->request->getPost('tempat'),
@@ -122,7 +123,7 @@ class C_Tna extends BaseController
 
         $status = $this->tna->getKadivAccept($date);
         $data = [
-            'tittle' => 'Training Yang Di ACC KADIV',
+            'tittle' => 'KADIV Training Accepted',
             'status' => $status
         ];
         return view('admin/kadivaccept', $data);
@@ -148,12 +149,12 @@ class C_Tna extends BaseController
 
         $data1 = [
             'id_tna' => $this->request->getPost('id_tna'),
+            'mulai_training' => $this->request->getPost('mulai_training'),
             'rencana_training' => $this->request->getPost('rencana_training'),
             'biaya_actual' => $this->request->getPost('biaya_actual'),
         ];
 
         // $fulldata = array_merge($data, $data1);
-
 
         $this->tna->save($data1);
         $this->approval->save($data);

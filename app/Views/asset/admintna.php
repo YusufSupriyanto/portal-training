@@ -34,6 +34,7 @@ $('#tna-admin').on('click', '.item-edit', function() {
 function Accept(i) {
     var id_tna = $('#accept' + i).attr('data-accept');
     var biaya_actual = $('#biaya' + i).val()
+    var mulai_training = $('#mulai-training' + i).val()
     var rencana_training = $('#rencana-training' + i).val()
     var vendor = $('#vendor' + i).val()
     var tempat = $('#tempat' + i).val()
@@ -49,6 +50,7 @@ function Accept(i) {
         data: {
             id_tna: id_tna,
             biaya_actual: biaya_actual,
+            mulai_training: mulai_training,
             rencana_training: rencana_training,
             vendor: vendor,
             tempat: tempat
@@ -116,6 +118,7 @@ function AcceptAdmin(i) {
     var id_tna = $('#acceptadmin' + i).attr('data-acceptadmin');
     var biaya_actual = $('#biaya' + i).val()
     var rencana_training = $('#rencana-training' + i).val()
+    var mulai_training = $('#mulai-training' + i).val()
     console.log(biaya_actual)
     console.log(rencana_training)
     console.log(id_tna)
@@ -127,7 +130,8 @@ function AcceptAdmin(i) {
         data: {
             id_tna: id_tna,
             biaya_actual: biaya_actual,
-            rencana_training: rencana_training
+            rencana_training: rencana_training,
+            mulai_training: mulai_training
         },
         success: function(data) {
             window.location.reload()

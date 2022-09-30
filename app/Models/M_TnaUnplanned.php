@@ -57,13 +57,13 @@ class M_TnaUnplanned extends Model
 
     public function getUserTna($id)
     {
-        $this->select()->where(['id_user' => $id])->where('kelompok_training', 'training');
+        $this->select()->where(['id_user' => $id])->where('kelompok_training', 'unplanned');
         return $this->get()->getResult();
     }
 
     public function getUserTnaUnplanned($id)
     {
-        $this->select()->where(['id_user' => $id])->where('kelompok_training', 'unplanned');
+        $this->select()->where('id_user', $id)->where('kelompok_training', 'unplanned');
         return $this->get()->getResult();
     }
 
@@ -117,26 +117,26 @@ class M_TnaUnplanned extends Model
     {
         if ($bagian == 'BOD') {
             $status = ['wait', 'accept'];
-            $this->select('tna.*,approval.*,user.bagian')->where('tna.dic', $member)->whereIn('tna.status', $status);
+            $this->select('tna.*,approval.*,user.bagian')->where('tna.dic', $member)->whereIn('tna.status', $status)->where('kelompok_training', 'unplanned');
             $this->join('approval', 'approval.id_tna = tna.id_tna');
             $this->join('user', 'user.id_user = tna.id_user')->where('bagian', 'KADIV');
             return $this->get()->getResultArray();
         } elseif ($bagian == 'KADIV') {
             $jabatan = ['KADIV'];
             $status = ['wait', 'accept'];
-            $this->select('tna.*,approval.*,user.bagian')->where('tna.divisi', $member)->whereIn('tna.status', $status);
+            $this->select('tna.*,approval.*,user.bagian')->where('tna.divisi', $member)->whereIn('tna.status', $status)->where('kelompok_training', 'unplanned');
             $this->join('approval', 'approval.id_tna = tna.id_tna');
             $this->join('user', 'user.id_user = tna.id_user')->where('bagian', 'KADEPT');
             return $this->get()->getResultArray();
         } elseif ($bagian == 'KADEPT') {
             $status = ['wait', 'accept'];
             $jabatan = ['STAFF', 'STAFF 4UP', 'KASIE'];
-            $this->select('tna.*,approval.*,user.bagian')->where('tna.departemen', $member)->whereIn('tna.status', $status);
+            $this->select('tna.*,approval.*,user.bagian')->where('tna.departemen', $member)->whereIn('tna.status', $status)->where('kelompok_training', 'unplanned');
             $this->join('approval', 'approval.id_tna = tna.id_tna');
             $this->join('user', 'user.id_user = tna.id_user')->whereIn('bagian', $jabatan);
             return $this->get()->getResultArray();
         } else {
-            $this->select('tna.*,approval.*,user.bagian')->where('tna.id_user', $id);
+            $this->select('tna.*,approval.*,user.bagian')->where('tna.id_user', $id)->where('kelompok_training', 'unplanned');
             $this->join('approval', 'approval.id_tna = tna.id_tna');
             $this->join('user', 'user.id_user = tna.id_user');
             return $this->get()->getResultArray();
@@ -254,7 +254,7 @@ class M_TnaUnplanned extends Model
 
     public function getPersonalSchedule($id)
     {
-        $this->select('tna.*,approval.*,user.bagian,user.id_user')->where('user.id_user', $id);
+        $this->select('tna.*,approval.*,user.bagian,user.id_user')->where('user.id_user', $id)->where('kelompok_training', 'unplanned');
         $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept');
         $this->join('user', 'user.id_user = tna.id_user');
         return $this->get()->getResultArray();

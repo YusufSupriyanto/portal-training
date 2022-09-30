@@ -1,7 +1,7 @@
 <?= $this->extend('/template/templateuser') ?>
 
 <?= $this->section('content') ?>
-<div class="card m-3">
+<div class="card m-1">
     <div class="card-header">
         <h3 class="card-title"><?= $tittle ?></h3>
     </div>
@@ -10,14 +10,14 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>NAMA</th>
-                    <th>DEPARTEMEN</th>
-                    <th>JUDUL TRAINING</th>
-                    <th>JENIS TRAINING</th>
-                    <th>KATEGORI TRAINING</th>
-                    <th>METODE TRAINING</th>
-                    <th>TUJUAN TRAINING</th>
-                    <th>RENCANA TRAINING</th>
+                    <th>Nama</th>
+                    <th>Departemen</th>
+                    <th>Judul Training</th>
+                    <th>Jenis Training</th>
+                    <th>Kategori Training</th>
+                    <th>Metode Training</th>
+                    <th>Tujuan Training</th>
+                    <th>Rencana Training</th>
                     <th>Keterangan</th>
                 </tr>
             </thead>

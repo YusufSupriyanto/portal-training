@@ -178,7 +178,7 @@ class M_Tna extends Model
     public function getKadivAccept($date)
     {
 
-        $this->select()->where('rencana_training', $date)->where('kelompok_training', 'training');
+        $this->select()->where('mulai_training', $date)->where('kelompok_training', 'training');
         $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_1', 'accept');
         return $this->get()->getResultArray();
     }
@@ -208,8 +208,8 @@ class M_Tna extends Model
 
     public function getTrainingMonthly()
     {
-        $sql =    $this->query("select tna.rencana_training as 'Planing Training', count(distinct tna.training) as 'Jumlah Training',count(distinct approval.status_approval_2) as 'Admin Approval',count(distinct approval.status_approval_3) as 'BOD Approval'
-            from tna join approval on approval.id_tna = tna.id_tna where tna.kelompok_training = 'training' group by tna.rencana_training")->getResultArray();
+        $sql =    $this->query("select tna.mulai_training as 'Planing Training', count(distinct tna.training) as 'Jumlah Training',count(distinct approval.status_approval_2) as 'Admin Approval',count(distinct approval.status_approval_3) as 'BOD Approval'
+            from tna join approval on approval.id_tna = tna.id_tna where tna.kelompok_training = 'training' group by tna.mulai_training")->getResultArray();
 
         return $sql;
     }
@@ -262,7 +262,7 @@ class M_Tna extends Model
 
     public function getDataHome()
     {
-        $this->select('tna.rencana_training,tna.kategori_training')->distinct();
+        $this->select('tna.mulai_training,tna.rencana_training,tna.kategori_training')->distinct()->where('kelompok_training', 'training');
         $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept');
         $this->join('user', 'user.id_user = tna.id_user');
         return $this->get()->getResultArray();
