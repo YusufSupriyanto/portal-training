@@ -110,7 +110,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary"><i class="fa fa-fw fa-send"></i>Kirim</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-send"></i>Kirim</button>
                 </div>
             </div>
         </form>

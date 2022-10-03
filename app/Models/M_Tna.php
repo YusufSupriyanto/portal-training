@@ -340,4 +340,15 @@ class M_Tna extends Model
         $this->join('evaluasi_efektivitas', 'evaluasi_efektivitas.id_tna = tna.id_tna');
         return $this->get()->getResultArray();
     }
+
+
+
+    public function getNotifEmailTraining()
+    {
+        $this->distinct()->select('tna.mulai_training,tna.training,user.bagian,approval.*,user.id_user,user.npk,evaluasi_efektivitas.status_efektivitas')->where('kelompok_training', 'training');
+        $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept');
+        $this->join('user', 'user.id_user = tna.id_user');
+        $this->join('evaluasi_efektivitas', 'evaluasi_efektivitas.id_tna = tna.id_tna');
+        return $this->get()->getResultArray();
+    }
 }

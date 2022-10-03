@@ -103,6 +103,11 @@ $routes->post('/sertifikat_upload', 'Admin\C_History::SertifikatUpload', ['filte
 $routes->post('/upload_history', 'Admin\C_History::UploadHistory', ['filter' => 'Auth']);
 
 
+//contac admin
+$routes->get('/massage_user', 'Admin\C_Contact::index', ['filter' => 'Auth']);
+$routes->post('/delete_contact', 'Admin\C_Contact::delete', ['filter' => 'Auth']);
+
+
 //Unplanned Training
 $routes->get('/tna_unplanned', 'Admin\C_TnaUnplanned::index', ['filter' => 'Auth']);
 $routes->get('/status_unplanned', 'Admin\C_TnaUnplanned::kadivStatusUnplanned', ['filter' => 'Auth']);
@@ -120,6 +125,7 @@ $routes->post('/detail_historyunplan_admin', 'Admin\C_HistoryUnplanned::DetailHi
 $routes->post('/sertifikat_upload_unplanned', 'Admin\C_HistoryUnplanned::SertifikatUpload', ['filter' => 'Auth']);
 
 
+
 //USER
 
 
@@ -130,6 +136,8 @@ $routes->get('/home_user', 'User\Home::index', ['filter' => 'Auth']);
 $routes->post('/data_home', 'User\Home::DataHome', ['filter' => 'Auth']);
 $routes->get('/data_home', 'User\Home::DataHome', ['filter' => 'Auth']);
 $routes->post('/jadwal', 'User\Home::JadwalHome', ['filter' => 'Auth']);
+
+$routes->post('/jadwal/(:any)', 'User\Home::JadwalHome/$1', ['filter' => 'Auth']);
 
 
 //Training List
@@ -171,6 +179,9 @@ $routes->post('/save_efektivitas', 'User\EvaluasiEfektifitas::saveEfektivitas', 
 $routes->get('/detail_efektivitas/(:num)', 'User\EvaluasiEfektifitas::DetailEfektivitas/$1', ['filter' => 'Auth']);
 $routes->post('/data_evaluasiEfektivitas', 'User\EvaluasiEfektifitas::DataEvaluasiEfektivitas', ['filter' => 'Auth']);
 
+$routes->get('/send_email', 'User\EvaluasiEfektifitas::sendEmail', ['filter' => 'Auth']);
+
+
 //history
 $routes->get('/personal_history', 'User\History::index', ['filter' => 'Auth']);
 $routes->get('/member_history', 'User\History::memberHistory', ['filter' => 'Auth']);
@@ -207,6 +218,7 @@ $routes->post('/detail_history_unplanned', 'User\HistoryUnplanned::detailHistory
 
 //contac Us
 $routes->get('/contac_us', 'User\ContacUs::index', ['filter' => 'Auth']);
+$routes->post('/send_massage', 'User\ContacUs::sendContact', ['filter' => 'Auth']);
 
 
 /*

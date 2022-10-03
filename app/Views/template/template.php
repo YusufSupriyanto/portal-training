@@ -331,6 +331,13 @@ to get the desired effect
                                     </li>
                                 </ul>
                             </li>
+                            <li class="nav-item">
+                                <a href="<?= base_url() ?>/massage_user" class="nav-link  <?php if ($page == 'message_user') : echo 'active';
+                                                                                        endif; ?>">
+                                    <i class="fa fa-fw  fa-phone"></i>
+                                    <p>Contac Us</p>
+                                </a>
+                            </li>
                         </ul>
                     </nav>
                     <!-- /.sidebar-menu -->

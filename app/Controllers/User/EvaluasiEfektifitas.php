@@ -122,4 +122,25 @@ class EvaluasiEfektifitas extends BaseController
         $data = $this->efektivitas->getIdEfektivitas($training);
         echo json_encode($data);
     }
+
+    public function sendEmail()
+    {
+        // $email = $this->tna->getNotifEmailTraining();
+        // foreach ($email as $emails) {
+        //     if ($emails['status_efektivitas'] == null) {
+        //         echo $emails['training'] . PHP_EOL;
+        //     }
+        // }
+        // dd($email);
+
+
+        $this->$this->load->library('email');
+
+        $this->email->from('rifsilhana.yunratika@incoe.astra.co.id', 'Evaluasi Efektifitas Training');
+        $this->email->to('yusuf.supriyanto18003@student.unsika.ac.id ');
+        $this->email->subject('subject');
+        $this->email->message('message');
+
+        $this->email->send();
+    }
 }

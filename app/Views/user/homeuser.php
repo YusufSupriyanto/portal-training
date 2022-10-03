@@ -82,11 +82,11 @@ $(document).ready(function() {
                 selectable: true,
                 events: data,
                 eventClick: function(data) {
-                    // event.jsEvent.preventDefault(); // don't let the browser navigate
-                    // alert(data.event.start)
-                    $('#exampleModal').modal('show', function() {
+                    console.log(data.event.start)
+                    jQuery.noConflict()
+                    $('#exampleModal').on('show.bs.modal', function(e) {
                         $.ajax({
-                            type: 'post',
+                            type: 'POST',
                             url: "<?= base_url(); ?>/jadwal",
                             async: true,
                             dataType: "json",
@@ -94,20 +94,24 @@ $(document).ready(function() {
                                 start: data.event.start
                             },
                             success: function(data) {
+                                console.log(data)
+                                $('#training').text(data[0]
+                                    .training)
+                                $('#pendaftar').text(data[0]
+                                    .pendaftar)
+                                $('#tanggal').text(data[0]
+                                    .tanggal)
+                                $('#kategori').text(data[0]
+                                    .kategori)
+                                $('#notes').html(
+                                    '<a href="<?= base_url() ?>/data_member_unplanned">daftar</a>'
+                                )
 
                             }
 
-                        });
-                    })
+                        })
+                    }).modal('show');
 
-
-                    // $('#exampleModalLabel').html(event.title);
-                    // $('#modalBody').html(event.description);
-                    // $('#eventUrl').attr('href', event.url);
-                    // $('#calendarModal').modal();
-                    // if (info.event.url) {
-                    //     window.open(info.event.url);
-                    // }
                 }
 
 
