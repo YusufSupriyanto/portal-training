@@ -7,6 +7,10 @@ use App\Models\M_EvaluasiEfektifitas;
 use App\Models\M_EvaluasiReaksi;
 use App\Models\M_Tna;
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
 class EvaluasiEfektifitas extends BaseController
 {
     private M_Tna $tna;
@@ -132,15 +136,45 @@ class EvaluasiEfektifitas extends BaseController
         //     }
         // }
         // dd($email);
+        // $this->email->from('yusufsurpiyanto149@gmail.com', 'Evaluasi Efektifitas Training');
+        // $this->email->to('yusuf.supriyanto18003@student.unsika.ac.id ');
+        // $this->email->subject('subject');
+        // $this->email->message('message');
+        // $this->email->send();
 
 
-        $this->$this->load->library('email');
+        $mail = new PHPMailer(true);
 
-        $this->email->from('rifsilhana.yunratika@incoe.astra.co.id', 'Evaluasi Efektifitas Training');
-        $this->email->to('yusuf.supriyanto18003@student.unsika.ac.id ');
-        $this->email->subject('subject');
-        $this->email->message('message');
+        try {
+            //Server settings
+            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+            $mail->isSMTP();                                            //Send using SMTP
+            $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+            $mail->Username   = 'ysme1209@gmail.com';                     //SMTP username
+            $mail->Password   = 'stpkfcwasjuzetpj';                               //SMTP password
+            $mail->SMTPSecure = 'ssl';            //Enable implicit TLS encryption
+            $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
-        $this->email->send();
+            //Recipients
+            $mail->setFrom('ysme1209@gmail.com', 'Update Evaluasi Efektifitas Training');
+            $mail->addAddress('ddump437@gmail.com', 'Joe User');     //Add a recipient
+            $mail->addReplyTo('ysme1209@gmail.com', 'Information');
+
+            //Attachments
+            // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+            // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+
+            //Content
+            $mail->isHTML(true);                                  //Set email format to HTML
+            $mail->Subject = 'Here is the subject';
+            $mail->Body    = 'Halo, @nama_user <b>iSaatnya anda melakukan update evaluasi efektifitas Training @nama_training yang telah dilakukan oleh member anda @nama_peserta_training pada 3 bulan yang lalu.</b>';
+            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+            $mail->send();
+            echo 'Message has been sent';
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
     }
 }
