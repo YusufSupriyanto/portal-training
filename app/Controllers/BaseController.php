@@ -9,6 +9,8 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 
+date_default_timezone_set("Asia/Jakarta");
+
 /**
  * Class BaseController
  *
@@ -21,6 +23,7 @@ use Psr\Log\LoggerInterface;
  */
 abstract class BaseController extends Controller
 {
+
     /**
      * Instance of the main Request object.
      *

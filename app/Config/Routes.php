@@ -180,6 +180,7 @@ $routes->get('/detail_efektivitas/(:num)', 'User\EvaluasiEfektifitas::DetailEfek
 $routes->post('/data_evaluasiEfektivitas', 'User\EvaluasiEfektifitas::DataEvaluasiEfektivitas', ['filter' => 'Auth']);
 
 $routes->get('/send_email', 'User\EvaluasiEfektifitas::sendEmail', ['filter' => 'Auth']);
+$routes->cli('/send_email', 'User\EvaluasiEfektifitas::sendEmail');
 
 
 //history

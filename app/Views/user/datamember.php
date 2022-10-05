@@ -7,7 +7,8 @@
             <h3 class="card-title"><?= $tittle ?>
             </h3>
             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModalCenter">
-                <i class="fa-solid fa-file"></i>
+                <i class="fa-solid fa-share-from-square"></i><br>
+                Submit TNA
             </button>
         </div>
     </div>

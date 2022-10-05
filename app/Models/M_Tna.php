@@ -270,14 +270,14 @@ class M_Tna extends Model
 
     public function getDataJadwalHome($date)
     {
-        $this->select('training as Training,COUNT(training) as Pendaftar')->where('rencana_training', $date);
+        $this->select('training as Training,COUNT(training) as Pendaftar')->where('mulai_training', $date);
         $this->groupBy('training');
         return $this->get()->getResultArray();
     }
 
-    public function getJadwalHomeVer($training, $date)
+    public function getJadwalHomeVer($date)
     {
-        $this->select('kategori_training,rencana_training')->where('rencana_training', $date)->where('training', $training);
+        $this->select()->where('mulai_training', $date);
         return $this->get()->getResultArray();
     }
 
@@ -345,7 +345,7 @@ class M_Tna extends Model
 
     public function getNotifEmailTraining()
     {
-        $this->distinct()->select('tna.mulai_training,tna.training,user.bagian,approval.*,user.id_user,user.npk,evaluasi_efektivitas.status_efektivitas')->where('kelompok_training', 'training');
+        $this->select('tna.*,user.bagian,approval.*,user.id_user,user.npk,evaluasi_efektivitas.status_efektivitas')->where('kelompok_training', 'training');
         $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept');
         $this->join('user', 'user.id_user = tna.id_user');
         $this->join('evaluasi_efektivitas', 'evaluasi_efektivitas.id_tna = tna.id_tna');

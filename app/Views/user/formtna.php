@@ -64,16 +64,15 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="date">Start Training<span style="color:red;">*</span></label>
-                    <input class="datepicker custom-select" data-date-format="
-                                            mm-dd-yyyy" name="rencanaFirst" type="date" id="dateFirst">
-
-                </div>
-                <div class="form-group">
-                    <label for="date">End Training<span style="color:red;">*</span></label>
-                    <input class="datepicker custom-select" data-date-format="
-                                            mm-dd-yyyy" name="rencana" type="date" id="date">
-
+                    <label for="datepicker">Request Training<span style="color:red;">*</span></label>
+                    <div class="input-group date" id="datepicker">
+                        <input type="text" class="form-control">
+                        <span class="input-group-append">
+                            <span class="input-group-text bg-white">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                        </span>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label>Tujuan<span style="color:red;">*</span></label>
@@ -153,12 +152,16 @@
 </div>
 <script>
 // $(function() {
-//     $('#datepicker').datepicker({
-//         format: 'mm/dd/yyyy',
+//     $('.datepicker').datepicker({
+//         format: 'mm/yyyy',
 //         startDate: '-3d'
 //     });
 // });
-
+$("#datepicker").datepicker({
+    format: "M-yyyy",
+    startView: "months",
+    minViewMode: "months"
+});
 
 //for change TNA 
 $("#training").on('change', function() {

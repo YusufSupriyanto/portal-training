@@ -6,19 +6,25 @@ use App\Controllers\BaseController;
 use App\Models\M_EvaluasiEfektifitas;
 use App\Models\M_EvaluasiReaksi;
 use App\Models\M_Tna;
-
+use App\Models\UserModel;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
+
+
 class EvaluasiEfektifitas extends BaseController
 {
+
     private M_Tna $tna;
     private M_EvaluasiEfektifitas $efektivitas;
+
+    private UserModel $user;
     public function __construct()
     {
         $this->tna = new M_Tna();
         $this->efektivitas = new M_EvaluasiEfektifitas();
+        $this->user = new UserModel();
     }
 
     public function index()
@@ -129,20 +135,58 @@ class EvaluasiEfektifitas extends BaseController
 
     public function sendEmail()
     {
+        $email = $this->tna->getNotifEmailTraining();
+        foreach ($email as $emails) {
+            if ($emails['status_approval_3'] == 'accept') {
+                $date_training = date_create($emails['rencana_training']);
+                $date_now = date_create(date('Y-m-d'));
+                $compare = date_diff($date_training, $date_now);
+                $due_date = (int)$compare->format('%a');
+                if ($due_date >= 90) {
+                    if ($emails['status_efektivitas'] == null) {
+                        $users = $this->user->getAllUser($emails['id_user']);
+                        if ($users['bagian'] == 'STAFF 4UP' or $users['bagian'] == 'KASIE') {
+                            $person = $this->user->getDataKadept($users['departemen']);
+                            phpinfo();
+                        } elseif ($users['bagian'] == 'KADEPT') {
+                            $person = $this->user->getDataKadiv($users['divisi']);
+                            dd($person);
+                        } else {
+                            $person = $this->user->getDataBod($users['dic']);
+                            dd($person);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    public function dump()
+    {
         // $email = $this->tna->getNotifEmailTraining();
         // foreach ($email as $emails) {
-        //     if ($emails['status_efektivitas'] == null) {
-        //         echo $emails['training'] . PHP_EOL;
+        //     if ($emails['status_approval_3'] == 'accept') {
+        //         $date_training = date_create($emails['rencana_training']);
+        //         $date_now = date_create(date('Y-m-d'));
+        //         $compare = date_diff($date_training, $date_now);
+        //         $due_date = (int)$compare->format('%a');
+        //         if ($due_date >= 90) {
+        //             if ($emails['status_efektivitas'] == null) {
+        //                 $users = $this->user->getAllUser($emails['id_user']);
+        //                 if ($users['bagian'] == 'STAFF 4UP' or $users['bagian'] == 'KASIE') {
+        //                     $person = $this->user->getDataKadept($users['departemen']);
+        //                     phpinfo();
+        //                 } elseif ($users['bagian'] == 'KADEPT') {
+        //                     $person = $this->user->getDataKadiv($users['divisi']);
+        //                     dd($person);
+        //                 } else {
+        //                     $person = $this->user->getDataBod($users['dic']);
+        //                     dd($person);
+        //                 }
+        //             }
+        //         }
         //     }
         // }
         // dd($email);
-        // $this->email->from('yusufsurpiyanto149@gmail.com', 'Evaluasi Efektifitas Training');
-        // $this->email->to('yusuf.supriyanto18003@student.unsika.ac.id ');
-        // $this->email->subject('subject');
-        // $this->email->message('message');
-        // $this->email->send();
-
-
         $mail = new PHPMailer(true);
 
         try {
@@ -157,7 +201,7 @@ class EvaluasiEfektifitas extends BaseController
             $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
             //Recipients
-            $mail->setFrom('ysme1209@gmail.com', 'Update Evaluasi Efektifitas Training');
+            $mail->setFrom('ysme1209@gmail.com', 'Rifsilhana Yunratika');
             $mail->addAddress('ddump437@gmail.com', 'Joe User');     //Add a recipient
             $mail->addReplyTo('ysme1209@gmail.com', 'Information');
 
@@ -167,8 +211,9 @@ class EvaluasiEfektifitas extends BaseController
 
             //Content
             $mail->isHTML(true);                                  //Set email format to HTML
-            $mail->Subject = 'Here is the subject';
-            $mail->Body    = 'Halo, @nama_user <b>iSaatnya anda melakukan update evaluasi efektifitas Training @nama_training yang telah dilakukan oleh member anda @nama_peserta_training pada 3 bulan yang lalu.</b>';
+            $mail->Subject = 'Update Evaluasi Efektifitas Training';
+            $mail->Body    = 'Halo, @nama_user <br><br>Saatnya anda melakukan update evaluasi efektifitas Training @nama_training yang telah dilakukan oleh member anda @nama_peserta_training pada 3 bulan yang lalu.
+            <br><br>Klik link berikut untuk mengisi evaluasi efektifitas training<br><a href="https://www.google.co.uk/">Link</a><br>Evaluasi anda akan sangat bermanfaat untuk pengembangan member anda.<br><br>Terimakasih.';
             $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
             $mail->send();

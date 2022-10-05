@@ -52,6 +52,24 @@ class UserModel extends Model
         }
     }
 
+
+    public function getDataKadept($departemen)
+    {
+        $this->select()->where('bagian', 'KADEPT')->where('departemen', $departemen);
+        return $this->get()->getResultArray();
+    }
+
+    public function getDataKadiv($divisi)
+    {
+        $this->select()->where('bagian', 'KADIV')->where('divisi', $divisi);
+        return $this->get()->getResultArray();
+    }
+    public function getDataBod($dic)
+    {
+        $this->select()->where('bagian', 'BOD')->where('dic', $dic);
+        return $this->get()->getResultArray();
+    }
+
     function M_test()
     {
         $data = $this->get();

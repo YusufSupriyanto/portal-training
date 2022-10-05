@@ -1,0 +1,1 @@
+php c:/xampp/htdocs/portal-training/public/index.php send_email

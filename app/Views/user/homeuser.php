@@ -7,7 +7,7 @@
     </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Home</h5>
@@ -27,7 +27,8 @@
                                     <tr>
                                         <th>Training</th>
                                         <th>Pendaftar</th>
-                                        <th>Tanggal</th>
+                                        <th>Tanggal Mulai</th>
+                                        <th>Tanggal Berahir</th>
                                         <th>Kategori</th>
                                         <th>Notes</th>
                                     </tr>
@@ -41,7 +42,10 @@
                                             <div id="pendaftar"></div>
                                         </td>
                                         <td>
-                                            <div id="tanggal"></div>
+                                            <div id="tanggalmulai"></div>
+                                        </td>
+                                        <td>
+                                            <div id="tanggalahir"></div>
                                         </td>
                                         <td>
                                             <div id="kategori"></div>
@@ -77,6 +81,7 @@ $(document).ready(function() {
             jQuery.noConflict()
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
+                timeZone: 'local',
                 initialView: 'dayGridMonth',
                 height: 500,
                 selectable: true,
@@ -99,8 +104,10 @@ $(document).ready(function() {
                                     .training)
                                 $('#pendaftar').text(data[0]
                                     .pendaftar)
-                                $('#tanggal').text(data[0]
-                                    .tanggal)
+                                $('#tanggalmulai').text(data[0]
+                                    .tanggal_start)
+                                $('#tanggalahir').text(data[0]
+                                    .tanggal_ahir)
                                 $('#kategori').text(data[0]
                                     .kategori)
                                 $('#notes').html(

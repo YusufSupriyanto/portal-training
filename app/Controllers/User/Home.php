@@ -46,7 +46,7 @@ class Home extends BaseController
                     'start' => $row['mulai_training'],
                     'end' => $row['rencana_training'],
                     'color' => 'green',
-                    'url' => base_url('/jadwal/' . $row['rencana_training'])
+                    // 'url' => base_url('/jadwal/' . $row['rencana_training'])
                 ];
                 array_push($json, $data);
             }
@@ -61,13 +61,15 @@ class Home extends BaseController
         $dates = date('Y-m-d', $time);
         $dataFix = [];
         $jadwal = $this->tna->getDataJadwalHome($dates);
+        // //dd($jadwal);
         foreach ($jadwal as $jadwals) {
-            $kategori = $this->tna->getJadwalHomeVer($jadwals['Training'], $dates);
+            $kategori = $this->tna->getJadwalHomeVer($dates);
             // dd($kategori);
             $data = [
                 'training' => $jadwals['Training'],
                 'pendaftar' => $jadwals['Pendaftar'],
-                'tanggal' => $dates,
+                'tanggal_start' => $dates,
+                'tanggal_ahir' => $kategori[0]['rencana_training'],
                 'kategori' => $kategori[0]['kategori_training'],
             ];
 
