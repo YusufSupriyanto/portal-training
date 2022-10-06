@@ -7,22 +7,24 @@
     </div>
     <!-- /.card-header -->
     <div class="card-body p-0 overflow-auto">
-        <table class="table table-striped overflow-auto">
-            <thead></thead>
-            <tr>
-                <th>Nama</th>
-                <th>Training</th>
-                <th>Jenis Training</th>
-                <th>Kategori Training</th>
-                <th>Metode Training</th>
-                <th>Rencana Training</th>
-                <th>Tujuan Training</th>
-                <th>Notes</th>
-                <th>Estimasi Budget</th>
-                <th>Approval KADIV</th>
-                <th>Approval Admin</th>
-                <th>Approval BOD</th>
-            </tr>
+        <table class="table table-striped overflow-auto" id="example">
+            <thead>
+                <tr>
+                    <th>Nama</th>
+                    <th>Training</th>
+                    <th>Jenis Training</th>
+                    <th>Kategori Training</th>
+                    <th>Metode Training</th>
+                    <th>Request Training</th>
+                    <th>Mulai Training</th>
+                    <th>Rencana Training</th>
+                    <th>Tujuan Training</th>
+                    <th>Notes</th>
+                    <th>Estimasi Budget</th>
+                    <th>Approval KADIV</th>
+                    <th>Approval Admin</th>
+                    <th>Approval BOD</th>
+                </tr>
             </thead>
             <tbody>
                 <?php foreach ($status as $statuses) : ?>
@@ -32,6 +34,10 @@
                     <td><?= $statuses['jenis_training'] ?></td>
                     <td><?= $statuses['kategori_training'] ?></td>
                     <td><?= $statuses['metode_training'] ?></td>
+                    <td>
+                        <div style="width:60px;"><?= $statuses['request_training'] ?></div>
+                    </td>
+                    <td><?= $statuses['mulai_training'] ?></td>
                     <td><?= $statuses['rencana_training'] ?></td>
                     <td><?= $statuses['tujuan_training'] ?></td>
                     <td><?= $statuses['notes'] ?></td>

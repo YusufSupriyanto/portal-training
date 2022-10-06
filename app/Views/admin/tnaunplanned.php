@@ -16,7 +16,9 @@
                         <th>Nama</th>
                         <th>Departemen</th>
                         <th>Training</th>
-                        <th>rencana_training</th>
+                        <th>Request Training</th>
+                        <th>Start Training</th>
+                        <th>End Training</th>
                         <th>Planing Budget</th>
                         <th>Actual Budget</th>
                         <th>Vendor</th>
@@ -31,6 +33,9 @@
                         <td><?= $tnas->nama ?></td>
                         <td><?= $tnas->departemen ?></td>
                         <td><?= $tnas->training ?></td>
+                        <td><?= $tnas->request_training ?></td>
+                        <td><input type="date" value="<?= $tnas->mulai_training ?>" name="mulai-training<?= $i ?>"
+                                id="mulai-training<?= $i ?>"></td>
                         <td><input type="date" value="<?= $tnas->rencana_training ?>" name="rencana-training<?= $i ?>"
                                 id="rencana-training<?= $i ?>"></td>
                         <td>

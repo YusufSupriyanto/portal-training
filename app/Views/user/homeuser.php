@@ -66,6 +66,48 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="user" tabindex="-1" aria-labelledby="user" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="user">Daftar Unplanned</h5>
+                </div>
+                <div class="modal-body">
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nama</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php $i = 0;
+                            foreach ($user as $users) : ?>
+                            <tr>
+                                <td>
+                                    <form action="<?= base_url() ?>\form_unplanned" id="dataform<?= $i ?>"
+                                        method="post">
+                                        <input type="hidden" name="member" id="member<?= $i ?>"
+                                            value="<?= $users->id_user ?>">
+                                        <input type="hidden" name="training" id="training">
+                                    </form>
+                                    <a href="#"
+                                        onclick="document.getElementById('dataform<?= $i ?>').submit();"><?= $users->nama ?></a>
+                                </td>
+                            </tr>
+                            <?php $i++;
+                            endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closed">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
 <script>
@@ -111,7 +153,10 @@ $(document).ready(function() {
                                 $('#kategori').text(data[0]
                                     .kategori)
                                 $('#notes').html(
-                                    '<a href="<?= base_url() ?>/data_member_unplanned">daftar</a>'
+                                    "<button class=\"btn btn-primary btn-sm\" onclick=\"call('" +
+                                    encodeURIComponent(data[0]
+                                        .training) +
+                                    "')\">Daftar</button>"
                                 )
 
                             }
@@ -127,6 +172,15 @@ $(document).ready(function() {
         }
 
     })
+})
+
+function call(training) {
+    $('#user #training').val(decodeURIComponent(training))
+    $('#user').modal('show')
+}
+
+$('#closed').on('click', function() {
+    $('#user').modal('hide')
 })
 </script>
 <?= $this->endSection() ?>

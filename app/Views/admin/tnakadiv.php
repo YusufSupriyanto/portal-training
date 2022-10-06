@@ -13,7 +13,8 @@
                     <th>Nama</th>
                     <th>Departemen</th>
                     <th>Training</th>
-                    <th>Rencana Training</th>
+                    <th>Start Training</th>
+                    <th>End Training</th>
                     <th>Planing Budget</th>
                     <th>Actual Budget</th>
                     <th>Status</th>
@@ -25,6 +26,7 @@
                     <td><?= $tnas['nama'] ?></td>
                     <td><?= $tnas['departemen'] ?></td>
                     <td><?= $tnas['training'] ?></td>
+                    <td><?= $tnas['mulai_training'] ?></td>
                     <td><?= $tnas['rencana_training'] ?></td>
                     <td><?= $tnas['biaya'] ?></td>
                     <td><?= $tnas['biaya_actual'] ?></td>

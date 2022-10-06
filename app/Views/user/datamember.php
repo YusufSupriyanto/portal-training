@@ -64,7 +64,7 @@
         <form method="post" action="<?= base_url() ?>\tna\send">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">TNA Tersimpan</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -80,8 +80,7 @@
                                     <th>Jenis Training</th>
                                     <th>Kategori Training</th>
                                     <th>Metode Training</th>
-                                    <th>Start Training</th>
-                                    <th>End Training</th>
+                                    <th>Request Training</th>
                                     <th>Tujuan Training</th>
                                     <th>Notes</th>
                                     <th>Estimasi Budget</th>
@@ -95,8 +94,7 @@
                                     <td><?= $Forms->jenis_training ?></td>
                                     <td><?= $Forms->kategori_training ?></td>
                                     <td><?= $Forms->metode_training ?></td>
-                                    <td><?= $Forms->mulai_training ?></td>
-                                    <td><?= $Forms->rencana_training ?></td>
+                                    <td><?= $Forms->request_training ?></td>
                                     <td><?= $Forms->tujuan_training ?></td>
                                     <td><?= $Forms->notes ?></td>
                                     <td>

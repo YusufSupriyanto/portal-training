@@ -138,6 +138,8 @@ $routes->get('/data_home', 'User\Home::DataHome', ['filter' => 'Auth']);
 $routes->post('/jadwal', 'User\Home::JadwalHome', ['filter' => 'Auth']);
 
 $routes->post('/jadwal/(:any)', 'User\Home::JadwalHome/$1', ['filter' => 'Auth']);
+$routes->post('/modal_member', 'User\Home::MemberModal', ['filter' => 'Auth']);
+
 
 
 //Training List

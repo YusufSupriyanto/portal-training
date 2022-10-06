@@ -50,14 +50,16 @@ class UnplannedTraining extends BaseController
     public function TnaUserUnplanned()
     {
         $id = $this->request->getPost('member');
+        $value = $this->request->getPost('training');
         $user = $this->user->getAllUser($id);
         $trainings = $this->training->getAll();
         $tna = $this->unplanned->getUserTnaUnplanned($id);
-        //  dd($tna);
+        //dd($value);
         $data = [
             'tittle' => 'Unplanned Training',
             'user' => $user,
             'training' => $trainings,
+            'value' => $value,
             'tna' => $tna,
             'validation' => \Config\Services::validation(),
         ];

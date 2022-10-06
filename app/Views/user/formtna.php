@@ -66,7 +66,7 @@
                 <div class="form-group">
                     <label for="datepicker">Request Training<span style="color:red;">*</span></label>
                     <div class="input-group date" id="datepicker">
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" name="request">
                         <span class="input-group-append">
                             <span class="input-group-text bg-white">
                                 <i class="fa fa-calendar"></i>

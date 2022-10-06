@@ -32,6 +32,11 @@
                     <input type="hidden" value="<?= $user['id_user'] ?>" name="id_user">
                     <input type="hidden" value="<?= 1; ?>" name="deadline">
                     <label>Training<span style="color:red;">*</span></label>
+                    <?php if ($value != null) : ?>
+                    <select class="form-control" name="training" id="training">
+                        <option selected value="<?= $value ?>"><?= $value ?></option>
+                    </select>
+                    <?php else : ?>
                     <select class="form-control" name="training" id="training">
                         <option selected>Choose...</option>
                         <?php foreach ($training as $trainings) : ?>
@@ -40,6 +45,8 @@
                         </option>
                         <?php endforeach; ?>
                     </select>
+                    <?php endif; ?>
+
                 </div>
                 <div class="form-group">
                     <label for="jenis_training">Jenis Training<span style="color:red;">*</span></label>
@@ -64,16 +71,15 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="date">Start Training<span style="color:red;">*</span></label>
-                    <input class="datepicker custom-select" data-date-format="
-                                            mm-dd-yyyy" name="rencanaFirst" type="date" id="dateFirst">
-
-                </div>
-                <div class="form-group">
-                    <label for="date">End Training<span style="color:red;">*</span></label>
-                    <input class="datepicker custom-select" data-date-format="
-                                            mm-dd-yyyy" name="rencana" type="date" id="date">
-
+                    <label for="datepicker">Request Training<span style="color:red;">*</span></label>
+                    <div class="input-group date" id="datepicker">
+                        <input type="text" class="form-control" name="request">
+                        <span class="input-group-append">
+                            <span class="input-group-text bg-white">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                        </span>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label>Tujuan<span style="color:red;">*</span></label>
@@ -158,6 +164,13 @@
 //         startDate: '-3d'
 //     });
 // });
+
+
+$("#datepicker").datepicker({
+    format: "M-yyyy",
+    startView: "months",
+    minViewMode: "months"
+});
 
 
 //for change TNA 

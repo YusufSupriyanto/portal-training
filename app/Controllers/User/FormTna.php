@@ -40,6 +40,7 @@ class FormTna extends BaseController
         $id = session()->get('id');
         $user = $this->user->filter($id);
         $tna = $this->tna->getTnaFilter($id);
+        //dd($user);
         $data = [
             'tittle' => 'Data Member',
             'user' => $user,
@@ -55,7 +56,7 @@ class FormTna extends BaseController
         $user = $this->user->getAllUser($id);
         $trainings = $this->training->getAll();
         $tna = $this->tna->getUserTna($id);
-
+        // dd($value);
         $data = [
             'tittle' => 'TRAINING NEED ANALYSIS',
             'user' => $user,
@@ -85,7 +86,7 @@ class FormTna extends BaseController
             $status =  $this->tna->getStatusWaitUser($bagian, $dic, $id);
         }
 
-        // dd($status);
+        //dd($status);
         $data = [
             'tittle' => 'Status TNA',
             'status' => $status,
@@ -205,8 +206,7 @@ class FormTna extends BaseController
             'kategori_training' => $this->request->getVar('kategori'),
             'training' => $jenis_trainng['judul_training'],
             'metode_training' => $this->request->getVar('metode'),
-            'mulai_training' => $this->request->getVar('rencanaFirst'),
-            'rencana_training' => $this->request->getVar('rencana'),
+            'request_training' => $this->request->getVar('request'),
             'tujuan_training' => $this->request->getVar('tujuan'),
             'notes' => $this->request->getVar('notes'),
             'biaya' => $jenis_trainng['biaya'],

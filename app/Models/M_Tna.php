@@ -12,7 +12,7 @@ class M_Tna extends Model
     protected $allowedFields = [
         'id_user', 'id_training', 'dic', 'divisi',
         'departemen', 'nama', 'jabatan', 'golongan', 'seksi', 'jenis_training',
-        'kategori_training', 'training', 'vendor', 'tempat', 'metode_training', 'mulai_training', 'rencana_training',
+        'kategori_training', 'training', 'vendor', 'tempat', 'metode_training', 'request_training', 'mulai_training', 'rencana_training',
         'tujuan_training', 'notes', 'biaya', 'biaya_actual', 'status', 'kelompok_training'
     ];
 
@@ -117,26 +117,26 @@ class M_Tna extends Model
     {
         if ($bagian == 'BOD') {
             $status = ['wait', 'accept'];
-            $this->select('tna.*,approval.*,user.bagian')->where('tna.dic', $member)->whereIn('tna.status', $status);
+            $this->select('tna.*,approval.*,user.bagian')->where('tna.dic', $member)->whereIn('tna.status', $status)->where('kelompok_training', 'training');
             $this->join('approval', 'approval.id_tna = tna.id_tna');
             $this->join('user', 'user.id_user = tna.id_user')->where('bagian', 'KADIV');
             return $this->get()->getResultArray();
         } elseif ($bagian == 'KADIV') {
             $jabatan = ['KADIV'];
             $status = ['wait', 'accept'];
-            $this->select('tna.*,approval.*,user.bagian')->where('tna.divisi', $member)->whereIn('tna.status', $status);
+            $this->select('tna.*,approval.*,user.bagian')->where('tna.divisi', $member)->whereIn('tna.status', $status)->where('kelompok_training', 'training');
             $this->join('approval', 'approval.id_tna = tna.id_tna');
             $this->join('user', 'user.id_user = tna.id_user')->where('bagian', 'KADEPT');
             return $this->get()->getResultArray();
         } elseif ($bagian == 'KADEPT') {
             $status = ['wait', 'accept'];
             $jabatan = ['STAFF', 'STAFF 4UP', 'KASIE'];
-            $this->select('tna.*,approval.*,user.bagian')->where('tna.departemen', $member)->whereIn('tna.status', $status);
+            $this->select('tna.*,approval.*,user.bagian')->where('tna.departemen', $member)->whereIn('tna.status', $status)->where('kelompok_training', 'training');
             $this->join('approval', 'approval.id_tna = tna.id_tna');
             $this->join('user', 'user.id_user = tna.id_user')->whereIn('bagian', $jabatan);
             return $this->get()->getResultArray();
         } else {
-            $this->select('tna.*,approval.*,user.bagian')->where('tna.id_user', $id);
+            $this->select('tna.*,approval.*,user.bagian')->where('tna.id_user', $id)->where('kelompok_training', 'training');
             $this->join('approval', 'approval.id_tna = tna.id_tna');
             $this->join('user', 'user.id_user = tna.id_user');
             return $this->get()->getResultArray();

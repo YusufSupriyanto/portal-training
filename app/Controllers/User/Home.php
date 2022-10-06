@@ -4,20 +4,25 @@ namespace App\Controllers\User;
 
 use App\Controllers\BaseController;
 use App\Models\M_Tna;
+use App\Models\UserModel;
 
 class Home extends BaseController
 {
 
     private M_Tna $tna;
+    private UserModel $user;
     public function __construct()
     {
         $this->tna = new M_Tna();
+        $this->user = new UserModel();
     }
     public function index()
     {
-
+        $id = session()->get('id');
+        $user = $this->user->filter($id);
         $data = [
-            'tittle' => 'Portal Training & Development'
+            'tittle' => 'Portal Training & Development',
+            'user' => $user
         ];
         return view('user/homeuser', $data);
     }
@@ -78,4 +83,13 @@ class Home extends BaseController
 
         echo json_encode($dataFix);
     }
+
+
+    // public function MemberModal()
+    // {
+    //     //$training = $this->request->getPost('training');
+    //     $id = session()->get('id');
+    //     $users = $this->user->Filter($id);
+    //     echo json_encode($users);
+    // }
 }
