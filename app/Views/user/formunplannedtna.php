@@ -26,79 +26,77 @@
         </div>
         <!-- /.card-header -->
         <!-- form start -->
-        <form role="form" action="<?= base_url() ?>/save_form" method="post" id="form-tna">
+        <form role="form" action="<?= base_url() ?>/unplanned_save" method="post" id="form-tna">
             <div class="card-body">
                 <div class="form-group">
                     <input type="hidden" value="<?= $user['id_user'] ?>" name="id_user">
                     <input type="hidden" value="<?= 1; ?>" name="deadline">
                     <label>Training<span style="color:red;">*</span></label>
-                    <input type="hidden" name="data" id="data" value="<?= $value ?>">
                     <input type="hidden" name="trainingunplanned" id="trainingunplanned">
-                    <select class="form-control" name="training" id="training">
-                        <option selected>Choose...</option>
-                        <?php foreach ($training as $trainings) : ?>
-                        <option value="<?= $trainings->id_training ?>">
-                            <?= $trainings->judul_training ?>
+                    <select class="form-control" name="training" id="training" readonly>
+                        <option selected>
+                            <?= $training ?>
                         </option>
-                        <?php endforeach; ?>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="jenis_training">Jenis Training<span style="color:red;">*</span></label>
-                    <input class="form-control" id="jenis_training" readonly></input>
+                    <input class="form-control" id="jenis_training" name="jenis_training" readonly
+                        value="<?= $jenis ?>">
+                    <input type="hidden" id="id_training" name="id_training" readonly value="<?= $id_training ?>">
                 </div>
                 <div class="form-group">
                     <label>Kategori Training<span style="color:red;">*</span></label>
-                    <select class="form-control" name="kategori" id="kategori">
-                        <option value="">Choose</option>
-                        <option value="Internal">Internal</option>
-                        <option value="External">External</option>
-                        <option value="Inhouse">Inhouse</option>
+                    <select class="form-control" name="kategori" id="kategori" readonly>
+                        <option selected value="<?= $kategori ?>">
+                            <?= $kategori ?>
+                        </option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>Metode<span style="color:red;">*</span></label>
-                    <select class="custom-select" name="metode" id="metode">
-                        <option value="">Choose</option>
-                        <option value="Online">Online</option>
-                        <option value="Offline">Offline</option>
-                        <option value="Keduanya">Antara Keduanya</option>
+                    <select class="custom-select" name="metode" id="metode" readonly>
+                        <option selected>
+                            <?= $metode ?>
+                        </option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="datepicker">Request Training<span style="color:red;">*</span></label>
-                    <div class="input-group date" id="datepicker">
-                        <input type="text" class="form-control" name="request">
-                        <span class="input-group-append">
-                            <span class="input-group-text bg-white">
-                                <i class="fa fa-calendar"></i>
-                            </span>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Tujuan<span style="color:red;">*</span></label>
-                    <textarea class="form-control <?= ($validation->hasError('tujuan')) ? 'is-invalid' : ''; ?> "
-                        id="validationTextarea" placeholder="Required example textarea" required
-                        name="tujuan"></textarea>
-                    <div class="invalid-feedback">
-                        <?= $validation->getError('tujuan'); ?>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Notes</label>
-                    <textarea class="form-control" name=" notes" placeholder="Permintaan Khusus"></textarea></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="biaya">Estimasi Budget<span style="color:red;">*</span></label>
-                    <input class="form-control" id="biaya" readonly></input>
-                </div>
-            </div>
+                    <label for="date">Start Training<span style="color:red;">*</span></label>
+                    <input class="datepicker custom-select" data-date-format="
+                                            mm-dd-yyyy" name="rencanaFirst" type="date" id="dateFirst"
+                        value="<?= $start ?>" readonly>
 
-            <!-- /.card-body -->
-            <div class="card-footer">
-                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save</button>
-            </div>
+                </div>
+                <div class="form-group">
+                    <label for="date">End Training<span style="color:red;">*</span></label>
+                    <input class="datepicker custom-select" data-date-format="
+                                            mm-dd-yyyy" name="rencana" type="date" id="date" value="<?= $end ?>"
+                        readonly>
+                    <div class="form-group">
+                        <label>Tujuan<span style="color:red;">*</span></label>
+                        <textarea class="form-control <?= ($validation->hasError('tujuan')) ? 'is-invalid' : ''; ?> "
+                            id="validationTextarea" placeholder="Required example textarea" required
+                            name="tujuan"></textarea>
+                        <div class="invalid-feedback">
+                            <?= $validation->getError('tujuan'); ?>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Notes</label>
+                        <textarea class="form-control" name=" notes"
+                            placeholder="Permintaan Khusus"></textarea></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="budget">Budget<span style="color:red;">*</span></label>
+                        <input class="form-control" id="budget" name="budget" readonly value="<?= $budget ?>">
+                    </div>
+                </div>
+
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save</button>
+                </div>
         </form>
     </div>
     <!-- endform -->
@@ -177,7 +175,7 @@ if (data != null) {
             const convert = format.match(/\d{1,3}/g);
             const rupiah = 'Rp ' + convert.join('.').split('').reverse().join('')
             $("#training").val(data.id_training).prop(
-                'disabled', true)
+                'readonly', true)
             $("#trainingunplanned").val(data.id_training)
             $("#jenis_training").val(data.jenis_training)
 
@@ -188,38 +186,5 @@ if (data != null) {
     })
 
 }
-
-
-//for change TNA 
-$("#training").on('change', function() {
-    var id_training = this.value;
-    console.log(id_training);
-
-    $.ajax({
-        type: 'post',
-        url: "<?= base_url(); ?>/User/FormTna",
-        async: true,
-        dataType: "json",
-        data: {
-            id_training: id_training
-        },
-        success: function(data) {
-
-
-            console.log(data.jenis_training);
-
-            const format = data.biaya.toString().split('').reverse().join('');
-            const convert = format.match(/\d{1,3}/g);
-            const rupiah = 'Rp ' + convert.join('.').split('').reverse().join('')
-            console.log(rupiah)
-
-            $("#jenis_training").val(data.jenis_training)
-
-
-            $("#biaya").val(rupiah)
-        }
-
-    })
-})
 </script>
 <?= $this->endSection() ?>

@@ -3,7 +3,13 @@
 <?= $this->section('content') ?>
 <div class="card m-1">
     <div class="card-header">
-        <h3 class="card-title">Evaluasi Reaksi Member</h3>
+        <?php $page = basename($_SERVER['PHP_SELF']);
+        if ($page == 'evaluasi_reaksi_member') : ?>
+        <h3 class="card-title">Evaluasi Reaksi Member TNA</h3>
+        <?php else : ?>
+        <h3 class="card-title">Evaluasi Reaksi Member Unplanned</h3>
+        <?php endif; ?>
+
     </div>
     <div class="card-body table-responsive p-0" style="height: 400px;">
         <table class="table table-head-fixed display" id="example2">

@@ -2,27 +2,26 @@
 
 <?= $this->section('content') ?>
 <div class="success" data-success="<?= session()->get('success'); ?>"></div>
-<div class="card m-3">
+<div class="card m-1">
     <div class="card-header">
         <!-- <h3 class="card-title">User</h3> -->
+
         <div class="card-tools">
-            <div class="card-tools">
-                <div class="card flex-row-reverse">
-                    <div class="">
-                        <form action="<?= base_url() ?>/addUser" method="post" enctype="multipart/form-data">
-                            <div class="input-group">
+            <div class="card flex-row-reverse">
+                <div class="">
+                    <form action="<?= base_url() ?>/addUser" method="post" enctype="multipart/form-data">
+                        <div class="input-group">
 
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="exampleInputFile" name="file">
-                                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                </div>
-                                <div class="input-group-append"></div>
-                                <button type="submit" class="input-group-text" id="">Upload</button>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="exampleInputFile" name="file">
+                                <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                             </div>
-                        </form>
-                    </div>
-
+                            <div class="input-group-append"></div>
+                            <button type="submit" class="input-group-text" id="">Upload</button>
+                        </div>
+                    </form>
                 </div>
+
             </div>
         </div>
     </div>

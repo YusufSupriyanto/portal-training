@@ -1,7 +1,7 @@
 <?= $this->extend('/template/template') ?>
 
 <?= $this->section('content') ?>
-<div class="p-3">
+<div class="m-1">
     <div class="card card-primary">
         <div class="card-header">
             <h3 class="card-title"><?= $tittle ?></h3>

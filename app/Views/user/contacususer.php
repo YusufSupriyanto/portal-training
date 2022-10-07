@@ -3,8 +3,8 @@
 <?= $this->section('content') ?>
 <div class="success" data-success="<?= session()->get('success'); ?>"></div>
 <div class="d-flex flex-wrap">
-    <div class="m-2 flex-fill bd-highlight h-100 d-inline-block ">
-        <div class="card card-primary">
+    <div class="card m-2" style="width:400px;height:480px;">
+        <div class="m-2">
             <div class="card-header">
                 <h3 class="card-title">Contact Us</h3>
             </div>
@@ -14,7 +14,8 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Nama Lengkap</label>
-                        <input type="text" class="form-control" name="nama" placeholder="Masukan Nama">
+                        <input type="text" class="form-control" name="nama" placeholder="Masukan Nama"
+                            value="<?= session()->get('nama') ?>" disabled>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Email</label>
@@ -45,11 +46,14 @@
             <a
                 href="https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=rifsilhana.yunratika@incoe.astra.co.id">rifsilhana.yunratika@incoe.astra.co.id</a>
         </div>
-        <div class="card d-flex justify-content-center align-items-center" style="height:139px;"><i
+        <div class="card d-flex justify-content-center align-items-center" style="height:170px;"><i
                 class="fa-solid fa-location-dot" style="font-size:30px;"></i>
             <p>Address</p>
-            <a
-                href="https://www.google.com/maps/place/PT.+Century+Batteries+Indonesia/@-6.374713,107.3156649,17z/data=!4m6!3m5!1s0x2e6975dcd6af7e2f:0x7b284eb4eddc2d81!4b1!8m2!3d-6.3747838!4d107.3179866">Location</a>
+            <h6 style="margin-bottom:0px;">HRD PT CENTURY BATTERIES INDONESIA (Ext. 7412)</h6>
+            <p style="margin-top:0px;">
+                <center>Kawasan Industri Mitra, Jl. Mitra Raya Selatan l Blok E/ No.17-18<br>Parungmulya, Kec. Ciampel,
+                    Karawang,Jawa Barat 41363</center>
+            </p>
         </div>
     </div>
 </div>

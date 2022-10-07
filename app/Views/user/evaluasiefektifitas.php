@@ -5,7 +5,12 @@
     <div class="col-12">
 
         <div class="card-header">
-            <h3 class="card-title"><?= $tittle ?></h3>
+            <?php $page = basename($_SERVER['PHP_SELF']);
+            if ($page == 'evaluasi_efektifitas') : ?>
+            <h3 class="card-title">Evaluasi Efektifitas Training</h3>
+            <?php else : ?>
+            <h3 class="card-title">Evaluasi Efektifitas Unplanned Training</h3>
+            <?php endif; ?>
         </div>
 
         <!-- /.card-header -->

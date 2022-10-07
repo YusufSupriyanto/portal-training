@@ -4,8 +4,7 @@
 <div class="card m-1">
     <div class="card-header ">
         <div class="d-flex justify-content-between">
-            <h3 class="card-title"><?= $tittle ?>
-            </h3>
+            <h3 class="card-title">Unplanned Training</h3>
             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModalCenter">
                 <i class="fa-solid fa-share-from-square"></i><br>
                 Submit TNA
@@ -64,7 +63,7 @@
         <form method="post" action="<?= base_url() ?>\send_unplanned">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Unplanned Training</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -109,7 +108,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-send"></i>Kirim</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-send"></i>Submit</button>
                 </div>
             </div>
         </form>

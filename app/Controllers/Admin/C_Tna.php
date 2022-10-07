@@ -111,7 +111,7 @@ class C_Tna extends BaseController
     {
         $tna = $this->tna->getKadivStatus();
         $data = [
-            'tittle' => 'Kadiv Status',
+            'tittle' => 'Kadiv Status Approval',
             'tna' => $tna
         ];
         return view('admin/tnakadiv', $data);

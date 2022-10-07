@@ -1,7 +1,7 @@
 <?= $this->extend('/template/template') ?>
 
 <?= $this->section('content') ?>
-<div class="card m-3 " style="font-size:15px;">
+<div class="card m-1 " style="font-size:15px;">
     <div class="card-header h6 d-flex">
 
         <h3 class="card-title">Daftar Unplanned Training</h3>

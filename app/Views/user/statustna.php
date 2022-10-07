@@ -3,7 +3,13 @@
 <?= $this->section('content') ?>
 <div class="card overflow-auto m-1">
     <div class="card-header">
-        <h3 class="card-title"><?= $tittle ?></h3>
+        <?php $page = basename($_SERVER['PHP_SELF']);
+        if ($page == 'status_tna') : ?>
+        <h3 class="card-title">Status Training Need Analysis</h3>
+        <?php else : ?>
+        <h3 class="card-title">Status Unplanned Training</h3>
+        <?php endif; ?>
+
     </div>
     <!-- /.card-header -->
     <div class="card-body p-0 overflow-auto">

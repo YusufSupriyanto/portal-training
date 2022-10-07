@@ -51,4 +51,10 @@ class M_ListTraining extends Model
 
         return $this->where(['id_training' => $id])->first();
     }
+
+    // public function getDataIdTraining($training)
+    // {
+    //     $this->select('id_training')->like('judul_training', urlDecode($training));
+    //     $this->get()->getResultArray();
+    // }
 }

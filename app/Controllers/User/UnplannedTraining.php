@@ -11,6 +11,7 @@ use App\Models\UserModel;
 use App\Models\M_Approval;
 use App\Models\M_History;
 use App\Models\M_TnaUnplanned;
+use PhpParser\Builder\Function_;
 
 class UnplannedTraining extends BaseController
 {
@@ -51,6 +52,8 @@ class UnplannedTraining extends BaseController
     {
         $id = $this->request->getPost('member');
         $value = $this->request->getPost('training');
+        // $trainingId = $this->training->getIdTraining($id);
+        // dd($value);
         $user = $this->user->getAllUser($id);
         $trainings = $this->training->getAll();
         $tna = $this->unplanned->getUserTnaUnplanned($id);
@@ -117,5 +120,123 @@ class UnplannedTraining extends BaseController
             'status' => $status,
         ];
         return view('user/statustna', $data);
+    }
+
+    public function Unplanned()
+    {
+        $id = $this->request->getPost('member');
+        $training = $this->request->getPost('training');
+        $jenis = $this->request->getPost('jenis');
+        $kategori = $this->request->getPost('kategori');
+        $metode = $this->request->getPost('metode');
+        $start = $this->request->getPost('start');
+        $end = $this->request->getPost('end');
+        $budget = $this->request->getPost('budget');
+        // $trainingId = $this->training->getIdTraining($id);
+        // dd($value);
+        $user = $this->user->getAllUser($id);
+        $tna = $this->unplanned->getUserTnaUnplanned($id);
+        //dd($value);
+        $data = [
+            'tittle' => 'Unplanned Training',
+            'user' => $user,
+            'id_training' => $this->request->getPost('id_training'),
+            'training' => $training,
+            'jenis' => $jenis,
+            'kategori' => $kategori,
+            'metode' => $metode,
+            'start' => $start,
+            'end' => $end,
+            'budget' => $budget,
+            'tna' => $tna,
+            'validation' => \Config\Services::validation(),
+        ];
+        //dd($data);
+        return view('user/formunplannedtna', $data);
+    }
+
+    public function UnplannedSave()
+    {
+
+        $deadline = $this->request->getVar('deadline');
+        if ($deadline == 0) {
+            $kelompok = 'training';
+        } else {
+            $kelompok = 'unplanned';
+        }
+
+        $id_user = $this->request->getPost('id_user');
+        $id_training = $this->request->getVar('id_training');
+
+        if (!$this->validate([
+            'tujuan' => 'required'
+        ])) {
+            $validation = \Config\Services::validation();
+            return redirect()->to('/form_tna')->withInput()->with('validation', $validation);
+        }
+        $user = $this->user->getAllUser($id_user);
+        $jenis_trainng = $this->training->getIdTraining($id_training);
+
+        $data = [
+            'id_user' => $id_user,
+            'id_training' => $id_training,
+            'dic' => $user['dic'],
+            'divisi' => $user['divisi'],
+            'departemen' => $user['departemen'],
+            'nama' => $user['nama'],
+            'golongan' => null,
+            'seksi' => $user['seksi'],
+            'jenis_training' => $this->request->getVar('jenis_training'),
+            'kategori_training' => $this->request->getVar('kategori'),
+            'training' => $this->request->getVar('training'),
+            'metode_training' => $this->request->getVar('metode'),
+            'mulai_training' => $this->request->getVar('rencanaFirst'),
+            'rencana_training' => $this->request->getVar('rencana'),
+            'tujuan_training' => $this->request->getVar('tujuan'),
+            'notes' => $this->request->getVar('notes'),
+            'biaya_actual' => $this->request->getVar('budget'),
+            'status' => 'save',
+            'kelompok_training' => $kelompok
+
+        ];
+        //dd($data);
+        $this->tna->save($data);
+
+        $id  = $this->tna->getIdTna();
+
+        $data2 = [
+            'id_tna' => $id->id_tna,
+            'id_user' => $id->id_user
+        ];
+        $data3 = [
+            'id_tna' => $id->id_tna,
+        ];
+        $data4 = [
+            'id_tna' => $id->id_tna
+        ];
+        $data5 = [
+            'id_tna' => $id->id_tna,
+            'id_user' => $id_user
+        ];
+        $this->approval->save($data2);
+        $this->evaluasiReaksi->save($data3);
+        $this->history->save($data4);
+        $this->efektivitas->save($data5);
+
+        session()->setFlashdata('success', 'TNA Berhasil Disimpan');
+        if ($kelompok == 'training') {
+            return redirect()->to('/data_member');
+        } else {
+            return redirect()->to('/data_member_unplanned');
+        }
+    }
+
+    public function DataTraining()
+    {
+        $id = $this->request->getPost('id_training');
+
+        $data = $this->tna->getIdTna($id);
+
+        echo json_encode($data);
     }
 }

@@ -309,10 +309,20 @@ to get the desired effect
                             <?php if (session()->get('bagian') == 'KADEPT' || session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'BOD') : ?>
                             <ul class="nav nav-treeview" style="display: none;">
                                 <li class="nav-item">
-                                    <a href="<?= base_url() ?>/evaluasi_reaksi_member" class="nav-link  <?php if ($page == 'evaluasi_reaksi_member') : echo 'active';
+                                    <a href="<?= base_url() ?>/evaluasi_reaksi_member" class="nav-link  <?php if ($page == 'evaluasi_reaksi_member_unplanned') : echo 'active';
                                                                                                     endif; ?>">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Evaluaksi Reaksi Member</p>
+                                        <p>Evaluaksi Reaksi Member TNA</p>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-treeview" style="display: none;">
+                                <li class="nav-item">
+                                    <a href="<?= base_url() ?>/evaluasi_reaksi_member_unplanned"
+                                        class="nav-link  <?php if ($page == 'evaluasi_reaksi_member') : echo 'active';
+                                                                                                                endif; ?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Evaluaksi Reaksi Member Unplanned</p>
                                     </a>
                                 </li>
                             </ul>

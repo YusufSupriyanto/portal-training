@@ -2,7 +2,7 @@
 
 <?= $this->section('content') ?>
 <div class="import" data-import="<?= session()->get('import'); ?>"></div>
-<div class="card-tools p-3">
+<div class="card-tools m-1">
     <div class="card flex-row-reverse">
         <div class="m">
             <button type="button" class="btn btn-block btn-danger btn-sm h-100">Add Category</button>
@@ -26,7 +26,7 @@
 </div>
 
 
-<div class="card p-3">
+<div class="card">
     <?php foreach ($jenis as $categories) : ?>
     <div class="card card-primary card-outline">
         <div class=" card-body box-profile">

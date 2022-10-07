@@ -87,11 +87,17 @@
                             foreach ($user as $users) : ?>
                             <tr>
                                 <td>
-                                    <form action="<?= base_url() ?>\form_unplanned" id="dataform<?= $i ?>"
-                                        method="post">
+                                    <form action="<?= base_url() ?>\unplanned" id="dataform<?= $i ?>" method="post">
                                         <input type="hidden" name="member" id="member<?= $i ?>"
                                             value="<?= $users->id_user ?>">
                                         <input type="hidden" name="training" id="training">
+                                        <input type="hidden" name="id_training" id="id_training">
+                                        <input type="hidden" name="jenis" id="jenis">
+                                        <input type="hidden" name="kategori" id="kategori">
+                                        <input type="hidden" name="metode" id="metode">
+                                        <input type="hidden" name="start" id="start">
+                                        <input type="hidden" name="end" id="end">
+                                        <input type="hidden" name="budget" id="budget">
                                     </form>
                                     <a href="#"
                                         onclick="document.getElementById('dataform<?= $i ?>').submit();"><?= $users->nama ?></a>
@@ -155,7 +161,7 @@ $(document).ready(function() {
                                 $('#notes').html(
                                     "<button class=\"btn btn-primary btn-sm\" onclick=\"call('" +
                                     encodeURIComponent(data[0]
-                                        .training) +
+                                        .id_tna) +
                                     "')\">Daftar</button>"
                                 )
 
@@ -174,8 +180,29 @@ $(document).ready(function() {
     })
 })
 
-function call(training) {
-    $('#user #training').val(decodeURIComponent(training))
+function call(id) {
+
+    $.ajax({
+        type: 'POST',
+        url: "<?= base_url(); ?>/data_training",
+        async: true,
+        dataType: "json",
+        data: {
+            id_training: id
+        },
+        success: function(data) {
+            console.log(data)
+            $('#user #training').val(data.training)
+            $('#user #id_training').val(data.id_training)
+            $('#user #jenis').val(data.jenis_training)
+            $('#user #kategori').val(data.kategori_training)
+            $('#user #metode').val(data.metode_training)
+            $('#user #start').val(data.mulai_training)
+            $('#user #end').val(data.rencana_training)
+            $('#user #budget').val(data.biaya_actual)
+        }
+
+    })
     $('#user').modal('show')
 }
 

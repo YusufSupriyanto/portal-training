@@ -4,8 +4,7 @@
 <div class="card m-1">
     <div class="card-header ">
         <div class="d-flex justify-content-between">
-            <h3 class="card-title"><?= $tittle ?>
-            </h3>
+            <h3 class="card-title">Training Need Analysis</h3>
             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModalCenter">
                 <i class="fa-solid fa-share-from-square"></i><br>
                 Submit TNA
@@ -109,7 +108,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-send"></i>Kirim</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-send"></i>Submit TNA</button>
                 </div>
             </div>
         </form>

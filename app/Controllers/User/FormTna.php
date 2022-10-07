@@ -173,7 +173,8 @@ class FormTna extends BaseController
     public function TnaForm()
     {
 
-        // $deadline = $this->deadline->getIddeadline();
+
+
         $deadline = $this->request->getVar('deadline');
         if ($deadline == 0) {
             $kelompok = 'training';
@@ -182,7 +183,13 @@ class FormTna extends BaseController
         }
 
         $id_user = $this->request->getPost('id_user');
-        $id_training = $_POST['training'];
+        $id = $this->request->getPost('trainingunplanned');
+        if ($id == null) {
+            $id_training = $_POST['training'];
+        } else {
+            $id_training = $id;
+        }
+
         if (!$this->validate([
             'tujuan' => 'required'
         ])) {

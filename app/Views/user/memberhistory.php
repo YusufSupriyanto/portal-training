@@ -3,7 +3,12 @@
 <?= $this->section('content') ?>
 <div class="card m-1">
     <div class="card-header">
-        <h3 class="card-title"><?= $tittle ?></h3>
+        <?php $page = basename($_SERVER['PHP_SELF']);
+        if ($page == 'member_history') : ?>
+        <h3 class="card-title">Member History Training</h3>
+        <?php else : ?>
+        <h3 class="card-title">Member History Unplanned Training</h3>
+        <?php endif; ?>
     </div>
     <!-- /.card-header -->
     <div class="card-body table-responsive p-0">

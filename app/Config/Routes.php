@@ -198,6 +198,9 @@ $routes->post('/form_unplanned', 'User\UnplannedTraining::TnaUserUnplanned', ['f
 $routes->post('/send_unplanned', 'User\FormTna::TnaSend', ['filter' => 'Auth']);
 $routes->get('/request_unplanned', 'User\UnplannedTraining::requestUnplanned', ['filter' => 'Auth']);
 $routes->get('/status_tna_unplanned', 'User\UnplannedTraining::Status', ['filter' => 'Auth']);
+$routes->post('/unplanned', 'User\UnplannedTraining::Unplanned', ['filter' => 'Auth']);
+$routes->post('/unplanned_save', 'User\UnplannedTraining::UnplannedSave', ['filter' => 'Auth']);
+$routes->post('/data_training', 'User\UnplannedTraining::DataTraining', ['filter' => 'Auth']);
 
 //unplanned schedule
 $routes->get('/personal_schedule_unplanned', 'User\OurSchedule::personal', ['filter' => 'Auth']);
@@ -212,6 +215,7 @@ $routes->get('/form_efektivitas_unplanned/(:num)', 'User\EvaluasiEfektivitasUnpl
 $routes->post('/save_efektivitas_unplanned', 'User\EvaluasiEfektivitasUnplanned::saveEfektivitas', ['filter' => 'Auth']);
 $routes->get('/detail_efektivitas_unplanned/(:num)', 'User\EvaluasiEfektivitasUnplanned::DetailEfektivitas/$1', ['filter' => 'Auth']);
 $routes->post('/data_evaluasiEfektivitas', 'User\EvaluasiEfektifitas::DataEvaluasiEfektivitas', ['filter' => 'Auth']);
+$routes->get('/evaluasi_reaksi_member_unplanned', 'User\Evaluasi::EvaluasiMember', ['filter' => 'Auth']);
 
 
 //unplanned history
