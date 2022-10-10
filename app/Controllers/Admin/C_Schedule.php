@@ -54,7 +54,7 @@ class C_Schedule extends BaseController
         $schedule  = $this->unplanned->getSchedule();
 
         $data = [
-            'tittle' => 'Schedule Training',
+            'tittle' => 'Schedule Unplanned Training',
             'schedule' => $schedule
         ];
         return view('admin/schedule', $data);

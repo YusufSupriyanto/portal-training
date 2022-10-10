@@ -47,10 +47,12 @@ class EvaluasiEfektivitasUnplanned extends BaseController
             }
         }
         $data = [
-            'tittle' => 'Evaluasi Efektifitas',
+            'tittle' => 'Evaluasi Efektivitas Unplanned Training',
             'evaluasi' => $dataEvaluasifixed
         ];
-        return view('user/evaluasiefektifitas', $data);
+
+        //dd($data);
+        return view('user/evaluasiefektifitasunplanned', $data);
     }
 
     public function formEvaluasi($id)

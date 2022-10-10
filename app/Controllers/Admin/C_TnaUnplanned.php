@@ -42,7 +42,7 @@ class C_TnaUnplanned extends BaseController
     {
         $tna = $this->unplanned->getKadivStatusUnplanned();
         $data = [
-            'tittle' => 'Kadiv Status',
+            'tittle' => 'Kadiv Status Approval Unplanned Training',
             'tna' => $tna
         ];
         return view('admin/tnakadiv', $data);
@@ -55,7 +55,7 @@ class C_TnaUnplanned extends BaseController
         // dd($TrainingMonthly[0]);
 
         $data = [
-            'tittle' => 'Form TNA',
+            'tittle' => 'Training Monthly Unplanned',
             'training' => $TrainingMonthly
         ];
         return view('admin/trainingmonthly', $data);
@@ -65,6 +65,7 @@ class C_TnaUnplanned extends BaseController
     {
 
         $status = $this->unplanned->getKadivAccept($date);
+        //dd($status);
         $data = [
             'tittle' => 'Training Yang Di ACC KADIV',
             'status' => $status

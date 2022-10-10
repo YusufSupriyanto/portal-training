@@ -28,8 +28,8 @@
                     <td><?= $tnas['training'] ?></td>
                     <td><?= $tnas['mulai_training'] ?></td>
                     <td><?= $tnas['rencana_training'] ?></td>
-                    <td><?= $tnas['biaya'] ?></td>
-                    <td><?= $tnas['biaya_actual'] ?></td>
+                    <td><?= "Rp " . number_format($tnas['biaya'], 0, ',', '.') ?></td>
+                    <td><?= "Rp " . number_format($tnas['biaya_actual'], 0, ',', '.')  ?></td>
                     <td>
                         <?php if ($tnas['status_approval_1'] == 'reject') : ?>
                         <a href=" javascript:;" class="item-edit" data-reject="<?= $tnas['id_tna'] ?>"

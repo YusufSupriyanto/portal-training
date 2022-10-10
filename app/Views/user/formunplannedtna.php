@@ -89,7 +89,8 @@
                     </div>
                     <div class="form-group">
                         <label for="budget">Budget<span style="color:red;">*</span></label>
-                        <input class="form-control" id="budget" name="budget" readonly value="<?= $budget ?>">
+                        <input class="form-control" readonly value="<?= "Rp " . number_format($budget, 0, ',', '.') ?>">
+                        <input type="hidden" id="budget" name="budget" value="<?= $budget ?>">
                     </div>
                 </div>
 

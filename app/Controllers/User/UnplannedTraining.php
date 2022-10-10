@@ -194,6 +194,7 @@ class UnplannedTraining extends BaseController
             'rencana_training' => $this->request->getVar('rencana'),
             'tujuan_training' => $this->request->getVar('tujuan'),
             'notes' => $this->request->getVar('notes'),
+            'biaya' => $this->request->getVar('budget'),
             'biaya_actual' => $this->request->getVar('budget'),
             'status' => 'save',
             'kelompok_training' => $kelompok

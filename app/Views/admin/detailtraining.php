@@ -39,7 +39,7 @@
                         <td><?= $trainings->jenis_training ?></td>
                         <td><?= $trainings->deskripsi ?></td>
                         <td><?= $trainings->vendor ?></td>
-                        <td><?= $trainings->biaya ?></td>
+                        <td><?= "Rp " . number_format($trainings->biaya, 0, ',', '.') ?></td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>

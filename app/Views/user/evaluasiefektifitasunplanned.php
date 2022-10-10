@@ -5,12 +5,7 @@
     <div class="col-12">
 
         <div class="card-header">
-            <?php $page = basename($_SERVER['PHP_SELF']);
-            if ($page == 'evaluasi_efektifitas') : ?>
-            <h3 class="card-title">Evaluasi Efektifitas Training</h3>
-            <?php else : ?>
-            <h3 class="card-title">Evaluasi Efektifitas Unplanned Training</h3>
-            <?php endif; ?>
+            <h3 class="card-title"><?= $tittle ?></h3>
         </div>
 
         <!-- /.card-header -->
@@ -35,13 +30,13 @@
 
                         <?php if ($evaluation['status'] == null) : ?>
                         <td>
-                            <a href="<?= base_url() ?>/form_efektivitas/<?= $evaluation['id_tna'] ?>"
-                                class="btn btn-danger btn-sm" style="color:white">Belu
+                            <a href="<?= base_url() ?>/form_efektivitas_unplanned/<?= $evaluation['id_tna'] ?>"
+                                class="btn btn-danger btn-sm" style="color:white">Belum
                                 dievaluasi</a>
                         </td>
                         <?php else : ?>
                         <td>
-                            <a href="<?= base_url() ?>/detail_efektivitas/<?= $evaluation['id_tna'] ?>"
+                            <a href="<?= base_url() ?>/detail_efektivitas_unplanned/<?= $evaluation['id_tna'] ?>"
                                 class="btn btn-success btn-sm" style="color:white">Sudah
                                 dievaluasi</a>
                         </td>

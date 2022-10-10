@@ -31,10 +31,10 @@ class EvaluasiUnplanned extends BaseController
         // dd($evaluasi);
 
         $data = [
-            'tittle' => 'Evaluasi Reaksi',
+            'tittle' => 'Evaluasi Reaksi Unplanned Training',
             'evaluasi' => $evaluasi
         ];
-        return view('user/daftarreaksi', $data);
+        return view('user/daftarreaksiunplanned', $data);
     }
 
     public function EvaluasiForm($id)
@@ -46,6 +46,19 @@ class EvaluasiUnplanned extends BaseController
             'data' => $id
         ];
         return view('user/evaluasireaksi', $data);
+    }
+    public function DetailEvaluasiReaksi($id)
+    {
+
+        $evaluasi  = $this->tna->getDetailEvaluasiReaksi($id);
+        // $evaluasi = $this->tna->getDataForEvaluation($id);
+
+
+        $data = [
+            'tittle' => 'Evaluasi Reaksi',
+            'data' => $evaluasi
+        ];
+        return view('user/detailevaluasireaksi', $data);
     }
 
     public function SendEvaluasiReaksi()

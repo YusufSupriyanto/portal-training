@@ -1,4 +1,54 @@
 <script>
+// function rupiah(i) {
+//     var rupiah = $('#biaya' + i).val();
+//     console.log(rupiah);
+//     rupiah.on("keyup", function(e) {
+//         // tambahkan 'Rp.' pada saat form di ketik
+//         // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
+//         rupiah.value = formatRupiah(rupiah, 'Rp. ');
+//     });
+
+//     /* Fungsi formatRupiah */
+//     function formatRupiah(angka, prefix) {
+//         var number_string = angka.replace(/[^,\d]/g, '').toString(),
+//             split = number_string.split(','),
+//             sisa = split[0].length % 3,
+//             rupiah = split[0].substr(0, sisa),
+//             ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+//         // tambahkan titik jika yang di input sudah menjadi angka ribuan
+//         if (ribuan) {
+//             separator = sisa ? '.' : '';
+//             rupiah += separator + ribuan.join('.');
+//         }
+
+//         rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+//         return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+//     }
+// }
+
+// function call(i) {
+//     // Setting up the version
+//     // document.querySelector('#biaya' + i).innerHTML = `AutoNumeric version <code>${AutoNumeric.version()}</code>`;
+
+//     // AutoNumeric initialisation
+//     const anElement = new AutoNumeric('#biaya' + i, 42);
+
+//     anElement.node().addEventListener("change", () => console.log("Changed !"));
+
+// }
+
+// var an1;
+
+// $(document).ready(function() {
+//     an1 = new AutoNumeric('[name="coba"]', {
+//         decimalPlaces: 0
+//     });
+// });
+
+
+
+
 $('#tna-admin').on('click', '.item-edit', function() {
     var id_tna = $(this).attr('data');
     console.log(id_tna);

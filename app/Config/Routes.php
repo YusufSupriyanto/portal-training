@@ -208,7 +208,7 @@ $routes->get('/member_schedule_unplanned', 'User\OurSchedule::member', ['filter'
 
 //Unplanned Evaluation
 $routes->get('/evaluasi_reaksi_unplanned', 'User\EvaluasiUnplanned::index', ['filter' => 'Auth']);
-$routes->get('/form_evaluasi_unplanned/(:num)', 'User\EvaluasiUnplanned::EvaluasiForm/$1', ['filter' => 'Auth']);
+$routes->get('/form_evaluasi_unplanned/(:num)', 'User\Evaluasi::EvaluasiForm/$1', ['filter' => 'Auth']);
 $routes->get('/form_unplanned_selesai/(:num)', 'User\EvaluasiUnplanned::DetailEvaluasiReaksi/$1', ['filter' => 'Auth']);
 $routes->get('/evaluasi_efektifitas_unplanned', 'User\EvaluasiEfektivitasUnplanned::index', ['filter' => 'Auth']);
 $routes->get('/form_efektivitas_unplanned/(:num)', 'User\EvaluasiEfektivitasUnplanned::formEvaluasi/$1', ['filter' => 'Auth']);
@@ -216,6 +216,7 @@ $routes->post('/save_efektivitas_unplanned', 'User\EvaluasiEfektivitasUnplanned:
 $routes->get('/detail_efektivitas_unplanned/(:num)', 'User\EvaluasiEfektivitasUnplanned::DetailEfektivitas/$1', ['filter' => 'Auth']);
 $routes->post('/data_evaluasiEfektivitas', 'User\EvaluasiEfektifitas::DataEvaluasiEfektivitas', ['filter' => 'Auth']);
 $routes->get('/evaluasi_reaksi_member_unplanned', 'User\Evaluasi::EvaluasiMember', ['filter' => 'Auth']);
+$routes->post('/send_evaluasi_reaksi_unplanned', 'User\EvaluasiUnplanned::SendEvaluasiReaksi', ['filter' => 'Auth']);
 
 
 //unplanned history

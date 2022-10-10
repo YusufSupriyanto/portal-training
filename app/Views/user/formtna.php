@@ -76,12 +76,9 @@
                 </div>
                 <div class="form-group">
                     <label>Tujuan<span style="color:red;">*</span></label>
-                    <textarea class="form-control <?= ($validation->hasError('tujuan')) ? 'is-invalid' : ''; ?> "
-                        id="validationTextarea" placeholder="Required example textarea" required
-                        name="tujuan"></textarea>
-                    <div class="invalid-feedback">
-                        <?= $validation->getError('tujuan'); ?>
-                    </div>
+                    <textarea class="form-control" id="validationTextarea" placeholder="Required example textarea"
+                        required name="tujuan"></textarea>
+
                 </div>
                 <div class="form-group">
                     <label>Notes</label>

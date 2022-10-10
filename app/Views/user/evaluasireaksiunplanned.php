@@ -2,7 +2,7 @@
 
 <?= $this->section('content') ?>
 <div class="card m-1">
-    <form method="post" action="<?= base_url() ?>/send_evaluasi_reaksi">
+    <form method="post" action="<?= base_url() ?>/send_evaluasi_reaksi_unplanned">
         <div class="d-flex justify-content-center">
             <h4>Evaluasi Program Pelatihan </h4>
         </div>

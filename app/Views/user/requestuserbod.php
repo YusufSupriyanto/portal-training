@@ -31,8 +31,8 @@
                     <td><?= $statuses['kategori_training'] ?></td>
                     <td><?= $statuses['metode_training'] ?></td>
                     <td><?= $statuses['rencana_training'] ?></td>
-                    <td><?= $statuses['biaya'] ?></td>
-                    <td><?= $statuses['biaya_actual'] ?></td>
+                    <td><?= "Rp " . number_format($statuses['biaya'], 0, ',', '.') ?></td>
+                    <td><?= "Rp " . number_format($statuses['biaya_actual'], 0, ',', '.') ?></td>
                     <td>
                         <a onclick="AcceptBod(<?= $i ?>)" id="accept-bod<?= $i ?>" href="javascript:;"
                             class="btn btn-success btn-sm " style="width:100px;color:white;"

@@ -66,12 +66,11 @@ class C_Tna extends BaseController
     public function trainingMonthly()
     {
 
-        // $date = '2022-09-30';
         $TrainingMonthly = $this->tna->getTrainingMonthly();
         // dd($TrainingMonthly[0]);
 
         $data = [
-            'tittle' => 'Form TNA',
+            'tittle' => 'Training Monthly',
             'training' => $TrainingMonthly
         ];
         return view('admin/trainingmonthly', $data);

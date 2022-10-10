@@ -27,8 +27,8 @@
                     <td><?= $tnas['departemen'] ?></td>
                     <td><?= $tnas['training'] ?></td>
                     <td><?= $tnas['rencana_training'] ?></td>
-                    <td><?= $tnas['biaya'] ?></td>
-                    <td><?= $tnas['biaya_actual'] ?></td>
+                    <td><?= "Rp " . number_format($tnas['biaya'], 2, ',', '.') ?></td>
+                    <td><?= "Rp " . number_format($tnas['biaya_actual'], 2, ',', '.') ?></td>
                     <td>
                         <div class="d-flex justify-content-center sm"
                             style="background-color:red;width:100px;border:1px;border-radius:2px;color:white;">Reject

@@ -43,7 +43,7 @@ class C_HistoryUnplanned extends BaseController
         }
 
         $data = [
-            'tittle' => 'History Training',
+            'tittle' => 'History Unplanned Training',
             'user' => $DataHistory,
         ];
         return view('admin/history', $data);
@@ -57,7 +57,7 @@ class C_HistoryUnplanned extends BaseController
 
 
         $data = [
-            'tittle' => 'History Training',
+            'tittle' => 'History Unplanned Training',
             'history' => $history,
             'id' => $id
         ];

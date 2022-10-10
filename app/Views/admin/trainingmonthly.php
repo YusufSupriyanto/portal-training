@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
 <div class="card m-1">
     <div class="card-header">
-        <h3 class="card-title">Training Monthly</h3>
+        <h3 class="card-title"><?= $tittle ?></h3>
     </div>
     <!-- /.card-header -->
     <div class="card-body table-responsive p-0">
@@ -41,7 +41,8 @@
                 </td>
                 <td><?= $dates['Admin Approval'] ?></td>
                 <td><?= $dates['BOD Approval'] ?></td>
-                <td> <?= $dates['Jumlah Training'] - $dates['BOD Approval']   ?></td>
+                <td><?= $dates['Jumlah Training'] - $dates['BOD Approval'] ?>
+                </td>
             </tr>
             <?php $i++;
             endforeach; ?>

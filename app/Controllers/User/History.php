@@ -75,17 +75,25 @@ class History extends BaseController
         // $user = $this->user->getAllUser();
         $DataHistory = [];
 
-
-        if ($page == 'member_history') {
-            $training = $this->tna->getTnaUser($status[0]['id_user']);
+        if (empty($status[0]['id_user'])) {
+            $history = [
+                'id' => '',
+                'nama' => '',
+                'jumlah_training' => ''
+            ];
         } else {
-            $training = $this->unplanned->getTnaUser($status[0]['id_user']);
+            if ($page == 'member_history') {
+                $training = $this->tna->getTnaUser($status[0]['id_user']);
+            } else {
+                $training = $this->unplanned->getTnaUser($status[0]['id_user']);
+            }
+            $history = [
+                'id' => $status[0]['id_user'],
+                'nama' => $status[0]['nama'],
+                'jumlah_training' => $training[0]['id_user']
+            ];
         }
-        $history = [
-            'id' => $status[0]['id_user'],
-            'nama' => $status[0]['nama'],
-            'jumlah_training' => $training[0]['id_user']
-        ];
+
         array_push($DataHistory, $history);
 
 

@@ -36,7 +36,7 @@
                     <td><?= $statuses['rencana_training'] ?></td>
                     <td><?= $statuses['tujuan_training'] ?></td>
                     <td><?= $statuses['notes'] ?></td>
-                    <td><?= $statuses['biaya_actual'] ?></td>
+                    <td><?= "Rp " . number_format($statuses['biaya_actual'], 0, ',', '.') ?></td>
                     <td>
 
                         <a onclick="AcceptKadiv(<?= $i ?>)" id="accept-kadiv<?= $i ?>" href="javascript:;"
