@@ -340,4 +340,18 @@ class M_TnaUnplanned extends Model
         $this->join('evaluasi_efektivitas', 'evaluasi_efektivitas.id_tna = tna.id_tna');
         return $this->get()->getResultArray();
     }
+    public function getHistoryUnplanned($id)
+    {
+        $this->select()->where('tna.id_user', $id)->where('kelompok_training', 'unplanned');
+        $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept');
+        $this->join('evaluasi_reaksi', 'evaluasi_reaksi.id_tna = tna.id_tna')->where('status_evaluasi', '1');
+        return $this->get()->getResult();
+    }
+    public function getUnplannedTerdaftar($id)
+    {
+        $this->select()->where('tna.id_user', $id)->where('kelompok_training', 'unplanned');
+        $this->join('approval', 'approval.id_tna = tna.id_tna');
+        $this->join('evaluasi_reaksi', 'evaluasi_reaksi.id_tna = tna.id_tna')->where('status', null);
+        return $this->get()->getResult();
+    }
 }

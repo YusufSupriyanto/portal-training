@@ -2,6 +2,10 @@ $(document).ready(function() {
     $('#example').DataTable();
 });
 
+$(document).ready(function() {
+    $('#mytable').DataTable();
+});
+
 
 const list = $('.success').data('success')
 if (list) {

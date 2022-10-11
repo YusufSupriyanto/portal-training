@@ -41,7 +41,7 @@
                 </td>
                 <td><?= $dates['Admin Approval'] ?></td>
                 <td><?= $dates['BOD Approval'] ?></td>
-                <td><?= $dates['Jumlah Training'] - $dates['BOD Approval'] ?>
+                <td><?= $dates['Admin Approval'] - $dates['BOD Approval'] ?>
                 </td>
             </tr>
             <?php $i++;

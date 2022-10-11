@@ -53,17 +53,19 @@ class UnplannedTraining extends BaseController
         $id = $this->request->getPost('member');
         $value = $this->request->getPost('training');
         // $trainingId = $this->training->getIdTraining($id);
-        // dd($value);
+        // dd($id);
         $user = $this->user->getAllUser($id);
         $trainings = $this->training->getAll();
-        $tna = $this->unplanned->getUserTnaUnplanned($id);
-        //dd($value);
+        $unplannedHistory = $this->unplanned->getHistoryUnplanned($id);
+        $unplannedTerdaftar = $this->unplanned->getUnplannedTerdaftar($id);
+        //dd($tna);
         $data = [
             'tittle' => 'Unplanned Training',
             'user' => $user,
             'training' => $trainings,
             'value' => $value,
-            'tna' => $tna,
+            'tna' => $unplannedHistory,
+            'terdaftar' => $unplannedHistory,
             'validation' => \Config\Services::validation(),
         ];
         return view('user/formtnaunplanned', $data);

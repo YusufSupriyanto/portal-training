@@ -2,7 +2,7 @@
 
 <?= $this->section('content') ?>
 <div class="card m-1 d-flex justify-content-center">
-    <div class="w-100 p-3">
+    <div class="container-fluid">
         <div id='calendar'></div>
     </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -99,8 +99,13 @@
                                         <input type="hidden" name="end" id="end">
                                         <input type="hidden" name="budget" id="budget">
                                     </form>
+                                    <?php if (session()->get('id') == $users->nama) : ?>
+                                    <h6><?= $users->nama ?></h6>
+                                    <?php else : ?>
                                     <a href="#"
                                         onclick="document.getElementById('dataform<?= $i ?>').submit();"><?= $users->nama ?></a>
+                                    <?php endif; ?>
+
                                 </td>
                             </tr>
                             <?php $i++;
@@ -129,13 +134,14 @@ $(document).ready(function() {
             jQuery.noConflict()
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
+                editable: true,
                 timeZone: 'local',
                 initialView: 'dayGridMonth',
                 height: 500,
                 selectable: true,
                 events: data,
                 eventClick: function(data) {
-                    console.log(data.event.start)
+                    console.log(data)
                     jQuery.noConflict()
                     $('#exampleModal').on('show.bs.modal', function(e) {
                         $.ajax({

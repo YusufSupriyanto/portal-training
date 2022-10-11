@@ -55,15 +55,18 @@ class FormTna extends BaseController
         $id = $this->request->getPost('member');
         $user = $this->user->getAllUser($id);
         $trainings = $this->training->getAll();
-        $tna = $this->tna->getUserTna($id);
-        // dd($value);
-        $data = [
-            'tittle' => 'TRAINING NEED ANALYSIS',
-            'user' => $user,
-            'training' => $trainings,
-            'tna' => $tna,
-            'validation' => \Config\Services::validation(),
-        ];
+        $tna = $this->tna->getHistoryTna($id);
+        $terdaftar = $this->tna->getTnaTerdaftar($id);
+        $history =
+            // dd($value);
+            $data = [
+                'tittle' => 'TRAINING NEED ANALYSIS',
+                'user' => $user,
+                'training' => $trainings,
+                'tna' => $tna,
+                'terdaftar' => $terdaftar,
+                'validation' => \Config\Services::validation(),
+            ];
         return view('user/formtna', $data);
     }
 

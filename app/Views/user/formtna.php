@@ -11,8 +11,12 @@
     <div class="card card-primary m-3">
         <div class="card-header">
             <h3 class="card-title">
+
+                <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#terdaftar">
+                    Training Terdaftar
+                </button>
                 <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#exampleModal">
-                    Training
+                    History Training
                 </button>
                 <h6><input class="form-control" value="Nama                  :<?= "  " . $user['nama'] ?>" readonly>
                 </h6>
@@ -146,6 +150,56 @@
             </div>
         </div>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="terdaftar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped" id="mytable">
+                        <thead>
+                            <tr>
+                                <th>Training</th>
+                                <th>Jenis Training</th>
+                                <th>Kategori Training</th>
+                                <th>Metode Training</th>
+                                <th>Start Training</th>
+                                <th>End Training</th>
+                                <th>Tujuan Training</th>
+                                <th>Notes</th>
+                                <th>Estimasi Budget</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($terdaftar as $Forms) : ?>
+                            <tr>
+                                <td><?= $Forms->training ?></td>
+                                <td><?= $Forms->jenis_training ?></td>
+                                <td><?= $Forms->kategori_training ?></td>
+                                <td><?= $Forms->metode_training ?></td>
+                                <td><?= $Forms->mulai_training ?></td>
+                                <td><?= $Forms->rencana_training ?></td>
+                                <td><?= $Forms->tujuan_training ?></td>
+                                <td><?= $Forms->notes ?></td>
+                                <td>Rp<?= " " . number_format($Forms->biaya, 0, ',', '.')  ?></td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 <script>
 // $(function() {

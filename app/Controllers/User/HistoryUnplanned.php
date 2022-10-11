@@ -91,7 +91,7 @@ class HistoryUnplanned extends BaseController
         $id = $_POST['history'];
         $history = $this->unplanned->getDetailHistory($id);
         $data = [
-            'tittle' => 'Personal History Training',
+            'tittle' => 'Personal History Unplanned Training',
             'history' => $history
         ];
         return view('user/historypersonal', $data);

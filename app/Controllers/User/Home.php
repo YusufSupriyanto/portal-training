@@ -40,7 +40,7 @@ class Home extends BaseController
                 $data = [
                     'title' => $row['kategori_training'],
                     'start' => $row['mulai_training'],
-                    'end' => $row['rencana_training'],
+                    'end' => date('Y-m-d', strtotime('+1 days', strtotime($row['rencana_training']))),
                     'color' => '#FFD700',
                     // 'url' => base_url('/jadwal/' . $row['rencana_training'])
                 ];
@@ -49,7 +49,7 @@ class Home extends BaseController
                 $data = [
                     'title' => $row['kategori_training'],
                     'start' => $row['mulai_training'],
-                    'end' => $row['rencana_training'],
+                    'end' => date('Y-m-d', strtotime('+1 days', strtotime($row['rencana_training']))),
                     'color' => 'green',
                     // 'url' => base_url('/jadwal/' . $row['rencana_training'])
                 ];

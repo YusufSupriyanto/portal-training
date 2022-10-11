@@ -89,7 +89,6 @@ class C_History extends BaseController
         $file = $this->request->getFile('file');
         $id = $this->request->getVar('id_user');
         $user = $this->user->getAllUser($id);
-        // dd($user);
         if ($file == "") {
             return redirect()->to('/history');
         }
@@ -125,6 +124,7 @@ class C_History extends BaseController
                 'rencana_training' => date('Y-m-d', $selesai),
                 'vendor' => $vendor,
                 'tempat' => $tempat,
+                'kelompok_training' => 'training'
 
             ];
             //   dd($data);

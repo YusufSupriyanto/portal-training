@@ -11,9 +11,9 @@ class FilterNotLogin implements FilterInterface
     public function before(RequestInterface $request, $arguments = null)
     {
         $session = session();
-        if ($session->get('log') == true || $session->get('level') == 'ADMIN') {
+        if ($session->get('log') == true and $session->get('level') == 'ADMIN') {
             return redirect()->to('/home');
-        } elseif ($session->get('log') == true || $session->get('level') == 'USER') {
+        } elseif ($session->get('log') == true and $session->get('level') == 'USER') {
             return redirect()->to('/home_user');
         }
     }
