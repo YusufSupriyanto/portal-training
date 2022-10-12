@@ -56,17 +56,39 @@ class FormTna extends BaseController
         $user = $this->user->getAllUser($id);
         $trainings = $this->training->getAll();
         $tna = $this->tna->getHistoryTna($id);
+        $tnaUser = $this->tna->getUserTna($id);
         $terdaftar = $this->tna->getTnaTerdaftar($id);
-        $history =
-            // dd($value);
-            $data = [
-                'tittle' => 'TRAINING NEED ANALYSIS',
-                'user' => $user,
-                'training' => $trainings,
-                'tna' => $tna,
-                'terdaftar' => $terdaftar,
-                'validation' => \Config\Services::validation(),
-            ];
+        $array = [];
+        foreach ($tnaUser as $usersTna) {
+            $id = $this->training->getIdTraining($usersTna['id_training']);
+            $trainingProcess =
+                [
+                    'id_training' => $usersTna['id_training'],
+                    'judul_training' => $usersTna['training'],
+                    'jenis_training' => $usersTna['jenis_training'],
+                    'deskripsi' => $id['deskripsi'],
+                    'vendor' => $usersTna['vendor'],
+                    'biaya' => $usersTna['biaya']
+                ];
+            array_push($array, $trainingProcess);
+        }
+        for ($i = 0; $i < count($array); $i++) {
+            foreach ($trainings as $key => $arr) {
+                // echo $arr['id_training'];
+                if (in_array($arr['id_training'], $array[$i])) {
+                    unset($trainings[$key]);
+                }
+            }
+        }
+        //d($trainings);
+        $data = [
+            'tittle' => 'TRAINING NEED ANALYSIS',
+            'user' => $user,
+            'training' => $trainings,
+            'tna' => $tna,
+            'terdaftar' => $terdaftar,
+            'validation' => \Config\Services::validation(),
+        ];
         return view('user/formtna', $data);
     }
 

@@ -58,7 +58,7 @@ class M_TnaUnplanned extends Model
     public function getUserTna($id)
     {
         $this->select()->where(['id_user' => $id])->where('kelompok_training', 'unplanned');
-        return $this->get()->getResult();
+        return $this->get()->getResultArray();
     }
 
     public function getUserTnaUnplanned($id)
@@ -351,7 +351,7 @@ class M_TnaUnplanned extends Model
     {
         $this->select()->where('tna.id_user', $id)->where('kelompok_training', 'unplanned');
         $this->join('approval', 'approval.id_tna = tna.id_tna');
-        $this->join('evaluasi_reaksi', 'evaluasi_reaksi.id_tna = tna.id_tna')->where('status', null);
+        $this->join('evaluasi_reaksi', 'evaluasi_reaksi.id_tna = tna.id_tna')->where('status_evaluasi', null);
         return $this->get()->getResult();
     }
 }

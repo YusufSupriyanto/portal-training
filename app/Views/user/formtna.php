@@ -11,14 +11,13 @@
     <div class="card card-primary m-3">
         <div class="card-header">
             <h3 class="card-title">
-
                 <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#terdaftar">
                     Training Terdaftar
                 </button>
                 <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#exampleModal">
                     History Training
                 </button>
-                <h6><input class="form-control" value="Nama                  :<?= "  " . $user['nama'] ?>" readonly>
+                <h6><input class="form-control" value="Nama                  :<?= $user['nama'] ?>" readonly>
                 </h6>
                 <h6><input class="form-control" value="Jabatan             :<?= "  " . $user['bagian'] ?>" readonly>
                 </h6>
@@ -39,8 +38,8 @@
                     <select class="form-control" name="training" id="training">
                         <option selected>Choose...</option>
                         <?php foreach ($training as $trainings) : ?>
-                        <option value="<?= $trainings->id_training ?>">
-                            <?= $trainings->judul_training ?>
+                        <option value="<?= $trainings['id_training'] ?>">
+                            <?= $trainings['judul_training'] ?>
                         </option>
                         <?php endforeach; ?>
                     </select>
@@ -107,7 +106,7 @@
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">History Training</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -156,7 +155,7 @@
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Training Terdaftar</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

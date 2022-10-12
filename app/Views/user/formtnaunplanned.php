@@ -40,8 +40,8 @@
                     <select class="form-control" name="training" id="training">
                         <option selected>Choose...</option>
                         <?php foreach ($training as $trainings) : ?>
-                        <option value="<?= $trainings->id_training ?>">
-                            <?= $trainings->judul_training ?>
+                        <option value="<?= $trainings['id_training'] ?>">
+                            <?= $trainings['judul_training'] ?>
                         </option>
                         <?php endforeach; ?>
                     </select>
@@ -111,7 +111,7 @@
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">History Unplanned Training</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -160,7 +160,7 @@
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Unplanned Training Terdaftar</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -199,7 +199,6 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>

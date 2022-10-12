@@ -47,19 +47,7 @@ class Evaluasi extends BaseController
     public function SendEvaluasiReaksi()
     {
         $id =  $this->request->getPost('id_tna');
-
-
-        if (!$this->validate([
-            'instruktur1' => 'required',
-            'pengetahuan1' => 'required',
-            'kemampuan1' => 'required',
-            'wawasan' => 'required',
-        ])) {
-            $validation = \Config\Services::validation();
-            return redirect()->to('/form_evaluasi/' . $id)->withInput()->with('validation', $validation);
-        }
         $training = $this->evaluasiReaksi->getIdReaksi($id);
-
         $data = [
             'id_reaksi' =>  $training['id_reaksi'],
             'id_tna' =>  $training['id_tna'],
@@ -110,7 +98,7 @@ class Evaluasi extends BaseController
             'kebutuhan' => $this->request->getPost('kebutuhan'),
             'status_evaluasi' => true,
         ];
-        // dd($data);
+        //dd($data);
         $this->evaluasiReaksi->save($data);
         session()->setFlashdata('success', 'Data Berhasil Di Import');
         return redirect()->to('/evaluasi_reaksi');

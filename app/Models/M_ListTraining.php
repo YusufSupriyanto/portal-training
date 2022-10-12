@@ -36,7 +36,7 @@ class M_ListTraining extends Model
     public function getAll()
     {
         $data = $this->select('*')->get();
-        return $data->getResult();
+        return $data->getResultArray();
     }
 
 
@@ -48,7 +48,6 @@ class M_ListTraining extends Model
 
     public function getIdTraining($id = false)
     {
-
         return $this->where(['id_training' => $id])->first();
     }
 

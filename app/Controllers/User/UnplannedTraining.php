@@ -58,14 +58,37 @@ class UnplannedTraining extends BaseController
         $trainings = $this->training->getAll();
         $unplannedHistory = $this->unplanned->getHistoryUnplanned($id);
         $unplannedTerdaftar = $this->unplanned->getUnplannedTerdaftar($id);
-        //dd($tna);
+        $unplanTraining = $this->unplanned->getUserTna($id);
+
+        $array = [];
+        foreach ($unplanTraining as $usersTna) {
+            $id = $this->training->getIdTraining($usersTna['id_training']);
+            $trainingProcess =
+                [
+                    'id_training' => $usersTna['id_training'],
+                    'judul_training' => $usersTna['training'],
+                    'jenis_training' => $usersTna['jenis_training'],
+                    'deskripsi' => $id['deskripsi'],
+                    'vendor' => $usersTna['vendor'],
+                    'biaya' => $usersTna['biaya']
+                ];
+            array_push($array, $trainingProcess);
+        }
+        for ($i = 0; $i < count($array); $i++) {
+            foreach ($trainings as $key => $arr) {
+                // echo $arr['id_training'];
+                if (in_array($arr['id_training'], $array[$i])) {
+                    unset($trainings[$key]);
+                }
+            }
+        }
         $data = [
             'tittle' => 'Unplanned Training',
             'user' => $user,
             'training' => $trainings,
             'value' => $value,
             'tna' => $unplannedHistory,
-            'terdaftar' => $unplannedHistory,
+            'terdaftar' => $unplannedTerdaftar,
             'validation' => \Config\Services::validation(),
         ];
         return view('user/formtnaunplanned', $data);

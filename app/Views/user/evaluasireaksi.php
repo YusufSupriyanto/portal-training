@@ -135,59 +135,65 @@
                     name="perbaikan_program"></textarea>
             </div>
         </div>
-        <div class="card">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>
-                            No
-                        </th>
-                        <th>Pemahaman Instruktur</th>
-                        <th>Instruktur 1<span style="color:red;">*</span></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td><strong>Nama Instruktur</strong>
-                        </td>
-                        <td><input class="form-control input-sm" type="text" name="instruktur1" required></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Pengetahuan/pemahaman instruktur terhadap materi training
-                        </td>
-                        <td><input class="form-control input-sm" type="text" name="pengetahuan1" required></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Kemampuan dalam menjelaskan materi training
-                        </td>
-                        <td><input class="form-control input-sm" type="text" name="kemampuan1" required></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Kemampuan melibatkan partisipasi peserta dalam proses belajar
-                        </td>
-                        <td><input class="form-control input-sm" type="text" name="kemampuan_melibatkan1" required></td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Kemampuan menanggapi permasalahan dan pertanyaan peserta
-                        </td>
-                        <td><input class="form-control input-sm" type="text" name="kemampuan_menanggapi1" required></td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Kemampuan mengendalikan penggunaan waktu
-                        </td>
-                        <td><input class="form-control input-sm" type="text" name="kemampuan_mengendalikan1" required>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="m-2" style="width:100px;">
-                <button class="btn btn-success btn-sm"><i class="fa-solid fa-plus"></i></button>
+        <div class="card" id="instruktur">
+            <div id="1">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                No
+                            </th>
+                            <th>Pemahaman Instruktur</th>
+                            <th>Instruktur 1<span style="color:red;">*</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td><strong>Nama Instruktur</strong>
+                            </td>
+                            <td><input class="form-control input-sm" type="text" name="instruktur1" required></td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Pengetahuan/pemahaman instruktur terhadap materi training
+                            </td>
+                            <td><input class="form-control input-sm" type="text" name="pengetahuan1" required></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Kemampuan dalam menjelaskan materi training
+                            </td>
+                            <td><input class="form-control input-sm" type="text" name="kemampuan1" required></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Kemampuan melibatkan partisipasi peserta dalam proses belajar
+                            </td>
+                            <td><input class="form-control input-sm" type="text" name="kemampuan_melibatkan1" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Kemampuan menanggapi permasalahan dan pertanyaan peserta
+                            </td>
+                            <td><input class="form-control input-sm" type="text" name="kemampuan_menanggapi1" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Kemampuan mengendalikan penggunaan waktu
+                            </td>
+                            <td><input class="form-control input-sm" type="text" name="kemampuan_mengendalikan1"
+                                    required>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="m-2" style="width:100px;">
+                    <button type="button" class="btn btn-success btn-sm" id="plus" onclick="loop(1)"><i
+                            class="fa-solid fa-plus"></i></button>
+                </div>
             </div>
         </div>
         <div>
@@ -255,4 +261,78 @@
         </div>
     </form>
 </div>
-<?= $this->endSection() ?><div class="container">
+<script>
+function loop(i) {
+    i++
+    if (i <= 5) {
+        $('#instruktur').append(`
+          <div id="${i}">
+    <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            No
+                        </th>
+                        <th>Pemahaman Instruktur</th>
+                        <th>Instruktur ${i}<span style="color:red;">*</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td><strong>Nama Instruktur</strong>
+                        </td>
+                        <td><input class="form-control input-sm" type="text" name="instruktur${i}" required></td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Pengetahuan/pemahaman instruktur terhadap materi training
+                        </td>
+                        <td><input class="form-control input-sm" type="text" name="pengetahuan${i}" required></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Kemampuan dalam menjelaskan materi training
+                        </td>
+                        <td><input class="form-control input-sm" type="text" name="kemampuan${i}" required></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Kemampuan melibatkan partisipasi peserta dalam proses belajar
+                        </td>
+                        <td><input class="form-control input-sm" type="text" name="kemampuan_melibatkan${i}" required></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Kemampuan menanggapi permasalahan dan pertanyaan peserta
+                        </td>
+                        <td><input class="form-control input-sm" type="text" name="kemampuan_menanggapi${i}" required></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Kemampuan mengendalikan penggunaan waktu
+                        </td>
+                        <td><input class="form-control input-sm" type="text" name="kemampuan_mengendalikan${i}" required>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="m-2" style="width:100px;">
+                <button type="button" class="btn btn-success btn-sm" id="plus" onclick="loop(${i})"><i class="fa-solid fa-plus"></i></button>
+           <button type="button" class="btn btn-danger btn-sm" id="remove${i}" onclick="remove(${i})"><i
+                        class="fa fa-close"></i></button>
+                </div>
+            
+                        </div>
+            `)
+
+    }
+
+
+}
+
+function remove(i) {
+    $('#remove' + i).closest('#' + i).remove();
+}
+</script>
+<?= $this->endSection() ?>

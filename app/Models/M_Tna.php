@@ -58,7 +58,7 @@ class M_Tna extends Model
     public function getUserTna($id)
     {
         $this->select()->where(['id_user' => $id])->where('kelompok_training', 'training');
-        return $this->get()->getResult();
+        return $this->get()->getResultArray();
     }
 
     public function getUserTnaUnplanned($id)

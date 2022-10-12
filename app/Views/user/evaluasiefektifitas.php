@@ -36,7 +36,7 @@
                         <?php if ($evaluation['status'] == null) : ?>
                         <td>
                             <a href="<?= base_url() ?>/form_efektivitas/<?= $evaluation['id_tna'] ?>"
-                                class="btn btn-danger btn-sm" style="color:white">Belu
+                                class="btn btn-danger btn-sm" style="color:white">Belum
                                 dievaluasi</a>
                         </td>
                         <?php else : ?>
