@@ -166,8 +166,7 @@ $(document).ready(function() {
                                     .kategori)
                                 $('#notes').html(
                                     "<button class=\"btn btn-primary btn-sm\" onclick=\"call('" +
-                                    encodeURIComponent(data[0]
-                                        .id_tna) +
+                                    data[0].id_tna +
                                     "')\">Daftar</button>"
                                 )
 
@@ -187,7 +186,7 @@ $(document).ready(function() {
 })
 
 function call(id) {
-
+    console.log(id)
     $.ajax({
         type: 'POST',
         url: "<?= base_url(); ?>/data_training",
@@ -197,15 +196,15 @@ function call(id) {
             id_training: id
         },
         success: function(data) {
-            console.log(data)
-            $('#user #training').val(data.training)
-            $('#user #id_training').val(data.id_training)
-            $('#user #jenis').val(data.jenis_training)
-            $('#user #kategori').val(data.kategori_training)
-            $('#user #metode').val(data.metode_training)
-            $('#user #start').val(data.mulai_training)
-            $('#user #end').val(data.rencana_training)
-            $('#user #budget').val(data.biaya_actual)
+            console.log(data[0].training)
+            $('#user #training').val(data[0].training)
+            $('#user #id_training').val(data[0].id_training)
+            $('#user #jenis').val(data[0].jenis_training)
+            $('#user #kategori').val(data[0].kategori_training)
+            $('#user #metode').val(data[0].metode_training)
+            $('#user #start').val(data[0].mulai_training)
+            $('#user #end').val(data[0].rencana_training)
+            $('#user #budget').val(data[0].biaya_actual)
         }
 
     })

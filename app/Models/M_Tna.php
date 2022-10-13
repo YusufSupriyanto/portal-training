@@ -23,7 +23,11 @@ class M_Tna extends Model
     {
         $this->user = new UserModel();
     }
-
+    public function getTnaByid($id)
+    {
+        $this->select()->where('id_tna', $id);
+        return $this->get()->getResultArray();
+    }
 
     public function getTnaUser($id)
     {
@@ -209,7 +213,7 @@ class M_Tna extends Model
     public function getTrainingMonthly()
     {
         $sql = $this->query("select tna.mulai_training as 'Planing Training', count(distinct tna.training) as 'Jumlah Training',count(distinct approval.status_approval_2) as 'Admin Approval',count(distinct approval.status_approval_3) as 'BOD Approval'
-            from tna join approval on approval.id_tna = tna.id_tna where tna.kelompok_training = 'training' group by tna.mulai_training")->getResultArray();
+            from tna join approval on approval.id_tna = tna.id_tna where tna.kelompok_training = 'training' and approval.status_approval_1 = 'accept' group by tna.mulai_training")->getResultArray();
 
         return $sql;
     }

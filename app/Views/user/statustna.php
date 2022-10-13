@@ -26,7 +26,7 @@
                     <th>Rencana Training</th>
                     <th>Tujuan Training</th>
                     <th>Notes</th>
-                    <th>Estimasi Budget</th>
+                    <th>Budget</th>
                     <th>Approval KADIV</th>
                     <th>Approval Admin</th>
                     <th>Approval BOD</th>

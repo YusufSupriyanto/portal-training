@@ -1,165 +1,263 @@
 <?= $this->extend('/template/templateuser') ?>
 
 <?= $this->section('content') ?>
-<div class="card m-3">
-    <div class="d-flex justify-content-center">
-        <h4>Form Evaluasi Efektivitas Training</h4>
-    </div>
-    <div class="card m-2 p-2 " id="efektivitas">
-        <?php foreach ($evaluasi as $evaluation) : ?>
-        <input type="hidden" value="<?= $evaluation['id_tna'] ?>" name="id_tna" id="id_tna">
-        <label>Nama Peserta Training <span style="margin-left:20px;">: <?= $evaluation['nama'] ?> </span></label>
-        <label>Npk/Dept/Seksi <span style="margin-left:68px;"></span>:
-            <?= $evaluation['npk'] ?>/<?= $evaluation['departemen'] ?>/<?= $evaluation['seksi'] ?></span></label>
-        <label>Jabatan <span style="margin-left:118px;">: <?= $evaluation['bagian'] ?> </span></label>
-        <label>Nama Training <span style="margin-left:78px;">: <?= $evaluation['training'] ?></span></label>
-        <label>Tanggal Pelaksanaan <span style="margin-left:35px;">:
-                <?= $evaluation['rencana_training'] ?></span></label>
-        <label>Lembaga Penyelenggara <span style="margin-left:10px;">: <?= $evaluation['vendor'] ?></span></label>
-        <?php endforeach; ?>
-        <table class="table table-head-fixed display">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Item Penilaian</th>
-                    <th>4(BS)</th>
-                    <th>3(B)</th>
-                    <th>2(C)</th>
-                    <th>1(K)</th>
-                    <th>Score</th>
-                    <th>Keterangan</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1.</td>
-                    <td>Apakah pengetahuan karyawan meningkat untuk menunjang pekerjaan setelah mengikuti pelatihan?
-                        (Beri ketarangan, mis : peningkatan seperti apa dan sejauh mana)</td>
-                    <td><input type="radio" class="form-check-input d-block" id="radio1" name="pengetahuan" value="4">
-                    </td>
-                    <td><input type="radio" class="form-check-input" id="radio1" name="pengetahuan" value="3">
-                    </td>
-                    <td><input type="radio" class="form-check-input" id="radio1" name="pengetahuan" value="2">
-                    </td>
-                    <td><input type="radio" class="form-check-input" id="radio1" name="pengetahuan" value="1">
-                    </td>
-                    <td>
-                        <h6 id="score1"></h6>
-                    </td>
-                    <td>
-                        <div class="form-group">
-                            <textarea class="form-control rounded-0" rows="3" id="note1"></textarea>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2.</td>
-                    <td>Apakah keterampilan karyawan meningkat untuk menunjang pekerjaan setelah mengikuti
-                        pelatihan?
-                        (Beri ketarangan, mis : peningkatan seperti apa dan sejauh mana)</td>
-                    <td><input type="radio" class="form-check-input" id="radio1" name="keterampilan" value="4">
-                    </td>
-                    <td><input type="radio" class="form-check-input" id="radio1" name="keterampilan" value="3">
-                    </td>
-                    <td><input type="radio" class="form-check-input" id="radio1" name="keterampilan" value="2">
-                    </td>
-                    <td><input type="radio" class="form-check-input" id="radio1" name="keterampilan" value="1">
-                    </td>
-                    <td>
-                        <h6 id="score2"></h6>
-                    </td>
-                    <td>
-                        <div class="form-group">
-                            <textarea class="form-control rounded-0" id="note2" rows="3" name="note2"></textarea>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>3.</td>
-                    <td>Apakah performance karyawan meningkat setelah mengikuti pelatihan? (Beri ketarangan, mis :
-                        peningkatan seperti apa dan sejauh mana)</td>
-                    <td><input type="radio" class="form-check-input" id="radio1" name="performance" value="4">
-                    </td>
-                    <td><input type="radio" class="form-check-input" id="radio1" name="performance" value="3">
-                    </td>
-                    <td><input type="radio" class="form-check-input" id="radio1" name="performance" value="2">
-                    </td>
-                    <td><input type="radio" class="form-check-input" id="radio1" name="performance" value="1">
-                    </td>
-                    <td>
-                        <h6 id="score3"></h6>
-                    </td>
-                    <td>
-                        <div class="form-group">
-                            <textarea class="form-control rounded-0" id="note3" rows="3" name="note3"></textarea>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>4.</td>
-                    <td>Apakah ada perubahan sikap (positif) setelah karyawan mengikuti training ini ? (Beri
-                        keterangan,
-                        mis : perubahan sikap karyawan apa yang dirasakan oleh Atasan)</td>
-                    <td><input type="radio" class="form-check-input" id="radio1" name="perubahan" value="4">
-                    </td>
-                    <td><input type="radio" class="form-check-input" id="radio1" name="perubahan" value="3">
-                    </td>
-                    <td><input type="radio" class="form-check-input" id="radio1" name="perubahan" value="2">
-                    </td>
-                    <td><input type="radio" class="form-check-input" id="radio1" name="perubahan" value="1">
-                    </td>
-                    <td>
-                        <h6 id="score4"></h6>
-                    </td>
-                    <td>
-                        <div class="form-group">
-                            <textarea class="form-control rounded-0" id="note4" rows="3" name="note4"></textarea>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>5.</td>
-                    <td>Apakah pelatihan yang diikuti karyawan sudah diterapkan di pekerjaannya sehari - hari ?
-                        (beri
-                        keterangan, mis : diterapkan dalam bentuk apa)</td>
-                    <td><input type="radio" class="form-check-input" id="radio1" name="pelatihan" value="4">
-                    </td>
-                    <td><input type="radio" class="form-check-input" id="radio1" name="pelatihan" value="3">
-                    </td>
-                    <td><input type="radio" class="form-check-input" id="radio1" name="pelatihans" value="2">
-                    </td>
-                    <td><input type="radio" class="form-check-input" id="radio1" name="pelatihan" value="1">
-                    </td>
-                    <td>
-                        <h6 id="score5"></h6>
-                    </td>
-                    <td>
-                        <div class="form-group">
-                            <textarea class="form-control rounded-0" id="note25" rows="3" name="note5"></textarea>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        <div class="d-flex justify-content-center">
-                            <label>Rata-Rata</label>
-                        </div>
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <h6 id="rata-rata"></h6>
-                    </td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
+<style>
+.styling {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 
-        <h5>Kesimpulan</h5>
-        <h6>A. pelatihan ini</h6>
+}
+
+@media (max-width: 480px) {
+    .styling {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+}
+</style>
+<div class="card p-2 overflow-auto">
+    <?php
+    $page = basename($_SERVER['PHP_SELF']);
+    if ($page  == 'detail_efektivitas') : ?>
+    <h4>
+        <center>Form Evaluasi Efektivitas Training</center>
+    </h4>
+    <?php else : ?>
+    <h4>
+        <center>Form Evaluasi Unplanned Training</center>
+    </h4>
+    <?php endif; ?>
+
+    <?php foreach ($evaluasi as $evaluation) : ?>
+    <input type="hidden" value="<?= $evaluation['id_tna'] ?>" name="id_tna" id="id_tna">
+    <div class="form-group">
+        <label>Nama Peserta Training</label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <i class="fa-solid fa-user"></i>
+                </span>
+            </div>
+            <input type="text" class="form-control" value="<?= $evaluation['nama'] ?>" disabled>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Npk/Dept/Seksi</label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <i class="fa-regular fa-id-badge"></i>
+                </span>
+            </div>
+            <input type="text" class="form-control"
+                value="<?= $evaluation['npk'] . "/" . $evaluation['departemen'] . "/" . $evaluation['seksi'] ?>"
+                disabled>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Jabatan</label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <i class="fa-solid fa-sitemap"></i>
+                </span>
+            </div>
+            <input type="text" class="form-control" value="<?= $evaluation['bagian'] ?>" disabled>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Nama Training </label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <i class="fa-solid fa-book"></i>
+                </span>
+            </div>
+            <input type="text" class="form-control" value="<?= $evaluation['training'] ?>" disabled>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Tanggal Pelaksanaan</label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <i class="fa-solid fa-clock"></i>
+                </span>
+            </div>
+            <input type="text" class="form-control"
+                value="<?= date('d-M-Y', strtotime($evaluation['mulai_training'])) . " ------- " . date('d-M-Y', strtotime($evaluation['rencana_training'])) ?>"
+                disabled>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Lembaga Penyelenggara </label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <i class="fa-solid fa-building-columns"></i>
+                </span>
+            </div>
+            <input type="text" class="form-control" value="<?= $evaluation['vendor'] ?>" disabled>
+        </div>
+    </div>
+    <?php endforeach; ?>
+    <div id="efektivitas">
+        <div>
+            <h6>Item Penilaian</h6>
+            <p>
+                1. Apakah pengetahuan karyawan meningkat untuk menunjang pekerjaan setelah mengikuti pelatihan?
+                (Beri ketarangan, mis : peningkatan seperti apa dan sejauh mana)
+            </p>
+            <div class="d-flex justify-content-center">
+                <div class="m-4">
+                    <input type="radio" class="form-check-input" id="radio1" name="pengetahuan" value="4">
+                    <label>4(BS)</label>
+                </div>
+                <div class="m-4">
+                    <input type="radio" class="form-check-input" id="radio1" name="pengetahuan" value="3">
+                    <label>3(B)</label>
+                </div>
+                <div class="m-4">
+                    <input type="radio" class="form-check-input" id="radio1" name="pengetahuan" value="2">
+                    <label>2(C)</label>
+                </div>
+                <div class="m-4">
+                    <input type="radio" class="form-check-input" id="radio1" name="pengetahuan" value="1">
+                    <label>1(K)</label>
+                </div>
+                <div class="form-group">
+                    <label>keterangan</label>
+                    <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" name="note1"
+                        required></textarea>
+                </div>
+            </div>
+            <p>
+                2. Apakah keterampilan karyawan meningkat untuk menunjang pekerjaan setelah mengikuti
+                pelatihan?
+                (Beri ketarangan, mis : peningkatan seperti apa dan sejauh mana)
+            </p>
+            <div class="d-flex justify-content-center">
+                <div class="m-4">
+                    <input type="radio" class="form-check-input" id="radio1" name="keterampilan" value="4">
+                    <label>4(BS)</label>
+                </div>
+                <div class="m-4">
+                    <input type="radio" class="form-check-input" id="radio1" name="keterampilan" value="3">
+                    <label>3(B)</label>
+                </div>
+                <div class="m-4">
+                    <input type="radio" class="form-check-input" id="radio1" name="keterampilan" value="2">
+                    <label>2(C)</label>
+                </div>
+                <div class="m-4">
+                    <input type="radio" class="form-check-input" id="radio1" name="keterampilan" value="1">
+                    <label>1(K)</label>
+                </div>
+                <div class="form-group">
+                    <label>keterangan</label>
+                    <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" name="note2"
+                        required></textarea>
+                </div>
+            </div>
+            <p>
+                3. Apakah performance karyawan meningkat setelah mengikuti pelatihan? (Beri ketarangan, mis :
+                peningkatan seperti apa dan sejauh mana)
+            </p>
+            <div class="d-flex justify-content-center">
+                <div class="m-4">
+                    <input type="radio" class="form-check-input" id="radio1" name="performance" value="4">
+                    <label>4(BS)</label>
+                </div>
+                <div class="m-4">
+                    <input type="radio" class="form-check-input" id="radio1" name="performance" value="3">
+                    <label>3(B)</label>
+                </div>
+                <div class="m-4">
+                    <input type="radio" class="form-check-input" id="radio1" name="performance" value="2">
+                    <label>2(C)</label>
+                </div>
+                <div class="m-4">
+                    <input type="radio" class="form-check-input" id="radio1" name="performance" value="1">
+                    <label>1(K)</label>
+                </div>
+                <div class="form-group">
+                    <label>keterangan</label>
+                    <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" name="note3"
+                        required></textarea>
+                </div>
+            </div>
+            <p>
+                4. Apakah ada perubahan sikap (positif) setelah karyawan mengikuti training ini ? (Beri
+                keterangan,
+                mis : perubahan sikap karyawan apa yang dirasakan oleh Atasan)
+            </p>
+            <div class="d-flex justify-content-center">
+                <div class="m-4">
+                    <input type="radio" class="form-check-input" id="radio1" name="perubahan" value="4">
+                    <label>4(BS)</label>
+                </div>
+                <div class="m-4">
+                    <input type="radio" class="form-check-input" id="radio1" name="perubahan" value="3">
+                    <label>3(B)</label>
+                </div>
+                <div class="m-4">
+                    <input type="radio" class="form-check-input" id="radio1" name="perubahan" value="2">
+                    <label>2(C)</label>
+                </div>
+                <div class="m-4">
+                    <input type="radio" class="form-check-input" id="radio1" name="perubahan" value="1">
+                    <label>1(K)</label>
+                </div>
+                <div class="form-group">
+                    <label>keterangan</label>
+                    <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" name="note4"
+                        required></textarea>
+                </div>
+            </div>
+            <p>
+                5. Apakah pelatihan yang diikuti karyawan sudah diterapkan di pekerjaannya sehari - hari ?
+                (beri
+                keterangan, mis : diterapkan dalam bentuk apa)
+            </p>
+            <div class="d-flex justify-content-center">
+                <div class="m-4">
+                    <input type="radio" class="form-check-input" id="radio1" name="pelatihan" value="4">
+                    <label>4(BS)</label>
+                </div>
+                <div class="m-4">
+                    <input type="radio" class="form-check-input" id="radio1" name="pelatihan" value="3">
+                    <label>3(B)</label>
+                </div>
+                <div class="m-4">
+                    <input type="radio" class="form-check-input" id="radio1" name="pelatihan" value="2">
+                    <label>2(C)</label>
+                </div>
+                <div class="m-4">
+                    <input type="radio" class="form-check-input" id="radio1" name="pelatihan" value="1">
+                    <label>1(K)</label>
+                </div>
+                <div class="form-group">
+                    <label>keterangan</label>
+                    <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" name="note5"
+                        required></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="d-flex justify-content-center">
+            <label>Rata-Rata</label><br>
+        </div>
+        <div class="d-flex justify-content-center">
+            <h5 id="rata-rata"></h5>
+        </div>
+    </div>
+    <div>
+        <h4>Kesimpulan</h4>
+        <h5>A. pelatihan ini</h5>
         <div class="ml-3">
             <input type="radio" class="form-check-input" id="kesimpulan4" name="kesimpulan4" value="4">Signifikan
             untuk pekerjaan (Total Hasil : 4)<br>
@@ -170,75 +268,33 @@
             <input type="radio" class="form-check-input" id="kesimpulan1" name="kesimpulan1" value="1">Kurang
             bermanfaat untuk pekerjaan (Total Hasil : 1-1,9)
         </div>
-        <h6 class="mt-3">B. Apakah Ada Peningkatan Kopetensi Karyawan Setelah Pelatihan Ini</h6>
-        <div class="ml-3">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Kompetensi yang disasar oleh pelatihan</th>
-                        <th scope="col">Ada Peningkatan/Tidak </th>
-                        <th scope="col">Jika Ya </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th><input type="text" style="width:300px;" name="kompetensi1" id="kompetensi1"></th>
-                        <td>
-                            <select class="custom-select" name="perubahan1" id="perubahan1" style="width:200px;">
-                                <option value="Ya">Ya</option>
-                                <option value="Tidak">Tidak</option>
-                            </select>
-                        </td>
-                        <td><input type="text" style="width:300px;" name="keterangan1" id="keterangan1"></td>
-                    </tr>
-                    <tr>
-                        <th><input type=" text" style="width:300px;" name="kompetensi2" id="kompetensi2"></th>
-                        <td>
-                            <select class="custom-select" name="perubahan2" id="perubahan2" style="width:200px;">
-                                <option value="Ya" selected>Ya</option>
-                                <option value="Tidak">Tidak</option>
-                            </select>
-                        </td>
-                        <td><input type="text" style="width:300px;" name="keterangan2" id="keterangan2"></td>
-                    </tr>
-                    <tr>
-                        <th><input type="text" style="width:300px;" name="kompetensi3" id="kompetensi3"></th>
-                        <td>
-                            <select class="custom-select" name="perubahan3" id="perubahan3" style="width:200px;">
-                                <option value="Ya" selected>Ya</option>
-                                <option value="Tidak">Tidak</option>
-                            </select>
-                        </td>
-                        <td><input type="text" style="width:300px;" name="keterangan3" id="keterangan3"></td>
-                    </tr>
-                    <tr>
-                        <th><input type=" text" style="width:300px;" name="kompetensi4" id="kompetensi4"></th>
-                        <td>
-                            <select class="custom-select" name="perubahan4" id="perubahan4" style="width:200px;">
-                                <option value="Ya" selected>Ya</option>
-                                <option value="Tidak">Tidak</option>
-                            </select>
-                        </td>
-                        <td><input type="text" style="width:300px;" name="keterangan4" id="keterangan4"></td>
-                    </tr>
-                    <tr>
-                        <th><input type=" text" style="width:300px;" name="kompetensi5" id="kompetensi5"></th>
-                        <td>
-                            <select class="custom-select" name="perubahan5" id="perubahan5" style="width:200px;">
-                                <option value="Ya" selected>Ya</option>
-                                <option value="Tidak">Tidak</option>
-                            </select>
-                        </td>
-                        <td><input type="text" style="width:300px;" name="keterangan5" id="keterangan5"></td>
-                    </tr>
-                </tbody>
-            </table>
-
-        </div>
-
     </div>
-
-
+    <div id="adding">
+        <h5 class="mt-3">B. Apakah Ada Peningkatan Kopetensi Karyawan Setelah Pelatihan Ini</h5>
+        <div>
+            <div class="styling">
+                <div class="d-flex justify-content-center d-flex flex-column">
+                    <h6>Kompetensi yang disasar oleh pelatihan<span style="color:red;">*</span></h6>
+                    <input type="text" name="kompetensi1" id="kompetensi1">
+                </div>
+                <div class="d-flex justify-content-center d-flex flex-column">
+                    <h6>Ada Peningkatan/Tidak<span style="color:red;">*</span></h6>
+                    <select class="custom-select" name="perubahan1" id="perubahan1" style="width:200px;">
+                        <option value="Ya" selected>Ya</option>
+                        <option value="Tidak">Tidak</option>
+                    </select>
+                </div>
+                <div class="d-flex justify-content-center d-flex flex-column">
+                    <h6>Jika Ya<span style="color:red;">*</span></h6>
+                    <input type="text" name="keterangan1" id="keterangan1">
+                </div>
+            </div>
+            <div>
+                <button type="button" class="btn btn-success btn-sm" onclick="adding(1)"><i
+                        class="fa-solid fa-plus"></i></button>
+            </div>
+        </div>
+    </div>
 </div>
 <script>
 $(document).ready(function() {
@@ -316,34 +372,86 @@ $(document).ready(function() {
             }
 
             $('#kompetensi1').val(data[0].kompetensi1)
-            $('#kompetensi2').val(data[0].kompetensi2)
-            $('#kompetensi3').val(data[0].kompetensi3)
-            $('#kompetensi4').val(data[0].kompetensi4)
-            $('#kompetensi5').val(data[0].kompetensi5)
-
             $('#keterangan1').val(data[0].keterangan1)
-            $('#keterangan2').val(data[0].keterangan2)
-            $('#keterangan3').val(data[0].keterangan3)
-            $('#keterangan4').val(data[0].keterangan4)
-            $('#keterangan5').val(data[0].keterangan5)
-
             $("#perubahan1 option[value='" + data[0].perubahan1 + "']").attr("selected",
                 "selected");
-            $("#perubahan2 option[value='" + data[0].perubahan2 + "']").attr("selected",
-                "selected");
-            $("#perubahan3 option[value='" + data[0].perubahan3 + "']").attr("selected",
-                "selected");
-            $("#perubahan4 option[value='" + data[0].perubahan4 + "']").attr("selected",
-                "selected");
-            $("#perubahan5 option[value='" + data[0].perubahan5 + "']").attr("selected",
-                "selected");
-
-
 
         }
     })
-
-
 })
+
+
+function adding(i) {
+    i++
+    if (i <= 5) {
+        $('#adding').append(`
+<div id="${i}">
+            <div class="styling">
+                <div class="d-flex justify-content-center d-flex flex-column">
+                    <h6>Kompetensi yang disasar oleh pelatihan<span style="color:red;">*</span></h6>
+                    <input type="text" name="kompetensi${i}" id="kompetensi${i}">
+                </div>
+                <div class="d-flex justify-content-center d-flex flex-column">
+                    <h6>Ada Peningkatan/Tidak<span style="color:red;">*</span></h6>
+                    <select class="custom-select" name="perubahan${i}" id="perubahan${i}" style="width:200px;">
+                        <option value="Ya" selected>Ya</option>
+                        <option value="Tidak">Tidak</option>
+                    </select>
+                </div>
+                <div class="d-flex justify-content-center d-flex flex-column">
+                    <h6>Jika Ya<span style="color:red;">*</span></h6>
+                    <input type="text" name="keterangan${i}" id="keterangan${i}">
+                </div>
+            </div>
+            <div>
+                <button type="button" class="btn btn-success btn-sm" onclick="adding(${i})"><i
+                        class="fa-solid fa-plus"></i></button>
+                        <button type="button" class="btn btn-danger btn-sm" id="removed${i}" onclick="removed(${i})"><i
+                        class="fa fa-close"></i></button>
+            </div>
+        </div>
+`)
+        const id_training = $('#id_tna').val()
+        console.log(id_training)
+        $.ajax({
+            type: 'post',
+            url: "<?= base_url(); ?>/data_evaluasiEfektivitas",
+            async: true,
+            dataType: "json",
+            data: {
+                id_training: id_training
+            },
+            success: function(data) {
+                if (i == 2) {
+                    $('#kompetensi2').val(data[0].kompetensi2)
+                    $('#keterangan2').val(data[0].keterangan2)
+                    $("#perubahan2 option[value='" + data[0].perubahan2 + "']").attr("selected",
+                        "selected");
+                } else if (i == 3) {
+                    $('#kompetensi3').val(data[0].kompetensi3)
+                    $('#keterangan3').val(data[0].keterangan3)
+                    $("#perubahan3 option[value='" + data[0].perubahan3 + "']").attr("selected",
+                        "selected");
+                } else if (i == 4) {
+                    $('#kompetensi4').val(data[0].kompetensi4)
+                    $('#keterangan4').val(data[0].keterangan4)
+                    $("#perubahan4 option[value='" + data[0].perubahan4 + "']").attr("selected",
+                        "selected");
+                } else {
+                    $('#kompetensi5').val(data[0].kompetensi5)
+                    $('#keterangan5').val(data[0].keterangan5)
+                    $("#perubahan5 option[value='" + data[0].perubahan5 + "']").attr("selected",
+                        "selected");
+                }
+            }
+
+
+        })
+    }
+}
+
+function removed(i) {
+    $('#removed' + i).closest('#' + i).remove();
+}
 </script>
 <?= $this->endSection() ?>

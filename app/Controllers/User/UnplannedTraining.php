@@ -157,11 +157,9 @@ class UnplannedTraining extends BaseController
         $start = $this->request->getPost('start');
         $end = $this->request->getPost('end');
         $budget = $this->request->getPost('budget');
-        // $trainingId = $this->training->getIdTraining($id);
-        // dd($value);
         $user = $this->user->getAllUser($id);
-        $tna = $this->unplanned->getUserTnaUnplanned($id);
-        //dd($value);
+        $unplannedHistory = $this->unplanned->getHistoryUnplanned($id);
+        $unplannedTerdaftar = $this->unplanned->getUnplannedTerdaftar($id);
         $data = [
             'tittle' => 'Unplanned Training',
             'user' => $user,
@@ -173,7 +171,8 @@ class UnplannedTraining extends BaseController
             'start' => $start,
             'end' => $end,
             'budget' => $budget,
-            'tna' => $tna,
+            'terdaftar' => $unplannedTerdaftar,
+            'tna' => $unplannedHistory,
             'validation' => \Config\Services::validation(),
         ];
         //dd($data);
@@ -261,7 +260,7 @@ class UnplannedTraining extends BaseController
     {
         $id = $this->request->getPost('id_training');
 
-        $data = $this->tna->getIdTna($id);
+        $data = $this->tna->getTnaByid($id);
 
         echo json_encode($data);
     }

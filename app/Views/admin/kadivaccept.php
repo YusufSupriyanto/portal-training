@@ -59,7 +59,7 @@
                         Rp<?= " " . number_format($tnas['biaya_actual'], 0, ',', '.') ?>
                     </td>
                     <td>
-                        <?= $tnas['status_approval_1'] ?>
+                        <?= $tnas['status_approval_2'] ?>
                     </td>
                     <?php endif; ?>
                 </tr>

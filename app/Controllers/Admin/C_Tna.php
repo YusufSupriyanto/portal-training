@@ -67,7 +67,7 @@ class C_Tna extends BaseController
     {
 
         $TrainingMonthly = $this->tna->getTrainingMonthly();
-        // dd($TrainingMonthly[0]);
+        //dd($TrainingMonthly);
 
         $data = [
             'tittle' => 'Training Monthly',

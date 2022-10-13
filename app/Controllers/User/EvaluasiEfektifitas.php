@@ -111,7 +111,7 @@ class EvaluasiEfektifitas extends BaseController
             'status_efektivitas' => 1
         ];
 
-        // dd($data);
+        //dd($data);
         $this->efektivitas->save($data);
         return redirect()->to('/evaluasi_efektifitas');
     }

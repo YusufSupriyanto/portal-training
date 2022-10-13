@@ -209,7 +209,7 @@ class M_TnaUnplanned extends Model
     public function getUnplannedMonthly()
     {
         $sql =    $this->query("select tna.rencana_training as 'Planing Training', count(distinct tna.training) as 'Jumlah Training',count(distinct approval.status_approval_2) as 'Admin Approval',count(distinct approval.status_approval_3) as 'BOD Approval'
-            from tna join approval on approval.id_tna = tna.id_tna where tna.kelompok_training = 'unplanned' group by tna.rencana_training")->getResultArray();
+            from tna join approval on approval.id_tna = tna.id_tna where tna.kelompok_training = 'unplanned' and approval.status_approval_1 = 'accept' group by tna.rencana_training")->getResultArray();
 
         return $sql;
     }
