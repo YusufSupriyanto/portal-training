@@ -26,8 +26,6 @@
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css">
 
-
-
         <script src="https://cdn.jsdelivr.net/npm/autonumeric@4.1.0"></script>
 
 

@@ -3,15 +3,17 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
-use PhpParser\Node\Stmt\Return_;
 
 class UserModel extends Model
 {
-
     protected $table      = 'user';
     protected $primaryKey = 'id_user';
     // protected $useAutoIncrement = true;
-    protected $allowedFields = ['npk', 'nama', 'status', 'dic', 'divisi', 'departemen', 'seksi', 'bagian', 'username', 'password', 'level'];
+    protected $allowedFields = [
+        'npk', 'nama', 'status', 'dic',
+        'divisi', 'departemen', 'seksi', 'bagian', 'username', 'password',
+        'level', 'profile',
+    ];
 
     function get_data_login($username)
     {

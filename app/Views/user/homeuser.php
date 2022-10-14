@@ -22,6 +22,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body p-0">
+                            <div></div>
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
@@ -33,27 +34,7 @@
                                         <th>Notes</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <div id="training"></div>
-                                        </td>
-                                        <td>
-                                            <div id="pendaftar"></div>
-                                        </td>
-                                        <td>
-                                            <div id="tanggalmulai"></div>
-                                        </td>
-                                        <td>
-                                            <div id="tanggalahir"></div>
-                                        </td>
-                                        <td>
-                                            <div id="kategori"></div>
-                                        </td>
-                                        <td>
-                                            <div id="notes"></div>
-                                        </td>
-                                    </tr>
+                                <tbody id="home_table">
                                 </tbody>
                             </table>
                         </div>
@@ -72,7 +53,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="user">Daftar Unplanned</h5>
+                    <h5 class="modal-title" id="user">Daftar Unplanned Training</h5>
                 </div>
                 <div class="modal-body">
 
@@ -154,21 +135,39 @@ $(document).ready(function() {
                             },
                             success: function(data) {
                                 console.log(data)
-                                $('#training').text(data[0]
-                                    .training)
-                                $('#pendaftar').text(data[0]
-                                    .pendaftar)
-                                $('#tanggalmulai').text(data[0]
-                                    .tanggal_start)
-                                $('#tanggalahir').text(data[0]
-                                    .tanggal_ahir)
-                                $('#kategori').text(data[0]
-                                    .kategori)
-                                $('#notes').html(
-                                    "<button class=\"btn btn-primary btn-sm\" onclick=\"call('" +
-                                    data[0].id_tna +
-                                    "')\">Daftar</button>"
-                                )
+                                var html = '';
+                                for (let i = 0; i < data
+                                    .length; i++) {
+                                    html += `
+                                     <tr>
+                                        <td>
+                                           ${data[i]
+                                        .training}
+                                        </td>
+                                        <td>
+                                          ${data[i]
+                                    .pendaftar}
+                                        </td>
+                                        <td>
+                                            ${data[i]
+                                        .tanggal_start}
+                                        </td>
+                                        <td>
+                                           ${data[i]
+                                        .tanggal_ahir}
+                                        </td>
+                                        <td>
+                                            ${data[i]
+                                        .kategori}
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-primary btn-sm" onclick="call(${data[i].id_tna})">Daftar</button>
+                                        </td>
+                                    </tr>
+                                    `;
+                                }
+                                $('#exampleModal #home_table')
+                                    .html(html)
 
                             }
 

@@ -52,7 +52,7 @@
                     <td><?= $histories['tempat'] ?></td>
                     <?php if ($histories['keterangan'] == null) : ?>
                     <td><button type="button" class="btn btn-success btn-sm" data-toggle="modal"
-                            data-target="#exampleModal<?= $i ?>" onclick="upload(<?= $i ?>)">
+                            data-target="#exampleModalLong" onclick="upload(<?= $i ?>)">
                             Confirm
                         </button>
                     </td>
@@ -68,54 +68,47 @@
                 endforeach; ?>
             </tbody>
         </table>
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <?php $page = basename($_SERVER['PHP_SELF']);
-                    if ($page == 'detail_history') : ?>
-                    <form action="<?= base_url() ?>/sertifikat_upload" method="post" id="form<?= $i ?>"
-                        enctype="multipart/form-data">
-                        <?php else : ?>
-                        <form action="<?= base_url() ?>/sertifikat_upload_unplanned" method="post" id="form<?= $i ?>"
-                            enctype="multipart/form-data">
-                            <div class="modal-header">
-                                <?php endif; ?>
-
-                                <h5 class="modal-title" id="exampleModalLabel">Upload Sertifikat</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Sertifikat</th>
-                                            <th scope="col">Keterangan Lulus/Tidak</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th>
-                                                <input type="file" name="file" Accept="Application/Pdf" id="file">
-                                                <input type="hidden" name="history" id="history">
-                                            </th>
-                                            <td>
-                                                <input type="text" name="keterangan" id="keterangan">
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Upload</button>
-                            </div>
-                        </form>
+    </div>
+</div>
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form action="<?= base_url() ?>/sertifikat_upload" method="post" id="form<?= $i ?>"
+            enctype="multipart/form-data">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table>
+                        <thead class="table">
+                            <tr>
+                                <th scope="col">Sertifikat</th>
+                                <th scope="col">Keterangan Lulus/Tidak</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>
+                                    <input type="file" name="file" Accept="Application/Pdf" id="file">
+                                    <input type="hidden" name="history" id="history">
+                                </th>
+                                <td>
+                                    <input type="text" name="keterangan" id="keterangan">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Upload</button>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 <script>

@@ -25,15 +25,33 @@ class User extends BaseController
     public function index()
     {
         $id = session()->get('id');
-
+        //dd($id);
         $user = $this->user->getAllUser($id);
         //dd($user);
-
 
         $data = [
             'tittle' => 'Profile',
             'person' => $user
         ];
         return view('user/profile', $data);
+    }
+
+    public function UpdateProfile()
+    {
+        $image =  $this->request->getFile('foto');
+        // dd($image);
+        $image->getName();
+        $image->getClientExtension();
+        $newName = $image->getRandomName();
+        $image->move("../public/profile", $newName);
+        $filepath = "/profile/" . $newName;
+
+        $data = [
+            'id_user' => session()->get('id'),
+            'profile' => $filepath,
+        ];
+
+        $this->user->save($data);
+        return redirect()->to('/user_profile');
     }
 }

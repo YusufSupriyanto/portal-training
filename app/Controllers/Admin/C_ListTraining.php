@@ -29,10 +29,6 @@ class C_ListTraining extends BaseController
     }
     public function index()
     {
-        if (session()->get('level') != 'ADMIN') {
-            return redirect()->to('/home_user');
-        }
-
         $get =  $this->category->getTrainingCategory();
 
         $data = [

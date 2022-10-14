@@ -274,9 +274,12 @@ class M_Tna extends Model
 
     public function getDataJadwalHome($date)
     {
-        $this->select('training as Training,COUNT(training) as Pendaftar')->where('mulai_training', $date)->where('kelompok_training', 'training');
-        $this->groupBy('training');
-        return $this->get()->getResultArray();
+        // $this->select('training as Training,COUNT(training) as Pendaftar')->where('mulai_training', $date)->where('kelompok_training', 'training');
+        // $this->groupBy('training');
+        // return $this->get()->getResultArray();
+        $sql = $this->query("select id_tna,id_training, training as Training,COUNT(training) as Pendaftar,kategori_training,mulai_training,rencana_training from tna where mulai_training = '2022-10-15'
+and kelompok_training = 'training' group by id_tna,id_training,training,kategori_training,mulai_training,rencana_training");
+        return  $sql->getResultArray();
     }
 
     public function getJadwalHomeVer($date)

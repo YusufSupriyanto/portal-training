@@ -129,7 +129,8 @@ $routes->post('/sertifikat_upload_unplanned', 'Admin\C_HistoryUnplanned::Sertifi
 //USER
 
 //profile
-$routes->get('/profile', 'User\User::index', ['filter' => 'Auth']);
+$routes->get('/user_profile', 'User\User::index', ['filter' => 'Auth']);
+$routes->post('/change_profile', 'User\User::UpdateProfile', ['filter' => 'Auth']);
 
 
 //Home User

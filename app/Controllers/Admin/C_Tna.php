@@ -78,9 +78,11 @@ class C_Tna extends BaseController
 
     public function accept()
     {
+        $angka = $this->request->getPost('biaya_actual');
+        $number =  str_replace(".", "", $angka);
         $data = [
             'id_tna' => $this->request->getPost('id_tna'),
-            'biaya_actual' => $this->request->getPost('biaya_actual'),
+            'biaya_actual' => $number,
             'mulai_training' => $this->request->getPost('mulai_training'),
             'rencana_training' => $this->request->getPost('rencana_training'),
             'vendor' => $this->request->getPost('vendor'),
@@ -132,8 +134,9 @@ class C_Tna extends BaseController
     {
 
         $approve = $this->approval->getIdApproval($this->request->getPost('id_tna'));
-        $biaya_actual = (int) $this->request->getPost('biaya_actual');
-        if ($biaya_actual <= 2500000) {
+        $biaya_actual = $this->request->getPost('biaya_actual');
+        $number =  str_replace(".", "", $biaya_actual);
+        if ($number <= 2500000) {
             $data = [
                 'id_approval' => $approve['id_approval'],
                 'status_approval_2' => 'accept',
@@ -150,7 +153,7 @@ class C_Tna extends BaseController
             'id_tna' => $this->request->getPost('id_tna'),
             'mulai_training' => $this->request->getPost('mulai_training'),
             'rencana_training' => $this->request->getPost('rencana_training'),
-            'biaya_actual' => $this->request->getPost('biaya_actual'),
+            'biaya_actual' => $number,
         ];
 
         // $fulldata = array_merge($data, $data1);

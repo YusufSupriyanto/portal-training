@@ -66,17 +66,16 @@ class Home extends BaseController
         $dates = date('Y-m-d', $time);
         $dataFix = [];
         $jadwal = $this->tna->getDataJadwalHome($dates);
+
         foreach ($jadwal as $jadwals) {
-            $kategori = $this->tna->getJadwalHomeVer($dates);
-            // dd($kategori);
             $data = [
-                'id_tna' => $kategori[0]['id_tna'],
-                'id_training' => $kategori[0]['id_training'],
+                'id_tna' => $jadwals['id_tna'],
+                'id_training' => $jadwals['id_training'],
                 'training' => $jadwals['Training'],
                 'pendaftar' => $jadwals['Pendaftar'],
                 'tanggal_start' => $dates,
-                'tanggal_ahir' => $kategori[0]['rencana_training'],
-                'kategori' => $kategori[0]['kategori_training'],
+                'tanggal_ahir' => $jadwals['rencana_training'],
+                'kategori' => $jadwals['kategori_training'],
             ];
 
             array_push($dataFix, $data);

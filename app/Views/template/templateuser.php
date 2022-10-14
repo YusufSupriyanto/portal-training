@@ -120,11 +120,11 @@ to get the desired effect
                     <!-- Sidebar user panel (optional) -->
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                         <div class="image">
-                            <img src="<?= base_url() ?>/AdminLTE/dist/img/user2-160x160.jpg"
-                                class="img-circle elevation-2" alt="User Image">
+                            <img src="<?= base_url() . session()->get('image') ?>" class="img-circle elevation-2"
+                                alt="User Image">
                         </div>
                         <div class="info">
-                            <a href="<?= base_url() ?>/profile" class="d-block"><?= session()->get('nama')  ?></a>
+                            <a href="<?= base_url() ?>/user_profile" class="d-block"><?= session()->get('nama')  ?></a>
                         </div>
                     </div>
 

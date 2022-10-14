@@ -47,7 +47,8 @@
                         <td>
                             <div class="d-flex flex-row">
                                 <label for="biaya" class="h6">Rp</label>
-                                <input type="text" id="biaya<?= $i ?>" name="biaya<?= $i ?>">
+                                <input type="text" id="biaya<?= $i ?>" name="biaya<?= $i ?>"
+                                    onchange="format(<?= $i ?>)">
                             </div>
                         </td>
                         <td>
@@ -124,4 +125,8 @@
         </div>
     </div>
 </div>
+<script>
+
+</script>
+
 <?= $this->endSection() ?>

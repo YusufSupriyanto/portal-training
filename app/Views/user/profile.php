@@ -2,11 +2,9 @@
 
 <?= $this->section('content') ?>
 <style>
-.table-down {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-
+.images {
+    width: 200px;
+    height: 230px;
 }
 </style>
 <section class="content-header">
@@ -28,13 +26,24 @@
                     <div class="card card-primary card-outline">
                         <div class="card-body box-profile">
                             <div class="text-center">
-                                <img class="" src="<?= base_url() ?>/AdminLTE/dist/img/user4-128x128.jpg"
-                                    alt="User profile picture" style="width:200px;height:230px">
+                                <img class="images" src="<?= base_url() . $person['profile'] ?>"
+                                    alt="User profile picture">
                             </div>
                         </div>
-                        <!-- /.card-body -->
+                        <button type="button" class="btn btn-primary btn-sm m-2" data-toggle="modal"
+                            data-target="#edit">
+                            <i class="fa-solid fa-user-pen"></i> Edit
+                        </button>
+                        <button type="button" class="btn btn-danger btn-sm m-2" data-toggle="modal"
+                            data-target="#education">
+                            <i class="fa-solid fa-graduation-cap"></i> Education
+                        </button>
+                        <button type="button" class="btn btn-warning btn-sm m-2" data-toggle="modal"
+                            data-target="#career">
+                            <i class="fa-solid fa-clock-rotate-left"></i> History Career
+                        </button>
+
                     </div>
-                    <!-- /.card -->
                 </div>
                 <!-- /.col -->
                 <div class="col-md-9">
@@ -105,73 +114,133 @@
             <!-- /.row -->
         </div><!-- /.container-fluid -->
     </section>
-    <div class="table-down">
-        <div class="card">
-            <div class="card-header d-flex justify-content-center">
-                <h3 class=" card-title">Education</h3>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="education" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <!-- /.card-header -->
-            <div class="card-body p-0">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Grade</th>
-                            <th>Year</th>
-                            <th>Instution</th>
-                            <th>Major</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1.</td>
-                            <td>Update software</td>
-                            <td>
-                                <div class="progress progress-xs">
-                                    <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                                </div>
-                            </td>
-                            <td><span class="badge bg-danger">55%</span></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-center">
+                        <h3 class=" card-title">Education</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body p-0">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Grade</th>
+                                    <th>Year</th>
+                                    <th>Instution</th>
+                                    <th>Major</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1.</td>
+                                    <td>Update software</td>
+                                    <td>
+                                        <div class="progress progress-xs">
+                                            <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                                        </div>
+                                    </td>
+                                    <td><span class="badge bg-danger">55%</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
             </div>
-            <!-- /.card-body -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
         </div>
-        <div class="card">
-            <div class="card-header d-flex justify-content-center">
-                <h3 class=" card-title">History Career</h3>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="career" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <!-- /.card-header -->
-            <div class="card-body p-0">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Year Start</th>
-                            <th>Year End</th>
-                            <th>Position</th>
-                            <th>Departemen</th>
-                            <th>Division</th>
-                            <th>Company</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1.</td>
-                            <td>Update software</td>
-                            <td>
-                                <div class="progress progress-xs">
-                                    <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                                </div>
-                            </td>
-                            <td><span class="badge bg-danger">55%</span></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-center">
+                        <h3 class=" card-title">History Career</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body p-0">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Year Start</th>
+                                    <th>Year End</th>
+                                    <th>Position</th>
+                                    <th>Departemen</th>
+                                    <th>Division</th>
+                                    <th>Company</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1.</td>
+                                    <td>Update software</td>
+                                    <td>
+                                        <div class="progress progress-xs">
+                                            <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                                        </div>
+                                    </td>
+                                    <td><span class="badge bg-danger">55%</span></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
             </div>
-            <!-- /.card-body -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
         </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form role="form" action="<?= base_url() ?>/change_profile" method="post" enctype="multipart/form-data">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Change Photo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <label>Choose Photo</label>
+                        <input type="file" name="foto" id="foto">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 <?= $this->endSection() ?>

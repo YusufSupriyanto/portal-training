@@ -10,15 +10,15 @@
         <table class="table table-hover" id="personal-schedule">
             <thead>
                 <tr>
-                    <th>NAMA</th>
-                    <th>DEPARTEMEN</th>
-                    <th>JUDUL TRAINING</th>
-                    <th>JENIS TRAINING</th>
-                    <th>KATEGORI TRAINING</th>
-                    <th>METODE TRAINING</th>
-                    <th>TUJUAN TRAINING</th>
-                    <th>RENCANA TRAINING</th>
-                    <th>ACTION</th>
+                    <th>Nama</th>
+                    <th>Departemen</th>
+                    <th>Judul Training</th>
+                    <th>Jenis Training</th>
+                    <th>Kategori Training</th>
+                    <th>Metode Training</th>
+                    <th>Tujuan Training</th>
+                    <th>Rencana Training</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <?php foreach ($schedule as $Atmps) : ?>
