@@ -120,6 +120,38 @@ class EvaluasiEfektivitasUnplanned extends BaseController
         return view('user/detailefektivitas', $data);
     }
 
+    public function PersonalEvaluasiUnplanned()
+    {
+        $id = session()->get('id');
+        $efektifitas = $this->tna->getDataForEvaluationUnplanned($id);
+        $dataEvaluasifixed = [];
+
+        foreach ($efektifitas as $efektif) {
+
+            $date_training = date_create($efektif['rencana_training']);
+            $date_now = date_create(date('Y-m-d'));
+            $compare = date_diff($date_training, $date_now);
+            $due_date = (int)$compare->format('%a');
+            if ($due_date >= 90) {
+                $dataEvaluasiProcess = [
+                    'id_tna' => $efektif['id_tna'],
+                    'nama' => $efektif['nama'],
+                    'judul' => $efektif['training'],
+                    'jenis' => $efektif['jenis_training'],
+                    'tanggal' => $efektif['rencana_training'],
+                    'status' =>  $efektif['status_efektivitas']
+                ];
+
+                array_push($dataEvaluasifixed, $dataEvaluasiProcess);
+            }
+        }
+        //dd($evaluasi);
+        $data = [
+            'tittle' => 'Personal Evaluasi Efektivitas Unplanned',
+            'evaluasi' => $dataEvaluasifixed
+        ];
+        return view('user/personalefektivitas', $data);
+    }
     public function DataEvaluasiEfektivitas()
     {
         $training = $this->request->getPost('id_training');

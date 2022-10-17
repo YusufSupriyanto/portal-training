@@ -17,6 +17,7 @@
                 <th>Penyelenggara</th>
                 <th>Tempat</th>
                 <th>Lulus/Tidak</th>
+                <th>Sumber</th>
                 </tr>
             </thead>
             <tbody>
@@ -45,6 +46,7 @@
                     <?php else : ?>
                     <td><?= $histories['keterangan'] ?></td>
                     <?php endif; ?>
+                    <td><?= $histories['kelompok_training'] ?></td>
                 </tr>
                 <?php $i++;
                 endforeach; ?>

@@ -46,7 +46,8 @@ class Login extends BaseController
                 'departemen' => $row->departemen,
                 'bagian' => $row->bagian,
                 'level' => $row->level,
-                'image' => $row->profile
+                'image' => $row->profile,
+                'email' => $row->email
             );
 
             if ($data['level'] == 'USER') {

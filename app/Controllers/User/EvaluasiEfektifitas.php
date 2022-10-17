@@ -133,6 +133,39 @@ class EvaluasiEfektifitas extends BaseController
         echo json_encode($data);
     }
 
+    public function PersonalEvaluasi()
+    {
+        $id = session()->get('id');
+        $efektifitas = $this->tna->getDataForEvaluationTraining($id);
+        $dataEvaluasifixed = [];
+
+        foreach ($efektifitas as $efektif) {
+
+            $date_training = date_create($efektif['rencana_training']);
+            $date_now = date_create(date('Y-m-d'));
+            $compare = date_diff($date_training, $date_now);
+            $due_date = (int)$compare->format('%a');
+            if ($due_date >= 90) {
+                $dataEvaluasiProcess = [
+                    'id_tna' => $efektif['id_tna'],
+                    'nama' => $efektif['nama'],
+                    'judul' => $efektif['training'],
+                    'jenis' => $efektif['jenis_training'],
+                    'tanggal' => $efektif['rencana_training'],
+                    'status' =>  $efektif['status_efektivitas']
+                ];
+
+                array_push($dataEvaluasifixed, $dataEvaluasiProcess);
+            }
+        }
+        //dd($evaluasi);
+        $data = [
+            'tittle' => 'Personal Evaluasi Efektivitas',
+            'evaluasi' => $dataEvaluasifixed
+        ];
+        return view('user/personalefektivitas', $data);
+    }
+
     public function sendEmail()
     {
         $email = $this->tna->getNotifEmailTraining();

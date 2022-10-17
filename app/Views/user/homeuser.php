@@ -29,7 +29,7 @@
                                         <th>Training</th>
                                         <th>Pendaftar</th>
                                         <th>Tanggal Mulai</th>
-                                        <th>Tanggal Berahir</th>
+                                        <th>Tanggal Berakhir</th>
                                         <th>Kategori</th>
                                         <th>Notes</th>
                                     </tr>
@@ -142,26 +142,26 @@ $(document).ready(function() {
                                      <tr>
                                         <td>
                                            ${data[i]
-                                        .training}
+                                        .Training}
                                         </td>
                                         <td>
                                           ${data[i]
-                                    .pendaftar}
+                                    .Pendaftar}
                                         </td>
                                         <td>
                                             ${data[i]
-                                        .tanggal_start}
+                                        .mulai_training}
                                         </td>
                                         <td>
                                            ${data[i]
-                                        .tanggal_ahir}
+                                        .rencana_training}
                                         </td>
                                         <td>
                                             ${data[i]
-                                        .kategori}
+                                        .kategori_training}
                                         </td>
                                         <td>
-                                            <button class="btn btn-primary btn-sm" onclick="call(${data[i].id_tna})">Daftar</button>
+                                            <button class="btn btn-primary btn-sm" onclick="call('${data[i].id_training}','${encodeURIComponent(data[i].Training)}','${data[i].jenis_training}','${data[i].kategori_training}','${data[i].metode_training}','${data[i].mulai_training}','${data[i].rencana_training}','${data[i].biaya_actual}')">Daftar</button>
                                         </td>
                                     </tr>
                                     `;
@@ -184,29 +184,19 @@ $(document).ready(function() {
     })
 })
 
-function call(id) {
-    console.log(id)
-    $.ajax({
-        type: 'POST',
-        url: "<?= base_url(); ?>/data_training",
-        async: true,
-        dataType: "json",
-        data: {
-            id_training: id
-        },
-        success: function(data) {
-            console.log(data[0].training)
-            $('#user #training').val(data[0].training)
-            $('#user #id_training').val(data[0].id_training)
-            $('#user #jenis').val(data[0].jenis_training)
-            $('#user #kategori').val(data[0].kategori_training)
-            $('#user #metode').val(data[0].metode_training)
-            $('#user #start').val(data[0].mulai_training)
-            $('#user #end').val(data[0].rencana_training)
-            $('#user #budget').val(data[0].biaya_actual)
-        }
+function call(id_training, training, jenis, kategori, metode, mulai, ahir, biaya) {
 
-    })
+    let Training = decodeURIComponent(training)
+    //  console.log(Training)
+
+    $('#user #id_training').val(id_training)
+    $('#user #training').val(Training)
+    $('#user #jenis').val(jenis)
+    $('#user #kategori').val(kategori)
+    $('#user #metode').val(metode)
+    $('#user #start').val(mulai)
+    $('#user #end').val(ahir)
+    $('#user #budget').val(biaya)
     $('#user').modal('show')
 }
 

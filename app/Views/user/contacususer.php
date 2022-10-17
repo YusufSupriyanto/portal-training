@@ -19,7 +19,8 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Email</label>
-                        <input type="Email" class="form-control" name="email" placeholder="Masukan Email">
+                        <input type="Email" class="form-control" name="email" placeholder="Masukan Email"
+                            value="<?= session()->get('email') ?>" disabled>
                     </div>
                     <div class="form-group">
                         <label>Pesan</label>
@@ -43,8 +44,7 @@
         <div class="card d-flex justify-content-center align-items-center" style="height:139px;"><i
                 class="fa-solid fa-envelope" style="font-size:30px;"></i>
             <p>E-mail</p>
-            <a
-                href="https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=rifsilhana.yunratika@incoe.astra.co.id">rifsilhana.yunratika@incoe.astra.co.id</a>
+            <p>rifsilhana.yunratika@incoe.astra.co.id</p>
         </div>
         <div class="card d-flex justify-content-center align-items-center" style="height:170px;"><i
                 class="fa-solid fa-location-dot" style="font-size:30px;"></i>

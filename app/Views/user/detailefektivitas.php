@@ -114,19 +114,19 @@
             <div class="d-flex justify-content-center">
                 <div class="m-4">
                     <input type="radio" class="form-check-input" id="radio1" name="pengetahuan" value="4">
-                    <label>4(BS)</label>
+                    <label>4(Baik Sekali)</label>
                 </div>
                 <div class="m-4">
                     <input type="radio" class="form-check-input" id="radio1" name="pengetahuan" value="3">
-                    <label>3(B)</label>
+                    <label>3(Baik)</label>
                 </div>
                 <div class="m-4">
                     <input type="radio" class="form-check-input" id="radio1" name="pengetahuan" value="2">
-                    <label>2(C)</label>
+                    <label>2(Cukup)</label>
                 </div>
                 <div class="m-4">
                     <input type="radio" class="form-check-input" id="radio1" name="pengetahuan" value="1">
-                    <label>1(K)</label>
+                    <label>1(Kurang)</label>
                 </div>
                 <div class="form-group">
                     <label>keterangan</label>
@@ -142,19 +142,19 @@
             <div class="d-flex justify-content-center">
                 <div class="m-4">
                     <input type="radio" class="form-check-input" id="radio1" name="keterampilan" value="4">
-                    <label>4(BS)</label>
+                    <label>4(Baik Sekali)</label>
                 </div>
                 <div class="m-4">
                     <input type="radio" class="form-check-input" id="radio1" name="keterampilan" value="3">
-                    <label>3(B)</label>
+                    <label>3(Baik)</label>
                 </div>
                 <div class="m-4">
                     <input type="radio" class="form-check-input" id="radio1" name="keterampilan" value="2">
-                    <label>2(C)</label>
+                    <label>2(Cukup)</label>
                 </div>
                 <div class="m-4">
                     <input type="radio" class="form-check-input" id="radio1" name="keterampilan" value="1">
-                    <label>1(K)</label>
+                    <label>1(Kurang)</label>
                 </div>
                 <div class="form-group">
                     <label>keterangan</label>
@@ -169,19 +169,19 @@
             <div class="d-flex justify-content-center">
                 <div class="m-4">
                     <input type="radio" class="form-check-input" id="radio1" name="performance" value="4">
-                    <label>4(BS)</label>
+                    <label>4(Baik Sekali)</label>
                 </div>
                 <div class="m-4">
                     <input type="radio" class="form-check-input" id="radio1" name="performance" value="3">
-                    <label>3(B)</label>
+                    <label>3(Baik)</label>
                 </div>
                 <div class="m-4">
                     <input type="radio" class="form-check-input" id="radio1" name="performance" value="2">
-                    <label>2(C)</label>
+                    <label>2(Cukup)</label>
                 </div>
                 <div class="m-4">
                     <input type="radio" class="form-check-input" id="radio1" name="performance" value="1">
-                    <label>1(K)</label>
+                    <label>1(Kurang)</label>
                 </div>
                 <div class="form-group">
                     <label>keterangan</label>
@@ -197,19 +197,19 @@
             <div class="d-flex justify-content-center">
                 <div class="m-4">
                     <input type="radio" class="form-check-input" id="radio1" name="perubahan" value="4">
-                    <label>4(BS)</label>
+                    <label>4(Baik Sekali)</label>
                 </div>
                 <div class="m-4">
                     <input type="radio" class="form-check-input" id="radio1" name="perubahan" value="3">
-                    <label>3(B)</label>
+                    <label>3(Baik)</label>
                 </div>
                 <div class="m-4">
                     <input type="radio" class="form-check-input" id="radio1" name="perubahan" value="2">
-                    <label>2(C)</label>
+                    <label>2(Cukup)</label>
                 </div>
                 <div class="m-4">
                     <input type="radio" class="form-check-input" id="radio1" name="perubahan" value="1">
-                    <label>1(K)</label>
+                    <label>1(Kurang)</label>
                 </div>
                 <div class="form-group">
                     <label>keterangan</label>
@@ -225,19 +225,19 @@
             <div class="d-flex justify-content-center">
                 <div class="m-4">
                     <input type="radio" class="form-check-input" id="radio1" name="pelatihan" value="4">
-                    <label>4(BS)</label>
+                    <label>4(Baik Sekali)</label>
                 </div>
                 <div class="m-4">
                     <input type="radio" class="form-check-input" id="radio1" name="pelatihan" value="3">
-                    <label>3(B)</label>
+                    <label>3(Baik)</label>
                 </div>
                 <div class="m-4">
                     <input type="radio" class="form-check-input" id="radio1" name="pelatihan" value="2">
-                    <label>2(C)</label>
+                    <label>2(Cukup)</label>
                 </div>
                 <div class="m-4">
                     <input type="radio" class="form-check-input" id="radio1" name="pelatihan" value="1">
-                    <label>1(K)</label>
+                    <label>1(Kurang)</label>
                 </div>
                 <div class="form-group">
                     <label>keterangan</label>
@@ -270,7 +270,7 @@
         </div>
     </div>
     <div id="adding">
-        <h5 class="mt-3">B. Apakah Ada Peningkatan Kopetensi Karyawan Setelah Pelatihan Ini</h5>
+        <h5 class="mt-3">B. Apakah Ada Peningkatan Kompetensi Karyawan Setelah Pelatihan Ini</h5>
         <div>
             <div class="styling">
                 <div class="d-flex justify-content-center d-flex flex-column">
@@ -291,7 +291,7 @@
             </div>
             <div>
                 <button type="button" class="btn btn-success btn-sm" onclick="adding(1)"><i
-                        class="fa-solid fa-plus"></i></button>
+                        class="fa-solid fa-plus"></i> Tambah Sasaran Kompetensi</button>
             </div>
         </div>
     </div>
@@ -405,7 +405,7 @@ function adding(i) {
             </div>
             <div>
                 <button type="button" class="btn btn-success btn-sm" onclick="adding(${i})"><i
-                        class="fa-solid fa-plus"></i></button>
+                        class="fa-solid fa-plus"></i>Tambah Sasaran Kompetensi</button>
                         <button type="button" class="btn btn-danger btn-sm" id="removed${i}" onclick="removed(${i})"><i
                         class="fa fa-close"></i></button>
             </div>

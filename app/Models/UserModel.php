@@ -12,7 +12,7 @@ class UserModel extends Model
     protected $allowedFields = [
         'npk', 'nama', 'status', 'dic',
         'divisi', 'departemen', 'seksi', 'bagian', 'username', 'password',
-        'level', 'profile',
+        'level', 'profile', 'email',
     ];
 
     function get_data_login($username)

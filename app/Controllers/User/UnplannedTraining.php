@@ -258,10 +258,10 @@ class UnplannedTraining extends BaseController
 
     public function DataTraining()
     {
-        $id = $this->request->getPost('id_training');
+        $training = $this->request->getPost('training');
 
-        $data = $this->tna->getTnaByid($id);
+        // $data = $this->tna->getTnaByid($id);
 
-        echo json_encode($data);
+        echo json_encode($training);
     }
 }

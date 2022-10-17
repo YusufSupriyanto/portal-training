@@ -50,7 +50,7 @@
                 <td>
                     <div class="d-flex justify-content-center sm"
                         style="background-color:green;width:100px;border:1px;border-radius:2px;color:white;font-size:10px;">
-                        sudah
+                        Sudah
                         Dilaksanakan
                     </div>
                 </td>

@@ -17,7 +17,7 @@
                 <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#exampleModal">
                     History Training
                 </button>
-                <h6><input class="form-control" value="Nama                  :<?= $user['nama'] ?>" readonly>
+                <h6><input class="form-control" value="Nama                  :<?= "  " . $user['nama'] ?>" readonly>
                 </h6>
                 <h6><input class="form-control" value="Jabatan             :<?= "  " . $user['bagian'] ?>" readonly>
                 </h6>

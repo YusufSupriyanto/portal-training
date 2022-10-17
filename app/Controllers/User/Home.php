@@ -67,21 +67,20 @@ class Home extends BaseController
         $dataFix = [];
         $jadwal = $this->tna->getDataJadwalHome($dates);
 
-        foreach ($jadwal as $jadwals) {
-            $data = [
-                'id_tna' => $jadwals['id_tna'],
-                'id_training' => $jadwals['id_training'],
-                'training' => $jadwals['Training'],
-                'pendaftar' => $jadwals['Pendaftar'],
-                'tanggal_start' => $dates,
-                'tanggal_ahir' => $jadwals['rencana_training'],
-                'kategori' => $jadwals['kategori_training'],
-            ];
+        // foreach ($jadwal as $jadwals) {
+        //     $data = [
+        //         'id_training' => $jadwals['id_training'],
+        //         'training' => $jadwals['Training'],
+        //         'pendaftar' => $jadwals['Pendaftar'],
+        //         'tanggal_start' => $dates,
+        //         'tanggal_ahir' => $jadwals['rencana_training'],
+        //         'kategori' => $jadwals['kategori_training'],
+        //     ];
 
-            array_push($dataFix, $data);
-        }
+        //     array_push($dataFix, $data);
+        // }
 
-        echo json_encode($dataFix);
+        echo json_encode($jadwal);
     }
 
 

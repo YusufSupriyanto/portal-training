@@ -92,13 +92,13 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="inputSkills" class="col-sm-2 col-form-label">Promosi Terahir</label>
+                                    <label for="inputSkills" class="col-sm-2 col-form-label">Promosi Terakhir</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="inputSkills">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="inputSkills" class="col-sm-2 col-form-label">Masih Kerja</label>
+                                    <label for="inputSkills" class="col-sm-2 col-form-label">Masa Kerja</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="inputSkills">
                                     </div>
@@ -138,7 +138,7 @@
                                 <tr>
                                     <th>Grade</th>
                                     <th>Year</th>
-                                    <th>Instution</th>
+                                    <th>Institution</th>
                                     <th>Major</th>
                                 </tr>
                             </thead>
@@ -188,7 +188,7 @@
                                     <th>Year Start</th>
                                     <th>Year End</th>
                                     <th>Position</th>
-                                    <th>Departemen</th>
+                                    <th>Department</th>
                                     <th>Division</th>
                                     <th>Company</th>
                                 </tr>

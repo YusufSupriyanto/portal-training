@@ -71,7 +71,7 @@
                             style="background-color:grey;width:50;border:1px;border-radius:2px;color:white;">Wait</div>
                         <?php elseif ($statuses['status_approval_2'] == 'accept') : ?>
                         <div class="d-flex justify-content-center"
-                            style="background-color:green;width:50px;border:1px;border-radius:2px;color:white;">Accept
+                            style="background-color:green;width:50;border:1px;border-radius:2px;color:white;">Accept
                         </div>
                         <?php else : ?>
                         <div class="d-flex justify-content-center"

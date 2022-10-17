@@ -185,6 +185,9 @@ $routes->post('/data_evaluasiEfektivitas', 'User\EvaluasiEfektifitas::DataEvalua
 
 $routes->get('/send_email', 'User\EvaluasiEfektifitas::sendEmail', ['filter' => 'Auth']);
 $routes->cli('/send_email', 'User\EvaluasiEfektifitas::sendEmail');
+$routes->get('/evaluasi_efektifitas_personal', 'User\EvaluasiEfektifitas::PersonalEvaluasi');
+$routes->get('/evaluasi_efektifitas_unplanned_personal', 'User\EvaluasiEfektivitasUnplanned::PersonalEvaluasiUnplanned');
+
 
 
 //history
@@ -222,8 +225,6 @@ $routes->post('/send_evaluasi_reaksi_unplanned', 'User\EvaluasiUnplanned::SendEv
 
 
 //unplanned history
-$routes->get('/personal_history_unplanned', 'User\History::index', ['filter' => 'Auth']);
-$routes->get('/member_history_unplanned', 'User\History::memberHistory', ['filter' => 'Auth']);
 $routes->post('/detail_history_unplanned', 'User\HistoryUnplanned::detailHistoryMember', ['filter' => 'Auth']);
 
 //contac Us

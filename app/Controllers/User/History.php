@@ -26,16 +26,10 @@ class History extends BaseController
     {
         $id = session()->get('id');
 
-        $page  = basename($_SERVER['PHP_SELF']);
-        if ($page == 'personal_history') {
-            $history = $this->tna->getDetailHistory($id);
-            $tittle = 'Personal History Training';
-        } else {
-            $history = $this->unplanned->getDetailHistory($id);
-            $tittle = 'Personal History Training Unplanned';
-        }
+
+        $history = $this->tna->getDetailHistory($id);
         $data = [
-            'tittle' => $tittle,
+            'tittle' => 'Personal History Training',
             'history' => $history
         ];
         return view('user/historypersonal', $data);
@@ -48,28 +42,17 @@ class History extends BaseController
         $divisi = session()->get('divisi');
         $departemen = session()->get('departemen');
 
-        $page = basename($_SERVER['PHP_SELF']);
-        if ($page == 'member_history') {
-            if ($bagian == 'BOD') {
-                $status =  $this->tna->getMemberSchedule($bagian, $dic);
-            } elseif ($bagian == 'KADIV') {
-                $status =  $this->tna->getMemberSchedule($bagian, $divisi);
-            } elseif ($bagian == 'KADEPT') {
-                $status = $this->tna->getMemberSchedule($bagian, $departemen);
-            } else {
-                $status  =  array();
-            }
+
+        if ($bagian == 'BOD') {
+            $status =  $this->tna->getMemberHistory($bagian, $dic);
+        } elseif ($bagian == 'KADIV') {
+            $status =  $this->tna->getMemberHistory($bagian, $divisi);
+        } elseif ($bagian == 'KADEPT') {
+            $status = $this->tna->getMemberHistory($bagian, $departemen);
         } else {
-            if ($bagian == 'BOD') {
-                $status =  $this->unplanned->getMemberSchedule($bagian, $dic);
-            } elseif ($bagian == 'KADIV') {
-                $status =  $this->unplanned->getMemberSchedule($bagian, $divisi);
-            } elseif ($bagian == 'KADEPT') {
-                $status = $this->unplanned->getMemberSchedule($bagian, $departemen);
-            } else {
-                $status  =  array();
-            }
+            $status  =  array();
         }
+
 
         // dd($status[0]);
         // $user = $this->user->getAllUser();
@@ -82,11 +65,7 @@ class History extends BaseController
                 'jumlah_training' => ''
             ];
         } else {
-            if ($page == 'member_history') {
-                $training = $this->tna->getTnaUser($status[0]['id_user']);
-            } else {
-                $training = $this->unplanned->getTnaUser($status[0]['id_user']);
-            }
+            $training = $this->tna->getTnaUserHistory($status[0]['id_user']);
             $history = [
                 'id' => $status[0]['id_user'],
                 'nama' => $status[0]['nama'],
