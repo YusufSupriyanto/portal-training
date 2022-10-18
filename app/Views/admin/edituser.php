@@ -43,6 +43,22 @@
                 <input type="text" class="form-control" placeholder="Input Bagian" value="<?= $user['bagian'] ?>"
                     name="bagian">
             </div>
+            <div class="form-group">
+                <label>Grade</label>
+                <input type="text" class="form-control" placeholder="Input Grade" value="" name="grade">
+            </div>
+            <div class="form-group">
+                <label>Year</label>
+                <input type="text" class="form-control" placeholder="Input Year" value="" name="year">
+            </div>
+            <div class="form-group">
+                <label>Institution</label>
+                <input type="text" class="form-control" placeholder="Input Institution" value="" name="institution">
+            </div>
+            <div class="form-group">
+                <label>Major</label>
+                <input type="text" class="form-control" placeholder="Input Major" value="" name="major">
+            </div>
         </div>
         <!-- /.card-body -->
 

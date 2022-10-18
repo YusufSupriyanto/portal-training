@@ -72,6 +72,37 @@ class UserModel extends Model
         return $this->get()->getResultArray();
     }
 
+    public function DistinctSeksi()
+    {
+        $this->select('seksi')->distinct();
+        return $this->get()->getResultArray();
+    }
+    public function DistinctDic()
+    {
+        $this->select('dic')->distinct();
+        return $this->get()->getResultArray();
+    }
+    public function DistinctDivisi()
+    {
+        $this->select('divisi')->distinct();
+        return $this->get()->getResultArray();
+    }
+    public function DistinctDepartemen()
+    {
+        $this->select('departemen')->distinct();
+        return $this->get()->getResultArray();
+    }
+    public function getLastUser()
+    {
+        $this->select('id_user');
+        return $this->get()->getLastRow();
+    }
+    public function getIdUser()
+    {
+        $this->select('id_user');
+        return $this->get()->getResultArray();
+    }
+
     function M_test()
     {
         $data = $this->get();

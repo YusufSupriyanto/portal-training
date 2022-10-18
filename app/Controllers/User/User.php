@@ -45,7 +45,6 @@ class User extends BaseController
         $newName = $image->getRandomName();
         $image->move("../public/profile", $newName);
         $filepath = "/profile/" . $newName;
-
         $data = [
             'id_user' => session()->get('id'),
             'profile' => $filepath,

@@ -37,6 +37,7 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 //test
 $routes->get('/test', 'Test::testAjaxTna');
+$routes->get('/edu', 'Admin\C_User::addIdEducation');
 
 
 
@@ -71,6 +72,7 @@ $routes->post('/addUser', 'Admin\C_User::addUser', ['filter' => 'Auth']);
 $routes->delete('/delete/user/(:num)', 'Admin\C_User::delete/$1', ['filter' => 'Auth']);
 $routes->get('/update/user/(:num)', 'Admin\C_User::update/$1', ['filter' => 'Auth']);
 $routes->post('/edit/user/(:num)', 'Admin\C_User::edit/$1', ['filter' => 'Auth']);
+$routes->post('/save_user', 'Admin\C_User::singleUser', ['filter' => 'Auth']);
 
 
 //Form TNA ADMIN

@@ -22,38 +22,19 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body p-0">
+                            <div></div>
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th>Training</th>
                                         <th>Pendaftar</th>
                                         <th>Tanggal Mulai</th>
-                                        <th>Tanggal Berahir</th>
+                                        <th>Tanggal Berakhir</th>
                                         <th>Kategori</th>
                                         <th>Notes</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <div id="training"></div>
-                                        </td>
-                                        <td>
-                                            <div id="pendaftar"></div>
-                                        </td>
-                                        <td>
-                                            <div id="tanggalmulai"></div>
-                                        </td>
-                                        <td>
-                                            <div id="tanggalahir"></div>
-                                        </td>
-                                        <td>
-                                            <div id="kategori"></div>
-                                        </td>
-                                        <td>
-                                            <div id="notes"></div>
-                                        </td>
-                                    </tr>
+                                <tbody id="home_table">
                                 </tbody>
                             </table>
                         </div>
@@ -72,7 +53,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="user">Daftar Unplanned</h5>
+                    <h5 class="modal-title" id="user">Daftar Unplanned Training</h5>
                 </div>
                 <div class="modal-body">
 
@@ -154,21 +135,39 @@ $(document).ready(function() {
                             },
                             success: function(data) {
                                 console.log(data)
-                                $('#training').text(data[0]
-                                    .training)
-                                $('#pendaftar').text(data[0]
-                                    .pendaftar)
-                                $('#tanggalmulai').text(data[0]
-                                    .tanggal_start)
-                                $('#tanggalahir').text(data[0]
-                                    .tanggal_ahir)
-                                $('#kategori').text(data[0]
-                                    .kategori)
-                                $('#notes').html(
-                                    "<button class=\"btn btn-primary btn-sm\" onclick=\"call('" +
-                                    data[0].id_tna +
-                                    "')\">Daftar</button>"
-                                )
+                                var html = '';
+                                for (let i = 0; i < data
+                                    .length; i++) {
+                                    html += `
+                                     <tr>
+                                        <td>
+                                           ${data[i]
+                                        .Training}
+                                        </td>
+                                        <td>
+                                          ${data[i]
+                                    .Pendaftar}
+                                        </td>
+                                        <td>
+                                            ${data[i]
+                                        .mulai_training}
+                                        </td>
+                                        <td>
+                                           ${data[i]
+                                        .rencana_training}
+                                        </td>
+                                        <td>
+                                            ${data[i]
+                                        .kategori_training}
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-primary btn-sm" onclick="call('${data[i].id_training}','${encodeURIComponent(data[i].Training)}','${data[i].jenis_training}','${data[i].kategori_training}','${data[i].metode_training}','${data[i].mulai_training}','${data[i].rencana_training}','${data[i].biaya_actual}')">Daftar</button>
+                                        </td>
+                                    </tr>
+                                    `;
+                                }
+                                $('#exampleModal #home_table')
+                                    .html(html)
 
                             }
 
@@ -185,29 +184,19 @@ $(document).ready(function() {
     })
 })
 
-function call(id) {
-    console.log(id)
-    $.ajax({
-        type: 'POST',
-        url: "<?= base_url(); ?>/data_training",
-        async: true,
-        dataType: "json",
-        data: {
-            id_training: id
-        },
-        success: function(data) {
-            console.log(data[0].training)
-            $('#user #training').val(data[0].training)
-            $('#user #id_training').val(data[0].id_training)
-            $('#user #jenis').val(data[0].jenis_training)
-            $('#user #kategori').val(data[0].kategori_training)
-            $('#user #metode').val(data[0].metode_training)
-            $('#user #start').val(data[0].mulai_training)
-            $('#user #end').val(data[0].rencana_training)
-            $('#user #budget').val(data[0].biaya_actual)
-        }
+function call(id_training, training, jenis, kategori, metode, mulai, ahir, biaya) {
 
-    })
+    let Training = decodeURIComponent(training)
+    //  console.log(Training)
+
+    $('#user #id_training').val(id_training)
+    $('#user #training').val(Training)
+    $('#user #jenis').val(jenis)
+    $('#user #kategori').val(kategori)
+    $('#user #metode').val(metode)
+    $('#user #start').val(mulai)
+    $('#user #end').val(ahir)
+    $('#user #budget').val(biaya)
     $('#user').modal('show')
 }
 

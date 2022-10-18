@@ -26,7 +26,7 @@ $('.btn-delete').on('click', function(e) {
     const href = $(this).parents('form');
     Swal.fire({
         title: 'Apakah Anda Yakin?',
-        text: "Menghapus Category ?",
+        text: "Menghapus Data ?",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',

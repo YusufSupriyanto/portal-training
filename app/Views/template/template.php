@@ -112,7 +112,7 @@ to get the desired effect
             <!-- Main Sidebar Container -->
             <aside class="main-sidebar sidebar-dark-primary elevation-4">
                 <!-- Brand Logo -->
-                <a href="index3.html" class="brand-link">
+                <a href="<?= base_url() ?>/home" class="brand-link">
                     <img src="<?= base_url() ?>/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                         style="opacity: .8">
                     <span class="brand-text font-weight-light">Portal Training</span>
@@ -364,15 +364,6 @@ to get the desired effect
                 <!-- Control sidebar content goes here -->
             </aside>
             <!-- /.control-sidebar -->
-
-            <!-- Main Footer -->
-            <footer class="main-footer">
-                <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
-                All rights reserved.
-                <div class="float-right d-none d-sm-inline-block">
-                    <b>Version</b> 3.0.0
-                </div>
-            </footer>
         </div>
         <!-- ./wrapper -->
 
@@ -383,8 +374,11 @@ to get the desired effect
         <!-- Bootstrap -->
         <script src="<?= base_url() ?>/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
         <!-- AdminLTE -->
-        <script src="<?= base_url() ?>/AdminLTE/dist/js/adminlte.js"></script>
-
+        <!-- <script src="<?= base_url() ?>/AdminLTE/dist/js/adminlte.js"></script> -->
+        <!-- bs-custom-file-input -->
+        <script src="<?= base_url() ?>/AdminLTE/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="<?= base_url() ?>/AdminLTE/dist/js/adminlte.min.js"></script>
         <!-- OPTIONAL SCRIPTS -->
         <script src="<?= base_url() ?>/AdminLTE/plugins/chart.js/Chart.min.js"></script>
         <script src="<?= base_url() ?>/AdminLTE/dist/js/demo.js"></script>
@@ -394,6 +388,11 @@ to get the desired effect
         <script src="<?= base_url() ?>/sweet/sweetalert2.all.min.js"></script>
         <script src="<?= base_url() ?>/sweet/training.js"></script>
         <?= view('asset/admintna') ?>
+        <script type="text/javascript">
+        $(document).ready(function() {
+            bsCustomFileInput.init();
+        });
+        </script>
 
     </body>
 
