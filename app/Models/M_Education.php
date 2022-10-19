@@ -10,4 +10,15 @@ class M_Education extends Model
     // protected $useAutoIncrement = true;
     protected $primaryKey = 'id_education';
     protected $allowedFields = ['id_user', 'grade', 'year', 'institution', 'major'];
+
+    public function getIdEducation($id)
+    {
+        return $this->where(['id_education' => $id])->first();
+    }
+
+    public function getDataEducation($id)
+    {
+        $this->select()->where('id_user', $id);
+        return $this->get()->getResultArray();
+    }
 }

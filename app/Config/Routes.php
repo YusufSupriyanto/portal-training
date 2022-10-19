@@ -70,9 +70,13 @@ $routes->post('/edit/(:num)', 'Admin\C_ListTraining::edit/$1', ['filter' => 'Aut
 $routes->get('/user', 'Admin\C_User::index', ['filter' => 'Auth']);
 $routes->post('/addUser', 'Admin\C_User::addUser', ['filter' => 'Auth']);
 $routes->delete('/delete/user/(:num)', 'Admin\C_User::delete/$1', ['filter' => 'Auth']);
-$routes->get('/update/user/(:num)', 'Admin\C_User::update/$1', ['filter' => 'Auth']);
-$routes->post('/edit/user/(:num)', 'Admin\C_User::edit/$1', ['filter' => 'Auth']);
+$routes->post('/update_user', 'Admin\C_User::update', ['filter' => 'Auth']);
+$routes->post('/edit_user/(:num)', 'Admin\C_User::edit/$1', ['filter' => 'Auth']);
 $routes->post('/save_user', 'Admin\C_User::singleUser', ['filter' => 'Auth']);
+$routes->post('/add_education', 'Admin\C_User::AddEducation', ['filter' => 'Auth']);
+$routes->post('/add_career', 'Admin\C_User::AddCareer', ['filter' => 'Auth']);
+$routes->post('/get_education', 'Admin\C_User::getEducation', ['filter' => 'Auth']);
+$routes->post('/edit_user', 'Admin\C_User::EditUser', ['filter' => 'Auth']);
 
 
 //Form TNA ADMIN

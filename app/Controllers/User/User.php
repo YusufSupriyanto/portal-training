@@ -25,10 +25,7 @@ class User extends BaseController
     public function index()
     {
         $id = session()->get('id');
-        //dd($id);
         $user = $this->user->getAllUser($id);
-        //dd($user);
-
         $data = [
             'tittle' => 'Profile',
             'person' => $user

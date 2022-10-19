@@ -61,8 +61,19 @@
                                 <button type="submit" class="btn btn-danger btn-sm btn-delete"><i
                                         class="fa fa-fw fa-trash"></i></button>
                             </form>
-                            <a href="<?= base_url() ?>\update\user\<?= $users->id_user ?>" type="button"
-                                class="btn btn-warning btn-sm mt-2"><i class="fa fa-fw fa-edit"></i></a>
+                            <form action="<?= base_url() ?>\update_user" method="post">
+                                <input type="hidden" name="update" value="<?= $users->id_user ?>">
+                                <button type="submit" class="btn btn-warning btn-sm mt-2"><i
+                                        class="fa-solid fa-pen-to-square" style="font-size:17px;"></i></button>
+                            </form>
+                            <button type="button" class="btn btn-success btn-sm mt-2"
+                                onclick="education(<?= $users->id_user ?>)">
+                                <i class="fa-solid fa-graduation-cap"></i>
+                            </button>
+                            <button type="button" class="btn btn-secondary btn-sm mt-2"
+                                onclick="career(<?= $users->id_user ?>)">
+                                <i class="fa-solid fa-briefcase" style="font-size:17px;"></i>
+                            </button>
                         </div>
                     </td>
                 </tr>
@@ -90,7 +101,7 @@
 
                         <div class="card-body d-flex justify-content-between">
                             <div>
-                                <div>Data User</div>
+                                <div>Form User</div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Nama</label>
                                     <input type="text" name="nama" class="form-control" placeholder="Masukan Nama"
@@ -189,7 +200,7 @@
                                 </div>
                             </div>
                             <div>
-                                <div>Data User Education</div>
+                                <div>Form Education</div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Grade</label>
                                     <input type="text" name="grade" class="form-control" placeholder="Masukan Grade"
@@ -210,15 +221,15 @@
                                     <input type="text" name="major" class="form-control" placeholder="Masukan Major"
                                         required>
                                 </div>
-                                <div>Data User Career</div>
+                                <div>Form Career</div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Year Start</label>
-                                    <input type="date" name="year_start" class="form-control"
+                                    <input type="text" name="year_start" class="form-control"
                                         placeholder="Masukan Year Start" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Year End</label>
-                                    <input type="date" name="year_end" class="form-control"
+                                    <input type="text" name="year_end" class="form-control"
                                         placeholder="Masukan Year End" required>
                                 </div>
                                 <div class="form-group">
@@ -243,7 +254,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
@@ -254,4 +264,106 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="education" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form method="post" action="<?= base_url() ?>/add_education">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Form Education</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Grade</label>
+                        <input type="text" name="grade" class="form-control" placeholder="Masukan Grade" required>
+                        <input type="hidden" name="id" id="id" class="form-control">
+
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Year</label>
+                        <input type="text" name="year" class="form-control" placeholder="Masukan Year" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Institution</label>
+                        <input type="text" name="institution" class="form-control" placeholder="Masukan Institution"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Major</label>
+                        <input type="text" name="major" class="form-control" placeholder="Masukan Major" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="career" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form method="post" action="<?= base_url() ?>/add_career">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Form Education</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Year Start</label>
+                        <input type="text" name="year_start" class="form-control" placeholder="Masukan Year Start"
+                            required>
+                        <input type="hidden" name="id" id="id" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Year End</label>
+                        <input type="text" name="year_end" class="form-control" placeholder="Masukan Year End">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Position</label>
+                        <input type="text" name="position" class="form-control" placeholder="Masukan Position" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Department</label>
+                        <input type="text" name="department" class="form-control" placeholder="Masukan Department"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Division</label>
+                        <input type="text" name="division" class="form-control" placeholder="Masukan Division" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Company</label>
+                        <input type="text" name="company" class="form-control" placeholder="Masukan Company" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+function education(id) {
+    // alert(id)
+    jQuery.noConflict();
+    $('#education #id').val(id)
+    $("#education").modal("show");
+}
+
+function career(id) {
+    // alert(id)
+    jQuery.noConflict();
+    $('#career #id').val(id)
+    $("#career").modal("show");
+}
+</script>
 <?= $this->endSection() ?>

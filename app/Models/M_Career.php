@@ -9,5 +9,9 @@ class M_Career extends Model
     protected $table      = 'career';
     // protected $useAutoIncrement = true;
     protected $primaryKey = 'id_career';
-    protected $allowedFields = ['id_user', 'year_start', 'year_end', 'position', 'departemen', 'division', 'company'];
+    protected $allowedFields = ['id_user', 'year_start', 'year_end', 'position', 'departement', 'division', 'company'];
+    public function getDataCareer($id)
+    {
+        return $this->where(['id_user' => $id])->first();
+    }
 }

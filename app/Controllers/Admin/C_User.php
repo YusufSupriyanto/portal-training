@@ -61,7 +61,7 @@ class C_User extends BaseController
             'email' => $this->request->getVar('email'),
             'profile' =>   $filepath
         ];
-        // $this->user->save($data);
+        $this->user->save($data);
         $last = $this->user->getLastUser();
         $education = [
             'id_user' => $last,
@@ -80,9 +80,11 @@ class C_User extends BaseController
             'division' => $this->request->getVar('division'),
             'company' => $this->request->getVar('company'),
         ];
-        // $this->education->save($education);
-        // $this->career->save($career);
-        // dd($last);
+        $this->education->save($education);
+        $this->career->save($career);
+        // d($data);
+        // d($career);
+        // d($education);
         session()->setFlashdata('success', 'Data Berhasil Di Simpan');
         return redirect()->to('/user');
     }
@@ -133,14 +135,26 @@ class C_User extends BaseController
     }
 
 
-    public function update($id)
+    public function update()
     {
+        $id = $this->request->getVar('update');
+
         $data = [
             'tittle' => 'Edit User',
-            'user' => $this->user->getAllUser($id)
+            'user' => $this->user->getAllUser($id),
+            'education' => $this->education->getDataEducation($id)
         ];
 
         return view('admin/edituser', $data);
+    }
+
+    public function EditUser()
+    {
+        $edu =  $this->request->getPost('id_user');
+        $education = [];
+        foreach ($edu as $educate) {
+        }
+        echo json_encode($edu);
     }
 
     public function edit($id)
@@ -155,7 +169,32 @@ class C_User extends BaseController
             'bagian' => $this->request->getVar('bagian'),
         ];
 
+
+
+        // $data1 = [
+        //     'id_user' => $id,
+        //     'grade' => $this->request->getVar('grade'),
+        //     'year' => $this->request->getVar('year'),
+        //     'institution' => $this->request->getVar('institution'),
+        //     'major' => $this->request->getVar('major')
+        // ];
+        // $data2 = [
+        //     'id_user' => $id,
+        //     'year_start' => $this->request->getVar('year_start'),
+        //     'year_end' => $this->request->getVar('year_end'),
+        //     'position' => $this->request->getVar('position'),
+        //     'departement' => $this->request->getVar('department'),
+        //     'division' => $this->request->getVar('division'),
+        //     'company' => $this->request->getVar('company')
+        // ];
+        // d($data);
+        // d($data1);
+        // d($data2);
+
+
         $this->user->save($data);
+        // $this->education->save($data1);
+        // $this->career->save($data2);
         session()->setFlashdata('success', 'Data Berhasil Di Update');
         return redirect()->to('/user');
     }
@@ -170,6 +209,48 @@ class C_User extends BaseController
     }
 
 
+    public function AddEducation()
+    {
+        $data = [
+            'id_user' => $this->request->getVar('id'),
+            'grade' => $this->request->getVar('grade'),
+            'year' => $this->request->getVar('year'),
+            'institution' => $this->request->getVar('institution'),
+            'major' => $this->request->getVar('major')
+
+        ];
+        $this->education->save($data);
+        session()->setFlashdata('success', 'Data Education Berhasil Di Simpan');
+        return redirect()->to('/user');
+    }
+
+    public function AddCareer()
+    {
+        $data = [
+            'id_user' => $this->request->getVar('id'),
+            'year_start' => $this->request->getVar('year_start'),
+            'year_end' => $this->request->getVar('year_end'),
+            'position' => $this->request->getVar('position'),
+            'departement' => $this->request->getVar('department'),
+            'division' => $this->request->getVar('division'),
+            'company' => $this->request->getVar('company')
+
+        ];
+        $this->career->save($data);
+        session()->setFlashdata('success', 'Data Career Berhasil Di Simpan');
+        return redirect()->to('/user');
+    }
+
+    public function getEducation()
+    {
+        // $id = $this->request->getPost('id_education');
+        // $education =  $this->education->getIdEducation($id);
+        // echo json_encode($education);
+
+
+    }
+
+
     // public function addIdEducation()
     // {
     //     $id = $this->user->getIdUser();
@@ -180,6 +261,20 @@ class C_User extends BaseController
     //                 'id_user' => $ids['id_user']
     //             ];
     //         $this->education->save($data);
+    //     }
+    //     // dd($education);
+    // }
+
+    // public function addIdEducation()
+    // {
+    //     $id = $this->user->getIdUser();
+    //     $education = [];
+    //     foreach ($id as $ids) {
+    //         $data =
+    //             [
+    //                 'id_user' => $ids['id_user']
+    //             ];
+    //         $this->career->save($data);
     //     }
     //     // dd($education);
     // }
