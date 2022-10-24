@@ -77,6 +77,9 @@ $routes->post('/add_education', 'Admin\C_User::AddEducation', ['filter' => 'Auth
 $routes->post('/add_career', 'Admin\C_User::AddCareer', ['filter' => 'Auth']);
 $routes->post('/get_education', 'Admin\C_User::getEducation', ['filter' => 'Auth']);
 $routes->post('/edit_user', 'Admin\C_User::EditUser', ['filter' => 'Auth']);
+$routes->post('/delete_education', 'Admin\C_User::deleteEducation', ['filter' => 'Auth']);
+$routes->post('/delete_career', 'Admin\C_User::deleteCareer', ['filter' => 'Auth']);
+
 
 
 //Form TNA ADMIN

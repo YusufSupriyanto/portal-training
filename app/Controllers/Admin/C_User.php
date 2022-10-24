@@ -142,7 +142,8 @@ class C_User extends BaseController
         $data = [
             'tittle' => 'Edit User',
             'user' => $this->user->getAllUser($id),
-            'education' => $this->education->getDataEducation($id)
+            'education' => $this->education->getDataEducation($id),
+            'career' => $this->career->getDataCareer($id)
         ];
 
         return view('admin/edituser', $data);
@@ -150,62 +151,119 @@ class C_User extends BaseController
 
     public function EditUser()
     {
-        $edu =  $this->request->getPost('id_user');
-        $education = [];
-        foreach ($edu as $educate) {
-        }
-        echo json_encode($edu);
-    }
-
-    public function edit($id)
-    {
+        $dataFixes = [];
+        $profile =  $this->request->getPost('individual');
         $data = [
-            'id_user' => $id,
-            'npk' => $this->request->getVar('npk'),
-            'nama' => $this->request->getVar('nama'),
-            'status' => $this->request->getVar('status'),
-            'divisi' => $this->request->getVar('divisi'),
-            'departemen' => $this->request->getVar('departemen'),
-            'bagian' => $this->request->getVar('bagian'),
+            'id_user' => $profile[0],
+            'npk' => $profile[1],
+            'nama' => $profile[2],
+            'status' => $profile[3],
+            'divisi' => $profile[4],
+            'department' => $profile[5],
+            'seksi' => $profile[6],
+            'bagian' => $profile[7],
+            'promosi' => $profile[8],
+            'golongan' => $profile[9],
+            'tgl_masuk' => $profile[10],
+            'tahun' => $profile[11],
+            'bulan' => $profile[12],
         ];
 
-
-
-        // $data1 = [
-        //     'id_user' => $id,
-        //     'grade' => $this->request->getVar('grade'),
-        //     'year' => $this->request->getVar('year'),
-        //     'institution' => $this->request->getVar('institution'),
-        //     'major' => $this->request->getVar('major')
-        // ];
-        // $data2 = [
-        //     'id_user' => $id,
-        //     'year_start' => $this->request->getVar('year_start'),
-        //     'year_end' => $this->request->getVar('year_end'),
-        //     'position' => $this->request->getVar('position'),
-        //     'departement' => $this->request->getVar('department'),
-        //     'division' => $this->request->getVar('division'),
-        //     'company' => $this->request->getVar('company')
-        // ];
-        // d($data);
-        // d($data1);
-        // d($data2);
-
-
+        array_push($dataFixes, $data);
         $this->user->save($data);
-        // $this->education->save($data1);
-        // $this->career->save($data2);
-        session()->setFlashdata('success', 'Data Berhasil Di Update');
-        return redirect()->to('/user');
+        $old_education =  $this->request->getPost('education_old');
+        if (!empty($old_education)) {
+            $oldfix = [];
+            foreach ($old_education as $old) {
+                $education_old = [
+                    'id_education' => $old[1],
+                    'grade' => $old[0],
+                    'year' => $old[2],
+                    'institution' => $old[3],
+                    'major' => $old[4]
+                ];
+                array_push($oldfix, $education_old);
+                $this->education->save($education_old);
+            }
+
+            array_push($dataFixes, $oldfix);
+        }
+        $new_education =  $this->request->getPost('education_new');
+        if (!empty($new_education)) {
+            $newfix = [];
+            foreach ($new_education as $new) {
+                $education_new = [
+                    'id_user' => $profile[0],
+                    'grade' => $new[0],
+                    'year' => $new[1],
+                    'institution' => $new[2],
+                    'major' => $new[3]
+                ];
+                array_push($newfix, $education_new);
+                $this->education->save($education_new);
+            }
+            array_push($dataFixes, $newfix);
+        }
+        $old_career =  $this->request->getPost('career_old');
+        if (!empty($old_career)) {
+            $oldfixCareer = [];
+            foreach ($old_career as $old_career) {
+                $career_old = [
+                    'id_career' => $old_career[0],
+                    'year_start' => $old_career[1],
+                    'year_end' => $old_career[2],
+                    'position' => $old_career[3],
+                    'departement' => $old_career[4],
+                    'division' => $old_career[5],
+                    'company' => $old_career[6]
+                ];
+                array_push($oldfixCareer, $career_old);
+                $this->career->save($career_old);
+            }
+            array_push($dataFixes, $oldfixCareer);
+        }
+        $new_career =  $this->request->getPost('career_new');
+        if (!empty($new_career)) {
+            $newfixCareer = [];
+            foreach ($new_career as $new_careers) {
+                $career_new = [
+                    'id_user' => $profile[0],
+                    'year_start' => $new_careers[0],
+                    'year_end' => $new_careers[1],
+                    'position' => $new_careers[2],
+                    'departement' => $new_careers[3],
+                    'division' => $new_careers[4],
+                    'company' => $new_careers[5]
+                ];
+                array_push($newfixCareer, $career_new);
+                $this->career->save($career_new);
+            }
+            array_push($dataFixes, $newfixCareer);
+        }
+        echo json_encode($oldfix);
     }
+
 
 
     public function delete($id)
     {
-
         $this->user->delete($id);
         session()->setFlashdata('success', 'Data Berhasil Di Hapus');
         return redirect()->to('/user');
+    }
+
+
+    public function deleteEducation()
+    {
+        $id = $this->request->getPost('id');
+        $data = $this->education->delete($id);
+        echo json_encode($data);
+    }
+    public function deleteCareer()
+    {
+        $id = $this->request->getPost('id');
+        $data = $this->career->delete($id);
+        echo json_encode($data);
     }
 
 

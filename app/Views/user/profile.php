@@ -88,21 +88,31 @@
                                 <div class="form-group row">
                                     <label for="inputSkills" class="col-sm-2 col-form-label">Golongan</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="inputSkills">
+                                        <input type="text" class="form-control" id="inputSkills"
+                                            value="<?= $person['golongan'] ?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="inputSkills" class="col-sm-2 col-form-label">Promosi Terakhir</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="inputSkills">
+                                        <input type="text" class="form-control" id="inputSkills"
+                                            value="<?= $person['promosi_terahir'] ?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="inputSkills" class="col-sm-2 col-form-label">Masa Kerja</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="inputSkills">
+                                    <div class="d-flex">
+                                        <div class="col-sm-10 d-flex">
+                                            <input type="text" class="form-control" id="inputSkills"
+                                                value="<?= $person['tahun'] ?>">
+                                            <label class="m-2">Tahun</label>
+                                            <input type="text" class="form-control" id="inputSkills"
+                                                value="<?= $person['bulan'] ?>">
+                                            <label class="m-2">Bulan</label>
+                                        </div>
                                     </div>
                                 </div>
+
                             </div>
 
                         </div>
@@ -143,16 +153,14 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php foreach ($education as $educations) : ?>
                                 <tr>
-                                    <td>1.</td>
-                                    <td>Update software</td>
-                                    <td>
-                                        <div class="progress progress-xs">
-                                            <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                                        </div>
-                                    </td>
-                                    <td><span class="badge bg-danger">55%</span></td>
+                                    <td><?= $educations['grade'] ?></td>
+                                    <td><?= $educations['year'] ?></td>
+                                    <td><?= $educations['institution'] ?></td>
+                                    <td><?= $educations['major'] ?></td>
                                 </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>
@@ -194,18 +202,16 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php foreach ($career as $careers) : ?>
                                 <tr>
-                                    <td>1.</td>
-                                    <td>Update software</td>
-                                    <td>
-                                        <div class="progress progress-xs">
-                                            <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                                        </div>
-                                    </td>
-                                    <td><span class="badge bg-danger">55%</span></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td><?= $careers['year_start'] ?></td>
+                                    <td><?= $careers['year_end'] ?></td>
+                                    <td><?= $careers['position'] ?></td>
+                                    <td><?= $careers['departement'] ?></td>
+                                    <td><?= $careers['division'] ?></td>
+                                    <td><?= $careers['company'] ?></td>
                                 </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>
