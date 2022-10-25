@@ -66,14 +66,6 @@
                                 <button type="submit" class="btn btn-warning btn-sm mt-2"><i
                                         class="fa-solid fa-pen-to-square" style="font-size:17px;"></i></button>
                             </form>
-                            <button type="button" class="btn btn-success btn-sm mt-2"
-                                onclick="education(<?= $users->id_user ?>)">
-                                <i class="fa-solid fa-graduation-cap"></i>
-                            </button>
-                            <button type="button" class="btn btn-secondary btn-sm mt-2"
-                                onclick="career(<?= $users->id_user ?>)">
-                                <i class="fa-solid fa-briefcase" style="font-size:17px;"></i>
-                            </button>
                         </div>
                     </td>
                 </tr>

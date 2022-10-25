@@ -51,10 +51,13 @@ class C_ListTraining extends BaseController
     public function detail($category)
     {
         $categories = $this->training->getList($category);
+        $page = basename($_SERVER['PHP_SELF']);
         $data = [
             'tittle' => 'List Training',
             'jenis' => $categories,
+            'category' => $page
         ];
+        //dd($data);
         return view('admin/detailtraining', $data);
     }
 
@@ -202,5 +205,86 @@ class C_ListTraining extends BaseController
         $this->category->delete($id);
         session()->setFlashdata('success', 'Category berhasil di Hapus');
         return redirect()->to('/list_training');
+    }
+
+    public function singleAddCategory()
+    {
+        $list = $this->request->getVar('list');
+        $category = $this->request->getVar('category');
+        $deskripsi = $this->request->getVar('deskripsi');
+        $file = $this->request->getFile('file');
+        $file->getName();
+        $file->getClientExtension();
+        $newName = $file->getRandomName();
+        $file->move("../public/upload", $newName);
+        $filepath = base_url() . "/upload/" . $newName;
+
+
+        $data = [
+            'list' => $list,
+            'category' => $category,
+            'deskripsi' => $deskripsi,
+            'path' => $filepath
+        ];
+        $filter  = $this->request->getVar('filter');
+        if ($filter == 1) {
+            $this->category->save($data);
+            session()->setFlashdata('success', 'Data Berhasil Di Import');
+            return redirect()->to('/non_training');
+        } else {
+            $this->category->save($data);
+            session()->setFlashdata('success', 'Data Berhasil Di Import');
+            return redirect()->to('/list_training');
+        }
+    }
+
+
+    public function saveSingleTraining()
+    {
+        $add = $this->request->getPost('add');
+
+        $number =  str_replace(".", "", $add[3]);
+        $data  = [
+            'judul_training' => $add[0],
+            'jenis_training' =>  $add[1],
+            'deskripsi' => $add[2],
+            'biaya' => $number
+        ];
+        $this->training->save($data);
+        echo json_encode($data);
+    }
+
+
+    public function deleteAllTraining()
+    {
+        $this->training->emptyTable();
+        session()->setFlashdata('success', 'Data Berhasil Di Import');
+        return redirect()->to('/list_training');
+    }
+    public function deleteTraining()
+    {
+        $id = $this->request->getVar('id');
+        //dd($id);
+        $this->training->delete($id);
+        session()->setFlashdata('success', 'Data Berhasil Di Import');
+        return redirect()->to('/list_training');
+    }
+
+    public function editTraining()
+    {
+        $angka = $this->request->getPost('biaya');
+        $number =  str_replace(".", "", $angka);
+        $data = [
+            'id_training' => $this->request->getPost('id'),
+            'judul_training' => $this->request->getPost('judul'),
+            'jenis_training' => $this->request->getPost('jenis'),
+            'deskripsi' => $this->request->getPost('deskripsi'),
+            'vendor' => $this->request->getPost('vendor'),
+            'biaya' => $number
+
+        ];
+        $this->training->save($data);
+        session()->setFlashdata('success', 'Data Berhasil Di Update');
+        echo json_encode($data);
     }
 }

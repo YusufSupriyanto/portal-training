@@ -64,6 +64,11 @@ $routes->post('/import2', 'Admin\C_ListTraining::import2', ['filter' => 'Auth'])
 $routes->delete('/delete/(:num)', 'Admin\C_ListTraining::delete/$1', ['filter' => 'Auth']);
 $routes->get('/update/(:num)', 'Admin\C_ListTraining::update/$1', ['filter' => 'Auth']);
 $routes->post('/edit/(:num)', 'Admin\C_ListTraining::edit/$1', ['filter' => 'Auth']);
+$routes->post('/add_category', 'Admin\C_ListTraining::singleAddCategory', ['filter' => 'Auth']);
+$routes->post('/save_training', 'Admin\C_ListTraining::saveSingleTraining', ['filter' => 'Auth']);
+$routes->post('/delete_all', 'Admin\C_ListTraining::deleteAllTraining', ['filter' => 'Auth']);
+$routes->post('/delete_training', 'Admin\C_ListTraining::deleteTraining', ['filter' => 'Auth']);
+$routes->post('/edit_training', 'Admin\C_ListTraining::editTraining', ['filter' => 'Auth']);
 
 
 //User Admin

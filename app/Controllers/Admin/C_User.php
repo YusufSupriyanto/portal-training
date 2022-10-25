@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\M_Career;
 use App\Models\M_Education;
 use App\Models\UserModel;
+use PhpOffice\PhpSpreadsheet\Calculation\DateTime;
 
 class C_User extends BaseController
 {
@@ -128,10 +129,10 @@ class C_User extends BaseController
             ];
             array_push($user, $data);
         }
-        dd($user);
-        //$this->user->save($data);
-        // session()->setFlashdata('success', 'Data Berhasil Di Import');
-        // return redirect()->to('/user');
+        //  dd($user);
+        $this->user->save($data);
+        session()->setFlashdata('success', 'Data Berhasil Di Import');
+        return redirect()->to('/user');
     }
 
 
@@ -153,6 +154,10 @@ class C_User extends BaseController
     {
         $dataFixes = [];
         $profile =  $this->request->getPost('individual');
+        $tgl_masuk = date_create($profile[10]);
+        $today = date('d-m-Y');
+        $interval = date_diff($tgl_masuk, date_create($today));
+        $interval->format('%R%y years %m months');
         $data = [
             'id_user' => $profile[0],
             'npk' => $profile[1],
@@ -162,11 +167,12 @@ class C_User extends BaseController
             'department' => $profile[5],
             'seksi' => $profile[6],
             'bagian' => $profile[7],
-            'promosi' => $profile[8],
+            'promosi_terakhir' => $profile[8],
             'golongan' => $profile[9],
             'tgl_masuk' => $profile[10],
-            'tahun' => $profile[11],
-            'bulan' => $profile[12],
+            'tahun' => $interval->format('%y'),
+            'bulan' => $interval->format('%m'),
+            'email' => $profile[13],
         ];
 
         array_push($dataFixes, $data);
@@ -240,7 +246,7 @@ class C_User extends BaseController
             }
             array_push($dataFixes, $newfixCareer);
         }
-        echo json_encode($oldfix);
+        echo json_encode($data);
     }
 
 

@@ -180,46 +180,22 @@ class EvaluasiEfektifitas extends BaseController
                         $users = $this->user->getAllUser($emails['id_user']);
                         if ($users['bagian'] == 'STAFF 4UP' or $users['bagian'] == 'KASIE') {
                             $person = $this->user->getDataKadept($users['departemen']);
-                            phpinfo();
+                            //dd($person[0]['email']);
+                            $this->Email($person[0]['email'], $person[0]['nama']);
                         } elseif ($users['bagian'] == 'KADEPT') {
                             $person = $this->user->getDataKadiv($users['divisi']);
-                            dd($person);
+                            $this->Email($person[0]['email'], $person[0]['nama']);
                         } else {
                             $person = $this->user->getDataBod($users['dic']);
-                            dd($person);
+                            $this->Email($person[0]['email'], $person[0]['nama']);
                         }
                     }
                 }
             }
         }
     }
-    public function dump()
+    public function Email($email, $name)
     {
-        // $email = $this->tna->getNotifEmailTraining();
-        // foreach ($email as $emails) {
-        //     if ($emails['status_approval_3'] == 'accept') {
-        //         $date_training = date_create($emails['rencana_training']);
-        //         $date_now = date_create(date('Y-m-d'));
-        //         $compare = date_diff($date_training, $date_now);
-        //         $due_date = (int)$compare->format('%a');
-        //         if ($due_date >= 90) {
-        //             if ($emails['status_efektivitas'] == null) {
-        //                 $users = $this->user->getAllUser($emails['id_user']);
-        //                 if ($users['bagian'] == 'STAFF 4UP' or $users['bagian'] == 'KASIE') {
-        //                     $person = $this->user->getDataKadept($users['departemen']);
-        //                     phpinfo();
-        //                 } elseif ($users['bagian'] == 'KADEPT') {
-        //                     $person = $this->user->getDataKadiv($users['divisi']);
-        //                     dd($person);
-        //                 } else {
-        //                     $person = $this->user->getDataBod($users['dic']);
-        //                     dd($person);
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
-        // dd($email);
         $mail = new PHPMailer(true);
 
         try {
@@ -235,7 +211,7 @@ class EvaluasiEfektifitas extends BaseController
 
             //Recipients
             $mail->setFrom('ysme1209@gmail.com', 'Rifsilhana Yunratika');
-            $mail->addAddress('ddump437@gmail.com', 'Joe User');     //Add a recipient
+            $mail->addAddress($email, $name);     //Add a recipient
             $mail->addReplyTo('ysme1209@gmail.com', 'Information');
 
             //Attachments

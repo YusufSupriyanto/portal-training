@@ -453,6 +453,7 @@ to get the desired effect
         <script src="<?= base_url() ?>/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
         <!-- AdminLTE -->
         <script src="<?= base_url() ?>/AdminLTE/dist/js/adminlte.js"></script>
+        <script src="<?= base_url() ?>/AdminLTE/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 
         <!-- OPTIONAL SCRIPTS -->
         <script src="<?= base_url() ?>/AdminLTE/plugins/chart.js/Chart.min.js"></script>
@@ -465,6 +466,11 @@ to get the desired effect
         <script src="<?= base_url() ?>/sweet/setup.js"></script>
 
         <?= view('asset/request_tna') ?>
+        <script type="text/javascript">
+        $(document).ready(function() {
+            bsCustomFileInput.init();
+        });
+        </script>
     </body>
 
 </html>

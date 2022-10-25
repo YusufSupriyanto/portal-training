@@ -96,7 +96,7 @@
                                     <label for="inputSkills" class="col-sm-2 col-form-label">Promosi Terakhir</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="inputSkills"
-                                            value="<?= $person['promosi_terahir'] ?>">
+                                            value="<?= $person['promosi_terakhir'] ?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">

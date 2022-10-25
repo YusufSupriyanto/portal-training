@@ -48,8 +48,8 @@
                     name="profile[]">
             </div>
             <div class="form-group">
-                <label>Promosi Terahir</label>
-                <input type="text" class="form-control" value="<?= $user['promosi_terahir'] ?>" name="profile[]">
+                <label>Promosi Terakhir</label>
+                <input type="date" class="form-control" value="<?= $user['promosi_terakhir'] ?>" name="profile[]">
             </div>
             <div class="form-group">
                 <label>Golongan</label>
@@ -62,13 +62,20 @@
             <div class="form-group">
                 <label>Masa Kerja</label>
                 <div class="d-flex">
-                    <label class="m-2">Tahun :</label>
+
                     <input type="text" class="form-control" value="<?= $user['tahun'] ?>" name="profile[]"
                         style="width:100px;">
-                    <label class="m-2">Bulan :</label>
+                    <label class="m-2">Tahun </label>
+
                     <input type="text" class="form-control" value="<?= $user['bulan'] ?>" name="profile[]"
                         style="width:100px;">
+                    <label class="m-2">Bulan </label>
                 </div>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="text" class="form-control" placeholder="Input Nama" value="<?= $user['email'] ?>"
+                    name="profile[]">
             </div>
             <h6>Education</h6>
             <table class="table table-bordered overflow-auto">
@@ -151,10 +158,10 @@ function addEducation(i) {
     i++
     $('#education-table').append(`
         <tr id="column${i}">
-        <td><input class="educationadds" name="edu" type="text"></td>
-        <td><input class="educationadds" name="edu" type="text"></td>
-        <td><input class="educationadds" name="edu" type="text"></td>
-        <td><input class="educationadds" name="edu" type="text"></td>
+        <td><input class="educationadds" name="edu" type="text" required></td>
+        <td><input class="educationadds" name="edu" type="text" required></td>
+        <td><input class="educationadds" name="edu" type="text" required></td>
+        <td><input class="educationadds" name="edu" type="text" required></td>
          <td>
                             <button type="button" class="btn btn-danger btn-sm" id="delete(${i})" onclick="removeEducation(${i})"><i
                                     class="fa fa-close"></i></button>
@@ -167,12 +174,12 @@ function addCareers(i) {
     i++
     $('#career-table').append(`
         <tr id="column_career${i}">
-        <td><input class="career" name="career" type="text"  style="width:50px;"></td>
-        <td><input class="career" name="career" type="text"  style="width:50px;"></td>
-        <td><input class="career" name="career" type="text"></td>
-        <td><input class="career" name="career" type="text"></td>
-        <td><input class="career" name="career" type="text"></td>
-        <td><input class="career" name="career" type="text"></td>
+        <td><input class="career" name="career" type="text"  style="width:50px;" required></td>
+        <td><input class="career" name="career" type="text"  style="width:50px;" required></td>
+        <td><input class="career" name="career" type="text" required></td>
+        <td><input class="career" name="career" type="text" required></td>
+        <td><input class="career" name="career" type="text" required></td>
+        <td><input class="career" name="career" type="text" required></td>
          <td>
                             <button type="button" class="btn btn-danger btn-sm" id="deleteCareer(${i})" onclick="removeCareer(${i})"><i
                                     class="fa fa-close"></i></button>
@@ -262,6 +269,7 @@ function saveAll() {
         },
         success: function(data) {
             window.location.reload()
+            // console.log(data)
         }
     })
     // console.log(result)
