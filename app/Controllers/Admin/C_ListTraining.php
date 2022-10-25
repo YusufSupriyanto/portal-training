@@ -204,7 +204,8 @@ class C_ListTraining extends BaseController
     {
         $this->category->delete($id);
         session()->setFlashdata('success', 'Category berhasil di Hapus');
-        return redirect()->to('/list_training');
+        header("Location: https://www.geeksforgeeks.org");
+        exit;
     }
 
     public function singleAddCategory()
@@ -264,10 +265,11 @@ class C_ListTraining extends BaseController
     public function deleteTraining()
     {
         $id = $this->request->getVar('id');
+        $page = $this->request->getVar('category');
         //dd($id);
         $this->training->delete($id);
         session()->setFlashdata('success', 'Data Berhasil Di Import');
-        return redirect()->to('/list_training');
+        return redirect()->to('/detail/' . $page);
     }
 
     public function editTraining()

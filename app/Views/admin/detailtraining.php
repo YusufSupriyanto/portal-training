@@ -58,6 +58,7 @@
                         <td>
                             <div class="d-flex">
                                 <form action="<?= base_url() ?>/delete_training" method="POST">
+                                    <input type="hidden" value="<?= $category ?>" name="category">
                                     <input type="hidden" value="<?= $trainings->id_training ?>" name="id">
                                     <button class="btn btn-danger btn-sm btn-delete"><i
                                             class="fa fa-trash"></i></button>
