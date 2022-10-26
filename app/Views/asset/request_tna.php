@@ -30,24 +30,30 @@ function Kadiv_verify(i) {
 
 function reject_kadiv(i) {
     var id_tna = $('#reject-kadiv-input' + i).val();
-    const alasan = $('#alasan' + i).val()
+    var alasan = $('#alasan' + i).val()
     console.log(id_tna);
     console.log(alasan);
-    $.ajax({
-        type: 'post',
-        url: "<?= base_url(); ?>/reject_kadiv",
-        async: true,
-        dataType: "json",
-        data: {
-            id_tna: id_tna,
-            alasan: alasan
-        },
-        success: function(data) {
-            window.location.reload()
+    if (alasan == "") {
 
-        }
+        $('#alasan' + i).attr('required', true)
 
-    })
+    } else {
+        $.ajax({
+            type: 'post',
+            url: "<?= base_url(); ?>/reject_kadiv",
+            async: true,
+            dataType: "json",
+            data: {
+                id_tna: id_tna,
+                alasan: alasan
+            },
+            success: function(data) {
+                window.location.reload()
+
+            }
+
+        })
+    }
 
 }
 
@@ -83,25 +89,32 @@ function verify_bod(i) {
 }
 
 function Reject_Bod(i) {
-    const alasan = $('#alasan' + i).val()
+    var alasan = $('#alasan' + i).val()
     var id_tna = $('#accept-bod-input' + i).val();
     console.log(id_tna);
     console.log(alasan);
-    $.ajax({
-        type: 'post',
-        url: "<?= base_url(); ?>/reject_bod",
-        async: true,
-        dataType: "json",
-        data: {
-            id_tna: id_tna,
-            alasan: alasan
-        },
-        success: function(data) {
-            window.location.reload()
+    if (alasan == "") {
+        $('#alasan' + i).attr('required', true)
+    } else {
+        $.ajax({
+            type: 'post',
+            url: "<?= base_url(); ?>/reject_bod",
+            async: true,
+            dataType: "json",
+            data: {
+                id_tna: id_tna,
+                alasan: alasan
+            },
+            success: function(data) {
+                window.location.reload()
 
-        }
+            }
 
-    })
+        })
+
+    }
+
+
 
 }
 </script>

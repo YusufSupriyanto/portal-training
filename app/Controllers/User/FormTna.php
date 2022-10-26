@@ -119,6 +119,27 @@ class FormTna extends BaseController
         return view('user/statustna', $data);
     }
 
+    public function statusPersonal()
+    {
+        $id =  session()->get('id');
+        $status = $this->tna->getStatusPersonal($id);
+        $data = [
+            'tittle' => 'Status TNA',
+            'status' => $status,
+        ];
+        return view('user/statustnapersonal', $data);
+    }
+    public function statusPersonalUnplanned()
+    {
+        $id =  session()->get('id');
+        $status = $this->tna->getStatusPersonalUnplanned($id);
+        $data = [
+            'tittle' => 'Status Unplanned',
+            'status' => $status,
+        ];
+        return view('user/statusunplannedpersonal', $data);
+    }
+
     // public function statusMember()
     // {
     //     $id = session()->get('id');

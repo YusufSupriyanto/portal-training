@@ -4,17 +4,19 @@
 <div class="card m-1 overflow-auto">
     <div class="card-header">
         <h3 class="card-title"><?= $tittle ?></h3>
-        <form action="<?= base_url() ?>/upload_history" method="post" enctype="multipart/form-data">
-            <div class="input-group">
-                <div class="custom-file">
-                    <input type="hidden" value="<?= $id ?>" name="id_user">
-                    <input type="file" class="custom-file-input" id="exampleInputFile" name="file">
-                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+        <div class="float-right">
+            <form action="<?= base_url() ?>/upload_history" method="post" enctype="multipart/form-data">
+                <div class="input-group">
+                    <div class="custom-file">
+                        <input type="hidden" value="<?= $id ?>" name="id_user">
+                        <input type="file" class="custom-file-input" id="exampleInputFile" name="file">
+                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                    </div>
+                    <div class="input-group-append"></div>
+                    <button type="submit" class="input-group-text" id="">Upload</button>
                 </div>
-                <div class="input-group-append"></div>
-                <button type="submit" class="input-group-text" id="">Upload</button>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
     <!-- /.card-header -->
     <div class="card-body table-responsive p-0">
@@ -23,8 +25,8 @@
                 <tr>
                     <th>Nama</th>
                     <th>Materi Training</th>
-                    <th>Mulai</th>
-                    <th>Selesai</th>
+                    <th>Mulai Training</th>
+                    <th>Selesai Training</th>
                     <th>Penyelenggara</th>
                     <th>Tempat</th>
                     <th>Action</th>
@@ -77,7 +79,7 @@
             enctype="multipart/form-data">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Upload History</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -97,7 +99,7 @@
                                     <input type="hidden" name="history" id="history">
                                 </th>
                                 <td>
-                                    <input type="text" name="keterangan" id="keterangan">
+                                    <input type="text" name="keterangan" id="keterangan" required>
                                 </td>
                             </tr>
                         </tbody>

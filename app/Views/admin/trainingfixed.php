@@ -18,7 +18,8 @@
                     <th>Kategori Training</th>
                     <th>Metode Training</th>
                     <th>Tujuan Training</th>
-                    <th>Rencana Training</th>
+                    <th>Mulai Training</th>
+                    <th>Selesai Training</th>
                     <th>Biaya</th>
                 </tr>
             </thead>
@@ -32,6 +33,7 @@
                 <td><?= $Atmps['kategori_training'] ?></td>
                 <td><?= $Atmps['metode_training'] ?></td>
                 <td><?= $Atmps['tujuan_training'] ?></td>
+                <td><?= $Atmps['mulai_training'] ?></td>
                 <td><?= $Atmps['rencana_training'] ?></td>
                 <td>Rp<?= number_format($Atmps['biaya'], 0, ',', '.') ?></td>
             </tr>

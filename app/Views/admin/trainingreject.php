@@ -1,6 +1,7 @@
 <?= $this->extend('/template/template') ?>
 
 <?= $this->section('content') ?>
+<div class="success" data-success="<?= session()->get('success'); ?>"></div>
 <div class="card m-1">
     <div class="card-header">
         <h3 class="card-title"><?= $tittle ?></h3>
@@ -13,11 +14,13 @@
                     <th>Nama</th>
                     <th>Departemen</th>
                     <th>Training</th>
-                    <th>Rencana Training</th>
+                    <th>Mulai Training</th>
+                    <th>Selesai Training</th>
                     <th>Planing Budget</th>
                     <th>Actual Budget</th>
                     <th>Status</th>
                     <th>Alasan</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,6 +29,7 @@
                     <td><?= $tnas['nama'] ?></td>
                     <td><?= $tnas['departemen'] ?></td>
                     <td><?= $tnas['training'] ?></td>
+                    <td><?= $tnas['mulai_training'] ?></td>
                     <td><?= $tnas['rencana_training'] ?></td>
                     <td><?= "Rp " . number_format($tnas['biaya'], 2, ',', '.') ?></td>
                     <td><?= "Rp " . number_format($tnas['biaya_actual'], 2, ',', '.') ?></td>
@@ -35,6 +39,12 @@
                         </div>
                     </td>
                     <td><?= $tnas['alasan'] ?></td>
+                    <td>
+                        <form action="<?= base_url() ?>/delete_training_Reject" method="post">
+                            <input type="hidden" value="<?= $tnas['id_tna'] ?>" name="id">
+                            <button class="btn btn-danger btn-sm btn-delete"><i class="fa fa-trash"></i></button>
+                        </form>
+                    </td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>

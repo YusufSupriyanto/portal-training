@@ -48,10 +48,11 @@
             </div>
 
             <h3 class="profile-username text-center m-3 text-bold"><?= $categories->category ?></h3>
-
             <p class="text-muted text-left m-3"><?= $categories->deskripsi ?></p>
-            <a href="<?= base_url() ?>/detail/<?= $categories->category ?>"
-                class="btn btn-primary btn-sm"><b>Detail</b></a>
+            <div class="d-flex justify-content-center">
+                <a href="<?= base_url() ?>/detail/<?= $categories->category ?>" class="btn btn-primary"
+                    style="width:80px;height:40px"><b>Detail</b></a>
+            </div>
 
         </div>
 

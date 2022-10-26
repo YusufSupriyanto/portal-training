@@ -3,21 +3,7 @@
 <?= $this->section('content') ?>
 <div class="card overflow-auto m-1">
     <div class="card-header">
-        <?php $page = basename($_SERVER['PHP_SELF']);
-        if ($page == 'status_tna') : ?>
-        <?php if (session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'BOD' || session()->get('bagian') == 'KADEPT') : ?>
-        <h3 class="card-title">Status Training Need Analysis Member</h3>
-        <?php else : ?>
-        <h3 class="card-title">Status Training Need Analysis Personal</h3>
-        <?php endif; ?>
-        <?php else : ?>
-        <?php if (session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'BOD' || session()->get('bagian') == 'KADEPT') : ?>
-        <h3 class="card-title">Status Unplanned Member</h3>
-        <?php else : ?>
-        <h3 class="card-title">Status Unplanned Personal</h3>
-        <?php endif; ?>
-        <?php endif; ?>
-
+        <h3 class="card-title">Status Unplanned Training</h3>
     </div>
     <!-- /.card-header -->
     <div class="card-body p-0 overflow-auto">
@@ -51,22 +37,12 @@
                     <td>
                         <div style="width:60px;"><?= $statuses['request_training'] ?></div>
                     </td>
-                    <td>
-                        <div style="width:70px;">
-                            <?= $statuses['mulai_training'] ?>
-                        </div>
-
-                    </td>
-                    <td>
-                        <div style="width:70px;">
-                            <?= $statuses['rencana_training'] ?>
-                        </div>
-                    </td>
+                    <td><?= $statuses['mulai_training'] ?></td>
+                    <td><?= $statuses['rencana_training'] ?></td>
                     <td><?= $statuses['tujuan_training'] ?></td>
                     <td><?= $statuses['notes'] ?></td>
                     <td>
-                        <div style="width:80px;">
-                            <?= "Rp " . number_format((int) $statuses['biaya_actual'], 0, ',', '.') ?>
+                        <div style="width:80px;"><?= "Rp " . number_format($statuses['biaya_actual'], 0, ',', '.') ?>
                         </div>
                     </td>
                     <td>
@@ -131,7 +107,7 @@
             <div class="modal-body">
                 <div class="d-flex flex-column">
                     <label for="alasan">Alasan</label>
-                    <textarea id="text" class="mt-1" name="" disabled></textarea>
+                    <textarea id="text" class="mt-1" name=""></textarea>
                 </div>
             </div>
             <div class="modal-footer">

@@ -202,7 +202,7 @@ class C_Tna extends BaseController
         $reject = $this->tna->getTrainingDitolak();
 
         $data = [
-            'tittle' => 'Training Di Reject',
+            'tittle' => 'Training Rejected',
             'training' => $reject
         ];
         return view('admin/trainingreject', $data);
@@ -219,5 +219,13 @@ class C_Tna extends BaseController
         ];
 
         return view('admin/trainingfixed', $data);
+    }
+
+    public function DeleteTrainingReject()
+    {
+        $id = $this->request->getVar('id');
+        $this->tna->delete($id);
+        session()->setFlashdata('success', 'Data Berhasil Di Hapus');
+        return redirect()->to('/training_ditolak');
     }
 }

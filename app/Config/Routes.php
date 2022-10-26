@@ -92,6 +92,7 @@ $routes->get('/tna', 'Admin\C_Tna::index', ['filter' => 'Auth']);
 $routes->get('/training_monthly', 'Admin\C_Tna::trainingMonthly', ['filter' => 'Auth']);
 $routes->post('/accept_admin', 'Admin\C_Tna::accept', ['filter' => 'Auth']);
 $routes->post('/change_training', 'Admin\C_Tna::change', ['filter' => 'Auth']);
+$routes->post('/delete_training_Reject', 'Admin\C_Tna::DeleteTrainingReject', ['filter' => 'Auth']);
 
 
 // $routes->get('/accept_admin/(:num)', 'Admin\C_Tna::accept/$1');
@@ -172,6 +173,8 @@ $routes->post('/User/FormTna', 'User\FormTna::AjaxTna', ['filter' => 'Auth']);
 $routes->post('/save_form', 'User\FormTna::TnaForm', ['filter' => 'Auth']);
 $routes->post('/tna/send', 'User\FormTna::TnaSend', ['filter' => 'Auth']);
 $routes->get('/status_tna', 'User\FormTna::status', ['filter' => 'Auth']);
+$routes->get('/status_tna_personal', 'User\FormTna::statusPersonal', ['filter' => 'Auth']);
+$routes->get('/status_unplanned_personal', 'User\FormTna::statusPersonalUnplanned', ['filter' => 'Auth']);
 $routes->get('/request_tna', 'User\FormTna::requestTna', ['filter' => 'Auth']);
 $routes->post('/accept_kadiv', 'User\FormTna::acceptKadiv', ['filter' => 'Auth']);
 $routes->post('/reject_kadiv', 'User\FormTna::rejectKadiv', ['filter' => 'Auth']);

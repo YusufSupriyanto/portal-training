@@ -12,6 +12,7 @@ class M_ListTraining extends Model
     // protected $useAutoIncrement = true;
     protected $allowedFields = ['judul_training', 'jenis_training', 'deskripsi', 'vendor', 'biaya'];
 
+
     function M_test()
     {
         $data = $this->get();

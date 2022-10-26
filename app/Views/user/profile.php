@@ -54,49 +54,49 @@
                                     <label for="inputName" class="col-sm-2 col-form-label">Nama</label>
                                     <div class="col-sm-10">
                                         <input type="email" class="form-control" id="inputName"
-                                            value="<?= $person['nama'] ?>">
+                                            value="<?= $person['nama'] ?>" disabled>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="inputEmail" class="col-sm-2 col-form-label">Npk</label>
                                     <div class="col-sm-10">
                                         <input type="email" class="form-control" id="inputEmail"
-                                            value="<?= $person['npk'] ?>">
+                                            value="<?= $person['npk'] ?>" disabled>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="inputName2" class="col-sm-2 col-form-label">Departemen</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="inputName2"
-                                            value="<?= $person['departemen'] ?>">
+                                            value="<?= $person['departemen'] ?>" disabled>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="inputExperience" class="col-sm-2 col-form-label">Divisi</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="inputName2"
-                                            value="<?= $person['divisi'] ?>">
+                                            value="<?= $person['divisi'] ?>" disabled>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="inputSkills" class="col-sm-2 col-form-label">Seksi</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="inputSkills"
-                                            value="<?= $person['seksi'] ?>">
+                                            value="<?= $person['seksi'] ?>" disabled>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="inputSkills" class="col-sm-2 col-form-label">Golongan</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="inputSkills"
-                                            value="<?= $person['golongan'] ?>">
+                                            value="<?= $person['golongan'] ?>" disabled>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="inputSkills" class="col-sm-2 col-form-label">Promosi Terakhir</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="inputSkills"
-                                            value="<?= $person['promosi_terakhir'] ?>">
+                                            value="<?= $person['promosi_terakhir'] ?>" disabled>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -104,10 +104,10 @@
                                     <div class="d-flex">
                                         <div class="col-sm-10 d-flex">
                                             <input type="text" class="form-control" id="inputSkills"
-                                                value="<?= $person['tahun'] ?>">
+                                                value="<?= $person['tahun'] ?>" disabled>
                                             <label class="m-2">Tahun</label>
                                             <input type="text" class="form-control" id="inputSkills"
-                                                value="<?= $person['bulan'] ?>">
+                                                value="<?= $person['bulan'] ?>" disabled>
                                             <label class="m-2">Bulan</label>
                                         </div>
                                     </div>

@@ -22,8 +22,8 @@
                     <th>Kategori Training</th>
                     <th>Metode Training</th>
                     <th>Tujuan Training</th>
-                    <th>Start Training</th>
-                    <th>End Training</th>
+                    <th>Mulai Training</th>
+                    <th>Selesai Training</th>
                     <th>Keterangan Training</th>
                 </tr>
             </thead>

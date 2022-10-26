@@ -15,7 +15,7 @@
                 <th>Jenis Training</th>
                 <th>Kategori Training</th>
                 <th>Metode Training</th>
-                <th>Rencana Training</th>
+                <th>Selesai Training</th>
                 <th>Budget</th>
                 <th>Actual Budget</th>
                 <th>status</th>
@@ -57,7 +57,8 @@
                             <div class="modal-body">
                                 <div class="d-flex flex-column">
                                     <label for="alasan">Alasan</label>
-                                    <textarea id="alasan<?= $i ?>" class="mt-1" name="alasan<?= $i ?>"></textarea>
+                                    <textarea id="alasan<?= $i ?>" class="mt-1" name="alasan<?= $i ?>"
+                                        required></textarea>
                                 </div>
                             </div>
                             <div class="modal-footer">

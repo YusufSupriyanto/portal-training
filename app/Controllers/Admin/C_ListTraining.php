@@ -94,8 +94,15 @@ class C_ListTraining extends BaseController
             'path' => $filepath,
         ];
 
-        $this->category->save($data);
-        return redirect()->to('/list_training');
+        $categories = $this->category->getIdCategories($id);
+        // dd($categories);
+        if ($categories['list'] == 'Training') {
+            $this->category->save($data);
+            return redirect()->to('/list_training');
+        } else {
+            $this->category->save($data);
+            return redirect()->to('/non_training');
+        }
     }
 
     public function import2()

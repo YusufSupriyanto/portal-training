@@ -17,8 +17,8 @@
                         <th>Departemen</th>
                         <th>Training</th>
                         <th>Request Training</th>
-                        <th>Start Training</th>
-                        <th>End Training</th>
+                        <th>Mulai Training</th>
+                        <th>Selesai Training</th>
                         <th>Planing Budget</th>
                         <th>Actual Budget</th>
                         <th>Vendor</th>

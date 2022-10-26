@@ -17,8 +17,8 @@
                         <th>Departemen</th>
                         <th>Training</th>
                         <th>Request Training</th>
-                        <th>Start Training</th>
-                        <th>End Training</th>
+                        <th>Mulai Training</th>
+                        <th>Selesai Training</th>
                         <th>Planing Budget</th>
                         <th>Actual Budget</th>
                         <th>Vendor</th>
@@ -108,8 +108,10 @@
                         <input id="kategori-training" class="mt-1" name="kategori-training" readonly></input>
                         <label for="metode-training">Metode Training</label>
                         <input id="metode-training" class="mt-1" name="metode-training" readonly></input>
-                        <label for="rencana-training">Rencana Training</label>
-                        <input id="rencana-training" class="mt-1" name="rencana-training" readonly></input>
+                        <label for="mulai-training">Mulai Training</label>
+                        <input id="mulai-training" class="mt-1" name="mulai-training" readonly></input>
+                        <label for="Selesai-training">Selesai Training</label>
+                        <input id="Selesai-training" class="mt-1" name="Selesai-training" readonly></input>
                         <label for="tujuan-training">Tujuan Training</label>
                         <input id="tujuan-training" class="mt-1" name="tujuan-training" readonly></input>
                         <label for="notes">Note</label>

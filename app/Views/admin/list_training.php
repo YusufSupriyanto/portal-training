@@ -4,8 +4,8 @@
 <div class="import" data-import="<?= session()->get('import'); ?>"></div>
 <div class="card-tools m-1">
     <div class="card flex-row justify-content-between">
-        <div class="">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        <div class="d-flex">
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
                 <i class="fa fa-plus"></i>Add Category
             </button>
         </div>
@@ -26,7 +26,7 @@
 </div>
 <div class="card m-1">
     <?php foreach ($jenis as $categories) : ?>
-    <div class="card card-primary card-outline" style="height:400px;">
+    <div class="card card-primary card-outline" style="height:500px;">
         <div class=" card-body box-profile">
             <div class="d-flex flex-row">
                 <div>

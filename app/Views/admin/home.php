@@ -29,7 +29,7 @@
                                         <th>Training</th>
                                         <th>Pendaftar</th>
                                         <th>Tanggal Mulai</th>
-                                        <th>Tanggal Berakhir</th>
+                                        <th>Tanggal Selesai</th>
                                         <th>Kategori</th>
                                         <th>Notes</th>
                                     </tr>
@@ -118,7 +118,7 @@ $(document).ready(function() {
                 editable: true,
                 timeZone: 'local',
                 initialView: 'dayGridMonth',
-                height: 500,
+                height: 600,
                 selectable: true,
                 events: data,
                 eventClick: function(data) {

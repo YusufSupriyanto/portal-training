@@ -11,6 +11,12 @@ class M_Categories extends Model
     // protected $useAutoIncrement = true;
     protected $allowedFields = ['list', 'category', 'deskripsi', 'path'];
 
+
+    public function getIdCategories($id)
+    {
+        return $this->where(['id_categories' => $id])->first();
+    }
+
     public function getTrainingCategory()
     {
         $data = $this->select('id_categories,category,deskripsi,path')->where('list', 'Training')->get();

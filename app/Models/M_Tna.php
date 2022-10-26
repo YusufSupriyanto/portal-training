@@ -123,6 +123,21 @@ class M_Tna extends Model
         return $this->get()->getResult();
     }
 
+    public function getStatusPersonal($id)
+    {
+        $this->select('tna.*,approval.*,user.bagian')->where('user.id_user', $id)->where('kelompok_training', 'training');
+        $this->join('approval', 'approval.id_tna = tna.id_tna');
+        $this->join('user', 'user.id_user = tna.id_user');
+        return $this->get()->getResultArray();
+    }
+    public function getStatusPersonalUnplanned($id)
+    {
+        $this->select('tna.*,approval.*,user.bagian')->where('user.id_user', $id)->where('kelompok_training', 'unplanned');
+        $this->join('approval', 'approval.id_tna = tna.id_tna');
+        $this->join('user', 'user.id_user = tna.id_user');
+        return $this->get()->getResultArray();
+    }
+
     public function getStatusWaitUser($bagian, $member, $id = null)
     {
         if ($bagian == 'BOD') {
