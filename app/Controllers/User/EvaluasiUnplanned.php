@@ -37,29 +37,31 @@ class EvaluasiUnplanned extends BaseController
         return view('user/daftarreaksiunplanned', $data);
     }
 
-    public function EvaluasiForm($id)
-    {
-        $id = $this->tna->getDataForEvaluation($id);
+    // public function EvaluasiForm($id)
+    // {
+    //     $id = $this->tna->getDataForEvaluation($id);
+    //     dd($id);
 
-        $data = [
-            'tittle' => 'Evaluasi Reaksi',
-            'data' => $id
-        ];
-        return view('user/evaluasireaksi', $data);
-    }
-    public function DetailEvaluasiReaksi($id)
-    {
+    //     $data = [
+    //         'tittle' => 'Evaluasi Reaksi',
+    //         'data' => $id
+    //     ];
+    //     return view('user/evaluasireaksi', $data);
+    // }
+    // public function DetailEvaluasiReaksi($id)
+    // {
 
-        $evaluasi  = $this->tna->getDetailEvaluasiReaksi($id);
-        // $evaluasi = $this->tna->getDataForEvaluation($id);
+    //     $evaluasi  = $this->unplanned->getDetailEvaluasiReaksi($id);
+    //     // $evaluasi = $this->tna->getDataForEvaluation($id);
+    //     dd($id);
 
 
-        $data = [
-            'tittle' => 'Evaluasi Reaksi',
-            'data' => $evaluasi
-        ];
-        return view('user/detailevaluasireaksi', $data);
-    }
+    //     $data = [
+    //         'tittle' => 'Evaluasi Reaksi',
+    //         'data' => $evaluasi
+    //     ];
+    //     return view('user/detailevaluasireaksi', $data);
+    // }
 
     public function SendEvaluasiReaksi()
     {
@@ -131,5 +133,40 @@ class EvaluasiUnplanned extends BaseController
         $this->evaluasiReaksi->save($data);
         session()->setFlashdata('success', 'Data Berhasil Di Import');
         return redirect()->to('/evaluasi_reaksi_unplanned');
+    }
+
+    public function EvaluasiMember()
+    {
+        $id = session()->get('id');
+
+        $user =  $this->user->filter($id);
+        $person = [];
+        for ($i = 0; $i < count($user); $i++) {
+            $users = [
+                'id' => $user[$i]->id_user,
+                'nama' => $user[$i]->nama
+            ];
+
+            array_push($person, $users);
+        }
+        // dd($user);
+
+        $data = [
+            'tittle' => 'Evaluasi Reaksi',
+            'user' => $person
+        ];
+        return view('user/evaluasireaksimemberunplanned', $data);
+    }
+    public function detailEvaluasimember()
+    {
+        $id =  $this->request->getPost('evaluasi');
+        $evaluasi =  $this->unplanned->getEvaluasiReaksi($id);
+        // dd($evaluasi);
+
+        $data = [
+            'tittle' => 'Evaluasi Reaksi',
+            'evaluasi' => $evaluasi
+        ];
+        return view('user/daftarreaksi', $data);
     }
 }

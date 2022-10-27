@@ -26,11 +26,80 @@
                 <h6><input class="form-control" value="Seksi                   :<?= "  " . $user['seksi'] ?>" readonly>
                 </h6>
             </h3>
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Asrtra Leadership Competency</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Competency</th>
+                                <th>Proficiency</th>
+                                <th>Score</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($astra as $Astra) : ?>
+                            <tr>
+                                <td><?= $Astra['competency'] ?></td>
+                                <td><?= $Astra['proficiency'] ?></td>
+                                <td><?= $Astra['score'] ?></td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Technical Competency</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Competency</th>
+                                <th>Proficiency</th>
+                                <th>Score</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($technical as $Technical) : ?>
+                            <tr>
+                                <td><?= $Technical['competency'] ?></td>
+                                <td><?= $Technical['proficiency'] ?></td>
+                                <td><?= $Technical['score'] ?></td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+
         </div>
         <!-- /.card-header -->
         <!-- form start -->
         <form role="form" action="<?= base_url() ?>/save_form" method="post" id="form-tna">
             <div class="card-body">
+                <div class="form-group">
+                    <input type="hidden" id="role" name="role">
+                    <label>Target Competency<span style="color:red;">*</span></label>
+                    <select class="form-control" name="kompetensi" id="kompetensi">
+                        <option selected>Choose...</option>
+                        <?php foreach ($target as $competency) : ?>
+                        <option value="<?= $competency['keterangan'] ?>,<?= $competency['id'] ?>">
+                            <?= $competency['category'] ?>
+                        </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
                 <div class="form-group">
                     <input type="hidden" value="<?= $user['id_user'] ?>" name="id_user">
                     <input type="hidden" value="<?= 0; ?>" name="deadline">
@@ -212,6 +281,11 @@ $("#datepicker").datepicker({
     startView: "months",
     minViewMode: "months"
 });
+//for change kompetensi
+$('#kompetensi').on('change', function() {
+    var competency = this.value;
+    console.log(competency);
+})
 
 //for change TNA 
 $("#training").on('change', function() {

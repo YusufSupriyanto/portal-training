@@ -42,7 +42,10 @@
                             data-target="#career">
                             <i class="fa-solid fa-clock-rotate-left"></i> History Career
                         </button>
-
+                        <button type="button" class="btn btn-success btn-sm m-2" data-toggle="modal"
+                            data-target="#kompetensi">
+                            <i class="fa-solid fa-award"></i> Kompetensi Profile
+                        </button>
                     </div>
                 </div>
                 <!-- /.col -->
@@ -247,6 +250,70 @@
                 </div>
             </div>
         </form>
+    </div>
+</div>
+<div class="modal fade" id="kompetensi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-center">
+                        <h3 class=" card-title">Kompetensi Profile</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body p-0">
+                        <table class="table table-striped">
+
+                            <thead>
+                                <tr>
+                                    <th>Astra Leadership Competency </th>
+                                    <th>Proficiency</th>
+                                    <th>Score</th>
+                                </tr>
+                            </thead>
+                            <?php foreach ($astra as $Astra) : ?>
+                            <tr>
+                                <td><?= $Astra['astra'] ?></td>
+                                <td><?= $Astra['proficiency'] ?></td>
+                                <td><?= $Astra['score_astra'] ?></td>
+                            </tr>
+                            <?php endforeach; ?>
+                            <tbody>
+                            </tbody>
+                        </table>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Technical Competency </th>
+                                    <th>Proficiency</th>
+                                    <th>Score</th>
+                                </tr>
+                            </thead>
+                            <?php foreach ($technical as $Technical) : ?>
+                            <tr>
+                                <td><?= $Technical['technical'] ?></td>
+                                <td><?= $Technical['proficiency'] ?></td>
+                                <td><?= $Technical['score_technical'] ?></td>
+                            </tr>
+                            <?php endforeach; ?>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
 </div>
 <?= $this->endSection() ?>

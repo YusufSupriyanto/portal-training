@@ -45,7 +45,8 @@
                         <td>
                             <div class="d-flex flex-row">
                                 <label for="biaya" class="h6">Rp</label>
-                                <input type="text" id="biaya<?= $i ?>" name="biaya<?= $i ?>">
+                                <input type="text" id="biaya<?= $i ?>" name="biaya<?= $i ?>"
+                                    onchange="format(<?= $i ?>)">
                                 <!-- <input name="coba"> -->
                             </div>
                         </td>
@@ -106,8 +107,10 @@
                         <input id="kategori-training" class="mt-1" name="kategori-training" readonly></input>
                         <label for="metode-training">Metode Training</label>
                         <input id="metode-training" class="mt-1" name="metode-training" readonly></input>
-                        <label for="rencana-training">Rencana Training</label>
-                        <input id="rencana-training" class="mt-1" name="rencana-training" readonly></input>
+                        <label for="mulai-training">mulai Training</label>
+                        <input id="mulai-training" class="mt-1" name="mulai-training" readonly></input>
+                        <label for="selesai-training">selesai Training</label>
+                        <input id="selesai-training" class="mt-1" name="selesai-training" readonly></input>
                         <label for="tujuan-training">Tujuan Training</label>
                         <input id="tujuan-training" class="mt-1" name="tujuan-training" readonly></input>
                         <label for="notes">Note</label>

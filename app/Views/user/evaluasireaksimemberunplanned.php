@@ -4,7 +4,9 @@
 <div class="card m-1">
     <div class="card-header">
 
-        <h3 class="card-title">Evaluasi Reaksi Member TNA</h3>
+
+        <h3 class="card-title">Evaluasi Reaksi Member Unplanned</h3>
+
 
     </div>
     <div class="card-body table-responsive p-0" style="height: 400px;">
@@ -19,7 +21,8 @@
                 foreach ($user as $users) : ?>
                 <tr>
                     <td>
-                        <form id="myform<?= $i ?>" action="<?= base_url() ?>/detail_evaluasi_member" method="post">
+                        <form id="myform<?= $i ?>" action="<?= base_url() ?>/detail_evaluasi_member_unplanned"
+                            method="post">
                             <input type="hidden" name="evaluasi" value="<?= $users['id'] ?>" />
                         </form>
                         <a href="#"

@@ -11,6 +11,10 @@ use App\Models\M_History;
 use App\Models\M_ListTraining;
 use App\Models\M_Tna;
 use App\Models\UserModel;
+use App\Models\M_CompetencyAstra;
+use App\Models\M_CompetencyTechnical;
+use App\Models\M_Astra;
+use App\Models\M_Technical;
 
 class FormTna extends BaseController
 {
@@ -22,6 +26,11 @@ class FormTna extends BaseController
     private M_EvaluasiEfektifitas $efektivitas;
     private M_History $history;
 
+    private M_Astra $astra;
+    private M_CompetencyAstra $competencyAstra;
+    private M_Technical $technical;
+    private M_CompetencyTechnical $competencyTechnical;
+
 
     public function __construct()
     {
@@ -32,6 +41,10 @@ class FormTna extends BaseController
         $this->evaluasiReaksi = new M_EvaluasiReaksi();
         $this->history = new M_History();
         $this->efektivitas = new M_EvaluasiEfektifitas();
+        $this->astra = new M_Astra();
+        $this->competencyAstra = new M_CompetencyAstra();
+        $this->technical = new M_Technical();
+        $this->competencyTechnical = new M_CompetencyTechnical();
     }
 
     //function untuk menamplilkan data member dengan user yang akan di daftarkan tna
@@ -80,17 +93,68 @@ class FormTna extends BaseController
                 }
             }
         }
-        //d($trainings);
+        //Filter Astra Competency
+        $datas  = $this->competencyAstra->getProfileAstraCompetency($id);
+        $astra = [];
+        //dd($datas);
+        if (!empty($datas)) {
+
+            foreach ($datas as $data) {
+                if ($data['score_astra'] < $data['proficiency']) {
+                    $competency = [
+                        'id' => $data['id_competency_astra'],
+                        'category' => "ALC - " . $data['astra'],
+                        'competency' => $data['astra'],
+                        'proficiency' => $data['proficiency'],
+                        'score' => $data['score_astra'],
+                        'keterangan' => 'alc'
+                    ];
+                    array_push($astra, $competency);
+                }
+            }
+        } else {
+            $astra = [];
+        }
+
+
+        //Filter Tecnhnical Competency
+        $datas2  = $this->competencyTechnical->getProfileTechnicalCompetency($id);
+        $technical = [];
+        //dd($datas);
+        if (!empty($datas2)) {
+
+            foreach ($datas2 as $dataTech) {
+                if ($dataTech['score_technical'] < $dataTech['proficiency']) {
+                    $competencyTech = [
+                        'id' => $dataTech['id_competency_technical'],
+                        'category' => "Technical Comp - " . $dataTech['technical'],
+                        'competency' => $dataTech['technical'],
+                        'proficiency' => $dataTech['proficiency'],
+                        'score' => $dataTech['score_technical'],
+                        'keterangan' => 'tc'
+                    ];
+                    array_push($technical, $competencyTech);
+                }
+            }
+        } else {
+            $technical = [];
+        }
+        $target = array_merge($astra, $technical);
+        //dd($target);
         $data = [
             'tittle' => 'TRAINING NEED ANALYSIS',
             'user' => $user,
             'training' => $trainings,
             'tna' => $tna,
             'terdaftar' => $terdaftar,
+            'astra' => $astra,
+            'technical' => $technical,
+            'target' => $target,
             'validation' => \Config\Services::validation(),
         ];
         return view('user/formtna', $data);
     }
+
 
     //function untuk status tna yang sudah dikirim ke admin
     public function status()
@@ -218,85 +282,88 @@ class FormTna extends BaseController
     //function untuk save tna
     public function TnaForm()
     {
+        $competency = $this->request->getPost('kompetensi');
 
+        $id_kompetensi = strstr($competency, "1", false);
+        $type_kompetensi = strstr($competency, ",1", true);
+        dd($type_kompetensi);
 
+        // $deadline = $this->request->getVar('deadline');
+        // if ($deadline == 0) {
+        //     $kelompok = 'training';
+        // } else {
+        //     $kelompok = 'unplanned';
+        // }
 
-        $deadline = $this->request->getVar('deadline');
-        if ($deadline == 0) {
-            $kelompok = 'training';
-        } else {
-            $kelompok = 'unplanned';
-        }
+        // $id_user = $this->request->getPost('id_user');
+        // $id = $this->request->getPost('trainingunplanned');
+        // if ($id == null) {
+        //     $id_training = $_POST['training'];
+        // } else {
+        //     $id_training = $id;
+        // }
 
-        $id_user = $this->request->getPost('id_user');
-        $id = $this->request->getPost('trainingunplanned');
-        if ($id == null) {
-            $id_training = $_POST['training'];
-        } else {
-            $id_training = $id;
-        }
+        // if (!$this->validate([
+        //     'tujuan' => 'required'
+        // ])) {
+        //     $validation = \Config\Services::validation();
+        //     return redirect()->to('/form_tna')->withInput()->with('validation', $validation);
+        // }
+        // $user = $this->user->getAllUser($id_user);
+        // $jenis_trainng = $this->training->getIdTraining($id_training);
 
-        if (!$this->validate([
-            'tujuan' => 'required'
-        ])) {
-            $validation = \Config\Services::validation();
-            return redirect()->to('/form_tna')->withInput()->with('validation', $validation);
-        }
-        $user = $this->user->getAllUser($id_user);
-        $jenis_trainng = $this->training->getIdTraining($id_training);
+        // // dd($id_user);
+        // $data = [
+        //     'id_user' => $id_user,
+        //     'id_training' => $id_training,
+        //     'dic' => $user['dic'],
+        //     'divisi' => $user['divisi'],
+        //     'departemen' => $user['departemen'],
+        //     'nama' => $user['nama'],
+        //     'golongan' => null,
+        //     'seksi' => $user['seksi'],
+        //     'jenis_training' => $jenis_trainng['jenis_training'],
+        //     'kategori_training' => $this->request->getVar('kategori'),
+        //     'training' => $jenis_trainng['judul_training'],
+        //     'metode_training' => $this->request->getVar('metode'),
+        //     'request_training' => $this->request->getVar('request'),
+        //     'tujuan_training' => $this->request->getVar('tujuan'),
+        //     'notes' => $this->request->getVar('notes'),
+        //     'biaya' => $jenis_trainng['biaya'],
+        //     'status' => 'save',
+        //     'kelompok_training' => $kelompok
 
-        // dd($id_user);
-        $data = [
-            'id_user' => $id_user,
-            'id_training' => $id_training,
-            'dic' => $user['dic'],
-            'divisi' => $user['divisi'],
-            'departemen' => $user['departemen'],
-            'nama' => $user['nama'],
-            'golongan' => null,
-            'seksi' => $user['seksi'],
-            'jenis_training' => $jenis_trainng['jenis_training'],
-            'kategori_training' => $this->request->getVar('kategori'),
-            'training' => $jenis_trainng['judul_training'],
-            'metode_training' => $this->request->getVar('metode'),
-            'request_training' => $this->request->getVar('request'),
-            'tujuan_training' => $this->request->getVar('tujuan'),
-            'notes' => $this->request->getVar('notes'),
-            'biaya' => $jenis_trainng['biaya'],
-            'status' => 'save',
-            'kelompok_training' => $kelompok
+        // ];
+        // //dd($data);
+        // $this->tna->save($data);
 
-        ];
-        //dd($data);
-        $this->tna->save($data);
+        // $id  = $this->tna->getIdTna();
 
-        $id  = $this->tna->getIdTna();
+        // $data2 = [
+        //     'id_tna' => $id->id_tna,
+        //     'id_user' => $id->id_user
+        // ];
+        // $data3 = [
+        //     'id_tna' => $id->id_tna,
+        // ];
+        // $data4 = [
+        //     'id_tna' => $id->id_tna
+        // ];
+        // $data5 = [
+        //     'id_tna' => $id->id_tna,
+        //     'id_user' => $id_user
+        // ];
+        // $this->approval->save($data2);
+        // $this->evaluasiReaksi->save($data3);
+        // $this->history->save($data4);
+        // $this->efektivitas->save($data5);
 
-        $data2 = [
-            'id_tna' => $id->id_tna,
-            'id_user' => $id->id_user
-        ];
-        $data3 = [
-            'id_tna' => $id->id_tna,
-        ];
-        $data4 = [
-            'id_tna' => $id->id_tna
-        ];
-        $data5 = [
-            'id_tna' => $id->id_tna,
-            'id_user' => $id_user
-        ];
-        $this->approval->save($data2);
-        $this->evaluasiReaksi->save($data3);
-        $this->history->save($data4);
-        $this->efektivitas->save($data5);
-
-        session()->setFlashdata('success', 'TNA Berhasil Disimpan');
-        if ($kelompok == 'training') {
-            return redirect()->to('/data_member');
-        } else {
-            return redirect()->to('/data_member_unplanned');
-        }
+        // session()->setFlashdata('success', 'TNA Berhasil Disimpan');
+        // if ($kelompok == 'training') {
+        //     return redirect()->to('/data_member');
+        // } else {
+        //     return redirect()->to('/data_member_unplanned');
+        // }
     }
 
 

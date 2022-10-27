@@ -46,7 +46,13 @@
                     <?php else : ?>
                     <td><?= $histories['keterangan'] ?></td>
                     <?php endif; ?>
-                    <td><?= $histories['kelompok_training'] ?></td>
+                    <td>
+                        <?php
+                            if ($histories['kelompok_training'] == 'training') {
+                                echo 'TNA';
+                            } else {
+                                echo 'Unplanned';
+                            }  ?></td>
                 </tr>
                 <?php $i++;
                 endforeach; ?>

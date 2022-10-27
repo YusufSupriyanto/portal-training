@@ -17,7 +17,7 @@
                     <th>Metode Training</th>
                     <th>Request Training</th>
                     <th>Mulai Training</th>
-                    <th>Rencana Training</th>
+                    <th>Selesai Training</th>
                     <th>Tujuan Training</th>
                     <th>Notes</th>
                     <th>Budget</th>
