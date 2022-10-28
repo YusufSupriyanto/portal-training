@@ -147,6 +147,31 @@ to get the desired effect
                                     <p>Home</p>
                                 </a>
                             </li>
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fa-solid fa-gears"></i>
+                                    <p>
+                                        List Competency
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview" style="display: none;">
+                                    <li class="nav-item">
+                                        <a href="<?= base_url() ?>/list_astra" class="nav-link  <?php if ($page == 'list_astra') : echo 'active';
+                                                                                            endif; ?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Astra Leadership Competency </p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="<?= base_url() ?>/list_technical" class="nav-link <?php if ($page == 'list_technical') : echo 'active';
+                                                                                                endif; ?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Technical Competency</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
 
                             <li class="nav-item has-treeview">
 

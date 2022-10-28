@@ -51,6 +51,15 @@ $routes->get('/logout', 'Login::logout', ['filter' => 'Auth']);
 $routes->get('/home', 'Home::index', ['filter' => 'Auth']);
 
 
+//competency
+$routes->get('/list_astra', 'Admin\C_competency::astra', ['filter' => 'Auth']);
+$routes->post('/edit_competency_astra', 'Admin\C_competency::EditAstra', ['filter' => 'Auth']);
+$routes->delete('/delete/astra/(:num)', 'Admin\C_competency::DeleteAstra/$1', ['filter' => 'Auth']);
+$routes->get('/list_technical', 'Admin\C_competency::technical', ['filter' => 'Auth']);
+$routes->post('/save_technical', 'Admin\C_competency::SaveTechnical', ['filter' => 'Auth']);
+$routes->delete('/delete/technical/(:num)', 'Admin\C_competency::DeleteTechnical/$1', ['filter' => 'Auth']);
+
+
 //categories
 
 
@@ -157,6 +166,9 @@ $routes->post('/jadwal', 'User\Home::JadwalHome', ['filter' => 'Auth']);
 $routes->post('/jadwal/(:any)', 'User\Home::JadwalHome/$1', ['filter' => 'Auth']);
 $routes->post('/modal_member', 'User\Home::MemberModal', ['filter' => 'Auth']);
 
+//Competency User
+$routes->get('/member_competency', 'User\Competency::index', ['filter' => 'Auth']);
+$routes->post('/detail_competency', 'User\Competency::MemberProfile', ['filter' => 'Auth']);
 
 
 //Training List

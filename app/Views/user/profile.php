@@ -278,14 +278,14 @@
                                     <th>Score</th>
                                 </tr>
                             </thead>
-                            <?php foreach ($astra as $Astra) : ?>
-                            <tr>
-                                <td><?= $Astra['astra'] ?></td>
-                                <td><?= $Astra['proficiency'] ?></td>
-                                <td><?= $Astra['score_astra'] ?></td>
-                            </tr>
-                            <?php endforeach; ?>
                             <tbody>
+                                <?php foreach ($astra as $Astra) : ?>
+                                <tr>
+                                    <td><?= $Astra['astra'] ?></td>
+                                    <td><?= $Astra['proficiency'] ?></td>
+                                    <td><?= $Astra['score_astra'] ?></td>
+                                </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                         <table class="table table-striped">
@@ -296,14 +296,14 @@
                                     <th>Score</th>
                                 </tr>
                             </thead>
-                            <?php foreach ($technical as $Technical) : ?>
-                            <tr>
-                                <td><?= $Technical['technical'] ?></td>
-                                <td><?= $Technical['proficiency'] ?></td>
-                                <td><?= $Technical['score_technical'] ?></td>
-                            </tr>
-                            <?php endforeach; ?>
                             <tbody>
+                                <?php foreach ($technical as $Technical) : ?>
+                                <tr>
+                                    <td><?= $Technical['technical'] ?></td>
+                                    <td><?= $Technical['proficiency'] ?></td>
+                                    <td><?= $Technical['score_technical'] ?></td>
+                                </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>

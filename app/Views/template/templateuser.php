@@ -144,7 +144,13 @@ to get the desired effect
                                     <p>Home</p>
                                 </a>
                             </li>
-
+                            <li class="nav-item">
+                                <a href="<?= base_url() ?>/member_competency" class="nav-link  <?php if ($page == 'member_competency') : echo 'active';
+                                                                                            endif; ?>">
+                                    <i class="nav-icon fa-solid fa-users-gear"></i>
+                                    <p>Member Profile</p>
+                                </a>
+                            </li>
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon fa-solid fa-list"></i>

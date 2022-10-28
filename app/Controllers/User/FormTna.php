@@ -118,7 +118,7 @@ class FormTna extends BaseController
 
 
         //Filter Tecnhnical Competency
-        $datas2  = $this->competencyTechnical->getProfileTechnicalCompetency($id);
+        $datas2  = $this->competencyTechnical->getProfileTechnicalCompetency($id, $user['departemen']);
         $technical = [];
         //dd($datas);
         if (!empty($datas2)) {

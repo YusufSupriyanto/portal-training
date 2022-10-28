@@ -103,6 +103,24 @@ class UserModel extends Model
         return $this->get()->getResultArray();
     }
 
+
+
+    public function getUserAstra()
+    {
+        $seksi = ['RESEARCH & DEVELOPMENT', 'EXPERT PROCESS'];
+        $bagian = ['STAFF 4UP'];
+        $this->select()->whereNotIn('bagian', $bagian)->whereNotIn('seksi', $seksi);
+        return $this->get()->getResultArray();
+    }
+    public function getUserTechnical($departemen)
+    {
+        $bagian = ['STAFF 4UP'];
+        $this->select()->whereNotIn('bagian', $bagian)->where('departement', $departemen);
+        return $this->get()->getResultArray();
+    }
+
+
+
     function M_test()
     {
         $data = $this->get();

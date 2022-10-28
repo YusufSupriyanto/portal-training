@@ -9,5 +9,11 @@ class M_Technical extends Model
     protected $table      = 'technical_competency';
     // protected $useAutoIncrement = true;
     protected $primaryKey = 'id_technical';
-    protected $allowedFields = ['proficiency', '', 'technical'];
+    protected $allowedFields = ['proficiency', '', 'technical', 'departemen'];
+
+    public function getDataTechnical()
+    {
+        $this->select();
+        return $this->get()->getResultArray();
+    }
 }
