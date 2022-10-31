@@ -5,7 +5,8 @@ namespace App\Controllers\Admin;
 use App\Controllers\BaseController;
 use App\Models\M_Approval;
 use App\Models\M_Astra;
-use App\Models\M_Contact;
+use App\Models\M_CompetencyAstra;
+use App\Models\M_CompetencyTechnical;
 use App\Models\M_EvaluasiReaksi;
 use App\Models\M_Technical;
 use App\Models\M_Tna;
@@ -17,27 +18,30 @@ class C_Competency extends BaseController
     private M_Astra $astra;
     private M_Technical $technical;
     private UserModel $user;
+    private M_CompetencyAstra $competencyAstra;
+
+    private M_CompetencyTechnical $competencyTechnical;
     public function __construct()
     {
         $this->astra = new M_Astra();
         $this->technical = new M_Technical();
         $this->user = new UserModel();
+        $this->competencyAstra = new M_CompetencyAstra();
+        $this->competencyTechnical = new M_CompetencyTechnical();
     }
 
     public function astra()
     {
+        $astra = $this->astra->getDataAstra();
 
-        $astraUser = $this->user->getUserAstra();
-        dd($astraUser);
-        // $astra = $this->astra->getDataAstra();
-        // //dd($astra);
 
-        // $data = [
-        //     'tittle' => 'Astra Leadership Competency',
-        //     'astra' => $astra
-        // ];
-        // return view('admin/competencyastra', $data);
+        $data = [
+            'tittle' => 'Astra Leadership Competency',
+            'astra' => $astra
+        ];
+        return view('admin/competencyastra', $data);
     }
+
 
 
     public function EditAstra()
@@ -75,7 +79,21 @@ class C_Competency extends BaseController
 
     public function technical()
     {
-        $technical = $this->technical->getDataTechnical();
+
+        $technical = $this->competencyTechnical->getDataDepertemen();
+
+        //dd($technical);
+
+        $data = [
+            'tittle' => 'Department Technical Competency',
+            'technical' => $technical
+        ];
+        return view('admin/listtechnicalcompetency', $data);
+    }
+
+    public function DetailTechnical($departemen)
+    {
+        $technical = $this->technical->getDataTechnicalDepartemen($departemen);
         //dd($technical);
 
         $data = [
@@ -123,5 +141,31 @@ class C_Competency extends BaseController
         $this->technical->delete($id);
         session()->setFlashdata('success', 'Data Berhasil Di Hapus');
         return redirect()->to('/list_technical');
+    }
+
+
+    public function InputDataTechnical()
+    {
+        $file =  $this->request->getFile('Technical');
+        dd($file);
+    }
+
+    //dummy function
+    public function inputAstra()
+    {
+        $astraUser = $this->user->getUserAstra();
+        //   dd($astraUser);
+        $astra = $this->astra->getDataAstra();
+        foreach ($astraUser as $user) {
+            for ($i = 1; $i <= 8; $i++) {
+                $data = [
+                    'id_astra' => $i,
+                    'id_user' => $user['id_user'],
+                    'score_astra' => 0
+
+                ];
+                $this->competencyAstra->save($data);
+            }
+        }
     }
 }

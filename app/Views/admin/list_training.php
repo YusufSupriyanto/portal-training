@@ -12,7 +12,6 @@
         <div class="">
             <form action="<?= base_url() ?>/addCategory" method="post" enctype="multipart/form-data">
                 <div class="input-group">
-
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" id="exampleInputFile" name="file">
                         <label class="custom-file-label" for="exampleInputFile">Choose file</label>

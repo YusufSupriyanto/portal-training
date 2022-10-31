@@ -16,4 +16,10 @@ class M_Technical extends Model
         $this->select();
         return $this->get()->getResultArray();
     }
+
+    public function getDataTechnicalDepartemen($departemen)
+    {
+        $this->select()->where('departemen', $departemen);
+        return $this->get()->getResultArray();
+    }
 }

@@ -93,6 +93,7 @@ class C_User extends BaseController
     public function addUser()
     {
         $file = $this->request->getFile('file');
+        //dd($file);
         if ($file == "") {
             return redirect()->to('/user');
         }
@@ -107,30 +108,31 @@ class C_User extends BaseController
 
         $spreadsheet = $render->load($file);
         $sheet = $spreadsheet->getActiveSheet()->toArray();
-
-
+        // dd($sheet[1][0]);
         $user  = [];
-
-        for ($i = 1; $i < count($sheet); $i++) {
+        $total = count($sheet) - 1;
+        for ($i = 1; $i <= $total; $i++) {
             // var_dump($sheet[$i][1]);
             $data = [
-                'npk' => $sheet[$i][1],
-                'nama' => $sheet[$i][2],
-                'status' => $sheet[$i][3],
-                'dic' => $sheet[$i][4],
-                'divisi' => $sheet[$i][5],
-                'departemen' => $sheet[$i][6],
-                'seksi' => $sheet[$i][7],
-                'bagian' => $sheet[$i][8],
-                'username' => $sheet[$i][9],
-                'password' => password_hash($sheet[$i][10], PASSWORD_DEFAULT),
-                'level' => $sheet[$i][11],
+                'npk' => $sheet[$i][0],
+                'nama' => $sheet[$i][1],
+                'status' => $sheet[$i][2],
+                'dic' => $sheet[$i][3],
+                'divisi' => $sheet[$i][4],
+                'departemen' => $sheet[$i][5],
+                'seksi' => $sheet[$i][6],
+                'bagian' => $sheet[$i][7],
+                'username' => $sheet[$i][8],
+                'password' => password_hash($sheet[$i][9], PASSWORD_DEFAULT),
+                'level' => $sheet[$i][10],
+                'type_golongan' => $sheet[$i][11],
 
             ];
-            array_push($user, $data);
+            $this->user->save($data);
+            // array_push($user, $data);
         }
-        //  dd($user);
-        $this->user->save($data);
+        // dd($user);
+
         session()->setFlashdata('success', 'Data Berhasil Di Import');
         return redirect()->to('/user');
     }

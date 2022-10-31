@@ -53,7 +53,7 @@ class FormTna extends BaseController
         $id = session()->get('id');
         $user = $this->user->filter($id);
         $tna = $this->tna->getTnaFilter($id);
-        //dd($user);
+        // dd($tna);
         $data = [
             'tittle' => 'Data Member',
             'user' => $user,
@@ -282,88 +282,88 @@ class FormTna extends BaseController
     //function untuk save tna
     public function TnaForm()
     {
-        $competency = $this->request->getPost('kompetensi');
+        // $competency = $this->request->getPost('kompetensi');
 
-        $id_kompetensi = strstr($competency, "1", false);
-        $type_kompetensi = strstr($competency, ",1", true);
-        dd($type_kompetensi);
+        // $id_kompetensi = strstr($competency, "1", false);
+        // $type_kompetensi = strstr($competency, ",1", true);
+        // dd($type_kompetensi);
 
-        // $deadline = $this->request->getVar('deadline');
-        // if ($deadline == 0) {
-        //     $kelompok = 'training';
-        // } else {
-        //     $kelompok = 'unplanned';
-        // }
+        $deadline = $this->request->getVar('deadline');
+        if ($deadline == 0) {
+            $kelompok = 'training';
+        } else {
+            $kelompok = 'unplanned';
+        }
 
-        // $id_user = $this->request->getPost('id_user');
-        // $id = $this->request->getPost('trainingunplanned');
-        // if ($id == null) {
-        //     $id_training = $_POST['training'];
-        // } else {
-        //     $id_training = $id;
-        // }
+        $id_user = $this->request->getPost('id_user');
+        $id = $this->request->getPost('trainingunplanned');
+        if ($id == null) {
+            $id_training = $_POST['training'];
+        } else {
+            $id_training = $id;
+        }
 
-        // if (!$this->validate([
-        //     'tujuan' => 'required'
-        // ])) {
-        //     $validation = \Config\Services::validation();
-        //     return redirect()->to('/form_tna')->withInput()->with('validation', $validation);
-        // }
-        // $user = $this->user->getAllUser($id_user);
-        // $jenis_trainng = $this->training->getIdTraining($id_training);
+        if (!$this->validate([
+            'tujuan' => 'required'
+        ])) {
+            $validation = \Config\Services::validation();
+            return redirect()->to('/form_tna')->withInput()->with('validation', $validation);
+        }
+        $user = $this->user->getAllUser($id_user);
+        $jenis_trainng = $this->training->getIdTraining($id_training);
 
-        // // dd($id_user);
-        // $data = [
-        //     'id_user' => $id_user,
-        //     'id_training' => $id_training,
-        //     'dic' => $user['dic'],
-        //     'divisi' => $user['divisi'],
-        //     'departemen' => $user['departemen'],
-        //     'nama' => $user['nama'],
-        //     'golongan' => null,
-        //     'seksi' => $user['seksi'],
-        //     'jenis_training' => $jenis_trainng['jenis_training'],
-        //     'kategori_training' => $this->request->getVar('kategori'),
-        //     'training' => $jenis_trainng['judul_training'],
-        //     'metode_training' => $this->request->getVar('metode'),
-        //     'request_training' => $this->request->getVar('request'),
-        //     'tujuan_training' => $this->request->getVar('tujuan'),
-        //     'notes' => $this->request->getVar('notes'),
-        //     'biaya' => $jenis_trainng['biaya'],
-        //     'status' => 'save',
-        //     'kelompok_training' => $kelompok
+        // dd($id_user);
+        $data = [
+            'id_user' => $id_user,
+            'id_training' => $id_training,
+            'dic' => $user['dic'],
+            'divisi' => $user['divisi'],
+            'departemen' => $user['departemen'],
+            'nama' => $user['nama'],
+            'golongan' => null,
+            'seksi' => $user['seksi'],
+            'jenis_training' => $jenis_trainng['jenis_training'],
+            'kategori_training' => $this->request->getVar('kategori'),
+            'training' => $jenis_trainng['judul_training'],
+            'metode_training' => $this->request->getVar('metode'),
+            'request_training' => $this->request->getVar('request'),
+            'tujuan_training' => $this->request->getVar('tujuan'),
+            'notes' => $this->request->getVar('notes'),
+            'biaya' => $jenis_trainng['biaya'],
+            'status' => 'save',
+            'kelompok_training' => $kelompok
 
-        // ];
-        // //dd($data);
-        // $this->tna->save($data);
+        ];
+        //dd($data);
+        $this->tna->save($data);
 
-        // $id  = $this->tna->getIdTna();
+        $id  = $this->tna->getIdTna();
 
-        // $data2 = [
-        //     'id_tna' => $id->id_tna,
-        //     'id_user' => $id->id_user
-        // ];
-        // $data3 = [
-        //     'id_tna' => $id->id_tna,
-        // ];
-        // $data4 = [
-        //     'id_tna' => $id->id_tna
-        // ];
-        // $data5 = [
-        //     'id_tna' => $id->id_tna,
-        //     'id_user' => $id_user
-        // ];
-        // $this->approval->save($data2);
-        // $this->evaluasiReaksi->save($data3);
-        // $this->history->save($data4);
-        // $this->efektivitas->save($data5);
+        $data2 = [
+            'id_tna' => $id->id_tna,
+            'id_user' => $id->id_user
+        ];
+        $data3 = [
+            'id_tna' => $id->id_tna,
+        ];
+        $data4 = [
+            'id_tna' => $id->id_tna
+        ];
+        $data5 = [
+            'id_tna' => $id->id_tna,
+            'id_user' => $id_user
+        ];
+        $this->approval->save($data2);
+        $this->evaluasiReaksi->save($data3);
+        $this->history->save($data4);
+        $this->efektivitas->save($data5);
 
-        // session()->setFlashdata('success', 'TNA Berhasil Disimpan');
-        // if ($kelompok == 'training') {
-        //     return redirect()->to('/data_member');
-        // } else {
-        //     return redirect()->to('/data_member_unplanned');
-        // }
+        session()->setFlashdata('success', 'TNA Berhasil Disimpan');
+        if ($kelompok == 'training') {
+            return redirect()->to('/data_member');
+        } else {
+            return redirect()->to('/data_member_unplanned');
+        }
     }
 
 
@@ -387,10 +387,14 @@ class FormTna extends BaseController
             'tittle' => 'Request Tna',
             'status' => $status
         ];
-        if (session()->get('bagian') == 'KADIV') {
+
+        if ($bagian == 'KADEPT')
             return view('user/requestuser', $data);
+        elseif ($bagian == 'KADIV') {
+            return view('user/requestuser', $data);
+        } else {
+            return view('user/requestuserbod', $data);
         }
-        return view('user/requestuserbod', $data);
     }
 
 

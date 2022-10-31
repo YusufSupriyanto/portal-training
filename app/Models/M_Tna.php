@@ -90,6 +90,9 @@ class M_Tna extends Model
         } elseif ($user['bagian'] == 'KADEPT') {
             $this->select()->where('departemen', $user['departemen'])->where('status', 'save')->where('kelompok_training', 'training');
             return $this->get()->getResult();
+        } elseif ($user['bagian'] == 'KASIE' || $user['bagian'] == 'STAFF 4UP') {
+            $this->select()->where('seksi', $user['seksi'])->where('status', 'save')->where('kelompok_training', 'training');
+            return $this->get()->getResult();
         } else {
             $this->select()->where('id_user', $user['id_user'])->where('status', 'save')->where('kelompok_training', 'training');
             return $this->get()->getResult();
@@ -192,7 +195,7 @@ class M_Tna extends Model
         } elseif ($bagian == 'KADEPT') {
             $status = [null, 'reject'];
             $this->select()->where('departemen', $member)->where('status', 'accept')->whereIn('status_approval_1', $status)->where('kelompok_training', 'training');
-            $this->join('approval', 'approval.id_tna = tna.id_tna');
+            $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_0', null);
             return $this->get()->getResultArray();
         } else {
             return  $status  =  array();

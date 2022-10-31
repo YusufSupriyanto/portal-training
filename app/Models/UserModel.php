@@ -48,6 +48,11 @@ class UserModel extends Model
             $bagian = ['KASIE', 'STAFF 4UP', 'STAFF'];
             $this->select()->whereIn('bagian', $bagian)->where('departemen', $data['departemen'])->where('level', 'USER');
             return $this->get()->getResult();
+        } elseif ($data['bagian']  == "KASIE" || $data['bagian']  == "STAFF 4UP") {
+            $bagian = ['STAFF 4UP', 'KASIE'];
+
+            $this->select()->where('seksi', $data['seksi'])->where('level', 'USER')->whereNotIn('bagian', $bagian);
+            return $this->get()->getResult();
         } else {
             $this->select()->where('id_user', $id);
             return $this->get()->getResult();
@@ -109,7 +114,7 @@ class UserModel extends Model
     {
         $seksi = ['RESEARCH & DEVELOPMENT', 'EXPERT PROCESS'];
         $bagian = ['STAFF 4UP'];
-        $this->select()->whereNotIn('bagian', $bagian)->whereNotIn('seksi', $seksi);
+        $this->select('id_user')->whereNotIn('bagian', $bagian)->whereNotIn('seksi', $seksi);
         return $this->get()->getResultArray();
     }
     public function getUserTechnical($departemen)

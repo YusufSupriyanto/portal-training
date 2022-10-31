@@ -58,6 +58,8 @@ $routes->delete('/delete/astra/(:num)', 'Admin\C_competency::DeleteAstra/$1', ['
 $routes->get('/list_technical', 'Admin\C_competency::technical', ['filter' => 'Auth']);
 $routes->post('/save_technical', 'Admin\C_competency::SaveTechnical', ['filter' => 'Auth']);
 $routes->delete('/delete/technical/(:num)', 'Admin\C_competency::DeleteTechnical/$1', ['filter' => 'Auth']);
+$routes->get('/technical_departemen/(:any)', 'Admin\C_competency::DetailTechnical/$1', ['filter' => 'Auth']);
+$routes->post('/input_technical', 'Admin\C_competency::InputDataTechnical', ['filter' => 'Auth']);
 
 
 //categories
