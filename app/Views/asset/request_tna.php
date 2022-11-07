@@ -11,8 +11,9 @@ function AcceptKadiv(i) {
             id_tna: id_tna,
         },
         success: function(data) {
-            jQuery.noConflict()
+            //  jQuery.noConflict()
             window.location.reload()
+            // console.log(data)
 
         }
 

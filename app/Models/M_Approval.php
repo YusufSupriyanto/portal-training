@@ -9,7 +9,7 @@ class M_Approval extends Model
     protected $table      = 'approval';
     // protected $useAutoIncrement = true;
     protected $primaryKey = 'id_approval';
-    protected $allowedFields = ['id_tna', 'id_user', 'status_approval_1', 'status_approval_2', 'status_approval_3', 'alasan', 'tanggal', 'status_training'];
+    protected $allowedFields = ['id_tna', 'id_user', 'status_approval_0', 'status_approval_1', 'status_approval_2', 'status_approval_3', 'alasan', 'tanggal', 'status_training'];
 
 
     public function getIdApproval($id)

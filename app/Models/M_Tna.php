@@ -56,6 +56,14 @@ class M_Tna extends Model
         }
         return $this->where('id_tna', $id)->get()->getResult();
     }
+
+    public function getTnaForRole($id)
+    {
+        $this->select()->where('id_tna', $id);
+        $this->join('user', 'user.id_user = tna.id_user');
+        return $this->get()->getResultArray();
+    }
+
     public function getAllSave($id = false)
     {
         if ($id == false) {
@@ -121,7 +129,8 @@ class M_Tna extends Model
 
     public function getStatusWaitAdmin()
     {
-        $this->select()->where('status', 'wait')->where('kelompok_training', 'training');
+        $this->select()->where('tna.status', 'wait')->where('kelompok_training', 'training');
+        $this->join('user', 'user.id_user = tna.id_user');
         $this->join('approval', 'approval.id_tna = tna.id_tna');
         return $this->get()->getResult();
     }
@@ -163,6 +172,13 @@ class M_Tna extends Model
             $this->join('approval', 'approval.id_tna = tna.id_tna');
             $this->join('user', 'user.id_user = tna.id_user')->whereIn('bagian', $jabatan);
             return $this->get()->getResultArray();
+        } elseif ($bagian == 'KASIE') {
+            // $status = ['wait', 'accept'];
+            // $jabatan = ['STAFF', 'STAFF 4UP', 'KASIE'];
+            $this->select('tna.*,approval.*,user.bagian')->where('tna.seksi', $member)->where('kelompok_training', 'training');
+            $this->join('approval', 'approval.id_tna = tna.id_tna');
+            $this->join('user', 'user.id_user = tna.id_user');
+            return $this->get()->getResultArray();
         } else {
             $this->select('tna.*,approval.*,user.bagian')->where('tna.id_user', $id)->where('kelompok_training', 'training');
             $this->join('approval', 'approval.id_tna = tna.id_tna');
@@ -184,17 +200,15 @@ class M_Tna extends Model
     public function getRequestTna($bagian, $member)
     {
         if ($bagian == 'BOD') {
-            $this->select()->where('dic', $member)->where('status', 'accept')->where('status_approval_1', 'accept')->where('status_approval_2', 'accept')->where('status_approval_3', null)->where('kelompok_training', 'training');
+            $this->select()->where('dic', $member)->where('status', 'accept')->where('status_approval_0', 'accept')->where('status_approval_1', 'accept')->where('status_approval_2', 'accept')->where('status_approval_3', null)->where('kelompok_training', 'training');
             $this->join('approval', 'approval.id_tna = tna.id_tna');
             return $this->get()->getResultArray();
         } elseif ($bagian == 'KADIV') {
-            $status = [null, 'reject'];
             $this->select()->where('divisi', $member)->where('status', 'accept')->where('kelompok_training', 'training');
-            $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_1', null);
+            $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_0', 'accept')->where('status_approval_1', null);
             return $this->get()->getResultArray();
         } elseif ($bagian == 'KADEPT') {
-            $status = [null, 'reject'];
-            $this->select()->where('departemen', $member)->where('status', 'accept')->whereIn('status_approval_1', $status)->where('kelompok_training', 'training');
+            $this->select()->where('departemen', $member)->where('status', 'accept')->where('kelompok_training', 'training');
             $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_0', null);
             return $this->get()->getResultArray();
         } else {
@@ -276,7 +290,10 @@ class M_Tna extends Model
             $this->join('user', 'user.id_user = tna.id_user')->whereIn('bagian', $jabatan);
             return $this->get()->getResultArray();
         } else {
-            return  $status  =  array();
+            $this->select('tna.*,approval.*,user.bagian')->where('tna.seksi', $member)->where('kelompok_training', 'training');
+            $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept');
+            $this->join('user', 'user.id_user = tna.id_user');
+            return $this->get()->getResultArray();
         }
     }
 
@@ -322,8 +339,7 @@ class M_Tna extends Model
     public function getDataJadwalHome($date)
     {
 
-        $sql = $this->query("select id_training,metode_training,jenis_training, training as Training,COUNT(training) as Pendaftar,kategori_training,mulai_training,rencana_training,biaya_actual from tna where mulai_training = '2022-10-15'
-and kelompok_training = 'training' group by id_training,training,kategori_training,metode_training,jenis_training,mulai_training,rencana_training,biaya_actual");
+        $sql = $this->query("select id_training,metode_training,jenis_training, training as Training,COUNT(training) as Pendaftar,kategori_training,mulai_training,rencana_training,biaya_actual from tna where mulai_training = '$date' and kelompok_training = 'training' group by id_training,training,kategori_training,metode_training,jenis_training,mulai_training,rencana_training,biaya_actual");
         return  $sql->getResultArray();
     }
 

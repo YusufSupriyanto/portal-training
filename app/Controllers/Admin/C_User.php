@@ -344,4 +344,5 @@ class C_User extends BaseController
     //     }
     //     // dd($education);
     // }
+
 }

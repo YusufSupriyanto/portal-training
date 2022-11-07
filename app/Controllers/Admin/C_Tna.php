@@ -30,8 +30,6 @@ class C_Tna extends BaseController
     public function index()
     {
         $tna = $this->tna->getStatusWaitAdmin();
-
-
         //dd($deadline['deadline']);
         $data = [
             'tittle' => 'Form TNA',
@@ -78,20 +76,43 @@ class C_Tna extends BaseController
 
     public function accept()
     {
-        $angka = $this->request->getPost('biaya_actual');
-        $number =  str_replace(".", "", $angka);
-        $data = [
-            'id_tna' => $this->request->getPost('id_tna'),
-            'biaya_actual' => $number,
-            'mulai_training' => $this->request->getPost('mulai_training'),
-            'rencana_training' => $this->request->getPost('rencana_training'),
-            'vendor' => $this->request->getPost('vendor'),
-            'tempat' => $this->request->getPost('tempat'),
-            'status' => 'accept'
-        ];
-        // dd($data);
-        $this->tna->save($data);
-        echo json_encode($data);
+        $id = $this->request->getPost('id_tna');
+
+        $tna = $this->tna->getTnaForRole($id);
+        if ($tna[0]['type_golongan'] == 'A         ') {
+            $angka = $this->request->getPost('biaya_actual');
+            $number =  str_replace(".", "", $angka);
+            $data = [
+                'id_tna' => $id,
+                'biaya_actual' => $number,
+                'mulai_training' => $this->request->getPost('mulai_training'),
+                'rencana_training' => $this->request->getPost('rencana_training'),
+                'vendor' => $this->request->getPost('vendor'),
+                'tempat' => $this->request->getPost('tempat'),
+                'status' => 'accept'
+            ];
+            $id_approval = $this->approval->getIdApproval($id);
+            $approval = [
+                'id_approval' => $id_approval['id_approval'],
+                'status_approval_0' => 'accept'
+            ];
+            $this->tna->save($data);
+            $this->approval->save($approval);
+        } else {
+            $angka = $this->request->getPost('biaya_actual');
+            $number =  str_replace(".", "", $angka);
+            $data = [
+                'id_tna' => $id,
+                'biaya_actual' => $number,
+                'mulai_training' => $this->request->getPost('mulai_training'),
+                'rencana_training' => $this->request->getPost('rencana_training'),
+                'vendor' => $this->request->getPost('vendor'),
+                'tempat' => $this->request->getPost('tempat'),
+                'status' => 'accept'
+            ];
+            $this->tna->save($data);
+        }
+        echo json_encode('success');
     }
 
     public function reject()

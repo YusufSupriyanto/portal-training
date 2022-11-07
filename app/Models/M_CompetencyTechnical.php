@@ -19,7 +19,7 @@ class M_CompetencyTechnical extends Model
 
     public function getProfileTechnicalCompetency($id)
     {
-        $this->select('technical_competency.technical,technical_competency.proficiency,competency_profile_technical.id_competency_technical,competency_profile_technical.score_technical')->where('id_user', $id);
+        $this->select('technical_competency.technical,technical_competency.proficiency,competency_profile_technical.id_competency_technical,competency_profile_technical.score_technical')->where('competency_profile_technical.id_user', $id);
         $this->join('technical_competency', 'technical_competency.id_technical = competency_profile_technical.id_technical');
         return $this->get()->getResultArray();
     }

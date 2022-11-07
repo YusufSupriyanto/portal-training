@@ -19,7 +19,8 @@ class M_CompetencyAstra extends Model
 
     public function getProfileAstraCompetency($id)
     {
-        $this->select('astra_competency.astra,astra_competency.proficiency,competency_profile_astra.id_competency_astra,competency_profile_astra.score_astra')->where('id_user', $id);
+
+        $this->select('astra_competency.astra,astra_competency.proficiency,competency_profile_astra.id_competency_astra,competency_profile_astra.score_astra')->where('competency_profile_astra.id_user', $id);
         $this->join('astra_competency', 'astra_competency.id_astra = competency_profile_astra.id_astra');
         return $this->get()->getResultArray();
     }

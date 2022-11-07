@@ -37,31 +37,31 @@ class EvaluasiUnplanned extends BaseController
         return view('user/daftarreaksiunplanned', $data);
     }
 
-    // public function EvaluasiForm($id)
-    // {
-    //     $id = $this->tna->getDataForEvaluation($id);
-    //     dd($id);
+    public function EvaluasiForm($id)
+    {
+        $id = $this->tna->getDataForEvaluation($id);
+        //dd($id);
 
-    //     $data = [
-    //         'tittle' => 'Evaluasi Reaksi',
-    //         'data' => $id
-    //     ];
-    //     return view('user/evaluasireaksi', $data);
-    // }
-    // public function DetailEvaluasiReaksi($id)
-    // {
+        $data = [
+            'tittle' => 'Evaluasi Reaksi',
+            'data' => $id
+        ];
+        return view('user/evaluasireaksiunplanned', $data);
+    }
+    public function DetailEvaluasiReaksi($id)
+    {
 
-    //     $evaluasi  = $this->unplanned->getDetailEvaluasiReaksi($id);
-    //     // $evaluasi = $this->tna->getDataForEvaluation($id);
-    //     dd($id);
+        $evaluasi  = $this->unplanned->getDetailEvaluasiReaksi($id);
+        // $evaluasi = $this->tna->getDataForEvaluation($id);
+        // dd($id);
 
 
-    //     $data = [
-    //         'tittle' => 'Evaluasi Reaksi',
-    //         'data' => $evaluasi
-    //     ];
-    //     return view('user/detailevaluasireaksi', $data);
-    // }
+        $data = [
+            'tittle' => 'Evaluasi Reaksi',
+            'data' => $evaluasi
+        ];
+        return view('user/detailevaluasireaksi', $data);
+    }
 
     public function SendEvaluasiReaksi()
     {

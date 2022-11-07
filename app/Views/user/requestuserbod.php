@@ -1,7 +1,7 @@
 <?= $this->extend('/template/templateuser') ?>
 
 <?= $this->section('content') ?>
-<div class="card overflow-auto m-3">
+<div class="card overflow-auto m-1">
     <div class="card-header">
         <h3 class="card-title"><?= $tittle ?></h3>
     </div>

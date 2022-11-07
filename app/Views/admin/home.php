@@ -161,7 +161,7 @@ $(document).ready(function() {
                                         .kategori_training}
                                         </td>
                                         <td>
-                                            <button class="btn btn-primary btn-sm" onclick="call('${data[i].id_training}','${encodeURIComponent(data[i].Training)}','${data[i].jenis_training}','${data[i].kategori_training}','${data[i].metode_training}','${data[i].mulai_training}','${data[i].rencana_training}','${data[i].biaya_actual}')">Daftar</button>
+                                            <button class="btn btn-primary btn-sm" onclick="call('${data[i].id_training}','${data[i].Training}','${data[i].jenis_training}','${data[i].kategori_training}','${data[i].metode_training}','${data[i].mulai_training}','${data[i].rencana_training}','${data[i].biaya_actual}')">Daftar</button>
                                         </td>
                                     </tr>
                                     `;
@@ -186,11 +186,11 @@ $(document).ready(function() {
 
 function call(id_training, training, jenis, kategori, metode, mulai, ahir, biaya) {
 
-    let Training = decodeURIComponent(training)
+    //let Training = decodeURIComponent(training)
     //  console.log(Training)
 
     $('#user #id_training').val(id_training)
-    $('#user #training').val(Training)
+    $('#user #training').val(training)
     $('#user #jenis').val(jenis)
     $('#user #kategori').val(kategori)
     $('#user #metode').val(metode)

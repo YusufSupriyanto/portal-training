@@ -44,6 +44,7 @@ class Login extends BaseController
                 'dic' => $row->dic,
                 'divisi' => $row->divisi,
                 'departemen' => $row->departemen,
+                'seksi' => $row->seksi,
                 'bagian' => $row->bagian,
                 'level' => $row->level,
                 'image' => $row->profile,

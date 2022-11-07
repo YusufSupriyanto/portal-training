@@ -37,7 +37,7 @@
                 <td><?= $Atmps['tujuan_training'] ?></td>
                 <td><?= $Atmps['rencana_training'] ?></td>
                 <?php $page = basename($_SERVER['PHP_SELF']);
-                    if ($page == 'evaluasi_reaksi') : ?>
+                    if ($page == 'evaluasi_reaksi' || $page ==  'detail_evaluasi_member') : ?>
                 <?php if ($Atmps['status_evaluasi'] == null) : ?>
                 <td>
                     <div class="d-flex justify-content-center sm">

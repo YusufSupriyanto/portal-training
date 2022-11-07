@@ -39,7 +39,8 @@ class UnplannedTraining extends BaseController
     {
         $id = session()->get('id');
         $user = $this->user->filter($id);
-        $tna = $this->tna->getTnaFilterUnplanned($id);
+        $tna = $this->unplanned->getTnaFilterUnplanned($id);
+        //dd($tna);
         $data = [
             'tittle' => 'Data Member',
             'user' => $user,
@@ -115,10 +116,11 @@ class UnplannedTraining extends BaseController
             'tittle' => 'Request Tna',
             'status' => $status
         ];
-        if (session()->get('bagian') == 'KADIV') {
+        if ($bagian == 'KADIV' || $bagian == 'KADEPT') {
             return view('user/requestuser', $data);
+        } else {
+            return view('user/requestuserbod', $data);
         }
-        return view('user/requestuserbod', $data);
     }
 
     public function status()

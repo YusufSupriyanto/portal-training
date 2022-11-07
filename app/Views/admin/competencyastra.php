@@ -9,6 +9,20 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body p-0">
+            <div class="form-group m-2">
+                <form action="<?= base_url() ?>/astra_file" method="post" enctype="multipart/form-data">
+                    <label for="exampleInputFile">Input Competency Astra</label>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="exampleInputFile" name="file">
+                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                        </div>
+                        <div class="input-group-append">
+                            <button type="submit" class="input-group-text">Upload</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
             <table class="table table-striped" id="CompetencyAstra">
 
                 <thead>

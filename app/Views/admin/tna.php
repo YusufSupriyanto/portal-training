@@ -128,7 +128,6 @@
     </div>
 </div>
 <script>
-
 </script>
 
 <?= $this->endSection() ?>

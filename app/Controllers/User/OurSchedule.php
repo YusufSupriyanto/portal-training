@@ -50,6 +50,7 @@ class OurSchedule extends BaseController
         $dic = session()->get('dic');
         $divisi = session()->get('divisi');
         $departemen = session()->get('departemen');
+        $seksi = session()->get('seksi');
         $page = basename($_SERVER['PHP_SELF']);
         if ($page == 'member_schedule') {
             if ($bagian == 'BOD') {
@@ -59,7 +60,7 @@ class OurSchedule extends BaseController
             } elseif ($bagian == 'KADEPT') {
                 $schedule = $this->tna->getMemberSchedule($bagian, $departemen);
             } else {
-                $schedule  =  array();
+                $schedule =  $this->tna->getMemberSchedule($bagian, $seksi);
             }
         } else {
             if ($bagian == 'BOD') {
@@ -69,9 +70,10 @@ class OurSchedule extends BaseController
             } elseif ($bagian == 'KADEPT') {
                 $schedule = $this->unplanned->getMemberSchedule($bagian, $departemen);
             } else {
-                $schedule  =  array();
+                $schedule =  $this->unplanned->getMemberSchedule($bagian, $seksi);
             }
         }
+        //dd($schedule);
 
         $data = [
             'tittle' => 'Jadwal Training Member',

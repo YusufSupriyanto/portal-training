@@ -22,4 +22,9 @@ class M_Astra extends Model
         $this->select();
         return $this->get()->getResultArray();
     }
+    public function getAllIdAstra()
+    {
+        $this->select('id_astra');
+        return $this->get()->getResultArray();
+    }
 }

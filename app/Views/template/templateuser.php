@@ -176,6 +176,7 @@ to get the desired effect
                                     </li>
                                 </ul>
                             </li>
+                            <?php if (session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'BOD' || session()->get('bagian') == 'KADEPT' || session()->get('bagian') == 'KASIE') : ?>
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon fa-solid fa-chalkboard-user"></i>
@@ -187,29 +188,30 @@ to get the desired effect
                                 <ul class="nav nav-treeview" style="display: none;">
                                     <li class="nav-item">
                                         <a href="<?= base_url() ?>/data_member" class="nav-link  <?php if ($page == 'data_member') : echo 'active';
-                                                                                                endif; ?>">
+                                                                                                    endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Form Training</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="<?= base_url() ?>/data_member_unplanned" class="nav-link  <?php if ($page == 'data_member_unplanned') : echo 'active';
-                                                                                                        endif; ?>">
+                                                                                                            endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Form Unplanned Training</p>
                                         </a>
                                     </li>
+
                                     <?php if (session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'BOD' || session()->get('bagian') == 'KADEPT') : ?>
                                     <li class="nav-item">
                                         <a href="<?= base_url() ?>/request_tna" class="nav-link  <?php if ($page == 'request_tna') : echo 'active';
-                                                                                                    endif; ?>">
+                                                                                                        endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Request Training</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="<?= base_url() ?>/request_unplanned" class="nav-link  <?php if ($page == 'request_unplanned') : echo 'active';
-                                                                                                        endif; ?>">
+                                                                                                            endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Request Training Unplanned</p>
                                         </a>
@@ -223,6 +225,7 @@ to get the desired effect
                                     </li>
                                 </ul>
                             </li>
+                            <?php endif; ?>
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon fa-solid fa-file-circle-check"></i>
@@ -231,7 +234,7 @@ to get the desired effect
                                         <i class="right fas fa-angle-left"></i>
                                     </p>
                                 </a>
-                                <?php if (session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'BOD' || session()->get('bagian') == 'KADEPT' || session()->get('bagian') == 'KASIE' || session()->get('bagian') == 'STAFF 4UP') : ?>
+                                <?php if (session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'BOD' || session()->get('bagian') == 'KADEPT' || session()->get('bagian') == 'KASIE') : ?>
                                 <ul class="nav nav-treeview" style="display: none;">
                                     <li class="nav-item has-treeview">
                                         <a href="#" class="nav-link">
@@ -267,7 +270,7 @@ to get the desired effect
                                         <a href="#" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>
-                                                <?php if (session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'BOD' || session()->get('bagian') == 'KADEPT' || session()->get('bagian') == 'KASIE' || session()->get('bagian') == 'STAFF 4UP') : ?>
+                                                <?php if (session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'BOD' || session()->get('bagian') == 'KADEPT' || session()->get('bagian') == 'KASIE') : ?>
                                                 Member
                                                 <?php else : ?>
                                                 Personal
@@ -312,7 +315,7 @@ to get the desired effect
                                         </a>
                                     </li>
                                 </ul>
-                                <?php if (session()->get('bagian') == 'KADEPT' || session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'BOD' || session()->get('bagian') == 'KASIE' || session()->get('bagian') == 'STAFF 4UP') : ?>
+                                <?php if (session()->get('bagian') == 'KADEPT' || session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'BOD' || session()->get('bagian') == 'KASIE') : ?>
                                 <ul class="nav nav-treeview" style="display: none;">
                                     <li class="nav-item">
                                         <a href="<?= base_url() ?>/member_schedule" class="nav-link  <?php if ($page == 'member_schedule') : echo 'active';
@@ -341,7 +344,7 @@ to get the desired effect
                                         </a>
                                     </li>
                                 </ul>
-                                <?php if (session()->get('bagian') == 'KADEPT' || session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'BOD' || session()->get('bagian') == 'KASIE' || session()->get('bagian') == 'STAFF 4UP') : ?>
+                                <?php if (session()->get('bagian') == 'KADEPT' || session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'BOD' || session()->get('bagian') == 'KASIE') : ?>
                                 <ul class="nav nav-treeview" style="display: none;">
                                     <li class="nav-item">
                                         <a href="<?= base_url() ?>/member_schedule_unplanned" class="nav-link  <?php if ($page == 'member_schedule_unplanned') : echo 'active';
@@ -377,7 +380,7 @@ to get the desired effect
                                         </a>
                                     </li>
                                 </ul>
-                                <?php if (session()->get('bagian') == 'KADEPT' || session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'BOD') : ?>
+                                <?php if (session()->get('bagian') == 'KADEPT' || session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'BOD' || session()->get('bagian') == 'KASIE') : ?>
                                 <ul class="nav nav-treeview" style="display: none;">
                                     <li class="nav-item">
                                         <a href="<?= base_url() ?>/evaluasi_reaksi_member" class="nav-link  <?php if ($page == 'evaluasi_reaksi_member_unplanned') : echo 'active';
@@ -426,7 +429,7 @@ to get the desired effect
                                         </a>
                                     </li>
                                 </ul>
-                                <?php if (session()->get('bagian') == 'KADEPT' || session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'BOD' || session()->get('bagian') == 'KASIE' || session()->get('bagian') == 'STAFF 4UP') : ?>
+                                <?php if (session()->get('bagian') == 'KADEPT' || session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'BOD' || session()->get('bagian') == 'KASIE') : ?>
                                 <ul class="nav nav-treeview" style="display: none;">
                                     <li class="nav-item">
                                         <a href="<?= base_url() ?>/evaluasi_efektifitas" class="nav-link  <?php if ($page == 'evaluasi_efektifitas') : echo 'active';
@@ -464,7 +467,7 @@ to get the desired effect
                                         </a>
                                     </li>
                                 </ul>
-                                <?php if (session()->get('bagian') == 'KADEPT' || session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'BOD' || session()->get('bagian') == 'KASIE' || session()->get('bagian') == 'STAFF 4UP') : ?>
+                                <?php if (session()->get('bagian') == 'KADEPT' || session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'BOD' || session()->get('bagian') == 'KASIE') : ?>
                                 <ul class="nav nav-treeview" style="display: none;">
                                     <li class="nav-item">
                                         <a href="<?= base_url() ?>/member_history" class="nav-link  <?php if ($page == 'member_history') : echo 'active';

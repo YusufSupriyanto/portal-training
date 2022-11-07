@@ -66,25 +66,34 @@ class FormTna extends BaseController
     public function TnaUser()
     {
         $id = $this->request->getPost('member');
+
+
         $user = $this->user->getAllUser($id);
+
         $trainings = $this->training->getAll();
+
         $tna = $this->tna->getHistoryTna($id);
+
         $tnaUser = $this->tna->getUserTna($id);
+
         $terdaftar = $this->tna->getTnaTerdaftar($id);
+
         $array = [];
         foreach ($tnaUser as $usersTna) {
-            $id = $this->training->getIdTraining($usersTna['id_training']);
+            $trainingUser = $this->training->getIdTraining($usersTna['id_training']);
+
             $trainingProcess =
                 [
                     'id_training' => $usersTna['id_training'],
                     'judul_training' => $usersTna['training'],
                     'jenis_training' => $usersTna['jenis_training'],
-                    'deskripsi' => $id['deskripsi'],
+                    'deskripsi' => $trainingUser['deskripsi'],
                     'vendor' => $usersTna['vendor'],
                     'biaya' => $usersTna['biaya']
                 ];
             array_push($array, $trainingProcess);
         }
+
         for ($i = 0; $i < count($array); $i++) {
             foreach ($trainings as $key => $arr) {
                 // echo $arr['id_training'];
@@ -93,7 +102,9 @@ class FormTna extends BaseController
                 }
             }
         }
+
         //Filter Astra Competency
+
         $datas  = $this->competencyAstra->getProfileAstraCompetency($id);
         $astra = [];
         //dd($datas);
@@ -164,6 +175,8 @@ class FormTna extends BaseController
         $dic = session()->get('dic');
         $divisi = session()->get('divisi');
         $departemen = session()->get('departemen');
+        $seksi = session()->get('seksi');
+        //dd($seksi);
 
         if ($bagian == 'BOD') {
             $status =  $this->tna->getStatusWaitUser($bagian, $dic);
@@ -172,7 +185,7 @@ class FormTna extends BaseController
         } elseif ($bagian == 'KADEPT') {
             $status = $this->tna->getStatusWaitUser($bagian, $departemen);
         } else {
-            $status =  $this->tna->getStatusWaitUser($bagian, $dic, $id);
+            $status =  $this->tna->getStatusWaitUser($bagian, $seksi);
         }
 
         //dd($status);
@@ -225,10 +238,12 @@ class FormTna extends BaseController
     public function TnaSend()
     {
         $bagian = session()->get('bagian');
+
         $page = basename($_SERVER['PHP_SELF']);
 
         if ($bagian == 'BOD') {
             $data =  $_POST['training'];
+
             for ($i = 0; $i < count($data); $i++) {
                 $update = $this->tna->getAllTna($data[$i]);
                 $tna = [
@@ -373,6 +388,7 @@ class FormTna extends BaseController
         $dic = session()->get('dic');
         $divisi = session()->get('divisi');
         $departemen = session()->get('departemen');
+        // dd($departemen);
 
         if ($bagian == 'BOD') {
             $status = $this->tna->getRequestTna($bagian, $dic);
@@ -388,9 +404,7 @@ class FormTna extends BaseController
             'status' => $status
         ];
 
-        if ($bagian == 'KADEPT')
-            return view('user/requestuser', $data);
-        elseif ($bagian == 'KADIV') {
+        if ($bagian == 'KADEPT' || $bagian == 'KADIV') {
             return view('user/requestuser', $data);
         } else {
             return view('user/requestuserbod', $data);
@@ -401,14 +415,26 @@ class FormTna extends BaseController
     //function accept kadiv
     public function acceptKadiv()
     {
+        $bagian = session()->get('bagian');
         $approve = $this->approval->getIdApproval($this->request->getPost('id_tna'));
-        $data = [
-            'id_approval' => $approve['id_approval'],
-            'id_tna' => $this->request->getPost('id_tna'),
-            'status_approval_1' => 'accept'
-        ];
-        $this->approval->save($data);
-        echo json_encode($data);
+        if ($bagian == 'KADIV') {
+            $data = [
+                'id_approval' => $approve['id_approval'],
+                'id_tna' => $this->request->getPost('id_tna'),
+                'status_approval_1' => 'accept'
+            ];
+            $this->approval->save($data);
+        } else {
+            $data = [
+                'id_approval' => $approve['id_approval'],
+                'id_tna' => $this->request->getPost('id_tna'),
+                'status_approval_0' => 'accept'
+            ];
+            $this->approval->save($data);
+        }
+
+
+        echo json_encode('SUCCESS');
     }
     public function rejectKadiv()
     {

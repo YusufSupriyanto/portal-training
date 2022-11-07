@@ -152,6 +152,10 @@ $routes->post('/sertifikat_upload_unplanned', 'Admin\C_HistoryUnplanned::Sertifi
 
 
 
+//Competency Astra
+$routes->post('/astra_file', 'Admin\C_CompetencyAstra::InputExcel', ['filter' => 'Auth']);
+
+
 //USER
 
 //profile
@@ -244,7 +248,7 @@ $routes->get('/member_schedule_unplanned', 'User\OurSchedule::member', ['filter'
 
 //Unplanned Evaluation
 $routes->get('/evaluasi_reaksi_unplanned', 'User\EvaluasiUnplanned::index', ['filter' => 'Auth']);
-$routes->get('/form_evaluasi_unplanned/(:num)', 'User\Evaluasi::EvaluasiForm/$1', ['filter' => 'Auth']);
+$routes->get('/form_evaluasi_unplanned/(:num)', 'User\EvaluasiUnplanned::EvaluasiForm/$1', ['filter' => 'Auth']);
 $routes->get('/form_unplanned_selesai/(:num)', 'User\EvaluasiUnplanned::DetailEvaluasiReaksi/$1', ['filter' => 'Auth']);
 $routes->get('/evaluasi_efektifitas_unplanned', 'User\EvaluasiEfektivitasUnplanned::index', ['filter' => 'Auth']);
 $routes->get('/form_efektivitas_unplanned/(:num)', 'User\EvaluasiEfektivitasUnplanned::formEvaluasi/$1', ['filter' => 'Auth']);

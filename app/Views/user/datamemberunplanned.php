@@ -31,7 +31,7 @@
                 foreach ($user as $users) : ?>
                 <tr>
                     <td><?= $users->npk ?></td>
-                    <td><?php if (session()->get('bagian') == 'BOD' || session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'KADEPT') : ?>
+                    <td><?php if (session()->get('bagian') == 'BOD' || session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'KADEPT' ||  session()->get('bagian') == 'KASIE' ||  session()->get('bagian') == 'STAFF 4UP') : ?>
                         <form action="<?= base_url() ?>\form_unplanned" id="dataform<?= $i ?>" method="post">
                             <input type="hidden" name="member" id="member<?= $i ?>" value="<?= $users->id_user ?>">
                         </form>

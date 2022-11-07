@@ -114,7 +114,7 @@ class UserModel extends Model
     {
         $seksi = ['RESEARCH & DEVELOPMENT', 'EXPERT PROCESS'];
         $bagian = ['STAFF 4UP'];
-        $this->select('id_user')->whereNotIn('bagian', $bagian)->whereNotIn('seksi', $seksi);
+        $this->select('id_user')->whereNotIn('bagian', $bagian)->whereNotIn('seksi', $seksi)->where('type_golongan', 'A         ');
         return $this->get()->getResultArray();
     }
     public function getUserTechnical($departemen)
