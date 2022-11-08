@@ -22,4 +22,10 @@ class M_Technical extends Model
         $this->select()->where('departemen', $departemen);
         return $this->get()->getResultArray();
     }
+
+    public function getTechnicalLastRow()
+    {
+        $this->select('id_technical');
+        return $this->get()->getLastRow();
+    }
 }

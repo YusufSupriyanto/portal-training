@@ -5,13 +5,13 @@
 <div class="d-flex">
     <div class="card m-1" style="width:60%;">
         <div class="card-header d-flex justify-content-center">
-            <h3 class=" card-title">Astra Leadership Competency</h3>
+            <h3 class=" card-title">Expert Behavior Competencies</h3>
         </div>
         <!-- /.card-header -->
         <div class="card-body p-0">
             <div class="form-group m-2">
-                <form action="<?= base_url() ?>/astra_file" method="post" enctype="multipart/form-data">
-                    <label for="exampleInputFile">Input Competency Astra</label>
+                <form action="<?= base_url() ?>/expert_file" method="post" enctype="multipart/form-data">
+                    <label for="exampleInputFile">Input Competency Expert</label>
                     <div class="input-group">
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="exampleInputFile" name="file" required>
@@ -23,27 +23,28 @@
                     </div>
                 </form>
             </div>
-            <table class="table table-striped" id="CompetencyAstra">
+            <table class="table table-striped" id="CompetencyExpert">
 
                 <thead>
                     <tr>
-                        <th>Astra Leadership Competency </th>
+                        <th>Expert Behavior Competencies </th>
                         <th>Proficiency</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($astra as $Astra) : ?>
+                    <?php foreach ($expert as $Expert) : ?>
                     <tr>
-                        <td><?= $Astra['astra'] ?></td>
-                        <td><?= $Astra['proficiency'] ?></td>
+                        <td><?= $Expert['expert'] ?></td>
+                        <td><?= $Expert['proficiency'] ?></td>
                         <td>
                             <div class="row">
                                 <button type="button" class="btn btn-warning btn-sm mr-2">
                                     <i class="fa-solid fa-pen-to-square" style="font-size:17px;"
-                                        onclick="editCompetencyAtra('<?= $Astra['id_astra'] ?>','<?= $Astra['astra'] ?>','<?= $Astra['proficiency'] ?>')"></i>
+                                        onclick="editCompetencyExpert('<?= $Expert['id_expert'] ?>','<?= $Expert['expert'] ?>','<?= $Expert['proficiency'] ?>')"></i>
                                 </button>
-                                <form action="<?= base_url() ?>\delete\astra\<?= $Astra['id_astra'] ?>" method="post">
+                                <form action="<?= base_url() ?>\delete\expert\<?= $Expert['id_expert'] ?>"
+                                    method="post">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <button type="submit" class="btn btn-danger btn-sm btn-delete"><i
                                             class="fa fa-fw fa-trash"></i></button>
@@ -60,13 +61,13 @@
     <div class="card m-1" style="width:40%;">
         <div class="card card-primary">
             <!-- form start -->
-            <form role="form" action="<?= base_url() ?>/edit_competency_astra" method="post">
+            <form role="form" action="<?= base_url() ?>/edit_competency_expert" method="post">
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="astra">Astra Leadership Competency</label>
-                        <input type="hidden" class="form-control" id="id_astra" name="id_astra">
-                        <input type="text" class="form-control" id="astra" name="astra"
-                            placeholder="Astra Leadership Competency" required>
+                        <label for="expert">Expert Behavior Competencies</label>
+                        <input type="hidden" class="form-control" id="id_expert" name="id_expert">
+                        <input type="text" class="form-control" id="expert" name="expert"
+                            placeholder="Expert Behavior Competencies" required>
                     </div>
                     <div class="form-group">
                         <label for="proficiency">Proficiency</label>
@@ -86,13 +87,12 @@
 
 <script>
 $(document).ready(function() {
-    $('#CompetencyAstra').DataTable();
+    $('#CompetencyExpert').DataTable();
 });
 
-function editCompetencyAtra(id, astra, proficiency) {
-
-    $('#id_astra').val(id)
-    $('#astra').val(astra)
+function editCompetencyExpert(id, expert, proficiency) {
+    $('#id_expert').val(id)
+    $('#expert').val(expert)
     $('#proficiency').val(proficiency)
 
 

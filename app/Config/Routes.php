@@ -59,7 +59,11 @@ $routes->get('/list_technical', 'Admin\C_competency::technical', ['filter' => 'A
 $routes->post('/save_technical', 'Admin\C_competency::SaveTechnical', ['filter' => 'Auth']);
 $routes->delete('/delete/technical/(:num)', 'Admin\C_competency::DeleteTechnical/$1', ['filter' => 'Auth']);
 $routes->get('/technical_departemen/(:any)', 'Admin\C_competency::DetailTechnical/$1', ['filter' => 'Auth']);
-$routes->post('/input_technical', 'Admin\C_competency::InputDataTechnical', ['filter' => 'Auth']);
+$routes->post('/input_technical_file', 'Admin\C_competencyTechnical::InputExcel', ['filter' => 'Auth']);
+$routes->get('/list_expert', 'Admin\C_Competency::Expert', ['filter' => 'Auth']);
+$routes->post('/expert_file', 'Admin\C_CompetencyExpert::InputExcel', ['filter' => 'Auth']);
+$routes->post('/edit_competency_expert', 'Admin\C_competency::EditExpert', ['filter' => 'Auth']);
+$routes->delete('/delete/expert/(:num)', 'Admin\C_competency::DeleteExpert/$1', ['filter' => 'Auth']);
 
 
 //categories

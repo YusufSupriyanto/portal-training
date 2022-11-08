@@ -164,6 +164,13 @@ to get the desired effect
                                         </a>
                                     </li>
                                     <li class="nav-item">
+                                        <a href="<?= base_url() ?>/list_expert" class="nav-link <?php if ($page == 'list_expert') : echo 'active';
+                                                                                            endif; ?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Expert Behavior Competencies </p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
                                         <a href="<?= base_url() ?>/list_technical" class="nav-link <?php if ($page == 'list_technical') : echo 'active';
                                                                                                 endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>

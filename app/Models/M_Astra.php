@@ -27,4 +27,11 @@ class M_Astra extends Model
         $this->select('id_astra');
         return $this->get()->getResultArray();
     }
+
+
+    public function getAstraLastRow()
+    {
+        $this->select('id_astra');
+        return $this->get()->getLastRow();
+    }
 }

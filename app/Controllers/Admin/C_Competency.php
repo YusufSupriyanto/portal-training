@@ -6,8 +6,10 @@ use App\Controllers\BaseController;
 use App\Models\M_Approval;
 use App\Models\M_Astra;
 use App\Models\M_CompetencyAstra;
+use App\Models\M_CompetencyExpert;
 use App\Models\M_CompetencyTechnical;
 use App\Models\M_EvaluasiReaksi;
+use App\Models\M_Expert;
 use App\Models\M_Technical;
 use App\Models\M_Tna;
 use App\Models\M_TnaUnplanned;
@@ -17,16 +19,20 @@ class C_Competency extends BaseController
 {
     private M_Astra $astra;
     private M_Technical $technical;
+
+    private M_Expert $expert;
     private UserModel $user;
     private M_CompetencyAstra $competencyAstra;
-
+    private M_CompetencyExpert $competencyExpert;
     private M_CompetencyTechnical $competencyTechnical;
     public function __construct()
     {
         $this->astra = new M_Astra();
+        $this->expert = new M_Expert();
         $this->technical = new M_Technical();
         $this->user = new UserModel();
         $this->competencyAstra = new M_CompetencyAstra();
+        $this->competencyExpert = new M_CompetencyExpert();
         $this->competencyTechnical = new M_CompetencyTechnical();
     }
 
@@ -43,12 +49,14 @@ class C_Competency extends BaseController
     }
 
 
-
+    //function untuk menambahkan List Astra dan Edit List Astra
     public function EditAstra()
     {
         $id_astra =  $this->request->getVar('id_astra');
         $astra =  $this->request->getVar('astra');
         $proficiency =  $this->request->getVar('proficiency');
+        $user = $this->user->getUserAstra();
+        // dd($user);
 
         if ($id_astra != "") {
             $data = [
@@ -65,6 +73,16 @@ class C_Competency extends BaseController
                 'proficiency' => $proficiency
             ];
             $this->astra->save($data);
+            $list_new_astra = $this->astra->getAstraLastRow();
+            foreach ($user as $users) {
+                $AstraUser = [
+                    'id_user' => $users['id_user'],
+                    'id_astra' => $list_new_astra->id_astra,
+                    'score_astra' => 0
+                ];
+                $this->competencyAstra->save($AstraUser);
+                //d($AstraUser);
+            }
             session()->setFlashdata('success', 'Data Berhasil Di Di Input');
             return redirect()->to('/list_astra');
         }
@@ -81,12 +99,14 @@ class C_Competency extends BaseController
     {
 
         $technical = $this->competencyTechnical->getDataDepertemen();
+        $department = $this->user->DistinctDepartemen();
 
-        //dd($technical);
+        //dd($department);
 
         $data = [
             'tittle' => 'Department Technical Competency',
-            'technical' => $technical
+            'technical' => $technical,
+            'department' => $department
         ];
         return view('admin/listtechnicalcompetency', $data);
     }
@@ -144,11 +164,72 @@ class C_Competency extends BaseController
     }
 
 
-    public function InputDataTechnical()
+
+    public function Expert()
     {
-        $file =  $this->request->getFile('Technical');
-        dd($file);
+        $expert = $this->expert->getDataExpert();
+        $data = [
+            'tittle' => 'Expert Behavior Competencies',
+            'expert' => $expert
+        ];
+        return view('admin/competencyexpert', $data);
     }
+
+
+    public function EditExpert()
+    {
+        $id_expert =  $this->request->getVar('id_expert');
+        $expert =  $this->request->getVar('expert');
+        $proficiency =  $this->request->getVar('proficiency');
+        $user = $this->user->getUserExpert();
+        // dd($id_expert);
+
+        if ($id_expert != "") {
+            $data = [
+                'id_expert' => $id_expert,
+                'expert' => $expert,
+                'proficiency' => $proficiency
+            ];
+            $this->expert->save($data);
+            session()->setFlashdata('success', 'Data Berhasil Di Update');
+            return redirect()->to('/list_expert');
+        } else {
+            $data = [
+                'expert' => $expert,
+                'proficiency' => $proficiency
+            ];
+            $this->expert->save($data);
+            $list_new_expert = $this->expert->getAstraLastRow();
+            foreach ($user as $users) {
+                $ExpertUser = [
+                    'id_user' => $users['id_user'],
+                    'id_expert' => $list_new_expert->id_expert,
+                    'score_expert' => 0
+                ];
+                $this->competencyExpert->save($ExpertUser);
+                //d($AstraUser);
+            }
+            session()->setFlashdata('success', 'Data Berhasil Di Di Input');
+            return redirect()->to('/list_expert');
+        }
+    }
+
+    public function DeleteExpert($id)
+    {
+
+        // dd($id);
+
+        $this->expert->delete($id);
+        session()->setFlashdata('success', 'Data Berhasil Di Hapus');
+        return redirect()->to('/list_expert');
+    }
+
+
+    // public function InputDataTechnical()
+    // {
+    //     $file =  $this->request->getFile('Technical');
+    //     dd($file);
+    // }
 
     //dummy function
     public function inputAstra()

@@ -113,14 +113,28 @@ class UserModel extends Model
     public function getUserAstra()
     {
         $seksi = ['RESEARCH & DEVELOPMENT', 'EXPERT PROCESS'];
-        $bagian = ['STAFF 4UP'];
-        $this->select('id_user')->whereNotIn('bagian', $bagian)->whereNotIn('seksi', $seksi)->where('type_golongan', 'A         ');
+        $bagian = ['BOD', 'KADIV', 'KADEPT', 'KASIE', 'STAFF 4UP'];
+        $this->select('nama,id_user')->whereIn('bagian', $bagian)->whereNotIn('seksi', $seksi)->where('type_golongan', 'A         ')->where('level', 'USER');
+        $this->orderBy('nama', 'ASC');
         return $this->get()->getResultArray();
     }
-    public function getUserTechnical($departemen)
+
+
+    public function getUserExpert()
     {
-        $bagian = ['STAFF 4UP'];
-        $this->select()->whereNotIn('bagian', $bagian)->where('departement', $departemen);
+        $seksi = ['EXPERT PROCESS', 'RESEARCH & DEVELOPMENT'];
+        $this->select('nama,id_user')->whereIn('seksi', $seksi)->where('bagian', 'STAFF 4UP')->where('type_golongan', 'A         ');
+        return $this->get()->getResultArray();
+    }
+    public function getUserTechnicalA($departemen)
+    {
+        $this->select('nama,id_user')->where('departemen', $departemen)->where('level', 'USER')->where('type_golongan', 'A         ');
+        return $this->get()->getResultArray();
+    }
+
+    public function getUserTechnicalB($departemen)
+    {
+        $this->select('nama,id_user')->where('departemen', $departemen)->where('level', 'USER')->where('type_golongan', 'B        ');
         return $this->get()->getResultArray();
     }
 
