@@ -55,15 +55,32 @@ $routes->get('/home', 'Home::index', ['filter' => 'Auth']);
 $routes->get('/list_astra', 'Admin\C_competency::astra', ['filter' => 'Auth']);
 $routes->post('/edit_competency_astra', 'Admin\C_competency::EditAstra', ['filter' => 'Auth']);
 $routes->delete('/delete/astra/(:num)', 'Admin\C_competency::DeleteAstra/$1', ['filter' => 'Auth']);
-$routes->get('/list_technical', 'Admin\C_competency::technical', ['filter' => 'Auth']);
+
+
+$routes->get('/list_technicalA', 'Admin\C_competency::technicalA', ['filter' => 'Auth']);
+$routes->get('/list_technicalB', 'Admin\C_competency::technicalB', ['filter' => 'Auth']);
 $routes->post('/save_technical', 'Admin\C_competency::SaveTechnical', ['filter' => 'Auth']);
 $routes->delete('/delete/technical/(:num)', 'Admin\C_competency::DeleteTechnical/$1', ['filter' => 'Auth']);
-$routes->get('/technical_departemen/(:any)', 'Admin\C_competency::DetailTechnical/$1', ['filter' => 'Auth']);
+$routes->get('/technical_departemen/(:any)/(:any)', 'Admin\C_competency::DetailTechnical/$1/$2', ['filter' => 'Auth']);
 $routes->post('/input_technical_file', 'Admin\C_competencyTechnical::InputExcel', ['filter' => 'Auth']);
 $routes->get('/list_expert', 'Admin\C_Competency::Expert', ['filter' => 'Auth']);
 $routes->post('/expert_file', 'Admin\C_CompetencyExpert::InputExcel', ['filter' => 'Auth']);
 $routes->post('/edit_competency_expert', 'Admin\C_competency::EditExpert', ['filter' => 'Auth']);
 $routes->delete('/delete/expert/(:num)', 'Admin\C_competency::DeleteExpert/$1', ['filter' => 'Auth']);
+
+//soft Competency
+$routes->get('/list_soft', 'Admin\C_competencySoft::index', ['filter' => 'Auth']);
+$routes->post('/soft_file', 'Admin\C_competencySoft::InputExcel', ['filter' => 'Auth']);
+$routes->post('/edit_competency_soft', 'Admin\C_competencySoft::EditSoft', ['filter' => 'Auth']);
+$routes->delete('/delete/soft/(:num)', 'Admin\C_competencySoft::Delete/$1', ['filter' => 'Auth']);
+
+//Company Competency
+$routes->get('/list_company', 'Admin\C_competencyCompany::index', ['filter' => 'Auth']);
+$routes->post('/input_company_file', 'Admin\C_competencyCompany::InputExcel', ['filter' => 'Auth']);
+$routes->get('/company_division/(:any)', 'Admin\C_CompetencyCompany::DetailCompany/$1', ['filter' => 'Auth']);
+$routes->post('/save_company', 'Admin\C_CompetencyCompany::EditCompany', ['filter' => 'Auth']);
+$routes->delete('/delete/company/(:num)', 'Admin\C_competencyCompany::Delete/$1', ['filter' => 'Auth']);
+
 
 
 //categories

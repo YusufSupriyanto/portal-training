@@ -5,33 +5,33 @@
 <div class="d-flex">
     <div class="card m-1" style="width:60%;">
         <div class="card-header d-flex justify-content-center">
-            <h3 class=" card-title">Technical Competency Departemen <?= $departemen ?></h3>
+            <h3 class=" card-title">Company General Competency</h3>
         </div>
         <!-- /.card-header -->
         <div class="card-body p-0">
-            <table class="table table-striped" id="CompetencyAstra">
+            <table class="table table-striped" id="CompetencyCompany">
 
                 <thead>
                     <tr>
-                        <th>Technical Competency</th>
+                        <th>Company Competency</th>
                         <th>Proficiency</th>
-                        <th>Department</th>
+                        <th>Divisi</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($technical as $Technical) : ?>
+                    <?php foreach ($company as $Company) : ?>
                     <tr>
-                        <td><?= $Technical['technical'] ?></td>
-                        <td><?= $Technical['proficiency'] ?></td>
-                        <td><?= $Technical['departemen'] ?></td>
+                        <td><?= $Company['company'] ?></td>
+                        <td><?= $Company['proficiency'] ?></td>
+                        <td><?= $Company['divisi'] ?></td>
                         <td>
                             <div class="row">
                                 <button type="button" class="btn btn-warning btn-sm mr-2"
-                                    onclick="editCompetencyTechnical('<?= $Technical['id_technical'] ?>','<?= $Technical['technical'] ?>','<?= $Technical['proficiency'] ?>','<?= $Technical['departemen'] ?>')">
+                                    onclick="editCompetencyCompany('<?= $Company['id_company'] ?>','<?= $Company['company'] ?>','<?= $Company['proficiency'] ?>','<?= $Company['divisi'] ?>')">
                                     <i class="fa-solid fa-pen-to-square" style="font-size:17px;"></i>
                                 </button>
-                                <form action="<?= base_url() ?>\delete\technical\<?= $Technical['id_technical'] ?>"
+                                <form action="<?= base_url() ?>\delete\company\<?= $Company['id_company'] ?>"
                                     method="post">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <button type="submit" class="btn btn-danger btn-sm btn-delete"><i
@@ -49,13 +49,13 @@
     <div class="card m-1" style="width:40%;">
         <div class="card card-primary">
             <!-- form start -->
-            <form role="form" action="<?= base_url() ?>/save_technical" method="post">
+            <form role="form" action="<?= base_url() ?>/save_company" method="post">
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="technical">Technical Competency</label>
-                        <input type="hidden" class="form-control" id="id_technical" name="id_technical">
-                        <input type="text" class="form-control" id="technical" name="technical"
-                            placeholder="Technical Competency" required>
+                        <label for="company">Company General Competency</label>
+                        <input type="hidden" class="form-control" id="id_company" name="id_company">
+                        <input type="text" class="form-control" id="company" name="company"
+                            placeholder="Company General Competency	" required>
                     </div>
                     <div class="form-group">
                         <label for="proficiency">Proficiency</label>
@@ -63,14 +63,13 @@
                             placeholder="Proficiency" required>
                     </div>
                     <div class="form-group">
-                        <label for="department">Department</label>
-                        <input type="text" class="form-control" value="<?= $departemen ?>" name="department"
-                            id="department" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="golongan">Group</label>
-                        <input type="text" class="form-control" value="<?= $group ?>" name="golongan" id="golongan"
-                            readonly>
+                        <label for="department">Divisi</label>
+                        <select class="form-control" id="divisi" name="divisi" required>
+                            <option value="">Choose Divisi...</option>
+                            <?php foreach ($divisi as $division) : ?>
+                            <option value="<?= $division['divisi']  ?>"><?= $division['divisi'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
                 </div>
                 <!-- /.card-body -->
@@ -88,12 +87,12 @@ $(document).ready(function() {
     $('#CompetencyAstra').DataTable();
 });
 
-function editCompetencyTechnical(id, technical, proficiency, department) {
+function editCompetencyCompany(id, company, proficiency, divisi) {
 
-    $('#id_technical').val(id)
-    $('#technical').val(technical)
+    $('#id_company').val(id)
+    $('#company').val(company)
     $('#proficiency').val(proficiency)
-    $('#department').val(department)
+    $('#divisi').val(divisi)
 
 
 }

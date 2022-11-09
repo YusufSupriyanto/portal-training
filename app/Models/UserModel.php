@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use PHPSQLParser\Test\Creator\functionTest;
 
 class UserModel extends Model
 {
@@ -135,6 +136,19 @@ class UserModel extends Model
     public function getUserTechnicalB($departemen)
     {
         $this->select('nama,id_user')->where('departemen', $departemen)->where('level', 'USER')->where('type_golongan', 'B        ');
+        return $this->get()->getResultArray();
+    }
+
+
+    public function getGroupB()
+    {
+        $this->select()->where('type_golongan', 'B        ');
+        return $this->get()->getResultArray();
+    }
+
+    public function getUserDivisi($divisi)
+    {
+        $this->select('nama,id_user')->where('divisi', $divisi)->where('level', 'USER')->where('type_golongan', 'B        ');
         return $this->get()->getResultArray();
     }
 

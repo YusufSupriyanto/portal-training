@@ -95,30 +95,50 @@ class C_Competency extends BaseController
     }
 
 
-    public function technical()
+    public function technicalA()
     {
 
-        $technical = $this->competencyTechnical->getDataDepertemen();
+        $technicalA = $this->competencyTechnical->getDataDepertemenA();
         $department = $this->user->DistinctDepartemen();
 
         //dd($department);
 
         $data = [
             'tittle' => 'Department Technical Competency',
-            'technical' => $technical,
+            'technicalA' => $technicalA,
             'department' => $department
         ];
-        return view('admin/listtechnicalcompetency', $data);
+        return view('admin/listtechnicalcompetencyA', $data);
+    }
+    public function technicalB()
+    {
+
+
+        $technicalB = $this->competencyTechnical->getDataDepertemenB();
+        $department = $this->user->DistinctDepartemen();
+
+        //dd($department);
+
+        $data = [
+            'tittle' => 'Department Technical Competency',
+            'technicalB' => $technicalB,
+            'department' => $department
+        ];
+        return view('admin/listtechnicalcompetencyB', $data);
     }
 
-    public function DetailTechnical($departemen)
+    public function DetailTechnical($departemen, $group)
     {
-        $technical = $this->technical->getDataTechnicalDepartemen($departemen);
+        $technical = $this->technical->getDataTechnicalDepartemen($departemen, $group);
+        $department = $this->user->DistinctDepartemen();
         //dd($technical);
 
         $data = [
             'tittle' => 'Technical Competency',
-            'technical' => $technical
+            'technical' => $technical,
+            'department' => $department,
+            'departemen' => $departemen,
+            'group' => $group
         ];
         return view('admin/competencytechnical', $data);
     }
@@ -130,6 +150,8 @@ class C_Competency extends BaseController
         $technical =  $this->request->getVar('technical');
         $proficiency =  $this->request->getVar('proficiency');
         $depertemen = $this->request->getVar('department');
+        $golongan = $this->request->getVar('golongan');
+        //dd($golongan);
 
         if ($id_technical != "") {
             $data = [
@@ -142,18 +164,19 @@ class C_Competency extends BaseController
             // dd($data);
             $this->technical->save($data);
             session()->setFlashdata('success', 'Data Berhasil Di Update');
-            return redirect()->to('/list_technical');
+            return redirect()->to('/technical_departemen/' . $depertemen . '/' . $golongan);
         } else {
             $data = [
                 'technical' => $technical,
                 'departemen' => $depertemen,
-                'proficiency' => $proficiency
+                'proficiency' => $proficiency,
+                'golongan' => $golongan
             ];
 
             // dd($data);
             $this->technical->save($data);
             session()->setFlashdata('success', 'Data Berhasil Di Di Input');
-            return redirect()->to('/list_technical');
+            return redirect()->to('/technical_departemen/' . $depertemen . '/' . $golongan);
         }
     }
     public function DeleteTechnical($id)

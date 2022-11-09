@@ -156,32 +156,75 @@ to get the desired effect
                                     </p>
                                 </a>
                                 <ul class="nav nav-treeview" style="display: none;">
-                                    <li class="nav-item">
-                                        <a href="<?= base_url() ?>/list_astra" class="nav-link  <?php if ($page == 'list_astra') : echo 'active';
-                                                                                            endif; ?>">
+                                    <li class="nav-item has-treeview">
+                                        <a href="#" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>Astra Leadership Competency </p>
+                                            <p>
+                                                Group A
+                                                <i class="right fas fa-angle-left"></i>
+                                            </p>
                                         </a>
+                                        <ul class="nav nav-treeview" style="display: none;">
+                                            <li class="nav-item">
+                                                <a href="<?= base_url() ?>/list_astra" class="nav-link  <?php if ($page == 'list_astra') : echo 'active';
+                                                                                                    endif; ?>">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>Astra Leadership Competency </p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="<?= base_url() ?>/list_expert" class="nav-link <?php if ($page == 'list_expert') : echo 'active';
+                                                                                                    endif; ?>">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>Expert Behavior Competencies </p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="<?= base_url() ?>/list_technicalA" class="nav-link <?php if ($page == 'list_technicalA') : echo 'active';
+                                                                                                        endif; ?>">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>Technical Competency</p>
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </li>
-                                    <li class="nav-item">
-                                        <a href="<?= base_url() ?>/list_expert" class="nav-link <?php if ($page == 'list_expert') : echo 'active';
-                                                                                            endif; ?>">
+                                </ul>
+                                <ul class="nav nav-treeview" style="display: none;">
+                                    <li class="nav-item has-treeview">
+                                        <a href="#" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>Expert Behavior Competencies </p>
+                                            <p>
+                                                Group B
+                                                <i class="right fas fa-angle-left"></i>
+                                            </p>
                                         </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="<?= base_url() ?>/list_technical" class="nav-link <?php if ($page == 'list_technical') : echo 'active';
-                                                                                                endif; ?>">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Technical Competency</p>
-                                        </a>
+                                        <ul class="nav nav-treeview" style="display: none;">
+                                            <li class="nav-item">
+                                                <a href="<?= base_url() ?>/list_company" class="nav-link <?php if ($page == 'list_company') : echo 'active';
+                                                                                                        endif; ?>">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>Company General Competency</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="<?= base_url() ?>/list_soft" class="nav-link <?php if ($page == 'list_soft') : echo 'active';
+                                                                                                    endif; ?>">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>Soft Competency</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="<?= base_url() ?>/list_technicalB" class="nav-link <?php if ($page == 'list_technicalB') : echo 'active';
+                                                                                                        endif; ?>">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>Technical Competency</p>
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </li>
                                 </ul>
                             </li>
-
                             <li class="nav-item has-treeview">
-
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon fa fa-fw fa-list"></i>
                                     <p>

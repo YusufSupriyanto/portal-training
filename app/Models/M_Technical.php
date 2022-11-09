@@ -9,7 +9,7 @@ class M_Technical extends Model
     protected $table      = 'technical_competency';
     // protected $useAutoIncrement = true;
     protected $primaryKey = 'id_technical';
-    protected $allowedFields = ['proficiency', '', 'technical', 'departemen'];
+    protected $allowedFields = ['proficiency', '', 'technical', 'departemen', 'golongan'];
 
     public function getDataTechnical()
     {
@@ -17,9 +17,9 @@ class M_Technical extends Model
         return $this->get()->getResultArray();
     }
 
-    public function getDataTechnicalDepartemen($departemen)
+    public function getDataTechnicalDepartemen($departemen, $group)
     {
-        $this->select()->where('departemen', $departemen);
+        $this->select()->where('departemen', $departemen)->where('golongan', $group);
         return $this->get()->getResultArray();
     }
 
