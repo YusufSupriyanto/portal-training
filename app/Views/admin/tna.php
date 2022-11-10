@@ -2,14 +2,19 @@
 
 <?= $this->section('content') ?>
 <div class="card m-1 " style="font-size:15px;">
-    <div class="card-header h6 d-flex">
-
-        <h3 class="card-title">Daftar Training Need Analysis</h3>
-
-    </div>
-    <!-- /.card-header -->
-    <div class="card-body table-responsive p-0">
-        <form>
+    <?php $i = 0;
+    foreach ($dept as $d) : ?>
+    <div class="card">
+        <div class="card-header h6 d-flex justify-content-between">
+            <div>
+                <h3 class="card-title">Daftar Training Need Analysis</h3>
+            </div>
+            <div>
+                <h6><strong> Avaliable Budget : </strong></h6>
+            </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body table-responsive p-0">
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -27,8 +32,9 @@
                     </tr>
                 </thead>
                 <tbody id="tna-admin">
-                    <?php $i = 0;
-                    foreach ($tna as $tnas) : ?>
+                    <?php
+                        $deptTna = $tna->getStatusWaitAdmin($d->departemen);
+                        foreach ($deptTna as $tnas) : ?>
                     <tr>
                         <td><?= $tnas->nama ?></td>
                         <td><?= $tnas->departemen ?></td>
@@ -74,11 +80,30 @@
                         </td>
                     </tr>
                     <?php $i++;
-                    endforeach; ?>
+                        endforeach; ?>
+                    <tr>
+                        <td>
+                            <h6><strong>Alocated Budget : </strong></h6>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <h6><strong>Budget : </strong></h6>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
-        </form>
+        </div>
     </div>
+    <?php endforeach; ?>
     <!-- /.card-body -->
     <div class=" modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -127,7 +152,4 @@
         </div>
     </div>
 </div>
-<script>
-</script>
-
 <?= $this->endSection() ?>

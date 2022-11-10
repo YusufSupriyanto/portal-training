@@ -42,6 +42,7 @@
 
                     </tr>
                     <?php endforeach; ?>
+
                 </tbody>
             </table>
         </div>
@@ -64,12 +65,8 @@
                     </div>
                     <div class="form-group">
                         <label for="department">Divisi</label>
-                        <select class="form-control" id="divisi" name="divisi" required>
-                            <option value="">Choose Divisi...</option>
-                            <?php foreach ($divisi as $division) : ?>
-                            <option value="<?= $division['divisi']  ?>"><?= $division['divisi'] ?></option>
-                            <?php endforeach; ?>
-                        </select>
+                        <input type="text" value="<?= $division ?>" class="form-control" id="divisi" name="divisi"
+                            placeholder="Divisi" readonly>
                     </div>
                 </div>
                 <!-- /.card-body -->

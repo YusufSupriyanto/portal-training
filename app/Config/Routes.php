@@ -177,6 +177,11 @@ $routes->post('/sertifikat_upload_unplanned', 'Admin\C_HistoryUnplanned::Sertifi
 $routes->post('/astra_file', 'Admin\C_CompetencyAstra::InputExcel', ['filter' => 'Auth']);
 
 
+//Budget
+$routes->get('/budget', 'Admin\C_Budget::index', ['filter' => 'Auth']);
+$routes->post('/save_budget', 'Admin\C_Budget::SaveBudget', ['filter' => 'Auth']);
+
+
 //USER
 
 //profile

@@ -29,11 +29,12 @@ class C_Tna extends BaseController
     }
     public function index()
     {
-        $tna = $this->tna->getStatusWaitAdmin();
-        //dd($deadline['deadline']);
+        $departemen = $this->tna->getStatusWaitAdminDepartemen();
+        //dd($tna);
         $data = [
             'tittle' => 'Form TNA',
-            'tna' => $tna,
+            'tna' => $this->tna,
+            'dept' => $departemen
         ];
         return view('admin/tna', $data);
     }

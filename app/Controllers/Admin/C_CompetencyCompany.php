@@ -92,13 +92,14 @@ class C_CompetencyCompany extends BaseController
     public function DetailCompany($divisi)
     {
         $company = $this->company->getDataCompanyDivisi($divisi);
-        $divisi = $this->user->DistinctDivisi();
+        $division = $this->user->DistinctDivisi();
         //dd($company);
 
         $data = [
             'tittle' => 'Company General Competency',
             'company' => $company,
-            'divisi' => $divisi
+            'divisi' => $division,
+            'division' => $divisi
         ];
         return view('admin/competencycompany', $data);
     }

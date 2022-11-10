@@ -410,6 +410,13 @@ to get the desired effect
                                 </ul>
                             </li>
                             <li class="nav-item">
+                                <a href="<?= base_url() ?>/budget" class="nav-link  <?php if ($page == 'budget') : echo 'active';
+                                                                                endif; ?>">
+                                    <i class="nav-icon fa fa-fw  fa-money"></i>
+                                    <p>Budget</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="<?= base_url() ?>/massage_user" class="nav-link  <?php if ($page == 'message_user') : echo 'active';
                                                                                         endif; ?>">
                                     <i class="nav-icon fa fa-fw  fa-phone"></i>

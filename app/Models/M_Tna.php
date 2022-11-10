@@ -126,10 +126,17 @@ class M_Tna extends Model
         }
     }
 
-
-    public function getStatusWaitAdmin()
+    public function getStatusWaitAdminDepartemen()
     {
-        $this->select()->where('tna.status', 'wait')->where('kelompok_training', 'training');
+        $this->select('tna.departemen')->where('tna.status', 'wait')->where('kelompok_training', 'training');
+        $this->join('user', 'user.id_user = tna.id_user');
+        $this->join('approval', 'approval.id_tna = tna.id_tna');
+        $this->groupBy('tna.departemen');
+        return $this->get()->getResult();
+    }
+    public function getStatusWaitAdmin($departemen)
+    {
+        $this->select()->where('tna.status', 'wait')->where('kelompok_training', 'training')->where('tna.departemen', $departemen);
         $this->join('user', 'user.id_user = tna.id_user');
         $this->join('approval', 'approval.id_tna = tna.id_tna');
         return $this->get()->getResult();
