@@ -14,6 +14,7 @@ use App\Models\UserModel;
 use App\Models\M_CompetencyAstra;
 use App\Models\M_CompetencyTechnical;
 use App\Models\M_Astra;
+use App\Models\M_Budget;
 use App\Models\M_Technical;
 
 class FormTna extends BaseController
@@ -31,6 +32,8 @@ class FormTna extends BaseController
     private M_Technical $technical;
     private M_CompetencyTechnical $competencyTechnical;
 
+    private M_Budget $budget;
+
 
     public function __construct()
     {
@@ -45,6 +48,7 @@ class FormTna extends BaseController
         $this->competencyAstra = new M_CompetencyAstra();
         $this->technical = new M_Technical();
         $this->competencyTechnical = new M_CompetencyTechnical();
+        $this->budget = new M_Budget();
     }
 
     //function untuk menamplilkan data member dengan user yang akan di daftarkan tna
@@ -53,11 +57,14 @@ class FormTna extends BaseController
         $id = session()->get('id');
         $user = $this->user->filter($id);
         $tna = $this->tna->getTnaFilter($id);
-        // dd($tna);
+        $budget = $this->budget->getBudgetCurrent(session()->get('departemen'));
+
+        //dd($budget);
         $data = [
             'tittle' => 'Data Member',
             'user' => $user,
-            'tna' => $tna
+            'tna' => $tna,
+            'budget' => $budget
         ];
         return view('user/datamember', $data);
     }
@@ -317,20 +324,21 @@ class FormTna extends BaseController
         } else {
             $id_training = $id;
         }
-
-        if (!$this->validate([
-            'tujuan' => 'required'
-        ])) {
-            $validation = \Config\Services::validation();
-            return redirect()->to('/form_tna')->withInput()->with('validation', $validation);
-        }
         $user = $this->user->getAllUser($id_user);
+        //dd($user);
         $jenis_trainng = $this->training->getIdTraining($id_training);
 
+        $budget = $this->budget->getBudgetCurrent($user['departemen']);
+
+        if ($jenis_trainng['biaya'] > $budget['available_budget']) {
+            session()->setFlashdata('warning', 'Maaf');
+            return redirect()->to('/data_member');
+        }
         // dd($id_user);
         $data = [
             'id_user' => $id_user,
             'id_training' => $id_training,
+            'id_budget' => $budget['id_budget'],
             'dic' => $user['dic'],
             'divisi' => $user['divisi'],
             'departemen' => $user['departemen'],

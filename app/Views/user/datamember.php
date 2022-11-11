@@ -1,6 +1,7 @@
 <?= $this->extend('/template/templateuser') ?>
 
 <?= $this->section('content') ?>
+<div class="warning" data-warning="<?= session()->get('warning'); ?>"></div>
 <div class="card m-1">
     <div class="card-header ">
         <div class="d-flex justify-content-between">
@@ -86,7 +87,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($tna as $Forms) : ?>
+                                <?php
+                                $sum = 0;
+                                foreach ($tna as $Forms) : ?>
                                 <tr>
                                     <td><?= $Forms->nama ?></td>
                                     <td><?= $Forms->training ?></td>
@@ -101,10 +104,35 @@
                                     </td>
                                 </tr>
                                 <input type="hidden" value="<?= $Forms->id_tna ?>" name="training[]">
-                                <?php endforeach; ?>
+                                <?php
+                                    $sum += $Forms->biaya;
+                                endforeach; ?>
+                                <tr>
+                                    <td><strong>Jumlah</strong></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><?= "Rp " . number_format($sum, 0, ',', '.') ?></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Alocated Budget</strong></td>
+                                    <td><?= "Rp " . number_format($budget['alocated_budget'], 0, ',', '.') ?></td>
+                                    <td></td>
+                                    <td><strong>Available Budget</strong></td>
+                                    <td><?= "Rp " . number_format($budget['available_budget'], 0, ',', '.') ?></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><strong>Used Budget</strong></td>
+                                    <td><?= "Rp " . number_format($budget['used_budget'], 0, ',', '.') ?></td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

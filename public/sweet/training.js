@@ -1,4 +1,7 @@
 $(document).ready(function() {
+    $('#budgetTable').DataTable();
+});
+$(document).ready(function() {
     $('#example').DataTable();
 });
 
@@ -6,6 +9,15 @@ $(document).ready(function() {
     $('#mytable').DataTable();
 });
 
+
+const warning = $('.warning').data('warning')
+if (warning) {
+    Swal.fire({
+        icon: 'error',
+        title: warning,
+        text: 'Budget Training Tidak Mencuukupi Mohon Lakukan Reclass Budget Atau Menghubungi Bagian HRD!',
+    })
+}
 
 const list = $('.success').data('success')
 if (list) {
