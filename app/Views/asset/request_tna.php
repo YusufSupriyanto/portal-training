@@ -13,7 +13,7 @@ function AcceptKadiv(i) {
         success: function(data) {
             //  jQuery.noConflict()
             window.location.reload()
-            // console.log(data)
+            //console.log(data)
 
         }
 
@@ -50,7 +50,7 @@ function reject_kadiv(i) {
             },
             success: function(data) {
                 window.location.reload()
-
+                //console.log(data)
             }
 
         })
@@ -108,6 +108,7 @@ function Reject_Bod(i) {
             },
             success: function(data) {
                 window.location.reload()
+                //console.log(data)
 
             }
 

@@ -6,9 +6,16 @@
         <h3 class="card-title"><?= $tittle ?></h3>
     </div>
     <!-- /.card-header -->
+    <?php $i = 0;
+    foreach ($departemen as $dept) : ?>
     <div class="card-body p-0 overflow-auto">
         <table class="table table-striped overflow-auto">
-            <thead></thead>
+            <thead>
+                <div class=" float-right mr-4">
+                    <h6>Departemen : <?= $dept['departemen'] ?></h6>
+                </div>
+
+            </thead>
             <tr>
                 <th>Nama</th>
                 <th>Training</th>
@@ -24,8 +31,20 @@
             </tr>
             </thead>
             <tbody id="kadiv-verify">
-                <?php $i = 0;
-                foreach ($status as $statuses) : ?>
+                <?php
+                    $sum = 0;
+                    $bagian = session()->get('bagian');
+                    $dic = session()->get('dic');
+                    $divisi = session()->get('divisi');
+                    $departemen = session()->get('departemen');
+                    if ($bagian == 'BOD') {
+                        $stat = $status->getRequestTna($bagian, $dic, $dept['departemen']);
+                    } elseif ($bagian == 'KADIV') {
+                        $stat = $status->getRequestTna($bagian, $divisi, $dept['departemen']);
+                    } elseif ($bagian == 'KADEPT') {
+                        $stat = $status->getRequestTna($bagian, $departemen, $dept['departemen']);
+                    }
+                    foreach ($stat as $statuses) : ?>
                 <tr>
                     <td><?= $statuses['nama'] ?></td>
                     <td><?= $statuses['training'] ?></td>
@@ -75,11 +94,29 @@
                         </div>
                     </div>
                 </div>
-                <?php $i++;
-                endforeach; ?>
+                <?php
+                        $sum += $statuses['biaya_actual'];
+                        $i++;
+                    endforeach; ?>
             </tbody>
         </table>
     </div>
+
+    <?php $budgets = $budget->getBudgetCurrent($dept['departemen']); ?>
+    <div class="m-3 d-flex justify-content-around">
+        <div><strong>Alocated Budget : </strong>
+            <?= "Rp " . number_format($budgets['alocated_budget'], 0, ',', '.') ?>
+        </div>
+        <div><strong>Available
+                Budget : </strong><?= "Rp " . number_format($budgets['available_budget'], 0, ',', '.') ?></div>
+        <div><strong>Used Budget : </strong><?= "Rp " . number_format($budgets['used_budget'], 0, ',', '.') ?></div>
+        <div><strong>Jumlah Actual Budget:
+
+            </strong><?= "Rp " . number_format($budgets['temporary_calculation'], 0, ',', '.') ?>
+        </div>
+
+    </div>
+    <?php endforeach; ?>
 </div>
 <script>
 

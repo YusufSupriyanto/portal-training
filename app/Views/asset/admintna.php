@@ -65,7 +65,7 @@ function Accept(i) {
         },
         success: function(data) {
             window.location.reload()
-            // console.log(data)
+            //console.log(data)
 
         }
 
@@ -144,6 +144,7 @@ function AcceptAdmin(i) {
         },
         success: function(data) {
             window.location.reload()
+            //console.log(data);
 
         }
 

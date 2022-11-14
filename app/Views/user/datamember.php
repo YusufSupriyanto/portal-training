@@ -1,6 +1,18 @@
 <?= $this->extend('/template/templateuser') ?>
 
 <?= $this->section('content') ?>
+<style>
+.my-custom-scrollbar {
+    position: relative;
+    height: 200px;
+    overflow: auto;
+}
+
+.table-wrapper-scroll-y {
+    display: block;
+}
+</style>
+
 <div class="warning" data-warning="<?= session()->get('warning'); ?>"></div>
 <div class="card m-1">
     <div class="card-header ">
@@ -71,8 +83,8 @@
                 </div>
                 <div class="modal-body">
 
-                    <div class="card-body p-0 overflow-auto">
-                        <table class="table table-striped overflow-auto">
+                    <div class="card-body p-0 table-wrapper-scroll-y my-custom-scrollbar">
+                        <table class=" table table-striped table-bordered mb-0 overflow-auto">
                             <thead>
                                 <tr>
                                     <th>Nama</th>
@@ -107,32 +119,44 @@
                                 <?php
                                     $sum += $Forms->biaya;
                                 endforeach; ?>
-                                <tr>
-                                    <td><strong>Jumlah</strong></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><?= "Rp " . number_format($sum, 0, ',', '.') ?></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Alocated Budget</strong></td>
-                                    <td><?= "Rp " . number_format($budget['alocated_budget'], 0, ',', '.') ?></td>
-                                    <td></td>
-                                    <td><strong>Available Budget</strong></td>
-                                    <td><?= "Rp " . number_format($budget['available_budget'], 0, ',', '.') ?></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><strong>Used Budget</strong></td>
-                                    <td><?= "Rp " . number_format($budget['used_budget'], 0, ',', '.') ?></td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
-
+                    <div class="d-flex justify-content-between">
+                        <div class="ml-4"><strong>Jumlah</strong></div>
+                        <div style="margin-right:37px;"><strong><?= "Rp " . number_format($sum, 0, ',', '.') ?></strong>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-around m-4">
+                        <div class="ml-4">
+                            <div><strong>Alocated
+                                    Buduget :</strong>
+                                <?php if ($budget != null) {
+                                    echo "Rp " . number_format($budget['alocated_budget'], 0, ',', '.');
+                                } else {
+                                    echo 0;
+                                } ?>
+                            </div>
+                        </div>
+                        <div>
+                            <strong>Available
+                                Buduget :</strong>
+                            <?php if ($budget != null) {
+                                echo "Rp " . number_format($budget['available_budget'], 0, ',', '.');
+                            } else {
+                                echo 0;
+                            } ?>
+                        </div>
+                        <div class="mr-4">
+                            <strong>Used
+                                Buduget :</strong>
+                            <?php if ($budget != null) {
+                                echo "Rp " . number_format($budget['used_budget'], 0, ',', '.');
+                            } else {
+                                echo 0;
+                            } ?>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

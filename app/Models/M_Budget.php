@@ -9,7 +9,7 @@ class M_Budget extends Model
     protected $table      = 'budget';
     // protected $useAutoIncrement = true;
     protected $primaryKey = 'id_budget';
-    protected $allowedFields = ['alocated_budget', 'available_budget', 'used_budget', 'year', 'department', 'current'];
+    protected $allowedFields = ['alocated_budget', 'available_budget', 'used_budget', 'year', 'department', 'current', 'temporary_calculation'];
 
     public function getAllBudget()
     {

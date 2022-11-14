@@ -1,6 +1,17 @@
 <?= $this->extend('/template/template') ?>
 
 <?= $this->section('content') ?>
+<style>
+.my-custom-scrollbar {
+    position: relative;
+    height: 200px;
+    overflow: auto;
+}
+
+.table-wrapper-scroll-y {
+    display: block;
+}
+</style>
 <div class="card m-1 " style="font-size:15px;">
     <?php $i = 0;
     foreach ($dept as $d) : ?>
@@ -9,13 +20,10 @@
             <div>
                 <h3 class="card-title">Daftar Training Need Analysis</h3>
             </div>
-            <div>
-                <h6><strong> Avaliable Budget : </strong></h6>
-            </div>
         </div>
         <!-- /.card-header -->
-        <div class="card-body table-responsive p-0">
-            <table class="table table-hover">
+        <div class="card-body table-responsive p-0 table-wrapper-scroll-y my-custom-scrollbar">
+            <table class="table table-hover table-striped table-bordered mb-0 overflow-auto">
                 <thead>
                     <tr>
                         <th>Nama</th>
@@ -81,26 +89,20 @@
                     </tr>
                     <?php $i++;
                         endforeach; ?>
-                    <tr>
-                        <td>
-                            <h6><strong>Alocated Budget : </strong></h6>
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <h6><strong>Budget : </strong></h6>
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
+        </div>
+        <?php $budgets = $budget->getBudgetCurrent($d->departemen); ?>
+        <div class="d-flex justify-content-around">
+            <div><strong>Alocated Budget : </strong>
+                <?php "Rp " . number_format($budgets['alocated_budget'], 0, ',', '.') ?>
+            </div>
+            <div><strong>Available
+                    Budget : </strong><?= "Rp " . number_format($budgets['available_budget'], 0, ',', '.') ?></div>
+            <div><strong>Used Budget : </strong><?= "Rp " . number_format($budgets['used_budget'], 0, ',', '.') ?></div>
+            <div><strong>Actual Jumlah :
+                </strong><?= "Rp " . number_format($budgets['temporary_calculation'], 0, ',', '.') ?>
+            </div>
         </div>
     </div>
     <?php endforeach; ?>

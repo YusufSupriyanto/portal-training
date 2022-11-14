@@ -59,6 +59,7 @@ class FormTna extends BaseController
         $tna = $this->tna->getTnaFilter($id);
         $budget = $this->budget->getBudgetCurrent(session()->get('departemen'));
 
+
         //dd($budget);
         $data = [
             'tittle' => 'Data Member',
@@ -334,7 +335,7 @@ class FormTna extends BaseController
             session()->setFlashdata('warning', 'Maaf');
             return redirect()->to('/data_member');
         }
-        // dd($id_user);
+        //dd($budget['id_budget']);
         $data = [
             'id_user' => $id_user,
             'id_training' => $id_training,
@@ -399,17 +400,21 @@ class FormTna extends BaseController
         // dd($departemen);
 
         if ($bagian == 'BOD') {
-            $status = $this->tna->getRequestTna($bagian, $dic);
+            // $status = $this->tna->getRequestTna($bagian, $dic);
+            $distinct = $this->tna->getRequestTnaDisntinct($bagian, $dic);
         } elseif ($bagian == 'KADIV') {
-            $status =  $this->tna->getRequestTna($bagian, $divisi);
+            // $status =  $this->tna->getRequestTna($bagian, $divisi);
+            $distinct = $this->tna->getRequestTnaDisntinct($bagian, $divisi);
         } elseif ($bagian == 'KADEPT') {
-            $status = $this->tna->getRequestTna($bagian, $departemen);
-        } else {
-            $status  =  array();
+            // $status = $this->tna->getRequestTna($bagian, $departemen);
+            $distinct = $this->tna->getRequestTnaDisntinct($bagian, $departemen);
         }
+        // dd($distinct);
         $data = [
-            'tittle' => 'Request Tna',
-            'status' => $status
+            'tittle' => 'Request TNA',
+            'departemen' => $distinct,
+            'status' => $this->tna,
+            'budget' => $this->budget
         ];
 
         if ($bagian == 'KADEPT' || $bagian == 'KADIV') {
@@ -447,13 +452,15 @@ class FormTna extends BaseController
     public function rejectKadiv()
     {
         $approve = $this->approval->getIdApproval($this->request->getPost('id_tna'));
+        $training = $this->tna->getAllTna($this->request->getPost('id_tna'));
+        $this->subtraction($training[0]->biaya_actual, $training[0]->departemen);
         $data = [
             'id_approval' => $approve['id_approval'],
             'alasan' => $this->request->getPost('alasan'),
             'status_approval_1' => 'reject'
         ];
         $this->approval->save($data);
-        echo json_encode($data);
+        echo json_encode('SUCCESS');
     }
 
     public function acceptBod()
@@ -471,6 +478,8 @@ class FormTna extends BaseController
     public function rejectBod()
     {
         $approve = $this->approval->getIdApproval($this->request->getPost('id_tna'));
+        $training = $this->tna->getAllTna($this->request->getPost('id_tna'));
+        $this->subtraction($training[0]->biaya_actual, $training[0]->departemen);
         $data = [
             'id_approval' => $approve['id_approval'],
             'id_tna' => $this->request->getPost('id_tna'),
@@ -478,6 +487,18 @@ class FormTna extends BaseController
             'status_approval_3' => 'reject'
         ];
         $this->approval->save($data);
-        echo json_encode($data);
+        echo json_encode($training);
+    }
+
+    public function subtraction($money, $departemen)
+    {
+        $budgets = $this->budget->getBudgetCurrent($departemen);
+
+        $budgetData = [
+            'id_budget' => $budgets['id_budget'],
+            'temporary_calculation' => $budgets['temporary_calculation'] - $money
+        ];
+        // return $budgetData;
+        $this->budget->save($budgetData);
     }
 }

@@ -6,6 +6,8 @@
         <h3 class="card-title"><?= $tittle ?></h3>
     </div>
     <!-- /.card-header -->
+    <?php $i = 0;
+    foreach ($departemen as $dept) : ?>
     <div class="card-body table-responsive p-0">
         <table class="table table-hover" id="example">
             <thead>
@@ -21,8 +23,10 @@
                 </tr>
             </thead>
             <tbody id="admin-verify">
-                <?php $i = 0;
-                foreach ($status as $tnas) : ?>
+                <?php
+                    $status = $stat->getKadivAccept($date, $dept['departemen']);
+
+                    foreach ($status as $tnas) : ?>
                 <tr>
                     <td><?= $tnas['nama'] ?></td>
                     <td><?= $tnas['departemen'] ?></td>
@@ -88,10 +92,25 @@
                     </div>
                 </div>
                 <?php $i++;
-                endforeach; ?>
+                    endforeach; ?>
             </tbody>
         </table>
     </div>
+    <?php $budgets = $budget->getDataBudgetById($status[0]['id_budget']); ?>
+    <div class="m-3 d-flex justify-content-around">
+        <div><strong>Alocated Budget : </strong>
+            <?= "Rp " . number_format($budgets['alocated_budget'], 0, ',', '.') ?>
+        </div>
+        <div><strong>Available
+                Budget : </strong><?= "Rp " . number_format($budgets['available_budget'], 0, ',', '.') ?></div>
+        <div><strong>Used Budget : </strong><?= "Rp " . number_format($budgets['used_budget'], 0, ',', '.') ?></div>
+        <div><strong>Jumlah Actual Budget:
+
+            </strong><?= "Rp " . number_format($budgets['temporary_calculation'], 0, ',', '.') ?>
+        </div>
+
+    </div>
+    <?php endforeach; ?>
     <!-- /.card-body -->
 </div>
 <script>

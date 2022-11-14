@@ -43,7 +43,7 @@
                 </div>
             </form>
         </div>
-        <div class="card m-1" style="width:70%;">
+        <div class="card m-1" style="width:80%;">
             <div class="card-header">
                 <h3 class="card-title"><?= $tittle ?></h3>
             </div>
@@ -56,6 +56,7 @@
                             <th>Alocated Budget Training</th>
                             <th>Used Budget Training</th>
                             <th>Available Budget Training</th>
+                            <th>Temporary Calculation</th>
                             <th>Tahun Training</th>
                             <th>Action</th>
                         </tr>
@@ -68,6 +69,7 @@
                             <td><?= $number = "Rp. " . number_format($budgets['alocated_budget'], 0, ',', '.'); ?></td>
                             <td><?= "Rp. " . number_format($budgets['used_budget'], 0, ',', '.'); ?></td>
                             <td><?= "Rp. " . number_format($budgets['available_budget'], 0, ',', '.'); ?></td>
+                            <td><?= "Rp. " . number_format($budgets['temporary_calculation'], 0, ',', '.'); ?></td>
                             <td><?= $budgets['year'] ?></td>
                             <td>
                                 <div>

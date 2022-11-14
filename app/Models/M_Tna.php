@@ -13,7 +13,7 @@ class M_Tna extends Model
         'id_user', 'id_training', 'dic', 'divisi',
         'departemen', 'nama', 'jabatan', 'golongan', 'seksi', 'jenis_training',
         'kategori_training', 'training', 'vendor', 'tempat', 'metode_training', 'request_training', 'mulai_training', 'rencana_training',
-        'tujuan_training', 'notes', 'biaya', 'biaya_actual', 'status', 'kelompok_training'
+        'tujuan_training', 'notes', 'biaya', 'biaya_actual', 'status', 'kelompok_training', 'id_budget'
     ];
 
 
@@ -204,18 +204,36 @@ class M_Tna extends Model
 
 
     //function get Request Tna
-    public function getRequestTna($bagian, $member)
+    public function getRequestTna($bagian, $member, $depertemen)
     {
         if ($bagian == 'BOD') {
-            $this->select()->where('dic', $member)->where('status', 'accept')->where('status_approval_0', 'accept')->where('status_approval_1', 'accept')->where('status_approval_2', 'accept')->where('status_approval_3', null)->where('kelompok_training', 'training');
+            $this->select()->where('dic', $member)->where('departemen', $depertemen)->where('status', 'accept')->where('status_approval_0', 'accept')->where('status_approval_1', 'accept')->where('status_approval_2', 'accept')->where('status_approval_3', null)->where('kelompok_training', 'training');
             $this->join('approval', 'approval.id_tna = tna.id_tna');
             return $this->get()->getResultArray();
         } elseif ($bagian == 'KADIV') {
-            $this->select()->where('divisi', $member)->where('status', 'accept')->where('kelompok_training', 'training');
+            $this->select()->where('divisi', $member)->where('departemen', $depertemen)->where('status', 'accept')->where('kelompok_training', 'training');
             $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_0', 'accept')->where('status_approval_1', null);
             return $this->get()->getResultArray();
         } elseif ($bagian == 'KADEPT') {
-            $this->select()->where('departemen', $member)->where('status', 'accept')->where('kelompok_training', 'training');
+            $this->select()->where('departemen', $member)->where('departemen', $depertemen)->where('status', 'accept')->where('kelompok_training', 'training');
+            $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_0', null);
+            return $this->get()->getResultArray();
+        } else {
+            return  $status  =  array();
+        }
+    }
+    public function getRequestTnaDisntinct($bagian, $member)
+    {
+        if ($bagian == 'BOD') {
+            $this->select('tna.departemen')->where('dic', $member)->where('status', 'accept')->where('status_approval_0', 'accept')->where('status_approval_1', 'accept')->where('status_approval_2', 'accept')->where('status_approval_3', null)->where('kelompok_training', 'training')->distinct();
+            $this->join('approval', 'approval.id_tna = tna.id_tna');
+            return $this->get()->getResultArray();
+        } elseif ($bagian == 'KADIV') {
+            $this->select('tna.departemen')->where('divisi', $member)->where('status', 'accept')->where('kelompok_training', 'training')->distinct();
+            $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_0', 'accept')->where('status_approval_1', null);
+            return $this->get()->getResultArray();
+        } elseif ($bagian == 'KADEPT') {
+            $this->select('tna.departemen')->where('departemen', $member)->where('status', 'accept')->where('kelompok_training', 'training')->distinct();
             $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_0', null);
             return $this->get()->getResultArray();
         } else {
@@ -224,10 +242,20 @@ class M_Tna extends Model
     }
 
 
-    public function getKadivAccept($date)
+
+
+    public function getKadivAccept($date, $departemen)
     {
 
-        $this->select()->where('mulai_training', $date)->where('kelompok_training', 'training');
+        $this->select()->where('mulai_training', $date)->where('departemen', $departemen)->where('kelompok_training', 'training');
+        $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_1', 'accept');
+        return $this->get()->getResultArray();
+    }
+
+    public function getKadivAcceptDistinct($date)
+    {
+
+        $this->select('departemen')->where('mulai_training', $date)->where('kelompok_training', 'training');
         $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_1', 'accept');
         return $this->get()->getResultArray();
     }
