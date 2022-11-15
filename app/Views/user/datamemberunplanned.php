@@ -1,14 +1,32 @@
 <?= $this->extend('/template/templateuser') ?>
 
 <?= $this->section('content') ?>
+<style>
+.my-custom-scrollbar {
+    position: relative;
+    height: 200px;
+    overflow: auto;
+}
+
+.table-wrapper-scroll-y {
+    display: block;
+}
+</style>
 <div class="card m-1">
     <div class="card-header ">
         <div class="d-flex justify-content-between">
             <h3 class="card-title">Unplanned Training</h3>
+            <?php if (session()->get('bagian') == 'KADEPT' || session()->get('bagian') == 'KASIE' || session()->get('bagian') == 'BOD') : ?>
             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModalCenter">
                 <i class="fa-solid fa-share-from-square"></i><br>
                 Submit TNA
             </button>
+            <?php else : ?>
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModalKadiv">
+                <i class="fa-solid fa-share-from-square"></i><br>
+                Submit TNA
+            </button>
+            <?php endif; ?>
         </div>
     </div>
 
@@ -55,7 +73,6 @@
     </div>
     <!-- /.card-body -->
 </div>
-
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
@@ -63,15 +80,15 @@
         <form method="post" action="<?= base_url() ?>\send_unplanned">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Unplanned Training</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">TNA Tersimpan</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
 
-                    <div class="card-body p-0 overflow-auto">
-                        <table class="table table-striped overflow-auto">
+                    <div class="card-body p-0 table-wrapper-scroll-y my-custom-scrollbar">
+                        <table class=" table table-striped table-bordered mb-0 overflow-auto">
                             <thead>
                                 <tr>
                                     <th>Nama</th>
@@ -86,7 +103,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($tna as $Forms) : ?>
+                                <?php
+                                $sum = 0;
+                                foreach ($tna as $Forms) : ?>
                                 <tr>
                                     <td><?= $Forms->nama ?></td>
                                     <td><?= $Forms->training ?></td>
@@ -101,18 +120,130 @@
                                     </td>
                                 </tr>
                                 <input type="hidden" value="<?= $Forms->id_tna ?>" name="training[]">
-                                <?php endforeach; ?>
+                                <?php
+                                    $sum += $Forms->biaya;
+                                endforeach; ?>
                             </tbody>
                         </table>
+                    </div>
+                    <div class="d-flex justify-content-around">
+                        <div class="ml-4">
+                            <div><strong>Alocated
+                                    Budget :</strong>
+                                <?php if ($budget != null) {
+                                    echo "Rp " . number_format($budget['alocated_budget'], 0, ',', '.');
+                                } else {
+                                    echo 0;
+                                } ?>
+                            </div>
+                        </div>
+                        <div>
+                            <strong>Available
+                                Buduget :</strong>
+                            <?php if ($budget != null) {
+                                echo "Rp " . number_format($budget['available_budget'], 0, ',', '.');
+                            } else {
+                                echo 0;
+                            } ?>
+                        </div>
+                        <div class="mr-4">
+                            <strong>Used
+                                Buduget :</strong>
+                            <?php if ($budget != null) {
+                                echo "Rp " . number_format($budget['used_budget'], 0, ',', '.');
+                            } else {
+                                echo 0;
+                            } ?>
+                        </div>
+                        <div class="ml-4"><strong>Jumlah : </strong><?= "Rp " . number_format($sum, 0, ',', '.') ?>
+                        </div>
+
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-send"></i>Submit</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-send"></i>Submit TNA</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
+<!-- Modal -->
+<!-- Modal -->
+<div class="modal fade" id="exampleModalKadiv" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <form method="post" action="<?= base_url() ?>\tna\send">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">TNA Tersimpan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="card-body p-0 table-wrapper-scroll-y my-custom-scrollbar">
+                        <table class=" table table-striped table-bordered mb-0 overflow-auto">
+                            <thead>
+                                <tr>
+                                    <th>Nama</th>
+                                    <th>Training</th>
+                                    <th>Jenis Training</th>
+                                    <th>Kategori Training</th>
+                                    <th>Metode Training</th>
+                                    <th>Request Training</th>
+                                    <th>Tujuan Training</th>
+                                    <th>Notes</th>
+                                    <th>Estimasi Budget</th>
+                                </tr>
+                            </thead>
+                            <?php foreach ($departemen as $dept) : ?>
+                            <tbody>
+                                <?php
 
+                                    $sum = 0;
+                                    $tnafixes = $tnaKadept->getTnaFilterKadept(session()->get('id'), $dept->departemen);
+                                    foreach ($tnafixes as $Forms) : ?>
+                                <tr>
+                                    <td><?= $Forms->nama ?></td>
+                                    <td><?= $Forms->training ?></td>
+                                    <td><?= $Forms->jenis_training ?></td>
+                                    <td><?= $Forms->kategori_training ?></td>
+                                    <td><?= $Forms->metode_training ?></td>
+                                    <td><?= $Forms->request_training ?></td>
+                                    <td><?= $Forms->tujuan_training ?></td>
+                                    <td><?= $Forms->notes ?></td>
+                                    <td>
+                                        <div><?= "Rp " . number_format($Forms->biaya, 0, ',', '.') ?></div>
+                                    </td>
+                                </tr>
+                                <input type="hidden" value="<?= $Forms->id_tna ?>" name="training[]">
+
+                                <?php endforeach; ?>
+                                <?php $budgets = $budgetKadept->getBudgetCurrent($dept->departemen) ?>
+                                <tr>
+                                    <td><strong>Aloated Budget</strong></td>
+                                    <td><?= "Rp " . number_format($budgets['alocated_budget'], 0, ',', '.') ?></td>
+                                    <td><strong>Available Budget</strong></td>
+                                    <td><?= "Rp " . number_format($budgets['available_budget'], 0, ',', '.') ?></td>
+                                    <td><strong>Used Budget</strong></td>
+                                    <td><?= "Rp " . number_format($budgets['used_budget'], 0, ',', '.') ?></td>
+                                    <td></td>
+                                    <td><strong>Jumlah</strong></td>
+                                    <td><?= "Rp " . number_format($sum += $Forms->biaya, 0, ',', '.') ?></td>
+                                </tr>
+                            </tbody>
+                            <?php
+                            endforeach; ?>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-send"></i>Submit
+                            TNA</button>
+                    </div>
+                </div>
+        </form>
+    </div>
+</div>
 <?= $this->endSection() ?>

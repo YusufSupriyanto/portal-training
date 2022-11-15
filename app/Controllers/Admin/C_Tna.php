@@ -198,8 +198,15 @@ class C_Tna extends BaseController
             ];
             $this->budget->save($dataBudget);
         }
-
         if ($number <= 2500000) {
+            $tna =  $this->tna->getAllTna($this->request->getPost('id_tna'));
+            $budget = $this->budget->getDataBudgetById($tna[0]->id_budget);
+            $dataBudget = [
+                'id_budget' => $budget['id_budget'],
+                'used_budget' => $budget['used_budget'] + $tna[0]->biaya_actual,
+                'available_budget' => $budget['available_budget'] - $tna[0]->biaya_actual
+            ];
+            $this->budget->save($dataBudget);
             $data = [
                 'id_approval' => $approve['id_approval'],
                 'status_approval_2' => 'accept',

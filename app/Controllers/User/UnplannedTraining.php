@@ -9,6 +9,7 @@ use App\Models\M_Tna;
 use App\Models\M_ListTraining;
 use App\Models\UserModel;
 use App\Models\M_Approval;
+use App\Models\M_Budget;
 use App\Models\M_History;
 use App\Models\M_TnaUnplanned;
 use PhpParser\Builder\Function_;
@@ -24,6 +25,7 @@ class UnplannedTraining extends BaseController
     private M_History $history;
 
     private M_TnaUnplanned $unplanned;
+    private M_Budget $budget;
     public function __construct()
     {
         $this->training = new M_ListTraining();
@@ -34,17 +36,24 @@ class UnplannedTraining extends BaseController
         $this->history = new M_History();
         $this->efektivitas = new M_EvaluasiEfektifitas();
         $this->unplanned = new M_TnaUnplanned();
+        $this->budget = new M_Budget();
     }
     public function index()
     {
         $id = session()->get('id');
         $user = $this->user->filter($id);
+        $departemen = $this->unplanned->getTnaFilterDistinct($id);
         $tna = $this->unplanned->getTnaFilterUnplanned($id);
-        //dd($tna);
+        $budget = $this->budget->getBudgetCurrent(session()->get('departemen'));
+        //  dd($departemen);
         $data = [
             'tittle' => 'Data Member',
             'user' => $user,
-            'tna' => $tna
+            'tna' => $tna,
+            'departemen' => $departemen,
+            'budget' => $budget,
+            'tnaKadept' => $this->unplanned,
+            'budgetKadept' => $this->budget
         ];
         return view('user/datamemberunplanned', $data);
     }
@@ -53,8 +62,6 @@ class UnplannedTraining extends BaseController
     {
         $id = $this->request->getPost('member');
         $value = $this->request->getPost('training');
-        // $trainingId = $this->training->getIdTraining($id);
-        // dd($id);
         $user = $this->user->getAllUser($id);
         $trainings = $this->training->getAll();
         $unplannedHistory = $this->unplanned->getHistoryUnplanned($id);
@@ -104,17 +111,21 @@ class UnplannedTraining extends BaseController
         $departemen = session()->get('departemen');
 
         if ($bagian == 'BOD') {
-            $status = $this->unplanned->getRequestTnaUnplanned($bagian, $dic);
+            $dept = $this->unplanned->getRequestTnaUnplannedDistinct($bagian, $dic);
         } elseif ($bagian == 'KADIV') {
-            $status =  $this->unplanned->getRequestTnaUnplanned($bagian, $divisi);
+            $dept =  $this->unplanned->getRequestTnaUnplannedDistinct($bagian, $divisi);
         } elseif ($bagian == 'KADEPT') {
-            $status = $this->unplanned->getRequestTnaUnplanned($bagian, $departemen);
+            $dept = $this->unplanned->getRequestTnaUnplannedDistinct($bagian, $departemen);
         } else {
-            $status  =  array();
+            $dept  =  array();
         }
+
+
         $data = [
             'tittle' => 'Request Tna',
-            'status' => $status
+            'departemen' => $dept,
+            'status' => $this->unplanned,
+            'budget' => $this->budget
         ];
         if ($bagian == 'KADIV' || $bagian == 'KADEPT') {
             return view('user/requestuser', $data);

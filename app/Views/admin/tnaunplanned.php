@@ -1,16 +1,29 @@
 <?= $this->extend('/template/template') ?>
 
 <?= $this->section('content') ?>
+<style>
+.my-custom-scrollbar {
+    position: relative;
+    height: 200px;
+    overflow: auto;
+}
+
+.table-wrapper-scroll-y {
+    display: block;
+}
+</style>
 <div class="card m-1 " style="font-size:15px;">
-    <div class="card-header h6 d-flex">
-
-        <h3 class="card-title">Daftar Unplanned Training</h3>
-
-    </div>
-    <!-- /.card-header -->
-    <div class="card-body table-responsive p-0">
-        <form>
-            <table class="table table-hover">
+    <?php $i = 0;
+    foreach ($dept as $d) : ?>
+    <div class="card">
+        <div class="card-header h6 d-flex justify-content-between">
+            <div>
+                <h3 class="card-title">Unplanned Training</h3>
+            </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body table-responsive p-0 table-wrapper-scroll-y my-custom-scrollbar">
+            <table class="table table-hover table-striped table-bordered mb-0 overflow-auto">
                 <thead>
                     <tr>
                         <th>Nama</th>
@@ -27,13 +40,16 @@
                     </tr>
                 </thead>
                 <tbody id="tna-admin">
-                    <?php $i = 0;
-                    foreach ($tna as $tnas) : ?>
+                    <?php
+                        $deptTna = $tna->getStatusWaitAdminUnplanned($d->departemen);
+                        foreach ($deptTna as $tnas) : ?>
                     <tr>
                         <td><?= $tnas->nama ?></td>
                         <td><?= $tnas->departemen ?></td>
                         <td><?= $tnas->training ?></td>
-                        <td><?= $tnas->request_training ?></td>
+                        <td>
+                            <div style="width:60px;"><?= $tnas->request_training ?></div>
+                        </td>
                         <td><input type="date" value="<?= $tnas->mulai_training ?>" name="mulai-training<?= $i ?>"
                                 id="mulai-training<?= $i ?>"></td>
                         <td><input type="date" value="<?= $tnas->rencana_training ?>" name="rencana-training<?= $i ?>"
@@ -47,7 +63,6 @@
                                 <label for="biaya" class="h6">Rp</label>
                                 <input type="text" id="biaya<?= $i ?>" name="biaya<?= $i ?>"
                                     onchange="format(<?= $i ?>)">
-                                <!-- <input name="coba"> -->
                             </div>
                         </td>
                         <td>
@@ -73,11 +88,24 @@
                         </td>
                     </tr>
                     <?php $i++;
-                    endforeach; ?>
+                        endforeach; ?>
                 </tbody>
             </table>
-        </form>
+        </div>
+        <?php $budgets = $budget->getBudgetCurrent($d->departemen); ?>
+        <div class="d-flex justify-content-around">
+            <div><strong>Alocated Budget : </strong>
+                <?= "Rp " . number_format($budgets['alocated_budget'], 0, ',', '.') ?>
+            </div>
+            <div><strong>Available
+                    Budget : </strong><?= "Rp " . number_format($budgets['available_budget'], 0, ',', '.') ?></div>
+            <div><strong>Used Budget : </strong><?= "Rp " . number_format($budgets['used_budget'], 0, ',', '.') ?></div>
+            <div><strong>Actual Jumlah :
+                </strong><?= "Rp " . number_format($budgets['temporary_calculation'], 0, ',', '.') ?>
+            </div>
+        </div>
     </div>
+    <?php endforeach; ?>
     <!-- /.card-body -->
     <div class=" modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -107,10 +135,10 @@
                         <input id="kategori-training" class="mt-1" name="kategori-training" readonly></input>
                         <label for="metode-training">Metode Training</label>
                         <input id="metode-training" class="mt-1" name="metode-training" readonly></input>
-                        <label for="mulai-training">mulai Training</label>
+                        <label for="mulai-training">Mulai Training</label>
                         <input id="mulai-training" class="mt-1" name="mulai-training" readonly></input>
-                        <label for="selesai-training">selesai Training</label>
-                        <input id="selesai-training" class="mt-1" name="selesai-training" readonly></input>
+                        <label for="Selesai-training">Selesai Training</label>
+                        <input id="Selesai-training" class="mt-1" name="Selesai-training" readonly></input>
                         <label for="tujuan-training">Tujuan Training</label>
                         <input id="tujuan-training" class="mt-1" name="tujuan-training" readonly></input>
                         <label for="notes">Note</label>

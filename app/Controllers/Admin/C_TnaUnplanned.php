@@ -4,6 +4,7 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use App\Models\M_Approval;
+use App\Models\M_Budget;
 use App\Models\M_Tna;
 use App\Models\UserModel;
 use App\Models\M_TnaUnplanned;
@@ -17,23 +18,29 @@ class C_TnaUnplanned extends BaseController
 
     private M_TnaUnplanned $unplanned;
 
+    private M_Budget $budget;
+
     public function __construct()
     {
         $this->tna = new M_Tna();
         $this->user = new UserModel();
         $this->approval = new M_Approval();
         $this->unplanned = new M_TnaUnplanned();
+        $this->budget = new M_Budget();
     }
 
     public function index()
     {
-        $tna = $this->unplanned->getStatusWaitAdminUnplanned();
+        $departemen = $this->unplanned->getStatusWaitAdminUnplannedDistinct();
 
-
-        //dd($deadline['deadline']);
+        // dd($tna);
         $data = [
             'tittle' => 'Form TNA',
-            'tna' => $tna,
+            'dept' => $departemen,
+            'tna' => $this->unplanned,
+            'budget' => $this->budget,
+
+
         ];
         return view('admin/tnaunplanned', $data);
     }
@@ -64,11 +71,14 @@ class C_TnaUnplanned extends BaseController
     public function kadivAccept($date)
     {
 
-        $status = $this->unplanned->getKadivAccept($date);
-        //dd($status);
+        $departemen = $this->unplanned->getKadivAcceptDistinct($date);
+
         $data = [
-            'tittle' => 'Training Yang Di ACC KADIV',
-            'status' => $status
+            'tittle' => 'KADIV Training Accepted',
+            'departemen' => $departemen,
+            'stat' => $this->unplanned,
+            'date' => $date,
+            'budget' => $this->budget
         ];
         return view('admin/kadivaccept', $data);
     }

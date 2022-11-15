@@ -37,13 +37,25 @@
                     $dic = session()->get('dic');
                     $divisi = session()->get('divisi');
                     $departemen = session()->get('departemen');
-                    if ($bagian == 'BOD') {
-                        $stat = $status->getRequestTna($bagian, $dic, $dept['departemen']);
-                    } elseif ($bagian == 'KADIV') {
-                        $stat = $status->getRequestTna($bagian, $divisi, $dept['departemen']);
-                    } elseif ($bagian == 'KADEPT') {
-                        $stat = $status->getRequestTna($bagian, $departemen, $dept['departemen']);
+                    $page = basename($_SERVER['PHP_SELF']);
+                    if ($page == 'request_tna') {
+                        if ($bagian == 'BOD') {
+                            $stat = $status->getRequestTna($bagian, $dic, $dept['departemen']);
+                        } elseif ($bagian == 'KADIV') {
+                            $stat = $status->getRequestTna($bagian, $divisi, $dept['departemen']);
+                        } elseif ($bagian == 'KADEPT') {
+                            $stat = $status->getRequestTna($bagian, $departemen, $dept['departemen']);
+                        }
+                    } else {
+                        if ($bagian == 'BOD') {
+                            $stat = $status->getRequestTnaUnplanned($bagian, $dic, $dept['departemen']);
+                        } elseif ($bagian == 'KADIV') {
+                            $stat = $status->getRequestTnaUnplanned($bagian, $divisi, $dept['departemen']);
+                        } elseif ($bagian == 'KADEPT') {
+                            $stat = $status->getRequestTnaUnplanned($bagian, $departemen, $dept['departemen']);
+                        }
                     }
+
                     foreach ($stat as $statuses) : ?>
                 <tr>
                     <td><?= $statuses['nama'] ?></td>

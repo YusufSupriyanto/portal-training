@@ -95,7 +95,7 @@
         <?php $budgets = $budget->getBudgetCurrent($d->departemen); ?>
         <div class="d-flex justify-content-around">
             <div><strong>Alocated Budget : </strong>
-                <?php "Rp " . number_format($budgets['alocated_budget'], 0, ',', '.') ?>
+                <?= "Rp " . number_format($budgets['alocated_budget'], 0, ',', '.') ?>
             </div>
             <div><strong>Available
                     Budget : </strong><?= "Rp " . number_format($budgets['available_budget'], 0, ',', '.') ?></div>
