@@ -4,7 +4,7 @@
 <style>
 .my-custom-scrollbar {
     position: relative;
-    height: 200px;
+    height: 350px;
     overflow: auto;
 }
 
@@ -100,6 +100,7 @@
                                     <th>Tujuan Training</th>
                                     <th>Notes</th>
                                     <th>Estimasi Budget</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -118,7 +119,14 @@
                                     <td>
                                         <div><?= "Rp " . number_format($Forms->biaya, 0, ',', '.') ?></div>
                                     </td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger btn-sm"
+                                            onclick="DeleteTnaOther(<?= $Forms->id_tna ?>)">
+                                            <i class="fa fa-fw fa-trash"></i>
+                                        </button>
+                                    </td>
                                 </tr>
+
                                 <input type="hidden" value="<?= $Forms->id_tna ?>" name="training[]">
                                 <?php
                                     $sum += $Forms->biaya;
@@ -139,7 +147,7 @@
                         </div>
                         <div>
                             <strong>Available
-                                Buduget :</strong>
+                                Budget :</strong>
                             <?php if ($budget != null) {
                                 echo "Rp " . number_format($budget['available_budget'], 0, ',', '.');
                             } else {
@@ -148,14 +156,15 @@
                         </div>
                         <div class="mr-4">
                             <strong>Used
-                                Buduget :</strong>
+                                Budget :</strong>
                             <?php if ($budget != null) {
                                 echo "Rp " . number_format($budget['used_budget'], 0, ',', '.');
                             } else {
                                 echo 0;
                             } ?>
                         </div>
-                        <div class="ml-4"><strong>Jumlah : </strong><?= "Rp " . number_format($sum, 0, ',', '.') ?>
+                        <div class="ml-4"><strong>Total Estimasi Budget :
+                            </strong><?= "Rp " . number_format($sum, 0, ',', '.') ?>
                         </div>
 
                     </div>
@@ -169,6 +178,24 @@
     </div>
 </div>
 <!-- Modal -->
+<div class="modal fade" id="DeleteModalOther" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form action="<?= base_url() ?>\delete_training_user" method="post">
+                <div class="modal-body">
+                    <input type="hidden" name="id" id="id">
+                    <input type="hidden" name="url" id="url" value="1">
+                    <h6><strong>Apakah Anda Ingin Menghapus TNA Unplanned User!</strong></h6>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <button type="submit" class="btn btn-danger">Yes!</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <!-- Modal -->
 <div class="modal fade" id="exampleModalKadiv" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
@@ -195,12 +222,12 @@
                                     <th>Tujuan Training</th>
                                     <th>Notes</th>
                                     <th>Estimasi Budget</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
-                            <?php foreach ($departemen as $dept) : ?>
+                            <?php foreach ($user as $dept) : ?>
                             <tbody>
                                 <?php
-
                                     $sum = 0;
                                     $tnafixes = $tnaKadept->getTnaFilterKadept(session()->get('id'), $dept->departemen);
                                     foreach ($tnafixes as $Forms) : ?>
@@ -216,22 +243,44 @@
                                     <td>
                                         <div><?= "Rp " . number_format($Forms->biaya, 0, ',', '.') ?></div>
                                     </td>
+                                    <?php $sum += $Forms->biaya ?>
+                                    <td>
+                                        <button type="button" class="btn btn-danger btn-sm"
+                                            onclick="DeleteTna(<?= $Forms->id_tna ?>)">
+                                            <i class="fa fa-fw fa-trash"></i>
+                                        </button>
+                                    </td>
                                 </tr>
                                 <input type="hidden" value="<?= $Forms->id_tna ?>" name="training[]">
 
                                 <?php endforeach; ?>
                                 <?php $budgets = $budgetKadept->getBudgetCurrent($dept->departemen) ?>
-                                <tr>
-                                    <td><strong>Aloated Budget</strong></td>
+                                <?php if (isset($budgets)) : ?>
+                                <tr style="background-color:aliceblue;">
+                                    <td><strong><?= $dept->departemen ?></strong></td>
+                                    <td><strong>Alocated Budget</strong></td>
                                     <td><?= "Rp " . number_format($budgets['alocated_budget'], 0, ',', '.') ?></td>
                                     <td><strong>Available Budget</strong></td>
                                     <td><?= "Rp " . number_format($budgets['available_budget'], 0, ',', '.') ?></td>
                                     <td><strong>Used Budget</strong></td>
                                     <td><?= "Rp " . number_format($budgets['used_budget'], 0, ',', '.') ?></td>
-                                    <td></td>
-                                    <td><strong>Jumlah</strong></td>
-                                    <td><?= "Rp " . number_format($sum += $Forms->biaya, 0, ',', '.') ?></td>
+                                    <td><strong>Total Estimasi Budget</strong></td>
+                                    <td><?= "Rp " . number_format($sum, 0, ',', '.') ?></td>
+
                                 </tr>
+                                <?php else : ?>
+                                <tr style="background-color:aliceblue;">
+                                    <td><strong><?= $dept->departemen ?></strong></td>
+                                    <td><strong>Alocated Budget</strong></td>
+                                    <td><?= "Rp " . number_format(0, 0, ',', '.') ?></td>
+                                    <td><strong>Available Budget</strong></td>
+                                    <td><?= "Rp " . number_format(0, 0, ',', '.') ?></td>
+                                    <td><strong>Used Budget</strong></td>
+                                    <td><?= "Rp " . number_format(0, 0, ',', '.') ?></td>
+                                    <td><strong>Total Estimasi Budget</strong></td>
+                                    <td><?= "Rp " . number_format(0, 0, ',', '.') ?></td>
+                                </tr>
+                                <?php endif; ?>
                             </tbody>
                             <?php
                             endforeach; ?>
@@ -246,4 +295,37 @@
         </form>
     </div>
 </div>
+<div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form action="<?= base_url() ?>\delete_training_user" method="post">
+                <div class="modal-body">
+                    <input type="hidden" name="id" id="idkadiv">
+                    <input type="hidden" name="url" id="url" value="1">
+                    <h6><strong>Apakah Anda Ingin Menghapus TNA Unplanned User!</strong></h6>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <button type="submit" class="btn btn-danger">Yes!</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+function DeleteTna(id) {
+    jQuery.noConflict();
+    $('#DeleteModal').modal('show')
+    $('#idkadiv').val(id);
+
+}
+
+function DeleteTnaOther(id) {
+    jQuery.noConflict();
+    $('#DeleteModalOther').modal('show')
+    $('#id').val(id);
+
+}
+</script>
 <?= $this->endSection() ?>

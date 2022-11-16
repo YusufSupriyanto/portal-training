@@ -59,7 +59,7 @@ class FormTna extends BaseController
         $departemen = $this->tna->getTnaFilterDistinct($id);
         $tna = $this->tna->getTnaFilter($id);
         $budget = $this->budget->getBudgetCurrent(session()->get('departemen'));
-        //dd($tna);
+        //d($user);
         $data = [
             'tittle' => 'Data Member',
             'user' => $user,
@@ -525,5 +525,17 @@ class FormTna extends BaseController
         ];
         // return $budgetData;
         $this->budget->save($budgetData);
+    }
+
+    public function DeleteTrainingUser()
+    {
+        $id = $this->request->getVar('id');
+        $url = $this->request->getVar('url');
+        $this->tna->delete($id);
+        if ($url == 0) {
+            return redirect()->to('/data_member');
+        } else {
+            return redirect()->to('/data_member_unplanned');
+        }
     }
 }

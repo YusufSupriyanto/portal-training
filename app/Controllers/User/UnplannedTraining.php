@@ -122,7 +122,7 @@ class UnplannedTraining extends BaseController
 
 
         $data = [
-            'tittle' => 'Request Tna',
+            'tittle' => 'Request Unplanned',
             'departemen' => $dept,
             'status' => $this->unplanned,
             'budget' => $this->budget
@@ -151,7 +151,6 @@ class UnplannedTraining extends BaseController
         } else {
             $status =  $this->unplanned->getStatusWaitUser($bagian, $dic, $id);
         }
-
         // dd($status);
         $data = [
             'tittle' => 'Status TNA',

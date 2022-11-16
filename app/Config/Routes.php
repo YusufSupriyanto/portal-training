@@ -224,6 +224,8 @@ $routes->post('/accept_kadiv', 'User\FormTna::acceptKadiv', ['filter' => 'Auth']
 $routes->post('/reject_kadiv', 'User\FormTna::rejectKadiv', ['filter' => 'Auth']);
 $routes->post('/accept_bod', 'User\FormTna::acceptBod', ['filter' => 'Auth']);
 $routes->post('/reject_bod', 'User\FormTna::rejectBod', ['filter' => 'Auth']);
+$routes->post('/delete_training_user', 'User\FormTna::DeleteTrainingUser', ['filter' => 'Auth']);
+
 
 //Our Schedule User
 $routes->get('/member_schedule', 'User\OurSchedule::member', ['filter' => 'Auth']);

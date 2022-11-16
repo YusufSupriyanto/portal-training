@@ -28,22 +28,28 @@ class C_Budget extends BaseController
         return view('admin/budget', $data);
     }
 
+    public function strFilter($string)
+    {
+        $number =  str_replace("Rp.", "", $string);
+        $angka = str_replace(".", "", $number);
+        $fixes = str_replace(" ", "", $angka);
+        return $fixes;
+    }
+
     public function SaveBudget()
     {
         $id_budget = $this->request->getVar('id_budget');
-        // dd($id_budget);
         $department = $this->request->getVar('department');
-        $alocated = $this->request->getVar('alocated');
-        $number =  str_replace("Rp.", "", $alocated);
-        $angka = str_replace(".", "", $number);
-        $fixes = str_replace(" ", "", $angka);
+        $alocated = $this->strFilter($this->request->getVar('alocated'));
+        $used = $this->strFilter($this->request->getVar('used'));
+        $available = $this->strFilter($this->request->getVar('available'));
+        $temporary = $this->strFilter($this->request->getVar('temporary'));
+
         $year = $this->request->getVar('year');
         //dd($id_budget);
         if ($id_budget != "") {
             $budgetData = $this->budget->getDataBudgetById($id_budget);
-            $budgetAvailable = $fixes - $budgetData['used_budget'];
-
-
+            $budgetAvailable = $alocated - $budgetData['used_budget'];
             if ($year < date('Y')) {
                 $condition = 'past';
             } elseif ($year == date('Y')) {
@@ -54,8 +60,10 @@ class C_Budget extends BaseController
             $data1 = [
                 'id_budget' => $id_budget,
                 'department' => $department,
-                'alocated_budget' => $fixes,
+                'alocated_budget' => $alocated,
                 'available_budget' => $budgetAvailable,
+                'used_budget' => $used,
+                'temporary_calculation' => $temporary,
                 'year' => $year,
                 'current' => $condition
             ];
@@ -72,9 +80,10 @@ class C_Budget extends BaseController
             }
             $data2 = [
                 'department' => $department,
-                'alocated_budget' => $fixes,
-                'available_budget' => $fixes,
-                'used_budget' => 0,
+                'alocated_budget' => $alocated,
+                'available_budget' => $available,
+                'used_budget' => $used,
+                'temporary_calculation' => $temporary,
                 'year' => $year,
                 'current' => $condition
             ];

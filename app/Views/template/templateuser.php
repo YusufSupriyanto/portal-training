@@ -113,7 +113,7 @@ to get the desired effect
                 <a href="<?= base_url() ?>/home_user" class="brand-link">
                     <img src="<?= base_url() ?>/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                         style="opacity: .8">
-                    <span class="brand-text font-weight-light">Portal Training</span>
+                    <span class="brand-text font-weight-light ">Portal Training</span>
                 </a>
 
                 <!-- Sidebar -->
