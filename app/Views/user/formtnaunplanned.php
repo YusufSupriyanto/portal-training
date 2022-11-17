@@ -19,9 +19,9 @@
                 </button>
                 <h6><input class="form-control" value="Nama                  :<?= "  " . $user['nama'] ?>" readonly>
                 </h6>
-                <h6><input class="form-control" value="Jabatan             :<?= "  " . $user['bagian'] ?>" readonly>
+                <h6><input class="form-control" value="Jabatan               :<?= "  " . $user['bagian'] ?>" readonly>
                 </h6>
-                <h6><input class="form-control" value="Departemen   :<?= "  " . $user['departemen'] ?>" readonly>
+                <h6><input class="form-control" value="Departemen       :<?= "  " . $user['departemen'] ?>" readonly>
                 </h6>
                 <h6><input class="form-control" value="Seksi                   :<?= "  " . $user['seksi'] ?>" readonly>
                 </h6>

@@ -148,7 +148,11 @@ to get the desired effect
                                 </a>
                             </li>
                             <li class="nav-item has-treeview">
-                                <a href="#" class="nav-link">
+                                <a href="#" class="nav-link <?php if (($page == 'list_astra') || ($page == 'list_expert') || ($page == 'list_technicalA')
+                                                            || ($page == 'list_company') ||
+                                                            ($page == 'list_soft') || ($page == 'list_technicalB')
+                                                        ) : echo 'active';
+                                                        endif; ?>">
                                     <i class="nav-icon fa-solid fa-gears"></i>
                                     <p>
                                         List Competency
@@ -157,7 +161,8 @@ to get the desired effect
                                 </a>
                                 <ul class="nav nav-treeview" style="display: none;">
                                     <li class="nav-item has-treeview">
-                                        <a href="#" class="nav-link">
+                                        <a href="#" class="nav-link <?php if (($page == 'list_astra') || ($page == 'list_expert') || ($page == 'list_technicalA')) : echo 'active';
+                                                                endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>
                                                 Group A
@@ -191,7 +196,8 @@ to get the desired effect
                                 </ul>
                                 <ul class="nav nav-treeview" style="display: none;">
                                     <li class="nav-item has-treeview">
-                                        <a href="#" class="nav-link">
+                                        <a href="#" class="nav-link <?php if (($page == 'list_company') || ($page == 'list_soft') || ($page == 'list_technicalB')) : echo 'active';
+                                                                endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>
                                                 Group B
@@ -225,7 +231,8 @@ to get the desired effect
                                 </ul>
                             </li>
                             <li class="nav-item has-treeview">
-                                <a href="#" class="nav-link">
+                                <a href="#" class="nav-link <?php if (($page == 'list_training') || ($page == 'non_training')) : echo 'active';
+                                                        endif; ?>">
                                     <i class="nav-icon fa fa-fw fa-list"></i>
                                     <p>
                                         List Pengembangan
@@ -250,7 +257,11 @@ to get the desired effect
                                 </ul>
                             </li>
                             <li class="nav-item has-treeview">
-                                <a href="#" class="nav-link">
+                                <a href="#" class="nav-link <?php if (($page == 'tna')  || ($page == 'tna_unplanned') || ($page == 'kadiv_status') ||
+                                                            ($page == 'status_unplanned') || ($page == 'training_monthly') || ($page == 'unplanned_monthly') ||
+                                                            ($page == 'training_fixed')
+                                                        ) : echo 'active';
+                                                        endif; ?>">
                                     <i class="nav-icon fa-solid fa-chalkboard-user"></i>
                                     <p>
                                         Training
@@ -316,7 +327,8 @@ to get the desired effect
                                 </ul>
                             </li>
                             <li class="nav-item has-treeview">
-                                <a href="#" class="nav-link">
+                                <a href="#" class="nav-link <?php if ($page == 'user') : echo 'active';
+                                                        endif; ?>">
                                     <i class="nav-icon fas fa-fw fa-user-plus"></i>
                                     <p>
                                         User
@@ -340,7 +352,8 @@ to get the desired effect
                                 </ul>
                             </li>
                             <li class="nav-item has-treeview">
-                                <a href="#" class="nav-link">
+                                <a href="#" class="nav-link <?php if (($page == 'schedule_training') || ($page == 'schedule_unplanned')) : echo 'active';
+                                                        endif; ?>">
                                     <i class="nav-icon fa fa-fw fa-calendar-check-o"></i>
                                     <p>
                                         Schedule
@@ -365,7 +378,8 @@ to get the desired effect
                                 </ul>
                             </li>
                             <li class="nav-item has-treeview">
-                                <a href="#" class="nav-link">
+                                <a href="#" class="nav-link <?php if (($page == 'history_unplanned') || ($page == 'history')) : echo 'active';
+                                                        endif; ?>">
                                     <i class="nav-icon fa fa-fw  fa-history"></i>
                                     <p>
                                         History
@@ -383,7 +397,7 @@ to get the desired effect
                                 </ul>
                                 <ul class="nav nav-treeview" style="display: none;">
                                     <li class="nav-item">
-                                        <a href="<?= base_url() ?>/history_unplanned" class="nav-link  <?php if ($page == 'history_-unplanned') : echo 'active';
+                                        <a href="<?= base_url() ?>/history_unplanned" class="nav-link  <?php if ($page == 'history_unplanned') : echo 'active';
                                                                                                     endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>History Training Unplanned</p>
@@ -392,7 +406,8 @@ to get the desired effect
                                 </ul>
                             </li>
                             <li class="nav-item has-treeview">
-                                <a href="#" class="nav-link">
+                                <a href="#" class="nav-link <?php if ($page == 'training_ditolak') : echo 'active';
+                                                        endif; ?>">
                                     <i class="nav-icon fa fa-fw fa-trash"></i>
                                     <p>
                                         Training Reject
@@ -401,7 +416,7 @@ to get the desired effect
                                 </a>
                                 <ul class="nav nav-treeview" style="display: none;">
                                     <li class="nav-item">
-                                        <a href="<?= base_url() ?>/training_ditolak" class="nav-link  <?php if ($page == 'tna_diolak') : echo 'active';
+                                        <a href="<?= base_url() ?>/training_ditolak" class="nav-link  <?php if ($page == 'training_diolak') : echo 'active';
                                                                                                     endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Daftar Training Di Reject</p>

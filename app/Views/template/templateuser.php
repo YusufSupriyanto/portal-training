@@ -152,7 +152,8 @@ to get the desired effect
                                 </a>
                             </li>
                             <li class="nav-item has-treeview">
-                                <a href="#" class="nav-link">
+                                <a href="#" class="nav-link <?php if (($page == 'list_training_user') || ($page == 'non_training_user')) : echo 'active';
+                                                        endif; ?>">
                                     <i class="nav-icon fa-solid fa-list"></i>
                                     <p>
                                         List Pengembangan
@@ -178,7 +179,8 @@ to get the desired effect
                             </li>
                             <?php if (session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'BOD' || session()->get('bagian') == 'KADEPT' || session()->get('bagian') == 'KASIE') : ?>
                             <li class="nav-item has-treeview">
-                                <a href="#" class="nav-link">
+                                <a href="#" class="nav-link <?php if (($page == 'data_member') || ($page == 'data_member_unplanned') || ($page == 'request_tna') || ($page == 'request_unplanned')) : echo 'active';
+                                                            endif; ?> ">
                                     <i class="nav-icon fa-solid fa-chalkboard-user"></i>
                                     <p>
                                         Training
@@ -227,7 +229,8 @@ to get the desired effect
                             </li>
                             <?php endif; ?>
                             <li class="nav-item has-treeview">
-                                <a href="#" class="nav-link">
+                                <a href="#" class="nav-link <?php if (($page == 'status_tna_personal') || ($page == 'status_unplanned_personal') || ($page == 'status_tna') || ($page == 'status_tna_unplanned')) : echo 'active';
+                                                        endif; ?>">
                                     <i class="nav-icon fa-solid fa-file-circle-check"></i>
                                     <p>
                                         Status Training
@@ -237,7 +240,8 @@ to get the desired effect
                                 <?php if (session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'BOD' || session()->get('bagian') == 'KADEPT' || session()->get('bagian') == 'KASIE') : ?>
                                 <ul class="nav nav-treeview" style="display: none;">
                                     <li class="nav-item has-treeview">
-                                        <a href="#" class="nav-link">
+                                        <a href="#" class="nav-link <?php if (($page == 'status_tna_personal') || ($page == 'status_unplanned_personal')) : echo 'active';
+                                                                    endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>
                                                 Personal
@@ -267,7 +271,8 @@ to get the desired effect
                                 <?php endif; ?>
                                 <ul class="nav nav-treeview" style="display: none;">
                                     <li class="nav-item has-treeview">
-                                        <a href="#" class="nav-link">
+                                        <a href="#" class="nav-link <?php if (($page == 'status_tna') || ($page == 'status_tna_unplanned')) : echo 'active';
+                                                                endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>
                                                 <?php if (session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'BOD' || session()->get('bagian') == 'KADEPT' || session()->get('bagian') == 'KASIE') : ?>
@@ -299,7 +304,8 @@ to get the desired effect
                                 </ul>
                             </li>
                             <li class="nav-item has-treeview">
-                                <a href="#" class="nav-link">
+                                <a href="#" class="nav-link <?php if (($page == 'personal_schedule') || ($page == 'member_schedule')) : echo 'active';
+                                                        endif; ?>">
                                     <i class="nav-icon fa-solid fa-calendar-days"></i>
                                     <p>
                                         Schedule Training
@@ -328,7 +334,8 @@ to get the desired effect
                             </li>
                             <?php endif; ?>
                             <li class="nav-item has-treeview">
-                                <a href="#" class="nav-link">
+                                <a href="#" class="nav-link <?php if (($page == 'personal_schedule_unplanned') || ($page == 'member_schedule_unplanned')) : echo 'active';
+                                                    endif; ?>">
                                     <i class="nav-icon fa-solid fa-calendar"></i>
                                     <p>
                                         Schedule Training Unplanned
@@ -357,7 +364,8 @@ to get the desired effect
                             </li>
                             <?php endif; ?>
                             <li class="nav-item has-treeview">
-                                <a href="#" class="nav-link">
+                                <a href="#" class="nav-link <?php if (($page == 'evaluasi_reaksi') || ($page == 'evaluasi_reaksi_unplanned') || ($page == 'evaluasi_reaksi_member_unplanned') || ($page == 'evaluasi_reaksi_member')) : echo 'active';
+                                                endif; ?>">
                                     <i class="nav-icon fa-solid fa-file-lines"></i>
                                     <p>
                                         Evaluasi Reaksi
@@ -403,7 +411,8 @@ to get the desired effect
                                 <?php endif; ?>
                             </li>
                             <li class="nav-item has-treeview">
-                                <a href="#" class="nav-link">
+                                <a href="#" class="nav-link <?php if (($page == 'evaluasi_efektifitas_personal') || ($page == 'evaluasi_efektifitas_unplanned_personal') || ($page == 'evaluasi_efektifitas') || ($page == 'evaluasi_efektifitas_unplanned')) : echo 'active';
+                                                endif; ?>">
                                     <i class="nav-icon fa-regular fa-file-lines"></i>
                                     <p>
                                         Evaluasi Efektivitas
@@ -451,7 +460,8 @@ to get the desired effect
                                 <?php endif; ?>
                             </li>
                             <li class="nav-item has-treeview">
-                                <a href="#" class="nav-link">
+                                <a href="#" class="nav-link <?php if (($page == 'personal_history')|| ($page == 'member_history')) : echo 'active';
+                                                endif; ?>">
                                     <i class="nav-icon fa fa-fw  fa-history"></i>
                                     <p>
                                         History Training

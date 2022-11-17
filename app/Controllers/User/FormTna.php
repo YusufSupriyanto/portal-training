@@ -250,7 +250,11 @@ class FormTna extends BaseController
         $page = basename($_SERVER['PHP_SELF']);
 
         if ($bagian == 'BOD') {
-            $data =  $_POST['training'];
+            if (empty($_POST['training'])) {
+                return redirect()->to('/data_member');
+            } else {
+                $data = $_POST['training'];
+            }
 
             for ($i = 0; $i < count($data); $i++) {
                 $update = $this->tna->getAllTna($data[$i]);
@@ -274,7 +278,12 @@ class FormTna extends BaseController
                 return redirect()->to('/data_member_unplanned');
             }
         } else {
-            $data =  $_POST['training'];
+            if (empty($_POST['training'])) {
+                return redirect()->to('/data_member');
+            } else {
+                $data = $_POST['training'];
+            }
+
             for ($i = 0; $i < count($data); $i++) {
                 $update = $this->tna->getAllTna($data[$i]);
                 $tna = [
@@ -406,13 +415,13 @@ class FormTna extends BaseController
         // dd($departemen);
 
         if ($bagian == 'BOD') {
-            // $status = $this->tna->getRequestTna($bagian, $dic);
+
             $distinct = $this->tna->getRequestTnaDisntinct($bagian, $dic);
         } elseif ($bagian == 'KADIV') {
-            // $status =  $this->tna->getRequestTna($bagian, $divisi);
+
             $distinct = $this->tna->getRequestTnaDisntinct($bagian, $divisi);
         } elseif ($bagian == 'KADEPT') {
-            // $status = $this->tna->getRequestTna($bagian, $departemen);
+
             $distinct = $this->tna->getRequestTnaDisntinct($bagian, $departemen);
         }
         //dd($distinct);

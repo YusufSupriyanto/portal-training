@@ -185,7 +185,7 @@
                                     <div class="input-group">
                                         <div class="custom-file">
                                             <input type="file" name="image" class="custom-file-input"
-                                                id="singleInputFile" required>
+                                                id="singleInputFile">
                                             <label class="custom-file-label" for="singleInputFile">Choose file</label>
                                         </div>
                                     </div>
@@ -195,54 +195,59 @@
                                 <div>Form Education</div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Grade</label>
-                                    <input type="text" name="grade" class="form-control" placeholder="Masukan Grade"
-                                        required>
+                                    <input type="text" name="grade" class="form-control" placeholder="Masukan Grade">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Year</label>
-                                    <input type="text" name="year" class="form-control" placeholder="Masukan Year"
-                                        required>
+                                    <input type="text" name="year" class="form-control" placeholder="Masukan Year">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Institution</label>
                                     <input type="text" name="institution" class="form-control"
-                                        placeholder="Masukan Institution" required>
+                                        placeholder="Masukan Institution">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Major</label>
-                                    <input type="text" name="major" class="form-control" placeholder="Masukan Major"
-                                        required>
+                                    <input type="text" name="major" class="form-control" placeholder="Masukan Major">
                                 </div>
                                 <div>Form Career</div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Year Start</label>
                                     <input type="text" name="year_start" class="form-control"
-                                        placeholder="Masukan Year Start" required>
+                                        placeholder="Masukan Year Start">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Year End</label>
                                     <input type="text" name="year_end" class="form-control"
-                                        placeholder="Masukan Year End" required>
+                                        placeholder="Masukan Year End">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Position</label>
                                     <input type="text" name="position" class="form-control"
-                                        placeholder="Masukan Position" required>
+                                        placeholder="Masukan Position">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Department</label>
                                     <input type="text" name="department" class="form-control"
-                                        placeholder="Masukan Department" required>
+                                        placeholder="Masukan Department">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Division</label>
                                     <input type="text" name="division" class="form-control"
-                                        placeholder="Masukan Division" required>
+                                        placeholder="Masukan Division">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Company</label>
-                                    <input type="text" name="company" class="form-control" placeholder="Masukan Company"
-                                        required>
+                                    <input type="text" name="company" class="form-control"
+                                        placeholder="Masukan Company">
+                                </div>
+                                <div class="form-group">
+                                    <label>Group</label>
+                                    <select class="form-control" name="group" required>
+                                        <option>Choose...</option>
+                                        <option value="A">A</option>
+                                        <option value="B">B</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>

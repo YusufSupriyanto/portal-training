@@ -27,8 +27,9 @@ class Login extends BaseController
     {
         $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
+        //dd($username);
         $row = $this->userModel->get_data_login($username);
-        // dd($row);
+        //dd($row);
 
         if ($row == null) {
             // session()->setFlashdata('message', 'username salah');

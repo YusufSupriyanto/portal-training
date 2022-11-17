@@ -42,50 +42,71 @@ class C_User extends BaseController
 
     public function singleUser()
     {
-        $image = $this->request->getFile('image');
-        $image->getName();
-        $image->getClientExtension();
-        $newName = $image->getRandomName();
-        $image->move("../public/profile", $newName);
-        $filepath = "/profile/" . $newName;
-        $data = [
-            'nama' => $this->request->getVar('nama'),
-            'npk' => $this->request->getVar('npk'),
-            'seksi' => $this->request->getVar('seksi'),
-            'dic' => $this->request->getVar('dic'),
-            'divisi' => $this->request->getVar('divisi'),
-            'departemen' => $this->request->getVar('departemen'),
-            'bagian' => $this->request->getVar('bagian'),
-            'level' => $this->request->getVar('level'),
-            'username' => $this->request->getVar('username'),
-            'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
-            'email' => $this->request->getVar('email'),
-            'profile' =>   $filepath
-        ];
-        $this->user->save($data);
-        $last = $this->user->getLastUser();
-        $education = [
-            'id_user' => $last,
-            'grade' => $this->request->getVar('grade'),
-            'year' => $this->request->getVar('year'),
-            'institution' => $this->request->getVar('institution'),
-            'major' => $this->request->getVar('major')
+        $level =   $this->request->getVar('level');
+        $group = $this->request->getVar('group');
 
-        ];
-        $career = [
-            'id_user' => $last,
-            'year_start' => $this->request->getVar('year_start'),
-            'year_end' => $this->request->getVar('year_end'),
-            'position' => $this->request->getVar('position'),
-            'department' => $this->request->getVar('department'),
-            'division' => $this->request->getVar('division'),
-            'company' => $this->request->getVar('company'),
-        ];
-        $this->education->save($education);
-        $this->career->save($career);
-        // d($data);
-        // d($career);
-        // d($education);
+        if ($level == "ADMIN") {
+            $data = [
+                'nama' => $this->request->getVar('nama'),
+                'npk' => $this->request->getVar('npk'),
+                'seksi' => $this->request->getVar('seksi'),
+                'status' => $this->request->getVar('status'),
+                'dic' => $this->request->getVar('dic'),
+                'divisi' => $this->request->getVar('divisi'),
+                'departemen' => $this->request->getVar('departemen'),
+                'bagian' => $this->request->getVar('bagian'),
+                'level' => $level,
+                'username' => $this->request->getVar('username'),
+                'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
+                'email' => $this->request->getVar('email'),
+            ];
+            $this->user->save($data);
+        } else {
+            $image = $this->request->getFile('image');
+            $image->getName();
+            $image->getClientExtension();
+            $newName = $image->getRandomName();
+            $image->move("../public/profile", $newName);
+            $filepath = "/profile/" . $newName;
+            $data = [
+                'nama' => $this->request->getVar('nama'),
+                'npk' => $this->request->getVar('npk'),
+                'seksi' => $this->request->getVar('seksi'),
+                'dic' => $this->request->getVar('dic'),
+                'divisi' => $this->request->getVar('divisi'),
+                'departemen' => $this->request->getVar('departemen'),
+                'bagian' => $this->request->getVar('bagian'),
+                'level' => $this->request->getVar('level'),
+                'username' => $this->request->getVar('username'),
+                'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
+                'email' => $this->request->getVar('email'),
+                'profile' =>   $filepath,
+                'type_golongan' => $group
+            ];
+            $this->user->save($data);
+            $last = $this->user->getLastUser();
+            $education = [
+                'id_user' => $last,
+                'grade' => $this->request->getVar('grade'),
+                'year' => $this->request->getVar('year'),
+                'institution' => $this->request->getVar('institution'),
+                'major' => $this->request->getVar('major')
+
+            ];
+            $career = [
+                'id_user' => $last,
+                'year_start' => $this->request->getVar('year_start'),
+                'year_end' => $this->request->getVar('year_end'),
+                'position' => $this->request->getVar('position'),
+                'department' => $this->request->getVar('department'),
+                'division' => $this->request->getVar('division'),
+                'company' => $this->request->getVar('company'),
+            ];
+            $this->education->save($education);
+            $this->career->save($career);
+        }
+
+
         session()->setFlashdata('success', 'Data Berhasil Di Simpan');
         return redirect()->to('/user');
     }
