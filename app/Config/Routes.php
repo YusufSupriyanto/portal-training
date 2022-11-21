@@ -81,7 +81,11 @@ $routes->get('/company_division/(:any)', 'Admin\C_CompetencyCompany::DetailCompa
 $routes->post('/save_company', 'Admin\C_CompetencyCompany::EditCompany', ['filter' => 'Auth']);
 $routes->delete('/delete/company/(:num)', 'Admin\C_competencyCompany::Delete/$1', ['filter' => 'Auth']);
 
-
+//Technical B Competency
+$routes->post('/multiple_input_technicalB', 'Admin\C_competencyTechnicalB::InputExcel', ['filter' => 'Auth']);
+$routes->get('/technical_departemen/(:any)', 'Admin\C_competencyTechnicalB::DetailTechnical/$1', ['filter' => 'Auth']);
+$routes->post('/save_single_technicalB', 'Admin\C_competencyTechnicalB::SaveSingleTechnical', ['filter' => 'Auth']);
+$routes->delete('/delete_technicalB/(:num)/(:any)', 'Admin\C_competencyTechnicalB::delete/$1/$2', ['filter' => 'Auth']);
 
 //categories
 
@@ -101,6 +105,7 @@ $routes->post('/save_training', 'Admin\C_ListTraining::saveSingleTraining', ['fi
 $routes->post('/delete_all', 'Admin\C_ListTraining::deleteAllTraining', ['filter' => 'Auth']);
 $routes->post('/delete_training', 'Admin\C_ListTraining::deleteTraining', ['filter' => 'Auth']);
 $routes->post('/edit_training', 'Admin\C_ListTraining::editTraining', ['filter' => 'Auth']);
+
 
 
 //User Admin

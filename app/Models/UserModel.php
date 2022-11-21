@@ -12,8 +12,8 @@ class UserModel extends Model
     // protected $useAutoIncrement = true;
     protected $allowedFields = [
         'npk', 'nama', 'status', 'dic',
-        'divisi', 'departemen', 'seksi', 'bagian', 'username', 'password',
-        'level', 'profile', 'email', 'tgl_masuk', 'tahun', 'bulan', 'golongan', 'promosi_terakhir'
+        'divisi', 'departemen', 'seksi', 'bagian', 'nama_jabatan', 'type_golongan', 'username', 'password',
+        'level', 'profile', 'email', 'tgl_masuk', 'tahun', 'bulan', 'golongan', 'promosi_terakhir', 'type_user'
     ];
 
     function get_data_login($username)
@@ -97,6 +97,11 @@ class UserModel extends Model
         $this->select('departemen')->distinct();
         return $this->get()->getResultArray();
     }
+    public function DistinctJabatan()
+    {
+        $this->select('nama_jabatan')->distinct();
+        return $this->get()->getResultArray();
+    }
     public function getLastUser()
     {
         $this->select('id_user');
@@ -112,9 +117,8 @@ class UserModel extends Model
 
     public function getUserAstra()
     {
-        $seksi = ['RESEARCH & DEVELOPMENT', 'EXPERT PROCESS'];
         $bagian = ['BOD', 'KADIV', 'KADEPT', 'KASIE', 'STAFF 4UP'];
-        $this->select('nama,id_user')->whereIn('bagian', $bagian)->whereNotIn('seksi', $seksi)->where('type_golongan', 'A         ')->where('level', 'USER');
+        $this->select('nama,id_user')->whereIn('bagian', $bagian)->where('type_user', 'REGULAR')->where('type_golongan', 'A         ')->where('level', 'USER');
         $this->orderBy('nama', 'ASC');
         return $this->get()->getResultArray();
     }
@@ -122,8 +126,7 @@ class UserModel extends Model
 
     public function getUserExpert()
     {
-        $seksi = ['EXPERT PROCESS', 'RESEARCH & DEVELOPMENT'];
-        $this->select('nama,id_user')->whereIn('seksi', $seksi)->where('bagian', 'STAFF 4UP')->where('type_golongan', 'A         ');
+        $this->select('nama,id_user')->where('type_user', 'EXPERT')->where('bagian', 'STAFF 4UP')->where('type_golongan', 'A         ')->where('level', 'USER');
         return $this->get()->getResultArray();
     }
     public function getUserTechnicalA($departemen)
@@ -134,7 +137,7 @@ class UserModel extends Model
 
     public function getUserTechnicalB($departemen)
     {
-        $this->select('nama,id_user')->where('departemen', $departemen)->where('level', 'USER')->where('type_golongan', 'B        ');
+        $this->select('nama,id_user')->where('departemen', $departemen)->where('level', 'USER')->where('type_golongan', 'B');
         return $this->get()->getResultArray();
     }
 
@@ -148,6 +151,18 @@ class UserModel extends Model
     public function getUserDivisi($divisi)
     {
         $this->select('nama,id_user')->where('divisi', $divisi)->where('level', 'USER')->where('type_golongan', 'B        ');
+        return $this->get()->getResultArray();
+    }
+
+    public function getUserBagian()
+    {
+        $this->select('bagian')->distinct();
+        return $this->get()->getResultArray();
+    }
+
+    public function getUserJabatan()
+    {
+        $this->select('nama_jabatan')->distinct();
         return $this->get()->getResultArray();
     }
 

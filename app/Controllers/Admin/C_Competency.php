@@ -11,6 +11,7 @@ use App\Models\M_CompetencyTechnical;
 use App\Models\M_EvaluasiReaksi;
 use App\Models\M_Expert;
 use App\Models\M_Technical;
+use App\Models\M_TechnicalB;
 use App\Models\M_Tna;
 use App\Models\M_TnaUnplanned;
 use App\Models\UserModel;
@@ -19,17 +20,19 @@ class C_Competency extends BaseController
 {
     private M_Astra $astra;
     private M_Technical $technical;
-
+    private M_TechnicalB $technicalB;
     private M_Expert $expert;
     private UserModel $user;
     private M_CompetencyAstra $competencyAstra;
     private M_CompetencyExpert $competencyExpert;
     private M_CompetencyTechnical $competencyTechnical;
+
     public function __construct()
     {
         $this->astra = new M_Astra();
         $this->expert = new M_Expert();
         $this->technical = new M_Technical();
+        $this->technicalB = new M_TechnicalB();
         $this->user = new UserModel();
         $this->competencyAstra = new M_CompetencyAstra();
         $this->competencyExpert = new M_CompetencyExpert();
@@ -114,15 +117,16 @@ class C_Competency extends BaseController
     {
 
 
-        $technicalB = $this->competencyTechnical->getDataDepertemenB();
+        $technical = $this->technicalB->DepartmentB();
         $department = $this->user->DistinctDepartemen();
+        $nama_Jabatan = $this->user->DistinctJabatan();
 
-        //dd($department);
 
         $data = [
             'tittle' => 'Department Technical Competency',
-            'technicalB' => $technicalB,
-            'department' => $department
+            'technicalB' => $technical,
+            'department' => $department,
+            'jabatan' => $nama_Jabatan
         ];
         return view('admin/listtechnicalcompetencyB', $data);
     }

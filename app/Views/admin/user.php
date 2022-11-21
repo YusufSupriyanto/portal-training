@@ -149,12 +149,19 @@
                                     <label>Bagian</label>
                                     <select class="custom-select" name="bagian" required>
                                         <option>Choose</option>
-                                        <option value="BOD">BOD</option>
-                                        <option value="KADIV">KADIV</option>
-                                        <option value="KADEPT">KADEPT</option>
-                                        <option value="KASIE">KASIE</option>
-                                        <option value="STAFF 4UP">STAFF 4UP</option>
-                                        <option value="STAFF">STAFF</option>
+                                        <?php foreach ($BAGIAN as $bagian) : ?>
+                                        <option value="<?= $bagian['bagian'] ?>"><?= $bagian['bagian'] ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Nama Jabatan</label>
+                                    <select class="custom-select" name="jabatan" required>
+                                        <option>Choose</option>
+                                        <?php foreach ($JABATAN as $jabatan) : ?>
+                                        <option value="<?= $jabatan['nama_jabatan'] ?>"><?= $jabatan['nama_jabatan'] ?>
+                                        </option>
+                                        <?php endforeach; ?>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -243,10 +250,18 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Group</label>
-                                    <select class="form-control" name="group" required>
+                                    <select class="form-control" name="group">
                                         <option>Choose...</option>
                                         <option value="A">A</option>
                                         <option value="B">B</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Type User</label>
+                                    <select class="form-control" name="type_user">
+                                        <option>Choose...</option>
+                                        <option value="REGULAR">REGULAR</option>
+                                        <option value="EXPERT">EXPERT</option>
                                     </select>
                                 </div>
                             </div>

@@ -7,9 +7,8 @@
             <h3 class="card-title">Technical Competency</h3>
         </div>
         <div class="card-header">
-            <form action="<?= base_url() ?>/input_technical_file" method="post" enctype="multipart/form-data">
+            <form action="<?= base_url() ?>/multiple_input_technicalB" method="post" enctype="multipart/form-data">
                 <div class="form-group">
-                    <input type="hidden" value="B" name="golongan">
                     <label>Department</label>
                     <select class="form-control" name="department" required>
                         <option value="">Choose Department...</option>
@@ -41,7 +40,7 @@
                     <?php foreach ($technicalB as $departemen) : ?>
                     <tr>
                         <td><a
-                                href="<?= base_url() ?>/technical_departemen/<?= $departemen['departemen'] ?>/<?= $departemen['golongan'] ?>"><?= $departemen['departemen'] ?></a>
+                                href="<?= base_url() ?>/technical_departemen/<?= $departemen['department'] ?>"><?= $departemen['department'] ?></a>
                         </td>
                     </tr>
                     <?php endforeach; ?>

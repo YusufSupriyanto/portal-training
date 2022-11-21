@@ -43,6 +43,7 @@ class C_CompetencyAstra extends BaseController
         $spreadsheet = $render->load($file);
         $sheet = $spreadsheet->getActiveSheet()->toArray();
         $user = $this->user->getUserAstra();
+        dd($user);
 
         for ($i = 1; $i < count($sheet); $i++) {
             $dataAstra = [

@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use App\Models\M_Astra;
 use App\Models\M_Career;
 use App\Models\M_Education;
 use App\Models\UserModel;
@@ -14,11 +15,14 @@ class C_User extends BaseController
 
     private M_Education $education;
     private M_Career $career;
+
+    private M_Astra $astra;
     public function __construct()
     {
         $this->user = new UserModel();
         $this->career = new M_Career();
         $this->education = new M_Education();
+        $this->astra = new M_Astra();
     }
     public function index()
     {
@@ -27,6 +31,8 @@ class C_User extends BaseController
         $dic = $this->user->DistinctDic();
         $divisi = $this->user->DistinctDivisi();
         $departemen = $this->user->DistinctDepartemen();
+        $bagian = $this->user->getUserBagian();
+        $jabatan = $this->user->getUserJabatan();
         //dd($seksi);
         $data = [
             'tittle' => 'User',
@@ -34,7 +40,9 @@ class C_User extends BaseController
             'SEKSI' => $seksi,
             'DIC' => $dic,
             'DIVISI' => $divisi,
-            'DEPARTEMEN' => $departemen
+            'DEPARTEMEN' => $departemen,
+            'BAGIAN' => $bagian,
+            'JABATAN' => $jabatan
         ];
         return view('admin/user', $data);
     }
@@ -44,7 +52,9 @@ class C_User extends BaseController
     {
         $level =   $this->request->getVar('level');
         $group = $this->request->getVar('group');
-
+        $department = $this->request->getVar('departemen');
+        $type_user = $this->request->getvar('type_user');
+        // dd($type_user);
         if ($level == "ADMIN") {
             $data = [
                 'nama' => $this->request->getVar('nama'),
@@ -53,40 +63,60 @@ class C_User extends BaseController
                 'status' => $this->request->getVar('status'),
                 'dic' => $this->request->getVar('dic'),
                 'divisi' => $this->request->getVar('divisi'),
-                'departemen' => $this->request->getVar('departemen'),
+                'departemen' => $department,
                 'bagian' => $this->request->getVar('bagian'),
                 'level' => $level,
                 'username' => $this->request->getVar('username'),
                 'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
                 'email' => $this->request->getVar('email'),
             ];
-            $this->user->save($data);
+            // $this->user->save($data);
         } else {
             $image = $this->request->getFile('image');
-            $image->getName();
-            $image->getClientExtension();
-            $newName = $image->getRandomName();
-            $image->move("../public/profile", $newName);
-            $filepath = "/profile/" . $newName;
-            $data = [
-                'nama' => $this->request->getVar('nama'),
-                'npk' => $this->request->getVar('npk'),
-                'seksi' => $this->request->getVar('seksi'),
-                'dic' => $this->request->getVar('dic'),
-                'divisi' => $this->request->getVar('divisi'),
-                'departemen' => $this->request->getVar('departemen'),
-                'bagian' => $this->request->getVar('bagian'),
-                'level' => $this->request->getVar('level'),
-                'username' => $this->request->getVar('username'),
-                'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
-                'email' => $this->request->getVar('email'),
-                'profile' =>   $filepath,
-                'type_golongan' => $group
-            ];
-            $this->user->save($data);
+            if ($image->isValid()) {
+                $image->getName();
+                $image->getClientExtension();
+                $newName = $image->getRandomName();
+                $image->move("../public/profile", $newName);
+                $filepath = "/profile/" . $newName;
+                $data = [
+                    'nama' => $this->request->getVar('nama'),
+                    'npk' => $this->request->getVar('npk'),
+                    'seksi' => $this->request->getVar('seksi'),
+                    'dic' => $this->request->getVar('dic'),
+                    'divisi' => $this->request->getVar('divisi'),
+                    'departemen' => $this->request->getVar('departemen'),
+                    'bagian' => $this->request->getVar('bagian'),
+                    'level' => $this->request->getVar('level'),
+                    'username' => $this->request->getVar('username'),
+                    'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
+                    'email' => $this->request->getVar('email'),
+                    'profile' =>   $filepath,
+                    'type_golongan' => $group,
+                    'type_user' => $type_user
+                ];
+            } else {
+                $data = [
+                    'nama' => $this->request->getVar('nama'),
+                    'npk' => $this->request->getVar('npk'),
+                    'seksi' => $this->request->getVar('seksi'),
+                    'dic' => $this->request->getVar('dic'),
+                    'divisi' => $this->request->getVar('divisi'),
+                    'departemen' => $this->request->getVar('departemen'),
+                    'bagian' => $this->request->getVar('bagian'),
+                    'level' => $this->request->getVar('level'),
+                    'username' => $this->request->getVar('username'),
+                    'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
+                    'email' => $this->request->getVar('email'),
+                    'type_golongan' => $group,
+                    'type_user' => $type_user
+                ];
+            }
+
+            // $this->user->save($data);
             $last = $this->user->getLastUser();
             $education = [
-                'id_user' => $last,
+                'id_user' => $last->id_user,
                 'grade' => $this->request->getVar('grade'),
                 'year' => $this->request->getVar('year'),
                 'institution' => $this->request->getVar('institution'),
@@ -94,7 +124,7 @@ class C_User extends BaseController
 
             ];
             $career = [
-                'id_user' => $last,
+                'id_user' => $last->id_user,
                 'year_start' => $this->request->getVar('year_start'),
                 'year_end' => $this->request->getVar('year_end'),
                 'position' => $this->request->getVar('position'),
@@ -102,17 +132,32 @@ class C_User extends BaseController
                 'division' => $this->request->getVar('division'),
                 'company' => $this->request->getVar('company'),
             ];
-            $this->education->save($education);
-            $this->career->save($career);
+            // $this->education->save($education);
+            // $this->career->save($career);
+            if ($type_user == 'REGULAR') {
+                if ($group == 'A') {
+                    $AstraList = $this->astra->getDataAstra();
+                    // dd($AstraList);
+                    foreach ($AstraList as $list) {
+                        $Astra = [
+                            'id_user' => $last->id_user,
+                            'id_astra' => $list['id_astra'],
+                            'score_astra' => 0
+                        ];
+                        d($Astra);
+                    }
+                } else {
+                }
+            } else {
+            }
         }
-
-
-        session()->setFlashdata('success', 'Data Berhasil Di Simpan');
-        return redirect()->to('/user');
+        // session()->setFlashdata('success', 'Data Berhasil Di Simpan');
+        // return redirect()->to('/user');
     }
 
     public function addUser()
     {
+        ini_set('max_execution_time', 300);
         $file = $this->request->getFile('file');
         //dd($file);
         if ($file == "") {
@@ -129,7 +174,7 @@ class C_User extends BaseController
 
         $spreadsheet = $render->load($file);
         $sheet = $spreadsheet->getActiveSheet()->toArray();
-        // dd($sheet[1][0]);
+        //dd($sheet);
         $user  = [];
         $total = count($sheet) - 1;
         for ($i = 1; $i <= $total; $i++) {
@@ -147,12 +192,12 @@ class C_User extends BaseController
                 'password' => password_hash($sheet[$i][9], PASSWORD_DEFAULT),
                 'level' => $sheet[$i][10],
                 'type_golongan' => $sheet[$i][11],
-
+                'nama_jabatan' => $sheet[$i][12]
             ];
             $this->user->save($data);
-            // array_push($user, $data);
+            //array_push($user, $data);
         }
-        // dd($user);
+        //dd($user);
 
         session()->setFlashdata('success', 'Data Berhasil Di Import');
         return redirect()->to('/user');

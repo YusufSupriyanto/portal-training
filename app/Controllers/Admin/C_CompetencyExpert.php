@@ -46,7 +46,7 @@ class C_CompetencyExpert extends BaseController
         $sheet = $spreadsheet->getActiveSheet()->toArray();
         // dd($sheet);
         $user = $this->user->getUserExpert();
-        //dd($user);
+        dd($user);
         for ($i = 1; $i < count($sheet); $i++) {
             $dataExpert = [
                 'expert' => $sheet[$i][0],
