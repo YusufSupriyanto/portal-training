@@ -1,6 +1,27 @@
 <?= $this->extend('/template/template') ?>
 
 <?= $this->section('content') ?>
+<!-- Modal -->
+<div class="modal fade" id="CompetencyUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Competency User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="success" data-success="<?= session()->get('success'); ?>"></div>
 <div class="card m-1">
     <div class="card-header">
@@ -66,6 +87,8 @@
                                 <button type="submit" class="btn btn-warning btn-sm mt-2"><i
                                         class="fa-solid fa-pen-to-square" style="font-size:17px;"></i></button>
                             </form>
+                            <button class="btn btn-success btn-sm mt-2" onclick="Competency(<?= $users->id_user ?>)"><i
+                                    class="fa-solid fa-trophy" style="font-size:17px;"></i></button>
                         </div>
                     </td>
                 </tr>
@@ -363,7 +386,10 @@
         </div>
     </div>
 </div>
+
 <script>
+id
+
 function education(id) {
     // alert(id)
     jQuery.noConflict();
@@ -376,6 +402,26 @@ function career(id) {
     jQuery.noConflict();
     $('#career #id').val(id)
     $("#career").modal("show");
+}
+
+
+function Competency(id) {
+    $.ajax({
+        type: 'POST',
+        url: "<?= base_url(); ?>/competency_user",
+        async: true,
+        dataType: "json",
+        data: {
+            id: id
+        },
+        success: function(data) {
+            console.log(data)
+            jQuery.noConflict();
+            $('#CompetencyUser').modal('show')
+
+        }
+
+    })
 }
 </script>
 <?= $this->endSection() ?>

@@ -17,9 +17,9 @@ class M_Technical extends Model
         return $this->get()->getResultArray();
     }
 
-    public function getDataTechnicalDepartemen($departemen, $group)
+    public function getDataTechnicalDepartemen($departemen)
     {
-        $this->select()->where('departemen', $departemen)->where('golongan', $group);
+        $this->select()->where('departemen', $departemen);
         return $this->get()->getResultArray();
     }
 
@@ -27,5 +27,11 @@ class M_Technical extends Model
     {
         $this->select('id_technical');
         return $this->get()->getLastRow();
+    }
+
+    public function getCompetencyTechnicalDepartment()
+    {
+        $this->select('departemen')->distinct();
+        return $this->get()->getResultArray();
     }
 }

@@ -101,14 +101,11 @@ class C_Competency extends BaseController
     public function technicalA()
     {
 
-        $technicalA = $this->competencyTechnical->getDataDepertemenA();
+        $technical = $this->technical->getCompetencyTechnicalDepartment();
         $department = $this->user->DistinctDepartemen();
-
-        //dd($department);
-
         $data = [
             'tittle' => 'Department Technical Competency',
-            'technicalA' => $technicalA,
+            'technicalA' => $technical,
             'department' => $department
         ];
         return view('admin/listtechnicalcompetencyA', $data);

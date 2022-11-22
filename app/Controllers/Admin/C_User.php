@@ -5,24 +5,63 @@ namespace App\Controllers\Admin;
 use App\Controllers\BaseController;
 use App\Models\M_Astra;
 use App\Models\M_Career;
+use App\Models\M_Company;
+use App\Models\M_CompetencyAstra;
+use App\Models\M_CompetencyCompany;
+use App\Models\M_CompetencyExpert;
+use App\Models\M_CompetencySoft;
+use App\Models\M_CompetencyTechnical;
+use App\Models\M_CompetencyTechnicalB;
 use App\Models\M_Education;
+use App\Models\M_Expert;
+use App\Models\M_Soft;
+use App\Models\M_Technical;
+use App\Models\M_TechnicalB;
 use App\Models\UserModel;
 use PhpOffice\PhpSpreadsheet\Calculation\DateTime;
+
+use function PHPUnit\Framework\isEmpty;
 
 class C_User extends BaseController
 {
     private UserModel $user;
-
     private M_Education $education;
     private M_Career $career;
 
     private M_Astra $astra;
+
+    private M_Technical $technical;
+
+    private M_Expert $expert;
+    private M_Company $company;
+
+    private M_TechnicalB $technicalB;
+
+    private M_Soft $soft;
+
+    private M_CompetencyAstra $competencyAstra;
+    private M_CompetencyTechnical $competencyTechnical;
+    private M_CompetencyExpert $competencyExpert;
+    private M_CompetencyCompany $competencyCompany;
+    private M_CompetencyTechnicalB $competencyTechnicalB;
+    private M_CompetencySoft $competencySoft;
     public function __construct()
     {
         $this->user = new UserModel();
         $this->career = new M_Career();
         $this->education = new M_Education();
         $this->astra = new M_Astra();
+        $this->technical = new M_Technical();
+        $this->expert = new M_Expert();
+        $this->company = new M_Company();
+        $this->technicalB = new M_TechnicalB();
+        $this->soft = new M_Soft();
+        $this->competencyAstra = new M_CompetencyAstra();
+        $this->competencyExpert = new M_CompetencyExpert();
+        $this->competencyTechnical = new M_CompetencyTechnical();
+        $this->competencyCompany = new M_CompetencyCompany();
+        $this->competencyTechnicalB = new M_CompetencyTechnicalB();
+        $this->competencySoft = new M_CompetencySoft();
     }
     public function index()
     {
@@ -36,7 +75,7 @@ class C_User extends BaseController
         //dd($seksi);
         $data = [
             'tittle' => 'User',
-            'user' => $this->user->getAllUser(),
+            'user' => $user,
             'SEKSI' => $seksi,
             'DIC' => $dic,
             'DIVISI' => $divisi,
@@ -70,7 +109,7 @@ class C_User extends BaseController
                 'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
                 'email' => $this->request->getVar('email'),
             ];
-            // $this->user->save($data);
+            $this->user->save($data);
         } else {
             $image = $this->request->getFile('image');
             if ($image->isValid()) {
@@ -113,8 +152,9 @@ class C_User extends BaseController
                 ];
             }
 
-            // $this->user->save($data);
+            $this->user->save($data);
             $last = $this->user->getLastUser();
+            // dd($last);
             $education = [
                 'id_user' => $last->id_user,
                 'grade' => $this->request->getVar('grade'),
@@ -132,10 +172,13 @@ class C_User extends BaseController
                 'division' => $this->request->getVar('division'),
                 'company' => $this->request->getVar('company'),
             ];
-            // $this->education->save($education);
-            // $this->career->save($career);
-            if ($type_user == 'REGULAR') {
-                if ($group == 'A') {
+            $this->education->save($education);
+            $this->career->save($career);
+
+            $user = $this->user->getAllUser($last->id_user);
+            //d($user);
+            if ($group == 'A') {
+                if ($type_user == 'REGULAR') {
                     $AstraList = $this->astra->getDataAstra();
                     // dd($AstraList);
                     foreach ($AstraList as $list) {
@@ -144,15 +187,80 @@ class C_User extends BaseController
                             'id_astra' => $list['id_astra'],
                             'score_astra' => 0
                         ];
-                        d($Astra);
+                        // save d($Astra);
+                        $this->competencyAstra->save($Astra);
+                    }
+                    $departmentUser = $this->technical->getDataTechnicalDepartemen($user['departemen']);
+                    if (!isEmpty($departmentUser)) {
+                        foreach ($departmentUser as $departmentUsers) {
+                            $technical = [
+                                'id_user' => $last->id_user,
+                                'id_technical' => $departmentUsers['id_technical'],
+                                'score_technical' => 0
+                            ];
+                            // save technical A
+                            $this->competencyTechnical->save($technical);
+                        }
                     }
                 } else {
+                    $ExpertList = $this->expert->getDataExpert();
+                    foreach ($ExpertList as $list) {
+                        $Expert = [
+                            'id_user' => $last->id_user,
+                            'id_expert' => $list['id_expert'],
+                            'score_expert' => 0
+                        ];
+                        //save 
+                        $this->competencyExpert->save($Expert);
+                    }
+                    $departmentUser = $this->technical->getDataTechnicalDepartemen($user['departemen']);
+                    if (!isEmpty($departmentUser)) {
+                        foreach ($departmentUser as $departmentUsers) {
+                            $technical = [
+                                'id_user' => $last->id_user,
+                                'id_technical' => $departmentUsers['id_technical'],
+                                'score_technical' => 0
+                            ];
+                            // save
+                            $this->competencyTechnical->save($technical);
+                        }
+                    }
                 }
             } else {
+                $CompanyList = $this->company->getDataCompanyDivisi($user['divisi']);
+                foreach ($CompanyList as $Clist) {
+                    $company = [
+                        'id_user' => $last->id_user,
+                        'id_company' => $Clist['id_company'],
+                        'score_company' => 0
+                    ];
+                    //save
+                    $this->competencyCompany->save($company);
+                }
+                $TechnicalBList = $this->technicalB->getDataTechnicalBDepartemen($user['departemen']);
+                foreach ($TechnicalBList as $TBList) {
+                    $TechnicalB = [
+                        'id_user' => $last->id_user,
+                        'id_technicalB' => $TBList['id_technicalB'],
+                        'score' => 0
+                    ];
+                    // save
+                    $this->competencyTechnicalB->save($TechnicalB);
+                }
+                $SoftList = $this->soft->getDataSoft();
+                foreach ($SoftList as $SList) {
+                    $Soft = [
+                        'id_user' => $last->id_user,
+                        'id_soft' => $SList['id_soft'],
+                        'score_soft' => 0
+                    ];
+                    // save
+                    $this->competencySoft->save($Soft);
+                }
             }
         }
-        // session()->setFlashdata('success', 'Data Berhasil Di Simpan');
-        // return redirect()->to('/user');
+        session()->setFlashdata('success', 'Data Berhasil Di Simpan');
+        return redirect()->to('/user');
     }
 
     public function addUser()
@@ -174,11 +282,11 @@ class C_User extends BaseController
 
         $spreadsheet = $render->load($file);
         $sheet = $spreadsheet->getActiveSheet()->toArray();
-        //dd($sheet);
+
         $user  = [];
         $total = count($sheet) - 1;
         for ($i = 1; $i <= $total; $i++) {
-            // var_dump($sheet[$i][1]);
+
             $data = [
                 'npk' => $sheet[$i][0],
                 'nama' => $sheet[$i][1],
@@ -195,7 +303,90 @@ class C_User extends BaseController
                 'nama_jabatan' => $sheet[$i][12]
             ];
             $this->user->save($data);
-            //array_push($user, $data);
+            $last = $this->user->getLastUser();
+            $user = $this->user->getAllUser($last->id_user);
+            //d($user);
+            if ($user['type_golongan'] == 'A') {
+                if ($user['type_user'] == 'REGULAR') {
+                    $AstraList = $this->astra->getDataAstra();
+                    // dd($AstraList);
+                    foreach ($AstraList as $list) {
+                        $Astra = [
+                            'id_user' => $last->id_user,
+                            'id_astra' => $list['id_astra'],
+                            'score_astra' => 0
+                        ];
+                        // save d($Astra);
+                        $this->competencyAstra->save($Astra);
+                    }
+                    $departmentUser = $this->technical->getDataTechnicalDepartemen($user['departemen']);
+                    if (!isEmpty($departmentUser)) {
+                        foreach ($departmentUser as $departmentUsers) {
+                            $technical = [
+                                'id_user' => $last->id_user,
+                                'id_technical' => $departmentUsers['id_technical'],
+                                'score_technical' => 0
+                            ];
+                            // save technical A
+                            $this->competencyTechnical->save($technical);
+                        }
+                    }
+                } else {
+                    $ExpertList = $this->expert->getDataExpert();
+                    foreach ($ExpertList as $list) {
+                        $Expert = [
+                            'id_user' => $last->id_user,
+                            'id_expert' => $list['id_expert'],
+                            'score_expert' => 0
+                        ];
+                        //save 
+                        $this->competencyExpert->save($Expert);
+                    }
+                    $departmentUser = $this->technical->getDataTechnicalDepartemen($user['departemen']);
+                    if (!isEmpty($departmentUser)) {
+                        foreach ($departmentUser as $departmentUsers) {
+                            $technical = [
+                                'id_user' => $last->id_user,
+                                'id_technical' => $departmentUsers['id_technical'],
+                                'score_technical' => 0
+                            ];
+                            // save
+                            $this->competencyTechnical->save($technical);
+                        }
+                    }
+                }
+            } else {
+                $CompanyList = $this->company->getDataCompanyDivisi($user['divisi']);
+                foreach ($CompanyList as $Clist) {
+                    $company = [
+                        'id_user' => $last->id_user,
+                        'id_company' => $Clist['id_company'],
+                        'score_company' => 0
+                    ];
+                    //save
+                    $this->competencyCompany->save($company);
+                }
+                $TechnicalBList = $this->technicalB->getDataTechnicalBDepartemen($user['departemen']);
+                foreach ($TechnicalBList as $TBList) {
+                    $TechnicalB = [
+                        'id_user' => $last->id_user,
+                        'id_technicalB' => $TBList['id_technicalB'],
+                        'score' => 0
+                    ];
+                    // save
+                    $this->competencyTechnicalB->save($TechnicalB);
+                }
+                $SoftList = $this->soft->getDataSoft();
+                foreach ($SoftList as $SList) {
+                    $Soft = [
+                        'id_user' => $last->id_user,
+                        'id_soft' => $SList['id_soft'],
+                        'score_soft' => 0
+                    ];
+                    // save
+                    $this->competencySoft->save($Soft);
+                }
+            }
         }
         //dd($user);
 
@@ -371,6 +562,27 @@ class C_User extends BaseController
         $this->career->save($data);
         session()->setFlashdata('success', 'Data Career Berhasil Di Simpan');
         return redirect()->to('/user');
+    }
+
+
+    public function EditCompetencyUser()
+    {
+        $id = $this->request->getPost('id');
+        $user  = $this->user->getAllUser($id);
+        $astra =  $this->competencyAstra->getProfileAstraCompetency($id);
+        $technical = $this->competencyTechnical->getProfileTechnicalCompetency($id);
+        //$company = $this->competencyCompany->getProfileCompanyCompetency($id);
+        // $soft = $this->competencySoft->getProfileSoftCompetency($id);
+        // $technicalB = $this->competencyTechnicalB->
+        // if ($user['type_golongan'] == 'A') {
+        //     if ($user['type_user'] == 'REGULAR') {
+        //         $astra =  $this->competencyAstra->getProfileAstraCompetency($id);
+
+        //     } else {
+        //     }
+        // } else {
+        // }
+        echo json_encode($id);
     }
 
     public function getEducation()

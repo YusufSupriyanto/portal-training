@@ -28,7 +28,7 @@ class M_CompetencyTechnical extends Model
     public function getDataDepertemenA()
     {
         $this->select('technical_competency.departemen,technical_competency.golongan')->distinct();
-        $this->join('technical_competency', 'technical_competency.id_technical = competency_profile_technical.id_technical')->where('technical_competency.golongan', 'A');
+        $this->join('technical_competency', 'technical_competency.id_technical = competency_profile_technical.id_technical');
         return $this->get()->getResultArray();
     }
     public function getDataDepertemenB()

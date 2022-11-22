@@ -41,7 +41,7 @@
                     <?php foreach ($technicalA as $departemen) : ?>
                     <tr>
                         <td><a
-                                href="<?= base_url() ?>/technical_departemen/<?= $departemen['departemen'] ?>/<?= $departemen['golongan'] ?>"><?= $departemen['departemen'] ?></a>
+                                href="<?= base_url() ?>/technical_departemen/<?= $departemen['departemen'] ?>/A"><?= $departemen['departemen'] ?></a>
                         </td>
                     </tr>
                     <?php endforeach; ?>
