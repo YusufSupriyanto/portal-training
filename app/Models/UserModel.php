@@ -135,9 +135,9 @@ class UserModel extends Model
         return $this->get()->getResultArray();
     }
 
-    public function getUserTechnicalB($departemen)
+    public function getUserTechnicalB($jabatan, $departemen)
     {
-        $this->select('nama,id_user')->where('departemen', $departemen)->where('level', 'USER')->where('type_golongan', 'B');
+        $this->select('nama,id_user')->where('nama_jabatan', $jabatan)->where('departemen', $departemen)->where('level', 'USER')->where('type_golongan', 'B');
         return $this->get()->getResultArray();
     }
 
@@ -166,6 +166,12 @@ class UserModel extends Model
         return $this->get()->getResultArray();
     }
 
+
+    public function getJabatanInUser($department)
+    {
+        $this->select('nama_jabatan')->where('departemen', $department)->where('type_golongan', 'B')->distinct();
+        return $this->get()->getResultArray();
+    }
 
 
     function M_test()

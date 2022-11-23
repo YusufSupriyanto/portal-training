@@ -18,8 +18,6 @@ use App\Models\M_Soft;
 use App\Models\M_Technical;
 use App\Models\M_TechnicalB;
 use App\Models\UserModel;
-use PhpOffice\PhpSpreadsheet\Calculation\DateTime;
-
 use function PHPUnit\Framework\isEmpty;
 
 class C_User extends BaseController
@@ -81,15 +79,14 @@ class C_User extends BaseController
             'DIVISI' => $divisi,
             'DEPARTEMEN' => $departemen,
             'BAGIAN' => $bagian,
-            'JABATAN' => $jabatan
+            'JABATAN' => $jabatan,
         ];
         return view('admin/user', $data);
     }
 
-
     public function singleUser()
     {
-        $level =   $this->request->getVar('level');
+        $level = $this->request->getVar('level');
         $group = $this->request->getVar('group');
         $department = $this->request->getVar('departemen');
         $type_user = $this->request->getvar('type_user');
@@ -130,9 +127,9 @@ class C_User extends BaseController
                     'username' => $this->request->getVar('username'),
                     'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
                     'email' => $this->request->getVar('email'),
-                    'profile' =>   $filepath,
+                    'profile' => $filepath,
                     'type_golongan' => $group,
-                    'type_user' => $type_user
+                    'type_user' => $type_user,
                 ];
             } else {
                 $data = [
@@ -148,7 +145,7 @@ class C_User extends BaseController
                     'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
                     'email' => $this->request->getVar('email'),
                     'type_golongan' => $group,
-                    'type_user' => $type_user
+                    'type_user' => $type_user,
                 ];
             }
 
@@ -160,7 +157,7 @@ class C_User extends BaseController
                 'grade' => $this->request->getVar('grade'),
                 'year' => $this->request->getVar('year'),
                 'institution' => $this->request->getVar('institution'),
-                'major' => $this->request->getVar('major')
+                'major' => $this->request->getVar('major'),
 
             ];
             $career = [
@@ -185,7 +182,7 @@ class C_User extends BaseController
                         $Astra = [
                             'id_user' => $last->id_user,
                             'id_astra' => $list['id_astra'],
-                            'score_astra' => 0
+                            'score_astra' => 0,
                         ];
                         // save d($Astra);
                         $this->competencyAstra->save($Astra);
@@ -196,7 +193,7 @@ class C_User extends BaseController
                             $technical = [
                                 'id_user' => $last->id_user,
                                 'id_technical' => $departmentUsers['id_technical'],
-                                'score_technical' => 0
+                                'score_technical' => 0,
                             ];
                             // save technical A
                             $this->competencyTechnical->save($technical);
@@ -208,9 +205,9 @@ class C_User extends BaseController
                         $Expert = [
                             'id_user' => $last->id_user,
                             'id_expert' => $list['id_expert'],
-                            'score_expert' => 0
+                            'score_expert' => 0,
                         ];
-                        //save 
+                        //save
                         $this->competencyExpert->save($Expert);
                     }
                     $departmentUser = $this->technical->getDataTechnicalDepartemen($user['departemen']);
@@ -219,7 +216,7 @@ class C_User extends BaseController
                             $technical = [
                                 'id_user' => $last->id_user,
                                 'id_technical' => $departmentUsers['id_technical'],
-                                'score_technical' => 0
+                                'score_technical' => 0,
                             ];
                             // save
                             $this->competencyTechnical->save($technical);
@@ -232,7 +229,7 @@ class C_User extends BaseController
                     $company = [
                         'id_user' => $last->id_user,
                         'id_company' => $Clist['id_company'],
-                        'score_company' => 0
+                        'score_company' => 0,
                     ];
                     //save
                     $this->competencyCompany->save($company);
@@ -242,7 +239,7 @@ class C_User extends BaseController
                     $TechnicalB = [
                         'id_user' => $last->id_user,
                         'id_technicalB' => $TBList['id_technicalB'],
-                        'score' => 0
+                        'score' => 0,
                     ];
                     // save
                     $this->competencyTechnicalB->save($TechnicalB);
@@ -252,7 +249,7 @@ class C_User extends BaseController
                     $Soft = [
                         'id_user' => $last->id_user,
                         'id_soft' => $SList['id_soft'],
-                        'score_soft' => 0
+                        'score_soft' => 0,
                     ];
                     // save
                     $this->competencySoft->save($Soft);
@@ -274,16 +271,16 @@ class C_User extends BaseController
         $ext = $file->getClientExtension();
         if ($ext == 'xls') {
             $render = new
-                \PhpOffice\PhpSpreadsheet\Reader\Xls();
+            \PhpOffice\PhpSpreadsheet\Reader\Xls();
         } else {
             $render = new
-                \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+            \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
         }
 
         $spreadsheet = $render->load($file);
         $sheet = $spreadsheet->getActiveSheet()->toArray();
 
-        $user  = [];
+        $user = [];
         $total = count($sheet) - 1;
         for ($i = 1; $i <= $total; $i++) {
 
@@ -300,7 +297,7 @@ class C_User extends BaseController
                 'password' => password_hash($sheet[$i][9], PASSWORD_DEFAULT),
                 'level' => $sheet[$i][10],
                 'type_golongan' => $sheet[$i][11],
-                'nama_jabatan' => $sheet[$i][12]
+                'nama_jabatan' => $sheet[$i][12],
             ];
             $this->user->save($data);
             $last = $this->user->getLastUser();
@@ -314,7 +311,7 @@ class C_User extends BaseController
                         $Astra = [
                             'id_user' => $last->id_user,
                             'id_astra' => $list['id_astra'],
-                            'score_astra' => 0
+                            'score_astra' => 0,
                         ];
                         // save d($Astra);
                         $this->competencyAstra->save($Astra);
@@ -325,7 +322,7 @@ class C_User extends BaseController
                             $technical = [
                                 'id_user' => $last->id_user,
                                 'id_technical' => $departmentUsers['id_technical'],
-                                'score_technical' => 0
+                                'score_technical' => 0,
                             ];
                             // save technical A
                             $this->competencyTechnical->save($technical);
@@ -337,9 +334,9 @@ class C_User extends BaseController
                         $Expert = [
                             'id_user' => $last->id_user,
                             'id_expert' => $list['id_expert'],
-                            'score_expert' => 0
+                            'score_expert' => 0,
                         ];
-                        //save 
+                        //save
                         $this->competencyExpert->save($Expert);
                     }
                     $departmentUser = $this->technical->getDataTechnicalDepartemen($user['departemen']);
@@ -348,7 +345,7 @@ class C_User extends BaseController
                             $technical = [
                                 'id_user' => $last->id_user,
                                 'id_technical' => $departmentUsers['id_technical'],
-                                'score_technical' => 0
+                                'score_technical' => 0,
                             ];
                             // save
                             $this->competencyTechnical->save($technical);
@@ -361,7 +358,7 @@ class C_User extends BaseController
                     $company = [
                         'id_user' => $last->id_user,
                         'id_company' => $Clist['id_company'],
-                        'score_company' => 0
+                        'score_company' => 0,
                     ];
                     //save
                     $this->competencyCompany->save($company);
@@ -371,7 +368,7 @@ class C_User extends BaseController
                     $TechnicalB = [
                         'id_user' => $last->id_user,
                         'id_technicalB' => $TBList['id_technicalB'],
-                        'score' => 0
+                        'score' => 0,
                     ];
                     // save
                     $this->competencyTechnicalB->save($TechnicalB);
@@ -381,7 +378,7 @@ class C_User extends BaseController
                     $Soft = [
                         'id_user' => $last->id_user,
                         'id_soft' => $SList['id_soft'],
-                        'score_soft' => 0
+                        'score_soft' => 0,
                     ];
                     // save
                     $this->competencySoft->save($Soft);
@@ -394,7 +391,6 @@ class C_User extends BaseController
         return redirect()->to('/user');
     }
 
-
     public function update()
     {
         $id = $this->request->getVar('update');
@@ -403,7 +399,7 @@ class C_User extends BaseController
             'tittle' => 'Edit User',
             'user' => $this->user->getAllUser($id),
             'education' => $this->education->getDataEducation($id),
-            'career' => $this->career->getDataCareer($id)
+            'career' => $this->career->getDataCareer($id),
         ];
 
         return view('admin/edituser', $data);
@@ -412,7 +408,7 @@ class C_User extends BaseController
     public function EditUser()
     {
         $dataFixes = [];
-        $profile =  $this->request->getPost('individual');
+        $profile = $this->request->getPost('individual');
         $tgl_masuk = date_create($profile[10]);
         $today = date('d-m-Y');
         $interval = date_diff($tgl_masuk, date_create($today));
@@ -436,7 +432,7 @@ class C_User extends BaseController
 
         array_push($dataFixes, $data);
         $this->user->save($data);
-        $old_education =  $this->request->getPost('education_old');
+        $old_education = $this->request->getPost('education_old');
         if (!empty($old_education)) {
             $oldfix = [];
             foreach ($old_education as $old) {
@@ -445,7 +441,7 @@ class C_User extends BaseController
                     'grade' => $old[0],
                     'year' => $old[2],
                     'institution' => $old[3],
-                    'major' => $old[4]
+                    'major' => $old[4],
                 ];
                 array_push($oldfix, $education_old);
                 $this->education->save($education_old);
@@ -453,7 +449,7 @@ class C_User extends BaseController
 
             array_push($dataFixes, $oldfix);
         }
-        $new_education =  $this->request->getPost('education_new');
+        $new_education = $this->request->getPost('education_new');
         if (!empty($new_education)) {
             $newfix = [];
             foreach ($new_education as $new) {
@@ -462,14 +458,14 @@ class C_User extends BaseController
                     'grade' => $new[0],
                     'year' => $new[1],
                     'institution' => $new[2],
-                    'major' => $new[3]
+                    'major' => $new[3],
                 ];
                 array_push($newfix, $education_new);
                 $this->education->save($education_new);
             }
             array_push($dataFixes, $newfix);
         }
-        $old_career =  $this->request->getPost('career_old');
+        $old_career = $this->request->getPost('career_old');
         if (!empty($old_career)) {
             $oldfixCareer = [];
             foreach ($old_career as $old_career) {
@@ -480,14 +476,14 @@ class C_User extends BaseController
                     'position' => $old_career[3],
                     'departement' => $old_career[4],
                     'division' => $old_career[5],
-                    'company' => $old_career[6]
+                    'company' => $old_career[6],
                 ];
                 array_push($oldfixCareer, $career_old);
                 $this->career->save($career_old);
             }
             array_push($dataFixes, $oldfixCareer);
         }
-        $new_career =  $this->request->getPost('career_new');
+        $new_career = $this->request->getPost('career_new');
         if (!empty($new_career)) {
             $newfixCareer = [];
             foreach ($new_career as $new_careers) {
@@ -498,7 +494,7 @@ class C_User extends BaseController
                     'position' => $new_careers[2],
                     'departement' => $new_careers[3],
                     'division' => $new_careers[4],
-                    'company' => $new_careers[5]
+                    'company' => $new_careers[5],
                 ];
                 array_push($newfixCareer, $career_new);
                 $this->career->save($career_new);
@@ -508,15 +504,12 @@ class C_User extends BaseController
         echo json_encode($data);
     }
 
-
-
     public function delete($id)
     {
         $this->user->delete($id);
         session()->setFlashdata('success', 'Data Berhasil Di Hapus');
         return redirect()->to('/user');
     }
-
 
     public function deleteEducation()
     {
@@ -531,7 +524,6 @@ class C_User extends BaseController
         echo json_encode($data);
     }
 
-
     public function AddEducation()
     {
         $data = [
@@ -539,7 +531,7 @@ class C_User extends BaseController
             'grade' => $this->request->getVar('grade'),
             'year' => $this->request->getVar('year'),
             'institution' => $this->request->getVar('institution'),
-            'major' => $this->request->getVar('major')
+            'major' => $this->request->getVar('major'),
 
         ];
         $this->education->save($data);
@@ -556,7 +548,7 @@ class C_User extends BaseController
             'position' => $this->request->getVar('position'),
             'departement' => $this->request->getVar('department'),
             'division' => $this->request->getVar('division'),
-            'company' => $this->request->getVar('company')
+            'company' => $this->request->getVar('company'),
 
         ];
         $this->career->save($data);
@@ -564,24 +556,25 @@ class C_User extends BaseController
         return redirect()->to('/user');
     }
 
-
     public function EditCompetencyUser()
     {
         $id = $this->request->getPost('id');
-        $user  = $this->user->getAllUser($id);
-        $astra =  $this->competencyAstra->getProfileAstraCompetency($id);
-        $technical = $this->competencyTechnical->getProfileTechnicalCompetency($id);
-        //$company = $this->competencyCompany->getProfileCompanyCompetency($id);
-        // $soft = $this->competencySoft->getProfileSoftCompetency($id);
-        // $technicalB = $this->competencyTechnicalB->
-        // if ($user['type_golongan'] == 'A') {
-        //     if ($user['type_user'] == 'REGULAR') {
-        //         $astra =  $this->competencyAstra->getProfileAstraCompetency($id);
+        $user = $this->user->getAllUser($id);
 
-        //     } else {
-        //     }
-        // } else {
-        // }
+        // $technicalB = $this->competencyTechnicalB->
+        if ($user['type_golongan'] == 'A') {
+            if ($user['type_user'] == 'REGULAR') {
+                $astra = $this->competencyAstra->getProfileAstraCompetency($id);
+
+            } else {
+                $expert = $this->competencyExpert->getProfileExpertCompetency($id);
+                $technical = $this->competencyTechnical->getProfileTechnicalCompetency($id);
+            }
+        } else {
+            $company = $this->competencyCompany->getProfileCompanyCompetency($id);
+            $soft = $this->competencySoft->getProfileSoftCompetency($id);
+
+        }
         echo json_encode($id);
     }
 
@@ -591,36 +584,34 @@ class C_User extends BaseController
         // $education =  $this->education->getIdEducation($id);
         // echo json_encode($education);
 
-
     }
 
+// public function addIdEducation()
+// {
+//     $id = $this->user->getIdUser();
+//     $education = [];
+//     foreach ($id as $ids) {
+//         $data =
+//             [
+//                 'id_user' => $ids['id_user']
+//             ];
+//         $this->education->save($data);
+//     }
+//     // dd($education);
+// }
 
-    // public function addIdEducation()
-    // {
-    //     $id = $this->user->getIdUser();
-    //     $education = [];
-    //     foreach ($id as $ids) {
-    //         $data =
-    //             [
-    //                 'id_user' => $ids['id_user']
-    //             ];
-    //         $this->education->save($data);
-    //     }
-    //     // dd($education);
-    // }
-
-    // public function addIdEducation()
-    // {
-    //     $id = $this->user->getIdUser();
-    //     $education = [];
-    //     foreach ($id as $ids) {
-    //         $data =
-    //             [
-    //                 'id_user' => $ids['id_user']
-    //             ];
-    //         $this->career->save($data);
-    //     }
-    //     // dd($education);
-    // }
+// public function addIdEducation()
+// {
+//     $id = $this->user->getIdUser();
+//     $education = [];
+//     foreach ($id as $ids) {
+//         $data =
+//             [
+//                 'id_user' => $ids['id_user']
+//             ];
+//         $this->career->save($data);
+//     }
+//     // dd($education);
+// }
 
 }

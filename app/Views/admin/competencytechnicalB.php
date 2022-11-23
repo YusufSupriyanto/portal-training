@@ -16,7 +16,6 @@
         <!-- /.card-header -->
         <div class="card-body p-0">
             <table class="table table-striped" id="CompetencyAstra">
-
                 <thead>
                     <tr>
                         <th>Technical Competency</th>
@@ -35,44 +34,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($department0 as $position) : ?>
+                    <?php foreach ($department0 as $department1) : ?>
                     <tr>
-                        <td><?= $position['technicalB'] ?></td>
-                        <td><?= $position['kepala_sub_seksi'] ?></td>
-                        <td><?= $position['kepala_regu'] ?></td>
-                        <td><?= $position['staff'] ?></td>
-                        <td><?= $position['data_entry'] ?></td>
-                        <td><?= $position['operator'] ?></td>
-                        <td><?= $position['security'] ?></td>
-                        <td><?= $position['supply_man'] ?></td>
-                        <td><?= $position['supporting_assembly_a'] ?>
-                        </td>
-                        <td><?= $position['supporting_assembly_b'] ?>
-                        </td>
-                        <td><?= $position['driver_forklift'] ?></td>
-                        <td><?= $position['driver'] ?></td>
-                        <td>
-                            <div class="d-flex">
-                                <div class="mr-2">
-                                    <form
-                                        action="<?= base_url() ?>/delete_technicalB/<?= $position['id_technicalB'] ?>/<?= $department ?>"
-                                        method="POST">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <button type="submit" class="btn btn-danger btn-sm btn-delete"><i
-                                                class="fa fa-trash"></i></button>
-                                    </form>
-                                </div>
-                                <div>
-                                    <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
-                                        onclick="ModalCompetency('<?= $position['id_technicalB'] ?>','<?= $position['technicalB'] ?>','<?= $position['kepala_sub_seksi'] ?>','<?= $position['kepala_regu'] ?>','<?= $position['staff'] ?>','<?= $position['data_entry'] ?>','<?= $position['operator'] ?>','<?= $position['security'] ?>','<?= $position['supply_man'] ?>','<?= $position['supporting_assembly_a'] ?>','<?= $position['supporting_assembly_b'] ?>','<?= $position['driver_forklift'] ?>','<?= $position['driver'] ?>')">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </button>
-                                </div>
-                            </div>
-
-                        </td>
+                        <td><?= $department1['technicalB'] ?></td>
                     </tr>
                     <?php endforeach; ?>
+
                 </tbody>
             </table>
         </div>

@@ -10,13 +10,15 @@
             <form action="<?= base_url() ?>/multiple_input_technicalB" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label>Department</label>
-                    <select class="form-control" name="department" required>
+                    <select class="form-control" name="department" id="department" required>
                         <option value="">Choose Department...</option>
                         <?php foreach ($department as $departemen) : ?>
-                        <option value="<?= $departemen['departemen']  ?>"><?= $departemen['departemen'] ?></option>
+                        <option value="<?= $departemen['departemen']  ?>">
+                            <?= $departemen['departemen'] ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
+                <div id="jabatan" class="form-group"></div>
                 <div class="input-group">
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" id="Technical" name="technical" required>
@@ -50,4 +52,23 @@
         <!-- /.card-body -->
     </div>
 </div>
+<script>
+function displayNum() {
+    department = $("select#department").val();
+    console.log(department)
+    $.ajax({
+        type: 'POST',
+        url: "<?= base_url(); ?>/jabatan_user",
+        data: {
+            department: department
+        },
+        success: function(data) {
+            $('#jabatan').html(data)
+        }
+
+    })
+}
+
+$("select#department").change(displayNum);
+</script>
 <?= $this->endSection() ?>

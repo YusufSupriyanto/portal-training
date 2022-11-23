@@ -38,6 +38,7 @@ class C_CompetencyTechnicalB extends BaseController
     public function InputExcel()
     {
         $department = $this->request->getVar('department');
+        $jabatan = $this->request->getVar('data_jabatan');
 
         $file = $this->request->getFile('technical');
         if ($file == "") {
@@ -53,27 +54,21 @@ class C_CompetencyTechnicalB extends BaseController
         }
         $spreadsheet = $render->load($file);
         $sheet = $spreadsheet->getActiveSheet()->toArray();
-        //dd($sheet[1][2]);
+        //dd($sheet);
         $data = [];
         for ($i = 1; $i < count($sheet); $i++) {
             $dataTechnicalB = [
                 'technicalB' => $sheet[$i][0],
-                'kepala_sub_seksi' => (int) $sheet[$i][1],
-                'kepala_regu' => $sheet[$i][2],
-                'staff' => $sheet[$i][3],
-                'data_entry' => $sheet[$i][4],
-                'operator' => $sheet[$i][5],
-                'security' => $sheet[$i][6],
-                'supply_man' => $sheet[$i][7],
-                'supporting_assembly_a' => $sheet[$i][8],
-                'supporting_assembly_b' => $sheet[$i][9],
-                'driver_forklift' => $sheet[$i][10],
-                'driver' => $sheet[$i][11],
-                'department' => $department
+                'proficiency' => (int) $sheet[$i][1],
+                'nama_jabatan' => $jabatan,
+                'department' => $department,
             ];
+
+            array_push($data, $dataTechnicalB);
             $this->technicalB->save($dataTechnicalB);
             $id_technicalB = $this->technicalB->getTechnicalBLastRow();
-            $userB = $this->user->getUserTechnicalB($department);
+            $userB = $this->user->getUserTechnicalB($jabatan, $department);
+            //dd($userB);
             foreach ($userB as $users) {
                 $dataUser = [
                     'id_technicalB' => $id_technicalB->id_technicalB,
@@ -83,6 +78,7 @@ class C_CompetencyTechnicalB extends BaseController
                 $this->competencyTechnicaLB->save($dataUser);
             }
         }
+        // dd($data);
 
         return redirect()->to('/list_technicalB');
     }
@@ -91,6 +87,7 @@ class C_CompetencyTechnicalB extends BaseController
     public function DetailTechnical($department)
     {
         $department0 = $this->technicalB->getDataTechnicalBDepartemen($department);
+        dd($department0);
         $data = [
             'tittle' => 'Technical Competency',
             'department' => $department,
@@ -100,72 +97,72 @@ class C_CompetencyTechnicalB extends BaseController
     }
 
 
-    public function SaveSingleTechnical()
-    {
-        $id  = $this->request->getVar('id_technical');
-        $technical = $this->request->getVar('technical');
-        $kesubsek = $this->request->getVar('kesubsek');
-        $kepreg = $this->request->getVar('kepreg');
-        $staff = $this->request->getVar('staff');
-        $ade = $this->request->getVar('ade');
-        $operator = $this->request->getVar('operator');
-        $security = $this->request->getVar('security');
-        $supply = $this->request->getVar('supply');
-        $assembling_a = $this->request->getVar('assembling_a');
-        $assembling_b = $this->request->getVar('assembling_b');
-        $driver_forklift = $this->request->getVar('driver_forklift');
-        $driver = $this->request->getVar('driver');
-        $department = $this->request->getVar('department');
+    // public function SaveSingleTechnical()
+    // {
+    //     $id  = $this->request->getVar('id_technical');
+    //     $technical = $this->request->getVar('technical');
+    //     $kesubsek = $this->request->getVar('kesubsek');
+    //     $kepreg = $this->request->getVar('kepreg');
+    //     $staff = $this->request->getVar('staff');
+    //     $ade = $this->request->getVar('ade');
+    //     $operator = $this->request->getVar('operator');
+    //     $security = $this->request->getVar('security');
+    //     $supply = $this->request->getVar('supply');
+    //     $assembling_a = $this->request->getVar('assembling_a');
+    //     $assembling_b = $this->request->getVar('assembling_b');
+    //     $driver_forklift = $this->request->getVar('driver_forklift');
+    //     $driver = $this->request->getVar('driver');
+    //     $department = $this->request->getVar('department');
 
-        if ($id != "") {
-            $data = [
-                'id_technicalB' => $id,
-                'technicalB' => $technical,
-                'kepala_sub_seksi' => $kesubsek,
-                'kepala_regu' => $kepreg,
-                'staff' => $staff,
-                'data_entry' => $ade,
-                'operator' => $operator,
-                'security' => $security,
-                'supply' => $supply,
-                'supporting_assembly_a' => $assembling_a,
-                'supporting_assembly_b' => $assembling_b,
-                'driver_forklift' => $driver_forklift,
-                'driver' => $driver
-            ];
-            $this->technicalB->save($data);
-            session()->setFlashdata('success', 'Data Berhasil Di Update');
-            return redirect()->to('technical_departemen/' . $department);
-        } else {
-            $data = [
-                'technicalB' => $technical,
-                'kepala_sub_seksi' => $kesubsek,
-                'kepala_regu' => $kepreg,
-                'staff' => $staff,
-                'data_entry' => $ade,
-                'operator' => $operator,
-                'security' => $security,
-                'supply' => $supply,
-                'supporting_assembly_a' => $assembling_a,
-                'supporting_assembly_b' => $assembling_b,
-                'driver_forklift' => $driver_forklift,
-                'driver' => $driver
-            ];
-            $this->technicalB->save($data);
-            $id_technicalB = $this->technicalB->getTechnicalBLastRow();
-            $userB = $this->user->getUserTechnicalB($department);
-            foreach ($userB as $users) {
-                $dataUser = [
-                    'id_technicalB' => $id_technicalB->id_technicalB,
-                    'id_user' => $users['id_user'],
-                    'score' => 0
-                ];
-                $this->competencyTechnicaLB->save($dataUser);
-            }
-            session()->setFlashdata('success', 'Data Berhasil Di Simpan');
-            return redirect()->to('technical_departemen/' . $department);
-        }
-    }
+    //     if ($id != "") {
+    //         $data = [
+    //             'id_technicalB' => $id,
+    //             'technicalB' => $technical,
+    //             'kepala_sub_seksi' => $kesubsek,
+    //             'kepala_regu' => $kepreg,
+    //             'staff' => $staff,
+    //             'data_entry' => $ade,
+    //             'operator' => $operator,
+    //             'security' => $security,
+    //             'supply' => $supply,
+    //             'supporting_assembly_a' => $assembling_a,
+    //             'supporting_assembly_b' => $assembling_b,
+    //             'driver_forklift' => $driver_forklift,
+    //             'driver' => $driver
+    //         ];
+    //         $this->technicalB->save($data);
+    //         session()->setFlashdata('success', 'Data Berhasil Di Update');
+    //         return redirect()->to('technical_departemen/' . $department);
+    //     } else {
+    //         $data = [
+    //             'technicalB' => $technical,
+    //             'kepala_sub_seksi' => $kesubsek,
+    //             'kepala_regu' => $kepreg,
+    //             'staff' => $staff,
+    //             'data_entry' => $ade,
+    //             'operator' => $operator,
+    //             'security' => $security,
+    //             'supply' => $supply,
+    //             'supporting_assembly_a' => $assembling_a,
+    //             'supporting_assembly_b' => $assembling_b,
+    //             'driver_forklift' => $driver_forklift,
+    //             'driver' => $driver
+    //         ];
+    //         $this->technicalB->save($data);
+    //         $id_technicalB = $this->technicalB->getTechnicalBLastRow();
+    //         $userB = $this->user->getUserTechnicalB($department);
+    //         foreach ($userB as $users) {
+    //             $dataUser = [
+    //                 'id_technicalB' => $id_technicalB->id_technicalB,
+    //                 'id_user' => $users['id_user'],
+    //                 'score' => 0
+    //             ];
+    //             $this->competencyTechnicaLB->save($dataUser);
+    //         }
+    //         session()->setFlashdata('success', 'Data Berhasil Di Simpan');
+    //         return redirect()->to('technical_departemen/' . $department);
+    //     }
+    // }
 
     public function Delete($id, $department)
     {

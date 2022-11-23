@@ -118,6 +118,8 @@ class C_Competency extends BaseController
         $department = $this->user->DistinctDepartemen();
         $nama_Jabatan = $this->user->DistinctJabatan();
 
+        // dd($technical);
+
 
         $data = [
             'tittle' => 'Department Technical Competency',
@@ -142,6 +144,27 @@ class C_Competency extends BaseController
             'group' => $group
         ];
         return view('admin/competencytechnical', $data);
+    }
+
+
+    public function getJabatan()
+    {
+        $department  = $this->request->getPost('department');
+        $nama_jabatan = $this->user->getJabatanInUser($department);
+
+        echo   '
+                     <label>Nama Jabatan</label>
+                    <select class="form-control" name="data_jabatan" id="data_jabatan" required>
+                        <option value="">Choose Nama Jabatan...</option>';
+        foreach ($nama_jabatan as $jabatan) {
+            echo '
+                            <option value="' . $jabatan['nama_jabatan'] . '">' . $jabatan['nama_jabatan'] . '</option>
+                            
+                            ';
+        }
+        echo '                  
+                  </select>
+                  ';
     }
 
     public function SaveTechnical()

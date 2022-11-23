@@ -9,10 +9,7 @@ class M_TechnicalB extends Model
     protected $table      = 'competency_technicalB';
     // protected $useAutoIncrement = true;
     protected $primaryKey = 'id_technicalB';
-    protected $allowedFields = [
-        'kepala_sub_seksi', 'kepala_regu', 'staff', 'data_entry', 'operator',
-        'security', 'supply_man', 'supporting_assembly_a', 'supporting_assembly_b', 'driver_forklift', 'driver', 'technicalB', 'department'
-    ];
+    protected $allowedFields = ['technicalB', 'proficiency', 'department', 'nama_jabatan'];
 
     public function getDataTechnical()
     {
@@ -22,13 +19,15 @@ class M_TechnicalB extends Model
 
     public function getDataTechnicalBDepartemen($departemen)
     {
-        $this->select()->where('department', $departemen);
+        $this->select()->groupStart()
+            ->where('department', $departemen)
+            ->groupEnd();
         return $this->get()->getResultArray();
     }
 
     public function DepartmentB()
     {
-        $this->select('department');
+        $this->select('department')->Distinct();
         return $this->get()->getResultArray();
     }
 

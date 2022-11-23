@@ -10,4 +10,5 @@ class M_CompetencyTechnicalB extends Model
     // protected $useAutoIncrement = true;
     protected $primaryKey = 'id_competency_technicalB';
     protected $allowedFields = ['id_user', 'id_technicalB', 'score'];
+
 }
