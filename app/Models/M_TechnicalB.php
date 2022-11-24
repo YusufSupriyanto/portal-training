@@ -19,9 +19,23 @@ class M_TechnicalB extends Model
 
     public function getDataTechnicalBDepartemen($departemen)
     {
-        $this->select()->groupStart()
-            ->where('department', $departemen)
-            ->groupEnd();
+        $this->select('technicalB')->where('department', $departemen)->Distinct();
+        return $this->get()->getResultArray();
+    }
+    public function getDataTechnicalBJabatan($departemen)
+    {
+        $this->select('nama_jabatan')->where('department', $departemen)->Distinct();
+        return $this->get()->getResultArray();
+    }
+
+    public function getDataValue($jabatan, $technical, $department)
+    {
+        return  $this->select()->where('nama_jabatan', $jabatan)->where('technicalB', $technical)->where('department', $department)->first();
+    }
+
+    public function getDataTechnicalByName($technicalB)
+    {
+        $this->select()->where('technicalB', $technicalB);
         return $this->get()->getResultArray();
     }
 

@@ -55,7 +55,7 @@ class C_CompetencyTechnicalB extends BaseController
         $spreadsheet = $render->load($file);
         $sheet = $spreadsheet->getActiveSheet()->toArray();
         //dd($sheet);
-        $data = [];
+        // $data = [];
         for ($i = 1; $i < count($sheet); $i++) {
             $dataTechnicalB = [
                 'technicalB' => $sheet[$i][0],
@@ -64,7 +64,7 @@ class C_CompetencyTechnicalB extends BaseController
                 'department' => $department,
             ];
 
-            array_push($data, $dataTechnicalB);
+            //array_push($data, $dataTechnicalB);
             $this->technicalB->save($dataTechnicalB);
             $id_technicalB = $this->technicalB->getTechnicalBLastRow();
             $userB = $this->user->getUserTechnicalB($jabatan, $department);
@@ -87,13 +87,27 @@ class C_CompetencyTechnicalB extends BaseController
     public function DetailTechnical($department)
     {
         $department0 = $this->technicalB->getDataTechnicalBDepartemen($department);
-        dd($department0);
+        $jabatan = $this->technicalB->getDataTechnicalBJabatan($department);
+
+        // echo ''
+
+        // dd($department0);
         $data = [
             'tittle' => 'Technical Competency',
             'department' => $department,
-            'department0' => $department0
+            'department0' => $department0,
+            'jabatan' => $jabatan,
+            'value' => $this->technicalB
         ];
         return view('admin/competencytechnicalB', $data);
+    }
+
+    public function EditTechnicalB()
+    {
+        $technicalB = $this->request->getPost('technicalB');
+        $data = $this->technicalB->getDataTechnicalByName($technicalB);
+
+        echo json_encode($data);
     }
 
 
@@ -164,13 +178,54 @@ class C_CompetencyTechnicalB extends BaseController
     //     }
     // }
 
-    public function Delete($id, $department)
+    public function Delete($technicalB, $department)
     {
-
-        // d($id);
-        // d($department);
-        $this->technicalB->delete($id);
-        session()->setFlashdata('success', 'Data Berhasil Di Simpan');
+        $this->technicalB->where('technicalB', $technicalB)->delete();
+        session()->setFlashdata('success', 'Data Berhasil Di Hapus');
         return redirect()->to('technical_departemen/' . $department);
+    }
+
+    public function SaveSingleTechnical()
+    {
+        $id  = $this->request->getVar('id');
+        $technicalB = $this->request->getVar('technicalB');
+        $proficiency = $this->request->getVar('proficiency');
+        $department = $this->request->getVar('department');
+        if ($id != null) {
+            $data = [
+                'id_technicalB' => $id,
+                'technicalB' => $technicalB,
+                'proficiency' => $proficiency,
+            ];
+            $this->technicalB->save($data);
+            session()->setFlashdata('success', 'Data Berhasil Di Update');
+            return redirect()->to('technical_departemen/' . $department);
+        } else {
+            $nama_jabatan = $this->user->getJabatanInUser($department);
+            foreach ($nama_jabatan as $jabatan) {
+                $data = [
+                    'technicalB' => $technicalB,
+                    'proficiency' => $proficiency,
+                    'nama_jabatan' => $jabatan['nama_jabatan'],
+                    'department' => $department,
+
+                ];
+
+                $this->technicalB->save($data);
+
+                $id_technicalB = $this->technicalB->getTechnicalBLastRow();
+                $userB = $this->user->getUserTechnicalB($jabatan['nama_jabatan'], $department);
+                foreach ($userB as $users) {
+                    $dataUser = [
+                        'id_technicalB' => $id_technicalB->id_technicalB,
+                        'id_user' => $users['id_user'],
+                        'score' => 0
+                    ];
+                    $this->competencyTechnicaLB->save($dataUser);
+                }
+            }
+            session()->setFlashdata('success', 'Data Berhasil Di Simpan');
+            return redirect()->to('technical_departemen/' . $department);
+        }
     }
 }

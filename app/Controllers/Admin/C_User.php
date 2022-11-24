@@ -271,10 +271,10 @@ class C_User extends BaseController
         $ext = $file->getClientExtension();
         if ($ext == 'xls') {
             $render = new
-            \PhpOffice\PhpSpreadsheet\Reader\Xls();
+                \PhpOffice\PhpSpreadsheet\Reader\Xls();
         } else {
             $render = new
-            \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+                \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
         }
 
         $spreadsheet = $render->load($file);
@@ -565,17 +565,20 @@ class C_User extends BaseController
         if ($user['type_golongan'] == 'A') {
             if ($user['type_user'] == 'REGULAR') {
                 $astra = $this->competencyAstra->getProfileAstraCompetency($id);
-
+                $technical = $this->competencyTechnical->getProfileTechnicalCompetency($id);
+                $competency = array_merge($astra, $technical);
             } else {
                 $expert = $this->competencyExpert->getProfileExpertCompetency($id);
                 $technical = $this->competencyTechnical->getProfileTechnicalCompetency($id);
+                $competency = array_merge($expert, $technical);
             }
         } else {
             $company = $this->competencyCompany->getProfileCompanyCompetency($id);
             $soft = $this->competencySoft->getProfileSoftCompetency($id);
-
+            $technicalB = $this->competencyTechnicalB->getProfileTechnicalCompetencyB($id);
+            $competency = array_merge($company, $technicalB, $soft);
         }
-        echo json_encode($id);
+        echo json_encode($company);
     }
 
     public function getEducation()
@@ -586,32 +589,32 @@ class C_User extends BaseController
 
     }
 
-// public function addIdEducation()
-// {
-//     $id = $this->user->getIdUser();
-//     $education = [];
-//     foreach ($id as $ids) {
-//         $data =
-//             [
-//                 'id_user' => $ids['id_user']
-//             ];
-//         $this->education->save($data);
-//     }
-//     // dd($education);
-// }
+    // public function addIdEducation()
+    // {
+    //     $id = $this->user->getIdUser();
+    //     $education = [];
+    //     foreach ($id as $ids) {
+    //         $data =
+    //             [
+    //                 'id_user' => $ids['id_user']
+    //             ];
+    //         $this->education->save($data);
+    //     }
+    //     // dd($education);
+    // }
 
-// public function addIdEducation()
-// {
-//     $id = $this->user->getIdUser();
-//     $education = [];
-//     foreach ($id as $ids) {
-//         $data =
-//             [
-//                 'id_user' => $ids['id_user']
-//             ];
-//         $this->career->save($data);
-//     }
-//     // dd($education);
-// }
+    // public function addIdEducation()
+    // {
+    //     $id = $this->user->getIdUser();
+    //     $education = [];
+    //     foreach ($id as $ids) {
+    //         $data =
+    //             [
+    //                 'id_user' => $ids['id_user']
+    //             ];
+    //         $this->career->save($data);
+    //     }
+    //     // dd($education);
+    // }
 
 }

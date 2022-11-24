@@ -11,4 +11,10 @@ class M_CompetencyTechnicalB extends Model
     protected $primaryKey = 'id_competency_technicalB';
     protected $allowedFields = ['id_user', 'id_technicalB', 'score'];
 
+    public function getProfileTechnicalCompetencyB($id)
+    {
+        $this->select()->where('id_user', $id);
+        $this->join('competency_technicalB', 'competency_technicalB.id_technicalB =competency_profile_technicalB.id_technicalB');
+        return $this->get()->getResultArray();
+    }
 }

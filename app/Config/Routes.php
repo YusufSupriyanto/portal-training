@@ -85,8 +85,9 @@ $routes->delete('/delete/company/(:num)', 'Admin\C_competencyCompany::Delete/$1'
 $routes->post('/multiple_input_technicalB', 'Admin\C_competencyTechnicalB::InputExcel', ['filter' => 'Auth']);
 $routes->get('/technical_departemen/(:any)', 'Admin\C_competencyTechnicalB::DetailTechnical/$1', ['filter' => 'Auth']);
 $routes->post('/save_single_technicalB', 'Admin\C_competencyTechnicalB::SaveSingleTechnical', ['filter' => 'Auth']);
-$routes->delete('/delete_technicalB/(:num)/(:any)', 'Admin\C_competencyTechnicalB::delete/$1/$2', ['filter' => 'Auth']);
+$routes->delete('/delete_technicalB/(:any)/(:any)', 'Admin\C_competencyTechnicalB::delete/$1/$2', ['filter' => 'Auth']);
 $routes->post('/jabatan_user', 'Admin\C_Competency::getJabatan', ['filter' => 'Auth']);
+$routes->post('/edit_technicalB', 'Admin\C_competencyTechnicalB::EditTechnicalB', ['filter' => 'Auth']);
 
 //Copmpetency User
 $routes->post('/competency_user', 'Admin\C_User::EditCompetencyUser', ['filter' => 'Auth']);

@@ -173,6 +173,12 @@ class UserModel extends Model
         return $this->get()->getResultArray();
     }
 
+    public function getUserByDepartment($department)
+    {
+        $this->select()->where('departemen', $department)->where('type_golongan', 'B');
+        return $this->get()->getResultArray();
+    }
+
 
     function M_test()
     {
