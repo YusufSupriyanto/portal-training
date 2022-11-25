@@ -560,61 +560,69 @@ class C_User extends BaseController
     {
         $id = $this->request->getPost('id');
         $user = $this->user->getAllUser($id);
-
-        // $technicalB = $this->competencyTechnicalB->
         if ($user['type_golongan'] == 'A') {
             if ($user['type_user'] == 'REGULAR') {
                 $astra = $this->competencyAstra->getProfileAstraCompetency($id);
                 $technical = $this->competencyTechnical->getProfileTechnicalCompetency($id);
-                $competency = array_merge($astra, $technical);
             } else {
                 $expert = $this->competencyExpert->getProfileExpertCompetency($id);
                 $technical = $this->competencyTechnical->getProfileTechnicalCompetency($id);
-                $competency = array_merge($expert, $technical);
+                $competency = 'expert';
+                echo $competency;
             }
-        } else {
+        } elseif ($user['type_golongan'] == 'B') {
             $company = $this->competencyCompany->getProfileCompanyCompetency($id);
             $soft = $this->competencySoft->getProfileSoftCompetency($id);
             $technicalB = $this->competencyTechnicalB->getProfileTechnicalCompetencyB($id);
-            $competency = array_merge($company, $technicalB, $soft);
+            $competency = 'B';
+            echo $competency;
         }
-        echo json_encode($company);
+    }
+
+
+    public function CompetenncyEditHtml($type, $competency1, $competency2, $competency3)
+    {
+
+        if ($type == 'ASTRA') {
+        } elseif ($type == 'EXPERT') {
+        } else {
+        }
     }
 
     public function getEducation()
     {
         // $id = $this->request->getPost('id_education');
-        // $education =  $this->education->getIdEducation($id);
+        // $education = $this->education->getIdEducation($id);
         // echo json_encode($education);
 
     }
 
     // public function addIdEducation()
     // {
-    //     $id = $this->user->getIdUser();
-    //     $education = [];
-    //     foreach ($id as $ids) {
-    //         $data =
-    //             [
-    //                 'id_user' => $ids['id_user']
-    //             ];
-    //         $this->education->save($data);
-    //     }
-    //     // dd($education);
+    // $id = $this->user->getIdUser();
+    // $education = [];
+    // foreach ($id as $ids) {
+    // $data =
+    // [
+    // 'id_user' => $ids['id_user']
+    // ];
+    // $this->education->save($data);
+    // }
+    // // dd($education);
     // }
 
     // public function addIdEducation()
     // {
-    //     $id = $this->user->getIdUser();
-    //     $education = [];
-    //     foreach ($id as $ids) {
-    //         $data =
-    //             [
-    //                 'id_user' => $ids['id_user']
-    //             ];
-    //         $this->career->save($data);
-    //     }
-    //     // dd($education);
+    // $id = $this->user->getIdUser();
+    // $education = [];
+    // foreach ($id as $ids) {
+    // $data =
+    // [
+    // 'id_user' => $ids['id_user']
+    // ];
+    // $this->career->save($data);
+    // }
+    // // dd($education);
     // }
 
 }
