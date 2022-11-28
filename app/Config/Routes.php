@@ -36,7 +36,7 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 //test
-$routes->get('/test', 'Test::testAjaxTna');
+$routes->get('/test', 'Admin\C_User::test');
 $routes->get('/edu', 'Admin\C_User::addIdEducation');
 
 
@@ -91,6 +91,7 @@ $routes->post('/edit_technicalB', 'Admin\C_competencyTechnicalB::EditTechnicalB'
 
 //Copmpetency User
 $routes->post('/competency_user', 'Admin\C_User::EditCompetencyUser', ['filter' => 'Auth']);
+$routes->post('/change_competency', 'Admin\C_User::ChangeCompetency', ['filter' => 'Auth']);
 
 //categories
 
@@ -197,6 +198,7 @@ $routes->post('/save_budget', 'Admin\C_Budget::SaveBudget', ['filter' => 'Auth']
 //profile
 $routes->get('/user_profile', 'User\User::index', ['filter' => 'Auth']);
 $routes->post('/change_profile', 'User\User::UpdateProfile', ['filter' => 'Auth']);
+$routes->post('/competency_profile', 'User\User::CompetencyProfile', ['filter' => 'Auth']);
 
 
 //Home User

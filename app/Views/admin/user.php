@@ -12,13 +12,15 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <div id="competency"></div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+            <form action="<?= base_url() ?>/change_competency" method="POST">
+                <div class="modal-body">
+                    <div id="competency"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -388,8 +390,6 @@
 </div>
 
 <script>
-id
-
 function education(id) {
     // alert(id)
     jQuery.noConflict();
@@ -410,15 +410,15 @@ function Competency(id) {
         type: 'POST',
         url: "<?= base_url(); ?>/competency_user",
         // async: true,
-        // dataType: "json",
+        dataType: "text",
         data: {
             id: id
         },
         success: function(data) {
             console.log(data)
-            // jQuery.noConflict();
-            // $('#competency').html(data)
-            // $('#CompetencyUser').modal('show')
+            jQuery.noConflict();
+            $('#competency').html(data)
+            $('#CompetencyUser').modal('show')
 
 
         }

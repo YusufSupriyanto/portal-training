@@ -556,38 +556,301 @@ class C_User extends BaseController
         return redirect()->to('/user');
     }
 
+    public function test()
+    {
+        $technical = $this->competencyTechnical->getProfileTechnicalCompetency(7017);
+        $astra = $this->competencyAstra->getProfileAstraCompetency(7017);
+        dd($technical);
+    }
     public function EditCompetencyUser()
     {
         $id = $this->request->getPost('id');
         $user = $this->user->getAllUser($id);
-        if ($user['type_golongan'] == 'A') {
-            if ($user['type_user'] == 'REGULAR') {
-                $astra = $this->competencyAstra->getProfileAstraCompetency($id);
-                $technical = $this->competencyTechnical->getProfileTechnicalCompetency($id);
-            } else {
-                $expert = $this->competencyExpert->getProfileExpertCompetency($id);
-                $technical = $this->competencyTechnical->getProfileTechnicalCompetency($id);
-                $competency = 'expert';
-                echo $competency;
+        if ($user['type_golongan'] == 'A         ' && $user['type_user'] == 'REGULAR             ') {
+            $astra = $this->competencyAstra->getProfileAstraCompetency($id);
+            $technicalA = $this->competencyTechnical->getProfileTechnicalCompetency($id);
+            echo '
+                        <div class="d-flex">
+                        <div class="card w-100 m-1">
+                        <input type="hidden" value="Astra" name="competency">
+                            <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Astra Leadership Competency	</th>
+                                                <th>Proficiency</th>
+                                                <th>Score</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>';
+
+            foreach ($astra as $Astra) {
+                echo '<tr>
+            <td>' . $Astra['astra'] . '</td>
+            <td>' . $Astra['proficiency'] . '</td>
+            <td>
+             <input type="hidden" value="' . $Astra['id_competency_astra'] . '" name="astra[]">
+            <input style="width:30px;" name="astra[]" value="' . $Astra['score_astra'] . '">
+            </td>
+            
+            </tr>';
             }
-        } elseif ($user['type_golongan'] == 'B') {
+
+            echo '                           </tbody>
+                                    </table>
+                                    </div>
+                           ';
+            echo '
+             <div class="card w-100 m-1">
+                <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Technical Competency</th>
+                                    <th>Proficiency</th>
+                                    <th>Score</th>
+                                </tr>
+                            </thead>
+                            <tbody>';
+            foreach ($technicalA as $technicals) {
+                echo '<tr>
+<td>' . $technicals['technical'] . '</td>
+<td>' . $technicals['proficiency'] . '</td>
+<td>
+ <input type="hidden" value="' . $technicals['id_competency_technical'] . '" name="technical[]">
+<input style="width:30px;" name="technical[]" value="' . $technicals['score_technical'] . '"></td>
+</tr>';
+            }
+
+            echo '                           </tbody>
+                        </table>
+                        </div>
+                         </div>
+               ';
+        } elseif ($user['type_golongan'] == 'A         ' && $user['type_user'] == 'EXPERT              ') {
+            $expert = $this->competencyExpert->getProfileExpertCompetency($id);
+            $technical = $this->competencyTechnical->getProfileTechnicalCompetency($id);
+            echo '
+            <div class="d-flex">
+            <div class="card w-100 m-1">
+            <input type="hidden" value="Expert" name="competency">
+                <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Expert Behavior Competencies</th>
+                                    <th>Proficiency</th>
+                                    <th>Score</th>
+                                </tr>
+                            </thead>
+                            <tbody>';
+            foreach ($expert as $experts) {
+                echo '<tr>
+<td>' . $experts['expert'] . '</td>
+<td>' . $experts['proficiency'] . '</td>
+<td>
+<input type="hidden"  value="' . $experts['id_competency_expert'] . '" name="expert[]">
+<input style="width:30px;" value="' . $experts['score_expert'] . '" name="expert[]">
+</td>
+</tr>';
+            }
+
+            echo '                           </tbody>
+                        </table>
+                        </div>
+               ';
+            echo '
+             <div class="card w-100 m-1">
+                <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Technical Competency</th>
+                                    <th>Proficiency</th>
+                                    <th>Score</th>
+                                </tr>
+                            </thead>
+                            <tbody>';
+            foreach ($technical as $technicals) {
+                echo '<tr>
+<td>' . $technicals['technical'] . '</td>
+<td>' . $technicals['proficiency'] . '</td>
+<td>
+<input type="hidden" value="' . $technicals['id_competency_technical'] . '" name="technical[]">
+<input style="width:30px;" name="technical[]" value="' . $technicals['score_technical'] . '"></td>
+</td>
+</tr>';
+            }
+
+            echo '                           </tbody>
+                        </table>
+                        </div>
+                         </div>
+               ';
+        } else {
             $company = $this->competencyCompany->getProfileCompanyCompetency($id);
             $soft = $this->competencySoft->getProfileSoftCompetency($id);
             $technicalB = $this->competencyTechnicalB->getProfileTechnicalCompetencyB($id);
-            $competency = 'B';
-            echo $competency;
+            echo '
+            <div class="d-flex">
+            <div class="card w-100 m-1">
+             <input type="hidden" value="B" name="competency">
+                <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Company Competency</th>
+                                    <th>Proficiency</th>
+                                    <th>Score</th>
+                                </tr>
+                            </thead>
+                            <tbody>';
+            foreach ($company as $companies) {
+                echo '<tr>
+<td>' . $companies['company'] . '</td>
+<td>' . $companies['proficiency'] . '</td>
+<td>
+<input type="hidden" name="company[]" value="' . $companies['id_competency_company'] . '">
+<input style="width:30px;" name="company[]" value="' . $companies['score_company'] . '">
+</td>
+</tr>';
+            }
+
+            echo '                           </tbody>
+                        </table>
+                        </div>
+               ';
+            echo
+            ' <div class="card w-100 m-1">
+                <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Soft Competency</th>
+                                    <th>Proficiency</th>
+                                    <th>Score</th>
+                                </tr>
+                            </thead>
+                            <tbody>';
+            foreach ($soft as $softy) {
+                echo '<tr>
+<td>' . $softy['soft'] . '</td>
+<td>' . $softy['proficiency'] . '</td>
+<td>
+<input type="hidden" name="soft[]" value="' . $softy['id_competency_soft'] . '">
+<input style="width:30px;" name="soft[]" value="' . $softy['score_soft'] . '">
+</td>
+</tr>';
+            }
+
+            echo '                           </tbody>
+                        </table>
+                        </div>
+               ';
+
+
+            echo '
+             <div class="card w-100 m-1">
+                <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Technical Competency</th>
+                                    <th>Proficiency</th>
+                                    <th>Score</th>
+                                </tr>
+                            </thead>
+                            <tbody>';
+            foreach ($technicalB as $technical) {
+                echo '<tr>
+<td>' . $technical['technicalB'] . '</td>
+<td>' . $technical['proficiency'] . '</td>
+<td>
+<input type="hidden" name="technicalB[]" value="' . $technical['id_competency_technicalB'] . '">
+<input style="width:30px;" name="technicalB[]"  value="' . $technical['score'] . '">
+</td>
+</tr>';
+            }
+
+            echo '                           </tbody>
+                        </table>
+                        </div>
+                         </div>
+               ';
         }
     }
 
-
-    public function CompetenncyEditHtml($type, $competency1, $competency2, $competency3)
+    public function ChangeCompetency()
     {
-
-        if ($type == 'ASTRA') {
-        } elseif ($type == 'EXPERT') {
+        $competency  = $this->request->getVar('competency');
+        if ($competency == 'Astra') {
+            //Astra Competency
+            $astra = $this->request->getVar('astra');
+            $AstraCompetency = array_chunk($astra, 2);
+            foreach ($AstraCompetency as $Astra) {
+                $AstraData = [
+                    'id_competency_astra' => $Astra[0],
+                    'score_astra' => $Astra[1]
+                ];
+                //$this->competencyAstra->save($AstraData);
+            }
+            $technical = $this->request->getVar('technical');
+            $TehnicalCompetency = array_chunk($technical, 2);
+            foreach ($TehnicalCompetency as $Technical) {
+                $TechnicalData = [
+                    'id_competency_technical' => $Technical[0],
+                    'score_technical' => $Technical[1]
+                ];
+                // $this->competencyTechnical->save($TechnicalData);
+            }
+            return redirect()->to('/user');
+        } elseif ($competency == 'Expert') {
+            //Expert Competency
+            $expert = $this->request->getVar('expert');
+            $ExpertCompetency = array_chunk($expert, 2);
+            foreach ($ExpertCompetency as $Expert) {
+                $ExpertData = [
+                    'id_competency_expert' => $Expert[0],
+                    'score_expert' => $Expert[1]
+                ];
+                // $this->competencyExpert->save($ExpertData);
+            }
+            $technical = $this->request->getVar('technical');
+            $TehnicalCompetency = array_chunk($technical, 2);
+            foreach ($TehnicalCompetency as $Technical) {
+                $TechnicalData = [
+                    'id_competency_technical' => $Technical[0],
+                    'score_technical' => $Technical[1]
+                ];
+                //$this->competencyTechnical->save($TechnicalData);
+            }
+            return redirect()->to('/user');
         } else {
+            //Group B Competency
+            $company = $this->request->getVar('company');
+            $CompanyCompetency = array_chunk($company, 2);
+            foreach ($CompanyCompetency as $Company) {
+                $CompanyData = [
+                    'id_competency_company' => $Company[0],
+                    'score_company' => $Company[1]
+                ];
+                //$this->competencyCompany->save($CompanyData);
+            }
+            $soft = $this->request->getVar('soft');
+            $SoftCompetency = array_chunk($soft, 2);
+            foreach ($SoftCompetency as $Soft) {
+                $SoftData = [
+                    'id_competency_soft' => $Soft[0],
+                    'score_soft' => $Soft[1]
+                ];
+                // $this->competencySoft->save($SoftData);
+            }
+            $technicalB = $this->request->getVar('technicalB');
+            $TechnicalBCompetency = array_chunk($technicalB, 2);
+            foreach ($TechnicalBCompetency as $TechnicalB) {
+                $TechnicalBData = [
+                    'id_competency_technicalB' => $TechnicalB[0],
+                    'score' => $TechnicalB[1]
+                ];
+                $this->competencyTechnicalB->save($TechnicalBData);
+            }
+            return redirect()->to('/user');
         }
     }
+
 
     public function getEducation()
     {
