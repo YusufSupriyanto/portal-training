@@ -62,7 +62,8 @@ class Competency extends BaseController
             'education' => $education,
             'career' => $career,
             'astra' => $astraCompetency,
-            'technical' => $technicalCompetency
+            'technical' => $technicalCompetency,
+            'id' => $id
         ];
         return view('user/profile', $data);
     }

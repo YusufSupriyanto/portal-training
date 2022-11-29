@@ -74,6 +74,7 @@ class User extends BaseController
             'career' => $career,
             'astra' => $astraCompetency,
             'technical' => $technicalCompetency,
+            'id' => $id
         ];
         return view('user/profile', $data);
     }

@@ -15,6 +15,10 @@ use App\Models\M_CompetencyAstra;
 use App\Models\M_CompetencyTechnical;
 use App\Models\M_Astra;
 use App\Models\M_Budget;
+use App\Models\M_CompetencyCompany;
+use App\Models\M_CompetencyExpert;
+use App\Models\M_CompetencySoft;
+use App\Models\M_CompetencyTechnicalB;
 use App\Models\M_Technical;
 
 class FormTna extends BaseController
@@ -34,6 +38,11 @@ class FormTna extends BaseController
 
     private M_Budget $budget;
 
+    private M_CompetencyExpert $competencyExpert;
+    private M_CompetencySoft $competencySoft;
+    private M_CompetencyCompany $competencyCompany;
+    private M_CompetencyTechnicalB $competencyTechnicalB;
+
 
     public function __construct()
     {
@@ -49,6 +58,10 @@ class FormTna extends BaseController
         $this->technical = new M_Technical();
         $this->competencyTechnical = new M_CompetencyTechnical();
         $this->budget = new M_Budget();
+        $this->competencyCompany = new M_CompetencyCompany();
+        $this->competencyExpert = new M_CompetencyExpert();
+        $this->competencySoft = new M_CompetencySoft();
+        $this->competencyTechnicalB = new M_CompetencyTechnicalB();
     }
 
     //function untuk menamplilkan data member dengan user yang akan di daftarkan tna
@@ -113,66 +126,179 @@ class FormTna extends BaseController
             }
         }
 
-        //Filter Astra Competency
-
-        $datas  = $this->competencyAstra->getProfileAstraCompetency($id);
-        $astra = [];
-        //dd($datas);
-        if (!empty($datas)) {
-
-            foreach ($datas as $data) {
-                if ($data['score_astra'] < $data['proficiency']) {
-                    $competency = [
-                        'id' => $data['id_competency_astra'],
-                        'category' => "ALC - " . $data['astra'],
-                        'competency' => $data['astra'],
-                        'proficiency' => $data['proficiency'],
-                        'score' => $data['score_astra'],
-                        'keterangan' => 'alc'
-                    ];
-                    array_push($astra, $competency);
-                }
-            }
-        } else {
+        if ($user['type_golongan'] == 'A         ' && $user['type_user'] == 'REGULAR             ') {
+            //Filter Astra Competency
+            $datas  = $this->competencyAstra->getProfileAstraCompetency($id);
             $astra = [];
-        }
+            if (!empty($datas)) {
 
-
-        //Filter Tecnhnical Competency
-        $datas2  = $this->competencyTechnical->getProfileTechnicalCompetency($id, $user['departemen']);
-        $technical = [];
-        //dd($datas);
-        if (!empty($datas2)) {
-
-            foreach ($datas2 as $dataTech) {
-                if ($dataTech['score_technical'] < $dataTech['proficiency']) {
-                    $competencyTech = [
-                        'id' => $dataTech['id_competency_technical'],
-                        'category' => "Technical Comp - " . $dataTech['technical'],
-                        'competency' => $dataTech['technical'],
-                        'proficiency' => $dataTech['proficiency'],
-                        'score' => $dataTech['score_technical'],
-                        'keterangan' => 'tc'
-                    ];
-                    array_push($technical, $competencyTech);
+                foreach ($datas as $data) {
+                    if ($data['score_astra'] < $data['proficiency']) {
+                        $competency = [
+                            'id' => $data['id_competency_astra'],
+                            'category' => "ALC - " . $data['astra'],
+                            'competency' => $data['astra'],
+                            'proficiency' => $data['proficiency'],
+                            'score' => $data['score_astra'],
+                            'keterangan' => 'alc'
+                        ];
+                        array_push($astra, $competency);
+                    }
                 }
+            } else {
+                $astra = [];
             }
-        } else {
+            //Filter Tecnhnical Competency
+            $datas2  = $this->competencyTechnical->getProfileTechnicalCompetency($id);
             $technical = [];
+            //dd($datas);
+            if (!empty($datas2)) {
+
+                foreach ($datas2 as $dataTech) {
+                    if ($dataTech['score_technical'] < $dataTech['proficiency']) {
+                        $competencyTech = [
+                            'id' => $dataTech['id_competency_technical'],
+                            'category' => "Technical Comp - " . $dataTech['technical'],
+                            'competency' => $dataTech['technical'],
+                            'proficiency' => $dataTech['proficiency'],
+                            'score' => $dataTech['score_technical'],
+                            'keterangan' => 'tc'
+                        ];
+                        array_push($technical, $competencyTech);
+                    }
+                }
+            } else {
+                $technical = [];
+            }
+            $target = array_merge($astra, $technical);
+            $data = [
+                'tittle' => 'TRAINING NEED ANALYSIS',
+                'user' => $user,
+                'training' => $trainings,
+                'tna' => $tna,
+                'terdaftar' => $terdaftar,
+                'astra' => $astra,
+                'technical' => $technical,
+                'target' => $target,
+                'validation' => \Config\Services::validation(),
+            ];
+        } elseif ($user['type_golongan'] == 'A         ' && $user['type_user'] == 'EXPERT              ') {
+            //Filter Expert Competency
+            $dataExpert  = $this->competencyExpert->getProfileExpertCompetency($id);
+            $Expert = [];
+            if (!empty($dataExpert)) {
+
+                foreach ($dataExpert as $DataExpert) {
+                    if ($DataExpert['score_expert'] < $DataExpert['proficiency']) {
+                        $competency = [
+                            'id' => $DataExpert['id_competency_expert'],
+                            'category' => "Exp - " . $DataExpert['expert'],
+                            'competency' => $DataExpert['expert'],
+                            'proficiency' => $DataExpert['proficiency'],
+                            'score' => $DataExpert['score_expert'],
+                            'keterangan' => 'exp'
+                        ];
+                        array_push($Expert, $competency);
+                    }
+                }
+            } else {
+                $Expert = [];
+            }
+            //Filter Tecnhnical Competency
+            $datas2  = $this->competencyTechnical->getProfileTechnicalCompetency($id);
+            $technical = [];
+            //dd($datas);
+            if (!empty($datas2)) {
+
+                foreach ($datas2 as $dataTech) {
+                    if ($dataTech['score_technical'] < $dataTech['proficiency']) {
+                        $competencyTech = [
+                            'id' => $dataTech['id_competency_technical'],
+                            'category' => "Technical Comp - " . $dataTech['technical'],
+                            'competency' => $dataTech['technical'],
+                            'proficiency' => $dataTech['proficiency'],
+                            'score' => $dataTech['score_technical'],
+                            'keterangan' => 'tc'
+                        ];
+                        array_push($technical, $competencyTech);
+                    }
+                }
+            } else {
+                $technical = [];
+            }
+            $target = array_merge($Expert, $technical);
+            $data = [
+                'tittle' => 'TRAINING NEED ANALYSIS',
+                'user' => $user,
+                'training' => $trainings,
+                'tna' => $tna,
+                'terdaftar' => $terdaftar,
+                'expert' => $Expert,
+                'technical' => $technical,
+                'target' => $target,
+                'validation' => \Config\Services::validation(),
+            ];
+        } else {
+            $dataCompany  = $this->competencyCompany->getProfileCompanyCompetency($id);
+            $Company = [];
+            if (!empty($dataCompany)) {
+
+                foreach ($dataCompany as $DataCompany) {
+                    if ($DataCompany['score_company'] < $DataCompany['proficiency']) {
+                        $competency = [
+                            'id' => $DataCompany['id_competency_company'],
+                            'category' => "Exp - " . $DataCompany['company'],
+                            'competency' => $DataCompany['company'],
+                            'proficiency' => $DataCompany['proficiency'],
+                            'score' => $DataCompany['score_company'],
+                            'keterangan' => 'comp'
+                        ];
+                        array_push($Company, $competency);
+                    }
+                }
+            } else {
+                $Company = [];
+            }
+            $dataSoft  = $this->competencySoft->getProfileSoftCompetency($id);
+            $Soft = [];
+            if (!empty($dataCompany)) {
+
+                foreach ($dataCompany as $DataCompany) {
+                    if ($DataCompany['score_company'] < $DataCompany['proficiency']) {
+                        $competency = [
+                            'id' => $DataCompany['id_competency_company'],
+                            'category' => "Exp - " . $DataCompany['company'],
+                            'competency' => $DataCompany['company'],
+                            'proficiency' => $DataCompany['proficiency'],
+                            'score' => $DataCompany['score_company'],
+                            'keterangan' => 'comp'
+                        ];
+                        array_push($Company, $competency);
+                    }
+                }
+            } else {
+                $Company = [];
+            }
         }
-        $target = array_merge($astra, $technical);
-        //dd($target);
+
+
         $data = [
             'tittle' => 'TRAINING NEED ANALYSIS',
             'user' => $user,
             'training' => $trainings,
             'tna' => $tna,
             'terdaftar' => $terdaftar,
-            'astra' => $astra,
-            'technical' => $technical,
-            'target' => $target,
+            // 'astra' => $astra,
+            // 'technical' => $technical,
+            'target' => $target = [],
             'validation' => \Config\Services::validation(),
         ];
+
+
+
+
+        //dd($target);
+
         return view('user/formtna', $data);
     }
 

@@ -517,7 +517,7 @@ class M_Tna extends Model
     }
 
 
-    public function getDataEfektivitas()
+    public function getDataEfektivitas($id)
     {
         $this->select('tna.*,user.bagian,approval.*,user.id_user,user.npk,evaluasi_efektivitas.status_efektivitas')->where('kelompok_training', 'training');
         $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept');

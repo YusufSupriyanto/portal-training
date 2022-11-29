@@ -29,8 +29,10 @@ class EvaluasiEfektifitas extends BaseController
 
     public function index()
     {
-        $efektifitas = $this->tna->getDataEfektivitas();
-        //  dd($efektifitas);
+        $id =  session()->get('id');
+
+        $efektifitas = $this->tna->getDataEfektivitas($id);
+        //dd($efektifitas);
 
 
         $dataEvaluasifixed = [];
@@ -38,6 +40,7 @@ class EvaluasiEfektifitas extends BaseController
         foreach ($efektifitas as $efektif) {
 
             $date_training = date_create($efektif['rencana_training']);
+            //  dd($date_training);
             $date_now = date_create(date('Y-m-d'));
             $compare = date_diff($date_training, $date_now);
             $due_date = (int)$compare->format('%a');
@@ -54,8 +57,9 @@ class EvaluasiEfektifitas extends BaseController
                 array_push($dataEvaluasifixed, $dataEvaluasiProcess);
             }
         }
+        //dd($dataEvaluasifixed);
         $data = [
-            'tittle' => 'Evaluasi Efektifitas',
+            'tittle' => 'Evaluasi Efektifitass',
             'evaluasi' => $dataEvaluasifixed
         ];
         return view('user/evaluasiefektifitas', $data);

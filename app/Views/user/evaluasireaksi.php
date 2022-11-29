@@ -158,34 +158,145 @@
                             <td>1</td>
                             <td>Pengetahuan/pemahaman instruktur terhadap materi training
                             </td>
-                            <td><input class="form-control input-sm" type="text" name="pengetahuan1" required></td>
+                            <td>
+                                <div class="form-group">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required name="pengetahuan1"
+                                            value="4">
+                                        <label class="form-check-label">4 (Sangat Baik)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required name="pengetahuan1"
+                                            value="3">
+                                        <label class="form-check-label">3 (Baik)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required name="pengetahuan1"
+                                            value="2">
+                                        <label class="form-check-label">2 (Cukup)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required name="pengetahuan1"
+                                            value="1">
+                                        <label class="form-check-label">1 (Kurang)</label>
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
                         <tr>
                             <td>2</td>
                             <td>Kemampuan dalam menjelaskan materi training
                             </td>
-                            <td><input class="form-control input-sm" type="text" name="kemampuan1" required></td>
+                            <td>
+                                <div class="form-group">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required name="kemampuan1"
+                                            value="4">
+                                        <label class="form-check-label">4 (Sangat Baik)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required name="kemampuan1"
+                                            value="3">
+                                        <label class="form-check-label">3 (Baik)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required name="kemampuan1"
+                                            value="2">
+                                        <label class="form-check-label">2 (Cukup)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required name="kemampuan1"
+                                            value="1">
+                                        <label class="form-check-label">1 (Kurang)</label>
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
                         <tr>
                             <td>3</td>
                             <td>Kemampuan melibatkan partisipasi peserta dalam proses belajar
                             </td>
-                            <td><input class="form-control input-sm" type="text" name="kemampuan_melibatkan1" required>
+                            <td>
+                                <div class="form-group">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required
+                                            name="kemampuan_melibatkan1" value="4">
+                                        <label class="form-check-label">4 (Sangat Baik)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required
+                                            name="kemampuan_melibatkan1" value="3">
+                                        <label class="form-check-label">3 (Baik)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required
+                                            name="kemampuan_melibatkan1" value="2">
+                                        <label class="form-check-label">2 (Cukup)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required
+                                            name="kemampuan_melibatkan1" value="1">
+                                        <label class="form-check-label">1 (Kurang)</label>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         <tr>
                             <td>4</td>
                             <td>Kemampuan menanggapi permasalahan dan pertanyaan peserta
                             </td>
-                            <td><input class="form-control input-sm" type="text" name="kemampuan_menanggapi1" required>
+                            <td>
+                                <div class="form-group">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required
+                                            name="kemampuan_menanggapi1" value="4">
+                                        <label class="form-check-label">4 (Sangat Baik)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required
+                                            name="kemampuan_menanggapi1" value="3">
+                                        <label class="form-check-label">3 (Baik)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required
+                                            name="kemampuan_menanggapi1" value="2">
+                                        <label class="form-check-label">2 (Cukup)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required
+                                            name="kemampuan_menanggapi1" value="1">
+                                        <label class="form-check-label">1 (Kurang)</label>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         <tr>
                             <td>5</td>
                             <td>Kemampuan mengendalikan penggunaan waktu
                             </td>
-                            <td><input class="form-control input-sm" type="text" name="kemampuan_mengendalikan1"
-                                    required>
+                            <td>
+                                <div class="form-group">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required
+                                            name="kemampuan_mengendalikan1" value="4">
+                                        <label class="form-check-label">4 (Sangat Baik)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required
+                                            name="kemampuan_mengendalikan1" value="3">
+                                        <label class="form-check-label">3 (Baik)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required
+                                            name="kemampuan_mengendalikan1" value="2">
+                                        <label class="form-check-label">2 (Cukup)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required
+                                            name="kemampuan_mengendalikan1" value="1">
+                                        <label class="form-check-label">1 (Kurang)</label>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     </tbody>
@@ -277,45 +388,151 @@ function loop(i) {
                         <th>Instruktur ${i}<span style="color:red;">*</span></th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td><strong>Nama Instruktur</strong>
-                        </td>
-                        <td><input class="form-control input-sm" type="text" name="instruktur${i}" required></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Pengetahuan/pemahaman instruktur terhadap materi training
-                        </td>
-                        <td><input class="form-control input-sm" type="text" name="pengetahuan${i}" required></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Kemampuan dalam menjelaskan materi training
-                        </td>
-                        <td><input class="form-control input-sm" type="text" name="kemampuan${i}" required></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Kemampuan melibatkan partisipasi peserta dalam proses belajar
-                        </td>
-                        <td><input class="form-control input-sm" type="text" name="kemampuan_melibatkan${i}" required></td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Kemampuan menanggapi permasalahan dan pertanyaan peserta
-                        </td>
-                        <td><input class="form-control input-sm" type="text" name="kemampuan_menanggapi${i}" required></td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Kemampuan mengendalikan penggunaan waktu
-                        </td>
-                        <td><input class="form-control input-sm" type="text" name="kemampuan_mengendalikan${i}" required>
-                        </td>
-                    </tr>
-                </tbody>
+               <tbody>
+                        <tr>
+                            <td></td>
+                            <td><strong>Nama Instruktur</strong>
+                            </td>
+                            <td><input class="form-control input-sm" type="text" name="instruktur${i}" required></td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Pengetahuan/pemahaman instruktur terhadap materi training
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required name="pengetahuan${i}" value="4">
+                                        <label class="form-check-label">4 (Sangat Baik)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required name="pengetahuan${i}" value="3">
+                                        <label class="form-check-label">3 (Baik)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required name="pengetahuan${i}" value="2">
+                                        <label class="form-check-label">2 (Cukup)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required name="pengetahuan${i}" value="1">
+                                        <label class="form-check-label">1 (Kurang)</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Kemampuan dalam menjelaskan materi training
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required name="kemampuan${i}" value="4">
+                                        <label class="form-check-label">4 (Sangat Baik)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required name="kemampuan${i}" value="3">
+                                        <label class="form-check-label">3 (Baik)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required name="kemampuan${i}" value="2">
+                                        <label class="form-check-label">2 (Cukup)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required name="kemampuan${i}" value="1">
+                                        <label class="form-check-label">1 (Kurang)</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Kemampuan melibatkan partisipasi peserta dalam proses belajar
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required name="kemampuan_melibatkan${i}"
+                                            value="4">
+                                        <label class="form-check-label">4 (Sangat Baik)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required name="kemampuan_melibatkan${i}"
+                                            value="3">
+                                        <label class="form-check-label">3 (Baik)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required name="kemampuan_melibatkan${i}"
+                                            value="2">
+                                        <label class="form-check-label">2 (Cukup)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required name="kemampuan_melibatkan${i}"
+                                            value="1">
+                                        <label class="form-check-label">1 (Kurang)</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Kemampuan menanggapi permasalahan dan pertanyaan peserta
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required name="kemampuan_menanggapi${i}"
+                                            value="4">
+                                        <label class="form-check-label">4 (Sangat Baik)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required name="kemampuan_menanggapi${i}"
+                                            value="3">
+                                        <label class="form-check-label">3 (Baik)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required name="kemampuan_menanggapi${i}"
+                                            value="2">
+                                        <label class="form-check-label">2 (Cukup)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required name="kemampuan_menanggapi${i}"
+                                            value="1">
+                                        <label class="form-check-label">1 (Kurang)</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Kemampuan mengendalikan penggunaan waktu
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required name="kemampuan_mengendalikan${i}"
+                                            value="4">
+                                        <label class="form-check-label">4 (Sangat Baik)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required name="kemampuan_mengendalikan${i}"
+                                            value="3">
+                                        <label class="form-check-label">3 (Baik)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required name="kemampuan_mengendalikan${i}"
+                                            value="2">
+                                        <label class="form-check-label">2 (Cukup)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" required name="kemampuan_mengendalikan${i}"
+                                            value="1">
+                                        <label class="form-check-label">1 (Kurang)</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
             </table>
             <div class="m-2" style="width:100px;">
                 <button type="button" class="btn btn-success btn-sm" id="plus" onclick="loop(${i})"><i class="fa-solid fa-plus"></i></button>

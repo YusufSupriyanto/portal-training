@@ -42,9 +42,8 @@
                             data-target="#career">
                             <i class="fa-solid fa-clock-rotate-left"></i> History Career
                         </button>
-                        <button type="button" class="btn btn-success btn-sm m-2"
-                            onclick="Competency(<?= session()->get('id'); ?>)">
-                            <i class="fa-solid fa-award"></i> Kompetensi Profile
+                        <button type="button" class="btn btn-success btn-sm m-2" onclick="Competency(<?= $id; ?>)">
+                            <i class="fa-solid fa-award"></i> Competency Profile
                         </button>
                     </div>
                 </div>
@@ -255,7 +254,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+                <h5 class="modal-title" id="exampleModalLabel">Competency Profile</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
