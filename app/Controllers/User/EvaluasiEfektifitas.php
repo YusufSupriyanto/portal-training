@@ -32,7 +32,7 @@ class EvaluasiEfektifitas extends BaseController
         $id =  session()->get('id');
 
         $efektifitas = $this->tna->getDataEfektivitas($id);
-        //dd($efektifitas);
+        // dd($efektifitas);
 
 
         $dataEvaluasifixed = [];

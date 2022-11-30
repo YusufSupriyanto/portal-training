@@ -7,7 +7,9 @@ use App\Models\M_Approval;
 use App\Models\M_Astra;
 use App\Models\M_CompetencyAstra;
 use App\Models\M_CompetencyTechnical;
+use App\Models\M_DetailAstra;
 use App\Models\M_EvaluasiReaksi;
+use App\Models\M_ListTraining;
 use App\Models\M_Technical;
 use App\Models\M_Tna;
 use App\Models\M_TnaUnplanned;
@@ -18,12 +20,18 @@ class C_CompetencyAstra extends BaseController
     private M_Astra $astra;
     private UserModel $user;
 
+    private M_DetailAstra $detailAstra;
+
     private M_CompetencyAstra $competencyAstra;
+
+    private M_ListTraining $training;
     function __construct()
     {
         $this->astra = new M_Astra();
         $this->user = new UserModel();
         $this->competencyAstra = new M_CompetencyAstra();
+        $this->detailAstra = new M_DetailAstra();
+        $this->training = new M_ListTraining();
     }
 
     public function InputExcel()

@@ -8,6 +8,7 @@ use App\Models\M_Astra;
 use App\Models\M_CompetencyAstra;
 use App\Models\M_CompetencyExpert;
 use App\Models\M_CompetencyTechnical;
+use App\Models\M_DetailExpert;
 use App\Models\M_EvaluasiReaksi;
 use App\Models\M_Expert;
 use App\Models\M_Technical;
@@ -21,11 +22,14 @@ class C_CompetencyExpert extends BaseController
     private UserModel $user;
 
     private M_CompetencyExpert $competencyExpert;
+
+    private M_DetailExpert $detailExpert;
     function __construct()
     {
         $this->expert = new M_Expert();
         $this->user = new UserModel();
         $this->competencyExpert = new M_CompetencyExpert();
+        $this->detailExpert = new M_DetailExpert();
     }
 
     public function InputExcel()
@@ -65,5 +69,25 @@ class C_CompetencyExpert extends BaseController
         }
 
         return redirect()->to('/list_expert');
+    }
+
+
+    public function CheckedExpert()
+    {
+        $id = $this->request->getPost('id');
+        $id_competency = $this->request->getPost('id_competency');
+        $data = $this->detailExpert->getCheckIdTraining($id);
+        if ($data != null) {
+            $this->detailExpert->delete($data['id_detail_expert']);
+            $response = 'Unchecked';
+        } else {
+            $data = [
+                'id_expert' => $id_competency,
+                'id_training' => $id
+            ];
+            $this->detailExpert->save($data);
+            $response = 'Checked';
+        }
+        echo json_encode($response);
     }
 }

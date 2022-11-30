@@ -21,8 +21,9 @@
                     <th>Tujuan Training</th>
                     <th>Notes</th>
                     <th>Budget</th>
+                    <th>Approval KADEPT</th>
                     <th>Approval KADIV</th>
-                    <th>Approval Admin</th>
+                    <th>Approval ADMIN</th>
                     <th>Approval BOD</th>
                 </tr>
             </thead>
@@ -46,11 +47,25 @@
                         </div>
                     </td>
                     <td>
-                        <?php if ($statuses['status_approval_1'] == NULL) : ?>
+                        <?php if ($statuses['status_approval_0'] == NULL) : ?>
                         <div class="d-flex justify-content-center"
                             style="background-color:grey;width:100px;border:1px;border-radius:2px;color:white;">Wait
                         </div>
-                        <?php elseif ($statuses['status_approval_1'] == 'accept') : ?>
+                        <?php elseif ($statuses['status_approval_0'] == 'accept') : ?>
+                        <div class="d-flex justify-content-center"
+                            style="background-color:green;width:100px;border:1px;border-radius:2px;color:white;">Accept
+                        </div>
+                        <?php else : ?>
+                        <button class="btn btn-danger btn-sm" style="width:100px"
+                            onclick="alasan('<?= $statuses['alasan'] ?>')">Reject</button>
+                        <?php endif; ?>
+                    </td>
+                    <td>
+                        <?php if ($statuses['status_approval_0'] == NULL) : ?>
+                        <div class="d-flex justify-content-center"
+                            style="background-color:grey;width:100px;border:1px;border-radius:2px;color:white;">Wait
+                        </div>
+                        <?php elseif ($statuses['status_approval_0'] == 'accept') : ?>
                         <div class="d-flex justify-content-center"
                             style="background-color:green;width:100px;border:1px;border-radius:2px;color:white;">Accept
                         </div>

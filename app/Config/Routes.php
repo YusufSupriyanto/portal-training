@@ -65,6 +65,7 @@ $routes->get('/technical_departemen/(:any)/(:any)', 'Admin\C_competency::DetailT
 $routes->post('/input_technical_file', 'Admin\C_competencyTechnical::InputExcel', ['filter' => 'Auth']);
 $routes->get('/list_expert', 'Admin\C_Competency::Expert', ['filter' => 'Auth']);
 $routes->post('/expert_file', 'Admin\C_CompetencyExpert::InputExcel', ['filter' => 'Auth']);
+$routes->post('/detail_expert_checked', 'Admin\C_CompetencyExpert::CheckedExpert', ['filter' => 'Auth']);
 $routes->post('/edit_competency_expert', 'Admin\C_competency::EditExpert', ['filter' => 'Auth']);
 $routes->delete('/delete/expert/(:num)', 'Admin\C_competency::DeleteExpert/$1', ['filter' => 'Auth']);
 
@@ -186,6 +187,7 @@ $routes->post('/sertifikat_upload_unplanned', 'Admin\C_HistoryUnplanned::Sertifi
 
 //Competency Astra
 $routes->post('/astra_file', 'Admin\C_CompetencyAstra::InputExcel', ['filter' => 'Auth']);
+$routes->post('/detail_competency_checked', 'Admin\C_CompetencyAstra::CheckedAstra', ['filter' => 'Auth']);
 
 
 //Budget

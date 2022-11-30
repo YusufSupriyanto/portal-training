@@ -97,5 +97,9 @@ function editCompetencyAtra(id, astra, proficiency) {
 
 
 }
+
+$(document).ready(function() {
+    $('#AddCompetencyTable').DataTable();
+});
 </script>
 <?= $this->endSection() ?>

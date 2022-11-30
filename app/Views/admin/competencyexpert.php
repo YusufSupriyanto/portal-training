@@ -84,7 +84,6 @@
 
     </div>
 </div>
-
 <script>
 $(document).ready(function() {
     $('#CompetencyExpert').DataTable();

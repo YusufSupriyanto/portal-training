@@ -8,8 +8,11 @@ use App\Models\M_Astra;
 use App\Models\M_CompetencyAstra;
 use App\Models\M_CompetencyExpert;
 use App\Models\M_CompetencyTechnical;
+use App\Models\M_DetailAstra;
+use App\Models\M_DetailExpert;
 use App\Models\M_EvaluasiReaksi;
 use App\Models\M_Expert;
+use App\Models\M_ListTraining;
 use App\Models\M_Technical;
 use App\Models\M_TechnicalB;
 use App\Models\M_Tna;
@@ -27,6 +30,11 @@ class C_Competency extends BaseController
     private M_CompetencyExpert $competencyExpert;
     private M_CompetencyTechnical $competencyTechnical;
 
+    private M_ListTraining $training;
+    private M_DetailAstra $detailAstra;
+
+    private M_DetailExpert $detailExpert;
+
     public function __construct()
     {
         $this->astra = new M_Astra();
@@ -37,16 +45,23 @@ class C_Competency extends BaseController
         $this->competencyAstra = new M_CompetencyAstra();
         $this->competencyExpert = new M_CompetencyExpert();
         $this->competencyTechnical = new M_CompetencyTechnical();
+        $this->training = new M_ListTraining();
+        $this->detailAstra = new M_DetailAstra();
+        $this->detailExpert = new M_DetailExpert();
     }
 
     public function astra()
     {
         $astra = $this->astra->getDataAstra();
+        $training = $this->training->getAll();
+
 
 
         $data = [
             'tittle' => 'Astra Leadership Competency',
-            'astra' => $astra
+            'astra' => $astra,
+            'training' => $training,
+            'check' => $this->detailAstra
         ];
         return view('admin/competencyastra', $data);
     }
@@ -215,9 +230,12 @@ class C_Competency extends BaseController
     public function Expert()
     {
         $expert = $this->expert->getDataExpert();
+        $training = $this->training->getAll();
         $data = [
             'tittle' => 'Expert Behavior Competencies',
-            'expert' => $expert
+            'expert' => $expert,
+            'training' => $training,
+            'check' => $this->detailExpert
         ];
         return view('admin/competencyexpert', $data);
     }

@@ -140,7 +140,7 @@ class FormTna extends BaseController
                             'competency' => $data['astra'],
                             'proficiency' => $data['proficiency'],
                             'score' => $data['score_astra'],
-                            'keterangan' => 'alc'
+                            'keterangan' => 'Astra'
                         ];
                         array_push($astra, $competency);
                     }
@@ -162,7 +162,7 @@ class FormTna extends BaseController
                             'competency' => $dataTech['technical'],
                             'proficiency' => $dataTech['proficiency'],
                             'score' => $dataTech['score_technical'],
-                            'keterangan' => 'tc'
+                            'keterangan' => 'TechnicalA'
                         ];
                         array_push($technical, $competencyTech);
                     }
@@ -196,7 +196,7 @@ class FormTna extends BaseController
                             'competency' => $DataExpert['expert'],
                             'proficiency' => $DataExpert['proficiency'],
                             'score' => $DataExpert['score_expert'],
-                            'keterangan' => 'exp'
+                            'keterangan' => 'Expert'
                         ];
                         array_push($Expert, $competency);
                     }
@@ -218,7 +218,7 @@ class FormTna extends BaseController
                             'competency' => $dataTech['technical'],
                             'proficiency' => $dataTech['proficiency'],
                             'score' => $dataTech['score_technical'],
-                            'keterangan' => 'tc'
+                            'keterangan' => 'TechnicalA'
                         ];
                         array_push($technical, $competencyTech);
                     }
@@ -247,11 +247,11 @@ class FormTna extends BaseController
                     if ($DataCompany['score_company'] < $DataCompany['proficiency']) {
                         $competency = [
                             'id' => $DataCompany['id_competency_company'],
-                            'category' => "Exp - " . $DataCompany['company'],
+                            'category' => "Comp - " . $DataCompany['company'],
                             'competency' => $DataCompany['company'],
                             'proficiency' => $DataCompany['proficiency'],
                             'score' => $DataCompany['score_company'],
-                            'keterangan' => 'comp'
+                            'keterangan' => 'Company'
                         ];
                         array_push($Company, $competency);
                     }
@@ -261,41 +261,58 @@ class FormTna extends BaseController
             }
             $dataSoft  = $this->competencySoft->getProfileSoftCompetency($id);
             $Soft = [];
-            if (!empty($dataCompany)) {
+            if (!empty($dataSoft)) {
 
-                foreach ($dataCompany as $DataCompany) {
-                    if ($DataCompany['score_company'] < $DataCompany['proficiency']) {
+                foreach ($dataSoft as $DataSoft) {
+                    if ($DataSoft['score_soft'] < $DataSoft['proficiency']) {
                         $competency = [
-                            'id' => $DataCompany['id_competency_company'],
-                            'category' => "Exp - " . $DataCompany['company'],
-                            'competency' => $DataCompany['company'],
-                            'proficiency' => $DataCompany['proficiency'],
-                            'score' => $DataCompany['score_company'],
-                            'keterangan' => 'comp'
+                            'id' => $DataSoft['id_competency_soft'],
+                            'category' => "Soft - " . $DataSoft['soft'],
+                            'competency' => $DataSoft['soft'],
+                            'proficiency' => $DataSoft['proficiency'],
+                            'score' => $DataSoft['score_soft'],
+                            'keterangan' => 'Soft'
                         ];
-                        array_push($Company, $competency);
+                        array_push($Soft, $competency);
                     }
                 }
             } else {
-                $Company = [];
+                $Soft = [];
             }
+            $dataTechnicalB  = $this->competencyTechnicalB->getProfileTechnicalCompetencyB($id);
+            $TechnicalB = [];
+            if (!empty($dataTechnicalB)) {
+
+                foreach ($dataTechnicalB as $dataTechnicalB) {
+                    if ($dataTechnicalB['score'] < $dataTechnicalB['proficiency']) {
+                        $competency = [
+                            'id' => $dataTechnicalB['id_competency_technicalB'],
+                            'category' => "TechB - " . $dataTechnicalB['technicalB'],
+                            'competency' => $dataTechnicalB['technicalB'],
+                            'proficiency' => $dataTechnicalB['proficiency'],
+                            'score' => $dataTechnicalB['score'],
+                            'keterangan' => 'TechnicalB'
+                        ];
+                        array_push($TechnicalB, $competency);
+                    }
+                }
+            } else {
+                $TechnicalB = [];
+            }
+            $target = array_merge($Soft, $Company, $TechnicalB);
+            $data = [
+                'tittle' => 'TRAINING NEED ANALYSIS',
+                'user' => $user,
+                'training' => $trainings,
+                'tna' => $tna,
+                'terdaftar' => $terdaftar,
+                'soft' => $Soft,
+                'technicalB' => $TechnicalB,
+                'company' => $Company,
+                'target' => $target,
+                'validation' => \Config\Services::validation(),
+            ];
         }
-
-
-        $data = [
-            'tittle' => 'TRAINING NEED ANALYSIS',
-            'user' => $user,
-            'training' => $trainings,
-            'tna' => $tna,
-            'terdaftar' => $terdaftar,
-            // 'astra' => $astra,
-            // 'technical' => $technical,
-            'target' => $target = [],
-            'validation' => \Config\Services::validation(),
-        ];
-
-
-
 
         //dd($target);
 
@@ -440,11 +457,13 @@ class FormTna extends BaseController
     //function untuk save tna
     public function TnaForm()
     {
-        // $competency = $this->request->getPost('kompetensi');
+        $competency = $this->request->getPost('kompetensi');
+        // dd($competency);
 
-        // $id_kompetensi = strstr($competency, "1", false);
-        // $type_kompetensi = strstr($competency, ",1", true);
-        // dd($type_kompetensi);
+
+        $type_kompetensi = explode(",", $competency);
+        dd($type_kompetensi);
+
 
         $deadline = $this->request->getVar('deadline');
         if ($deadline == 0) {
@@ -481,6 +500,8 @@ class FormTna extends BaseController
             'id_user' => $id_user,
             'id_training' => $id_training,
             'id_budget' => $budget['id_budget'],
+            'id_competency' => $type_kompetensi[0],
+            'type_competency' => $type_kompetensi[1],
             'dic' => $user['dic'],
             'divisi' => $user['divisi'],
             'departemen' => $user['departemen'],
