@@ -18,8 +18,10 @@ class C_Tna extends BaseController
     private M_Approval $approval;
 
     private M_Budget $budget;
+    private C_Budget $budgetC;
 
     private M_TnaUnplanned $unplanned;
+
 
 
 
@@ -30,6 +32,7 @@ class C_Tna extends BaseController
         $this->approval = new M_Approval();
         $this->unplanned = new M_TnaUnplanned();
         $this->budget = new M_Budget();
+        $this->budgetC = new C_Budget();
     }
     public function index()
     {
@@ -86,18 +89,19 @@ class C_Tna extends BaseController
 
         $tna = $this->tna->getTnaForRole($id);
         $angka = $this->request->getPost('biaya_actual');
-        $number =  str_replace(".", "", $angka);
+        $rupiah = $this->budgetC->strFilter($angka);
+        // $rupiah =  str_replace(".", "", $angka);
         $budgets = $this->budget->getBudgetCurrent($tna[0]['departemen']);
         if ($budgets['temporary_calculation'] != null) {
             $budgetData = [
                 'id_budget' => $budgets['id_budget'],
-                'temporary_calculation' => $budgets['temporary_calculation'] + $number
+                'temporary_calculation' => $budgets['temporary_calculation'] + $rupiah
             ];
             $this->budget->save($budgetData);
         } else {
             $budgetData = [
                 'id_budget' => $budgets['id_budget'],
-                'temporary_calculation' =>  $number
+                'temporary_calculation' =>  $rupiah
             ];
             $this->budget->save($budgetData);
         }
@@ -105,7 +109,7 @@ class C_Tna extends BaseController
 
             $data = [
                 'id_tna' => $id,
-                'biaya_actual' => $number,
+                'biaya_actual' => $rupiah,
                 'mulai_training' => $this->request->getPost('mulai_training'),
                 'rencana_training' => $this->request->getPost('rencana_training'),
                 'vendor' => $this->request->getPost('vendor'),
@@ -122,7 +126,7 @@ class C_Tna extends BaseController
         } else {
             $data = [
                 'id_tna' => $id,
-                'biaya_actual' => $number,
+                'biaya_actual' => $rupiah,
                 'mulai_training' => $this->request->getPost('mulai_training'),
                 'rencana_training' => $this->request->getPost('rencana_training'),
                 'vendor' => $this->request->getPost('vendor'),
@@ -131,7 +135,7 @@ class C_Tna extends BaseController
             ];
             $this->tna->save($data);
         }
-        echo json_encode('SUCCESS');
+        echo json_encode('Success');
     }
 
     public function reject()
@@ -178,19 +182,21 @@ class C_Tna extends BaseController
 
         $approve = $this->approval->getIdApproval($this->request->getPost('id_tna'));
         $biaya_actual = $this->request->getPost('biaya_actual');
-        $number =  str_replace(".", "", $biaya_actual);
+
+        $Rupiah  = $this->budgetC->strFilter($biaya_actual);
+        // $rupiah =  str_replace(".", "", $biaya_actual);
         $tna =  $this->tna->getAllTna($this->request->getPost('id_tna'));
         $budget = $this->budget->getDataBudgetById($tna[0]->id_budget);
-        if ($number < $tna[0]->biaya_actual) {
-            $total =  $tna[0]->biaya_actual - $number;
+        if ($Rupiah < $tna[0]->biaya_actual) {
+            $total =  $tna[0]->biaya_actual - $Rupiah;
             $sum = $budget['temporary_calculation'] - $total;
             $dataBudget = [
                 'id_budget' => $tna[0]->id_budget,
                 'temporary_calculation' => $sum
             ];
             $this->budget->save($dataBudget);
-        } elseif ($number > $tna[0]->biaya_actual) {
-            $total = $number - $tna[0]->biaya_actual;
+        } elseif ($Rupiah > $tna[0]->biaya_actual) {
+            $total = $Rupiah - $tna[0]->biaya_actual;
             $sum = $budget['temporary_calculation'] + $total;
             $dataBudget = [
                 'id_budget' => $tna[0]->id_budget,
@@ -198,7 +204,7 @@ class C_Tna extends BaseController
             ];
             $this->budget->save($dataBudget);
         }
-        if ($number <= 2500000) {
+        if ($Rupiah <= 2500000) {
             $tna =  $this->tna->getAllTna($this->request->getPost('id_tna'));
             $budget = $this->budget->getDataBudgetById($tna[0]->id_budget);
             $dataBudget = [
@@ -223,7 +229,7 @@ class C_Tna extends BaseController
             'id_tna' => $this->request->getPost('id_tna'),
             'mulai_training' => $this->request->getPost('mulai_training'),
             'rencana_training' => $this->request->getPost('rencana_training'),
-            'biaya_actual' => $number,
+            'biaya_actual' => $Rupiah,
         ];
 
         // $fulldata = array_merge($data, $data1);
@@ -297,5 +303,18 @@ class C_Tna extends BaseController
         $this->tna->delete($id);
         session()->setFlashdata('success', 'Data Berhasil Di Hapus');
         return redirect()->to('/training_ditolak');
+    }
+
+
+    public function TrainingNotImplemented()
+    {
+        $training = $this->approval->getTrainingNotImplemented();
+        //dd($training);
+
+        $data = [
+            'tittle' => 'Training Tidak Terlaksana',
+            'training' => $training
+        ];
+        return view('admin/trainingnotimplemented', $data);
     }
 }

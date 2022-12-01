@@ -470,13 +470,45 @@ class M_TnaUnplanned extends Model
     }
 
 
-    public function getDataEfektivitas()
+    public function getDataEfektivitas($id)
     {
-        $this->select('tna.*,user.bagian,approval.*,user.id_user,user.npk,evaluasi_efektivitas.status_efektivitas')->where('kelompok_training', 'unplanned');
-        $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept');
-        $this->join('user', 'user.id_user = tna.id_user');
-        $this->join('evaluasi_efektivitas', 'evaluasi_efektivitas.id_tna = tna.id_tna');
-        return $this->get()->getResultArray();
+        $user = $this->user->getAllUser($id);
+
+        if ($user['bagian'] == "BOD") {
+            $this->select('tna.*,user.bagian,approval.*,user.id_user,user.npk,evaluasi_efektivitas.status_efektivitas')->where('kelompok_training', 'unplanned');
+            $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept');
+            $this->join('user', 'user.id_user = tna.id_user')->where('user.bagian', 'KADIV')->where('user.dic', $user['dic']);
+            $this->join('evaluasi_efektivitas', 'evaluasi_efektivitas.id_tna = tna.id_tna');
+            return $this->get()->getResultArray();
+        } elseif ($user['bagian'] == "KADIV") {
+            $this->select('tna.*,user.bagian,approval.*,user.id_user,user.npk,evaluasi_efektivitas.status_efektivitas')->where('kelompok_training', 'unplanned');
+            $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept');
+            $this->join('user', 'user.id_user = tna.id_user')->where('user.bagian', 'KADEPT')->where('user.divisi', $user['divisi']);
+            $this->join('evaluasi_efektivitas', 'evaluasi_efektivitas.id_tna = tna.id_tna');
+            return $this->get()->getResultArray();
+        } elseif ($user['bagian']  == "KADEPT") {
+            $bagian = ['KASIE', 'STAFF 4UP', 'STAFF'];
+            $this->select('tna.*,user.bagian,approval.*,user.id_user,user.npk,evaluasi_efektivitas.status_efektivitas')->where('kelompok_training', 'unplanned');
+            $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept');
+            $this->join('user', 'user.id_user = tna.id_user')->whereIn('user.bagian', $bagian)->where('user.departemen', $user['departemen'])->where('user.level', 'USER');
+            $this->join('evaluasi_efektivitas', 'evaluasi_efektivitas.id_tna = tna.id_tna');
+            return $this->get()->getResultArray();
+        } elseif ($user['bagian']  == "KASIE" || $user['bagian']  == "STAFF 4UP") {
+            $bagian = ['STAFF 4UP', 'KASIE'];
+            $this->select('tna.*,user.bagian,approval.*,user.id_user,user.npk,evaluasi_efektivitas.status_efektivitas')->where('kelompok_training', 'unplanned');
+            $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept');
+            $this->join('user', 'user.id_user = tna.id_user')->where('user.seksi', $user['seksi'])->where('user.level', 'USER')->whereNotIn('user.bagian', $bagian);
+            $this->join('evaluasi_efektivitas', 'evaluasi_efektivitas.id_tna = tna.id_tna');
+            return $this->get()->getResultArray();
+        } else {
+            return 'E';
+        }
+
+        // $this->select('tna.*,user.bagian,approval.*,user.id_user,user.npk,evaluasi_efektivitas.status_efektivitas')->where('kelompok_training', 'unplanned');
+        // $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept');
+        // $this->join('user', 'user.id_user = tna.id_user');
+        // $this->join('evaluasi_efektivitas', 'evaluasi_efektivitas.id_tna = tna.id_tna');
+        // return $this->get()->getResultArray();
     }
     public function getHistoryUnplanned($id)
     {

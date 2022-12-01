@@ -23,13 +23,11 @@ class C_CompetencyExpert extends BaseController
 
     private M_CompetencyExpert $competencyExpert;
 
-    private M_DetailExpert $detailExpert;
     function __construct()
     {
         $this->expert = new M_Expert();
         $this->user = new UserModel();
         $this->competencyExpert = new M_CompetencyExpert();
-        $this->detailExpert = new M_DetailExpert();
     }
 
     public function InputExcel()
@@ -72,22 +70,22 @@ class C_CompetencyExpert extends BaseController
     }
 
 
-    public function CheckedExpert()
-    {
-        $id = $this->request->getPost('id');
-        $id_competency = $this->request->getPost('id_competency');
-        $data = $this->detailExpert->getCheckIdTraining($id);
-        if ($data != null) {
-            $this->detailExpert->delete($data['id_detail_expert']);
-            $response = 'Unchecked';
-        } else {
-            $data = [
-                'id_expert' => $id_competency,
-                'id_training' => $id
-            ];
-            $this->detailExpert->save($data);
-            $response = 'Checked';
-        }
-        echo json_encode($response);
-    }
+    // public function CheckedExpert()
+    // {
+    //     $id = $this->request->getPost('id');
+    //     $id_competency = $this->request->getPost('id_competency');
+    //     $data = $this->detailExpert->getCheckIdTraining($id);
+    //     if ($data != null) {
+    //         $this->detailExpert->delete($data['id_detail_expert']);
+    //         $response = 'Unchecked';
+    //     } else {
+    //         $data = [
+    //             'id_expert' => $id_competency,
+    //             'id_training' => $id
+    //         ];
+    //         $this->detailExpert->save($data);
+    //         $response = 'Checked';
+    //     }
+    //     echo json_encode($response);
+    // }
 }

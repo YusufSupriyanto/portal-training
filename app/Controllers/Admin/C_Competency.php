@@ -31,10 +31,6 @@ class C_Competency extends BaseController
     private M_CompetencyTechnical $competencyTechnical;
 
     private M_ListTraining $training;
-    private M_DetailAstra $detailAstra;
-
-    private M_DetailExpert $detailExpert;
-
     public function __construct()
     {
         $this->astra = new M_Astra();
@@ -46,8 +42,6 @@ class C_Competency extends BaseController
         $this->competencyExpert = new M_CompetencyExpert();
         $this->competencyTechnical = new M_CompetencyTechnical();
         $this->training = new M_ListTraining();
-        $this->detailAstra = new M_DetailAstra();
-        $this->detailExpert = new M_DetailExpert();
     }
 
     public function astra()

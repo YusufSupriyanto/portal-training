@@ -5,6 +5,7 @@ namespace App\Controllers\User;
 use App\Controllers\BaseController;
 use App\Models\M_EvaluasiEfektifitas;
 use App\Models\M_EvaluasiReaksi;
+use App\Models\M_Nilai;
 use App\Models\M_Tna;
 use App\Models\UserModel;
 use PHPMailer\PHPMailer\PHPMailer;
@@ -20,11 +21,14 @@ class EvaluasiEfektifitas extends BaseController
     private M_EvaluasiEfektifitas $efektivitas;
 
     private UserModel $user;
+
+    private M_Nilai $nilai;
     public function __construct()
     {
         $this->tna = new M_Tna();
         $this->efektivitas = new M_EvaluasiEfektifitas();
         $this->user = new UserModel();
+        $this->nilai = new M_Nilai();
     }
 
     public function index()
@@ -68,10 +72,12 @@ class EvaluasiEfektifitas extends BaseController
     public function formEvaluasi($id)
     {
         $evaluation  = $this->tna->getDataForEvaluation($id);
-        // dd($evaluation);
+        $nilai = $this->nilai->getDataNilai($id);
+        dd($nilai);
         $data = [
             'tittle' => 'Form Evaluasi Efektifitas',
-            'evaluasi' => $evaluation
+            'evaluasi' => $evaluation,
+            'nilai' => $nilai
         ];
         return view('user/formefektivitas', $data);
     }

@@ -65,7 +65,8 @@ function Accept(i) {
         },
         success: function(data) {
             window.location.reload()
-            //console.log(data)
+            // console.log(data)
+            // alert(data)
 
         }
 

@@ -73,4 +73,21 @@ class C_Schedule extends BaseController
 
         return redirect()->to('/schedule_unplanned');
     }
+
+    public function NotImplemented()
+    {
+        $id = $this->request->getPost('id_tna');
+        $reason = $this->request->getPost('alasan');
+        $false  = $this->approval->getIdApproval($id);
+        $status = $this->approval->getTrainingNotImplemented();
+        $data = [
+            'id_approval' => $false['id_approval'],
+            'alasan' => $reason,
+            'status_training' => false
+        ];
+
+        $this->approval->save($data);
+
+        return redirect()->to('/schedule_unplanned');
+    }
 }

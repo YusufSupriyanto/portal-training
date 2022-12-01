@@ -423,6 +423,15 @@ to get the desired effect
                                         </a>
                                     </li>
                                 </ul>
+                                <ul class="nav nav-treeview" style="display: none;">
+                                    <li class="nav-item">
+                                        <a href="<?= base_url() ?>/training_not_implemented" class="nav-link  <?php if ($page == 'training_not_implemented') : echo 'active';
+                                                                                                            endif; ?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Training Tidak Dilaksanakan</p>
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
                             <li class="nav-item">
                                 <a href="<?= base_url() ?>/budget" class="nav-link  <?php if ($page == 'budget') : echo 'active';

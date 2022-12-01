@@ -271,7 +271,7 @@
                 <div class="styling">
                     <div class="d-flex justify-content-center d-flex flex-column">
                         <h6>Kompetensi yang disasar oleh pelatihan<span style="color:red;">*</span></h6>
-                        <input type="text" name="kompetensi1">
+                        <input type="text" name="kompetensi1" vaue="">
                     </div>
                     <div class="d-flex justify-content-center d-flex flex-column">
                         <h6>Ada Peningkatan/Tidak<span style="color:red;">*</span></h6>

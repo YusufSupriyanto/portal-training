@@ -16,4 +16,11 @@ class M_Approval extends Model
     {
         return $this->where(['id_tna' => $id])->first();
     }
+
+    public function getTrainingNotImplemented()
+    {
+        $this->select()->where('status_training', 0);
+        $this->join('tna', 'tna.id_tna = approval.id_tna');
+        return $this->get()->getResultArray();
+    }
 }

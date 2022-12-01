@@ -19,6 +19,7 @@ use App\Models\M_CompetencyCompany;
 use App\Models\M_CompetencyExpert;
 use App\Models\M_CompetencySoft;
 use App\Models\M_CompetencyTechnicalB;
+use App\Models\M_Nilai;
 use App\Models\M_Technical;
 
 class FormTna extends BaseController
@@ -42,6 +43,7 @@ class FormTna extends BaseController
     private M_CompetencySoft $competencySoft;
     private M_CompetencyCompany $competencyCompany;
     private M_CompetencyTechnicalB $competencyTechnicalB;
+    private M_Nilai $nilai;
 
 
     public function __construct()
@@ -62,6 +64,7 @@ class FormTna extends BaseController
         $this->competencyExpert = new M_CompetencyExpert();
         $this->competencySoft = new M_CompetencySoft();
         $this->competencyTechnicalB = new M_CompetencyTechnicalB();
+        $this->nilai = new M_Nilai();
     }
 
     //function untuk menamplilkan data member dengan user yang akan di daftarkan tna
@@ -462,7 +465,7 @@ class FormTna extends BaseController
 
 
         $type_kompetensi = explode(",", $competency);
-        dd($type_kompetensi);
+        //dd($type_kompetensi);
 
 
         $deadline = $this->request->getVar('deadline');
@@ -523,6 +526,7 @@ class FormTna extends BaseController
         //dd($data);
         $this->tna->save($data);
 
+
         $id  = $this->tna->getIdTna();
 
         $data2 = [
@@ -539,6 +543,15 @@ class FormTna extends BaseController
             'id_tna' => $id->id_tna,
             'id_user' => $id_user
         ];
+        $nilai = [
+            'id_tna' => $id->id_tna,
+            'id_competency1' => $type_kompetensi[0],
+            'type_competency1' => $type_kompetensi[1]
+        ];
+        // dd($nilai);
+
+
+        $this->nilai->save($nilai);
         $this->approval->save($data2);
         $this->evaluasiReaksi->save($data3);
         $this->history->save($data4);

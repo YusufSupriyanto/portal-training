@@ -20,8 +20,6 @@ class C_CompetencyAstra extends BaseController
     private M_Astra $astra;
     private UserModel $user;
 
-    private M_DetailAstra $detailAstra;
-
     private M_CompetencyAstra $competencyAstra;
 
     private M_ListTraining $training;
@@ -30,7 +28,6 @@ class C_CompetencyAstra extends BaseController
         $this->astra = new M_Astra();
         $this->user = new UserModel();
         $this->competencyAstra = new M_CompetencyAstra();
-        $this->detailAstra = new M_DetailAstra();
         $this->training = new M_ListTraining();
     }
 

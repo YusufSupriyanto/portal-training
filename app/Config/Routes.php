@@ -150,10 +150,12 @@ $routes->post('/detail_reject', 'Admin\C_Tna::detailReject', ['filter' => 'Auth'
 $routes->get('/detail_reject', 'Admin\C_Tna::detailReject', ['filter' => 'Auth']);
 $routes->get('/training_ditolak', 'Admin\C_Tna::TrainingDitolak', ['filter' => 'Auth']);
 $routes->get('/training_fixed', 'Admin\C_Tna::TrainingFix', ['filter' => 'Auth']);
+$routes->get('/training_not_implemented', 'Admin\C_Tna::TrainingNotImplemented', ['filter' => 'Auth']);
 
 //schedule training
 $routes->get('/schedule_training', 'Admin\C_Schedule::index', ['filter' => 'Auth']);
 $routes->get('/schedule_action/(:num)', 'Admin\C_Schedule::askForEvaluation/$1', ['filter' => 'Auth']);
+$routes->post('/schedule_not_implemented', 'Admin\C_Schedule::NotImplemented', ['filter' => 'Auth']);
 
 //history
 $routes->get('/history', 'Admin\C_History::index', ['filter' => 'Auth']);

@@ -36,12 +36,12 @@
                             id="mulai-training<?= $i ?>"></td>
                     <td><input type="date" value="<?= $tnas['rencana_training'] ?>" name="rencana-training<?= $i ?>"
                             id="rencana-training<?= $i ?>"></td>
-                    <td>Rp.<?= $tnas['biaya'] ?></td>
+                    <td><?= "Rp. " . number_format($tnas['biaya'], 0, ',', '.'); ?></td>
                     <td>
                         <div class="d-flex flex-row">
-                            <label for="biaya" class="h6">Rp.</label>
                             <input type="text" id="biaya<?= $i ?>" name="biaya<?= $i ?>"
-                                value="<?= $tnas['biaya_actual'] ?>" onchange="format(<?= $i ?>)">
+                                value="<?= "Rp. " . number_format($tnas['biaya_actual'], 0, ',', '.'); ?>"
+                                onkeyup="rupiah('biaya<?= $i ?>')">
                         </div>
                     </td>
                     <td>
@@ -114,50 +114,33 @@
     <!-- /.card-body -->
 </div>
 <script>
-//for change TNA 
-// $("#btn-accept-admin-admin").on('click', function() {
-//     var id_tna = $('#accept-admin').val();
-//     var biaya_actual = $('#biaya').val();
-//     console.log(id_tna);
-//     console.log(biaya_actual);
-//     $.ajax({
-//         type: 'post',
-//         url: "<?= base_url(); ?>/accept_adminfixed",
-//         async: true,
-//         dataType: "json",
-//         data: {
-//             id_tna: id_tna,
-//             biaya_actual: biaya_actual
-//         },
-//         success: function(data) {
-//             window.location.reload()
+function rupiah(id) {
 
-//         }
+    var rupiah = document.getElementById(id);
+    rupiah.addEventListener("keyup", function(e) {
+        // tambahkan 'Rp.' pada saat form di ketik
+        // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
+        rupiah.value = formatRupiah(this.value, "Rp. ");
+    });
 
-//     })
-// })
+    /* Fungsi formatRupiah */
+    function formatRupiah(angka, prefix) {
+        var number_string = angka.replace(/[^,\d]/g, "").toString(),
+            split = number_string.split(","),
+            sisa = split[0].length % 3,
+            rupiah = split[0].substr(0, sisa),
+            ribuan = split[0].substr(sisa).match(/\d{3}/gi);
 
-// //for reject tna
-// $("#btn-reject").on('click', function() {
-//     var id_tna = $('#reject').val();
-//     var biaya_actual = $('#biaya').val();
-//     console.log(id_tna);
-//     console.log(biaya_actual);
-//     $.ajax({
-//         type: 'post',
-//         url: "<?= base_url(); ?>/reject_adminfixed",
-//         async: true,
-//         dataType: "json",
-//         data: {
-//             id_tna: id_tna,
-//             biaya_actual: biaya_actual
-//         },
-//         success: function(data) {
-//             window.location.reload()
+        // tambahkan titik jika yang di input sudah menjadi angka ribuan
+        if (ribuan) {
+            separator = sisa ? "." : "";
+            rupiah += separator + ribuan.join(".");
+        }
 
-//         }
+        rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
+        return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
+    }
 
-//     })
-// })
+}
 </script>
 <?= $this->endSection() ?>

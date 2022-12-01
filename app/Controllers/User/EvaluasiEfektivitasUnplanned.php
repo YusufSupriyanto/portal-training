@@ -23,10 +23,9 @@ class EvaluasiEfektivitasUnplanned extends BaseController
 
     public function index()
     {
-        $efektifitas = $this->unplanned->getDataEfektivitas();
-        //  dd($efektifitas);
+        $id = session()->get('id');
+        $efektifitas = $this->unplanned->getDataEfektivitas($id);
         $dataEvaluasifixed = [];
-
         foreach ($efektifitas as $efektif) {
 
             $date_training = date_create($efektif['rencana_training']);
@@ -42,7 +41,6 @@ class EvaluasiEfektivitasUnplanned extends BaseController
                     'tanggal' => $efektif['rencana_training'],
                     'status' =>  $efektif['status_efektivitas']
                 ];
-
                 array_push($dataEvaluasifixed, $dataEvaluasiProcess);
             }
         }
@@ -50,7 +48,6 @@ class EvaluasiEfektivitasUnplanned extends BaseController
             'tittle' => 'Evaluasi Efektivitas Unplanned Training',
             'evaluasi' => $dataEvaluasifixed
         ];
-
         //dd($data);
         return view('user/evaluasiefektifitasunplanned', $data);
     }
