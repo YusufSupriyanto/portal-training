@@ -11,7 +11,8 @@ class M_Nilai extends Model
     // protected $useAutoIncrement = true;
     protected $allowedFields = [
         'id_competency1', 'type_competency1', 'id_competency2', 'type_competency2',
-        'id_competency3', 'type_competency3', 'id_competency4', 'type_competency4', 'id_competency5', 'type_competency5',
+        'id_competency3', 'type_competency3', 'id_competency4', 'type_competency4',
+        'id_competency5', 'type_competency5', 'id_tna'
     ];
 
     public function getDataNilai($id)

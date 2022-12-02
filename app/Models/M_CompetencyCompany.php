@@ -24,6 +24,13 @@ class M_CompetencyCompany extends Model
         $this->join('company_competency', 'company_competency.id_company = competency_profile_company.id_company');
         return $this->get()->getResultArray();
     }
+    public function getCompanyByIdCompetency($id)
+    {
+
+        $this->select('company_competency.company,company_competency.proficiency,competency_profile_company.id_competency_company,competency_profile_company.score_company')->where('competency_profile_company.id_profile_company', $id);
+        $this->join('company_competency', 'company_competency.id_company = competency_profile_company.id_company');
+        return $this->get()->getResultArray();
+    }
 
     public function getDataDivisi()
     {

@@ -3,6 +3,12 @@
 namespace App\Controllers\User;
 
 use App\Controllers\BaseController;
+use App\Models\M_CompetencyAstra;
+use App\Models\M_CompetencyCompany;
+use App\Models\M_CompetencyExpert;
+use App\Models\M_CompetencySoft;
+use App\Models\M_CompetencyTechnical;
+use App\Models\M_CompetencyTechnicalB;
 use App\Models\M_EvaluasiEfektifitas;
 use App\Models\M_EvaluasiReaksi;
 use App\Models\M_Nilai;
@@ -18,17 +24,30 @@ class EvaluasiEfektifitas extends BaseController
 {
 
     private M_Tna $tna;
-    private M_EvaluasiEfektifitas $efektivitas;
+    private M_EvaluasiEfektifitas $evaluasiEfektivitas;
+    private M_CompetencyAstra  $competencyAstra;
+    private M_CompetencyExpert $competencyExpert;
+    private M_CompetencySoft $competencySoft;
+    private M_CompetencyCompany $competencyCompany;
+
+    private M_CompetencyTechnical $competencyTechnical;
+    private M_CompetencyTechnicalB $competencyTechnicalB;
 
     private UserModel $user;
-
     private M_Nilai $nilai;
+
+
     public function __construct()
     {
         $this->tna = new M_Tna();
-        $this->efektivitas = new M_EvaluasiEfektifitas();
+        $this->evaluasiEfektivitas = new M_EvaluasiEfektifitas();
         $this->user = new UserModel();
         $this->nilai = new M_Nilai();
+        $this->competencyAstra = new M_CompetencyAstra();
+        $this->competencyCompany = new  M_CompetencyCompany();
+        $this->competencyExpert = new M_CompetencyExpert();
+        $this->competencyTechnical = new M_CompetencyTechnical();
+        $this->competencyTechnicalB = new M_CompetencyTechnicalB();
     }
 
     public function index()
@@ -37,8 +56,6 @@ class EvaluasiEfektifitas extends BaseController
 
         $efektifitas = $this->tna->getDataEfektivitas($id);
         // dd($efektifitas);
-
-
         $dataEvaluasifixed = [];
 
         foreach ($efektifitas as $efektif) {
@@ -72,21 +89,159 @@ class EvaluasiEfektifitas extends BaseController
     public function formEvaluasi($id)
     {
         $evaluation  = $this->tna->getDataForEvaluation($id);
-        $nilai = $this->nilai->getDataNilai($id);
-        dd($nilai);
-        $data = [
-            'tittle' => 'Form Evaluasi Efektifitas',
-            'evaluasi' => $evaluation,
-            'nilai' => $nilai
-        ];
-        return view('user/formefektivitas', $data);
+        // dd($evaluation[0]['id_competency1']);
+        if ($evaluation[0]['type_golongan'] == 'A         ' && $evaluation[0]['type_user'] == 'REGULAR             ') {
+            $CompetencyFixed = [];
+            if ($evaluation[0]['type_competency1'] == 'Astra     ') {
+                $competency_now = $this->competencyAstra->getAstraByIdCompetency($evaluation[0]['id_competency1']);
+                foreach ($competency_now as $Competency_Now) {
+                    $competency = [
+                        'id' => $Competency_Now['id_competency_astra'],
+                        'category' => "ALC - " . $Competency_Now['astra'],
+                        'competency' => $Competency_Now['astra'],
+                        'proficiency' => $Competency_Now['proficiency'],
+                        'score' => $Competency_Now['score_astra'],
+                        'keterangan' => 'Astra'
+                    ];
+                    array_push($CompetencyFixed, $competency);
+                }
+            } else {
+                $competency_now = $this->competencyTechnical->getTechnicalByCompetency($evaluation[0]['id_competency1']);
+                foreach ($competency_now as $Competency_Now) {
+                    $competency = [
+                        'id' => $Competency_Now['id_competency_technical'],
+                        'category' => "Technical Comp - " . $Competency_Now['technical'],
+                        'competency' => $Competency_Now['technical'],
+                        'proficiency' => $Competency_Now['proficiency'],
+                        'score' => $Competency_Now['score_technical'],
+                        'keterangan' => 'TechnicalA'
+                    ];
+                    array_push($CompetencyFixed, $competency);
+                }
+            }
+            // dd($CompetencyFixed);
+            $astra = $this->competencyAstra->getProfileAstraCompetency($evaluation[0]['id_user']);
+            $Astra = [];
+            foreach ($astra as $data) {
+                if ($data['score_astra'] < $data['proficiency']) {
+                    $competency = [
+                        'id' => $data['id_competency_astra'],
+                        'category' => "ALC - " . $data['astra'],
+                        'competency' => $data['astra'],
+                        'proficiency' => $data['proficiency'],
+                        'score' => $data['score_astra'],
+                        'keterangan' => 'Astra'
+                    ];
+                    array_push($Astra, $competency);
+                }
+            }
+            $technicalA = $this->competencyTechnical->getProfileTechnicalCompetency($evaluation[0]['id_user']);
+            $TechnicalA = [];
+            foreach ($technicalA as $dataTech) {
+                if ($dataTech['score_technical'] < $dataTech['proficiency']) {
+                    $competencyTech = [
+                        'id' => $dataTech['id_competency_technical'],
+                        'category' => "Technical Comp - " . $dataTech['technical'],
+                        'competency' => $dataTech['technical'],
+                        'proficiency' => $dataTech['proficiency'],
+                        'score' => $dataTech['score_technical'],
+                        'keterangan' => 'TechnicalA'
+                    ];
+                    array_push($TechnicalA, $competencyTech);
+                }
+            }
+            $target = array_merge($Astra, $TechnicalA);
+            $data = [
+                'tittle' => 'Form Evaluasi Efektifitas',
+                'evaluasi' => $evaluation,
+                'competency' => $CompetencyFixed,
+                'target' => $target
+            ];
+            return view('user/formefektivitas', $data);
+        } elseif ($evaluation[0]['type_golongan'] == 'A         ' && $evaluation[0]['type_user'] == 'EXPERT              ') {
+
+            if ($evaluation[0]['type_competency1'] == 'Expert    ') {
+                $competency_now = $this->competencyExpert->getExpertByIdCompetency($evaluation[0]['id_competency1']);
+                $CompetencyFixed = [];
+                foreach ($competency_now as $Competency_Now) {
+                    $competency = [
+                        'id' => $Competency_Now['id_competency_expert'],
+                        'category' => "Exp - " . $Competency_Now['expert'],
+                        'competency' => $Competency_Now['expert'],
+                        'proficiency' => $Competency_Now['proficiency'],
+                        'score' => $Competency_Now['score_expert'],
+                        'keterangan' => 'Expert'
+                    ];
+                    array_push($CompetencyFixed, $competency);
+                }
+            } else {
+                $competency_now = $this->competencyTechnical->getTechnicalByCompetency($evaluation[0]['id_competency1']);
+                foreach ($competency_now as $Competency_Now) {
+                    $competency = [
+                        'id' => $Competency_Now['id_competency_technical'],
+                        'category' => "Technical Comp - " . $Competency_Now['technical'],
+                        'competency' => $Competency_Now['technical'],
+                        'proficiency' => $Competency_Now['proficiency'],
+                        'score' => $Competency_Now['score_technical'],
+                        'keterangan' => 'TechnicalA'
+                    ];
+                    array_push($CompetencyFixed, $competency);
+                }
+            }
+            $expert = $this->competencyExpert->getProfileExpertCompetency($evaluation[0]['id_user']);
+            $Expert = [];
+            foreach ($expert as $DataExpert) {
+                if ($DataExpert['score_expert'] < $DataExpert['proficiency']) {
+                    $competency = [
+                        'id' => $DataExpert['id_competency_expert'],
+                        'category' => "Exp - " . $DataExpert['expert'],
+                        'competency' => $DataExpert['expert'],
+                        'proficiency' => $DataExpert['proficiency'],
+                        'score' => $DataExpert['score_expert'],
+                        'keterangan' => 'Expert'
+                    ];
+                    array_push($Expert, $competency);
+                }
+            }
+            $technicalA = $this->competencyTechnical->getProfileTechnicalCompetency($evaluation[0]['id_user']);
+            $TechnicalA = [];
+            foreach ($technicalA as $dataTech) {
+                if ($dataTech['score_technical'] < $dataTech['proficiency']) {
+                    $competencyTech = [
+                        'id' => $dataTech['id_competency_technical'],
+                        'category' => "Technical Comp - " . $dataTech['technical'],
+                        'competency' => $dataTech['technical'],
+                        'proficiency' => $dataTech['proficiency'],
+                        'score' => $dataTech['score_technical'],
+                        'keterangan' => 'TechnicalA'
+                    ];
+                    array_push($TechnicalA, $competencyTech);
+                }
+            }
+            $target = array_merge($Expert, $TechnicalA);
+            $data = [
+                'tittle' => 'Form Evaluasi Efektifitas',
+                'evaluasi' => $evaluation,
+                'competency' => $CompetencyFixed,
+                'target' => $target
+            ];
+            return view('user/formefektivitas', $data);
+        } else {
+            //dd('Group B');
+            $company = $this->competencyCompany->getProfileCompanyCompetency($evaluation[0]['id_user']);
+            dd($company);
+            // $soft = $this->competencySoft->getProfileSoftCompetency($evaluation[0]['id_user']);
+            // $technicalB = $this->competencyTechnicalB->getProfileTechnicalCompetencyB($evaluation[0]['id_user']);
+        }
+        // dd($evaluation);
+
     }
 
 
     public function saveEfektivitas()
     {
         $id = $this->request->getPost('id_tna');
-        // dd($id);
+        // dd($id);s
         $id_efektivitas =  $this->efektivitas->getIdEfektivitas($id);
         // dd($id_efektivitas);
         $pengetahuan = $_POST['pengetahuan'];

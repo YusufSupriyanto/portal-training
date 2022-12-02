@@ -24,4 +24,12 @@ class M_CompetencyExpert extends Model
         $this->join('expert_competency', 'expert_competency.id_expert = competency_profile_expert.id_expert');
         return $this->get()->getResultArray();
     }
+
+    public function getExpertByIdCompetency($id)
+    {
+
+        $this->select('expert_competency.expert,expert_competency.proficiency,competency_profile_expert.id_competency_expert,competency_profile_expert.score_expert')->where('competency_profile_expert.id_competency_expert', $id);
+        $this->join('expert_competency', 'expert_competency.id_expert = competency_profile_expert.id_expert');
+        return $this->get()->getResultArray();
+    }
 }

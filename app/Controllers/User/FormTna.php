@@ -503,8 +503,6 @@ class FormTna extends BaseController
             'id_user' => $id_user,
             'id_training' => $id_training,
             'id_budget' => $budget['id_budget'],
-            'id_competency' => $type_kompetensi[0],
-            'type_competency' => $type_kompetensi[1],
             'dic' => $user['dic'],
             'divisi' => $user['divisi'],
             'departemen' => $user['departemen'],
@@ -521,7 +519,6 @@ class FormTna extends BaseController
             'biaya' => $jenis_trainng['biaya'],
             'status' => 'save',
             'kelompok_training' => $kelompok
-
         ];
         //dd($data);
         $this->tna->save($data);
