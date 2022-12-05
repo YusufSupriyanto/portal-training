@@ -24,4 +24,11 @@ class M_CompetencySoft extends Model
         $this->join('soft_competency', 'soft_competency.id_soft = competency_profile_soft.id_soft');
         return $this->get()->getResultArray();
     }
+    public function getSoftByIdCompetency($id)
+    {
+
+        $this->select('soft_competency.soft,soft_competency.proficiency,competency_profile_soft.id_competency_soft,competency_profile_soft.score_soft')->where('competency_profile_soft.id_competency_soft', $id);
+        $this->join('soft_competency', 'soft_competency.id_soft = competency_profile_soft.id_soft');
+        return $this->get()->getResultArray();
+    }
 }

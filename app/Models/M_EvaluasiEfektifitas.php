@@ -13,7 +13,7 @@ class M_EvaluasiEfektifitas extends Model
         'id_tna', 'id_user', 'pengetahuan', 'keterampilan', 'performance', 'perubahan',
         'pelatihan', 'kompetensi1', 'kompetensi2', 'kompetensi3', 'kompetensi4', 'kompetensi5', 'perubahan1', 'perubahan2',
         'perubahan3', 'perubahan4', 'perubahan5', 'keterangan1', 'keterangan2', 'keterangan3', 'keterangan4', 'keterangan5',
-        'note1', 'note2', 'note3', 'note4', 'note5', 'status_efektivitas'
+        'note1', 'note2', 'note3', 'note4', 'note5', 'status_efektivitas', 'score'
     ];
 
 

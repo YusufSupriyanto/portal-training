@@ -10,7 +10,7 @@ use App\Models\M_CompetencySoft;
 use App\Models\M_CompetencyTechnical;
 use App\Models\M_CompetencyTechnicalB;
 use App\Models\M_EvaluasiEfektifitas;
-use App\Models\M_EvaluasiReaksi;
+
 use App\Models\M_Nilai;
 use App\Models\M_Tna;
 use App\Models\UserModel;
@@ -18,7 +18,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-
+use function PHPUnit\Framework\isEmpty;
 
 class EvaluasiEfektifitas extends BaseController
 {
@@ -48,6 +48,7 @@ class EvaluasiEfektifitas extends BaseController
         $this->competencyExpert = new M_CompetencyExpert();
         $this->competencyTechnical = new M_CompetencyTechnical();
         $this->competencyTechnicalB = new M_CompetencyTechnicalB();
+        $this->competencySoft = new M_CompetencySoft();
     }
 
     public function index()
@@ -89,7 +90,7 @@ class EvaluasiEfektifitas extends BaseController
     public function formEvaluasi($id)
     {
         $evaluation  = $this->tna->getDataForEvaluation($id);
-        // dd($evaluation[0]['id_competency1']);
+        //dd($evaluation);
         if ($evaluation[0]['type_golongan'] == 'A         ' && $evaluation[0]['type_user'] == 'REGULAR             ') {
             $CompetencyFixed = [];
             if ($evaluation[0]['type_competency1'] == 'Astra     ') {
@@ -227,11 +228,101 @@ class EvaluasiEfektifitas extends BaseController
             ];
             return view('user/formefektivitas', $data);
         } else {
-            //dd('Group B');
+            $CompetencyFixed = [];
+            if ($evaluation[0]['type_competency1'] == 'Company   ') {
+                $competency_now =   $this->competencyCompany->getCompanyByIdCompetency($evaluation[0]['id_competency1']);
+                foreach ($competency_now as $Competency_Now) {
+                    $competency = [
+                        'id' => $Competency_Now['id_competency_company'],
+                        'category' => "Technical Comp - " . $Competency_Now['company'],
+                        'competency' => $Competency_Now['company'],
+                        'proficiency' => $Competency_Now['proficiency'],
+                        'score' => $Competency_Now['score_company'],
+                        'keterangan' => 'Company'
+                    ];
+                    array_push($CompetencyFixed, $competency);
+                }
+            } elseif ($evaluation[0]['type_competency1'] == 'Soft      ') {
+                $competency_now =  $this->competencySoft->getSoftByIdCompetency($evaluation[0]['id_competency1']);
+                foreach ($competency_now as $Competency_Now) {
+                    $competency = [
+                        'id' => $Competency_Now['id_competency_soft'],
+                        'category' => "Soft - " . $Competency_Now['soft'],
+                        'competency' => $Competency_Now['soft'],
+                        'proficiency' => $Competency_Now['proficiency'],
+                        'score' => $Competency_Now['score_soft'],
+                        'keterangan' => 'Soft'
+                    ];
+                    array_push($CompetencyFixed, $competency);
+                }
+            } else {
+                $competency_now = $this->competencyTechnicalB->getTechnicalByIdCompetencyB($evaluation[0]['id_competency1']);
+                foreach ($competency_now as $Competency_Now) {
+                    $competency = [
+                        'id' => $Competency_Now['id_competency_technicalB'],
+                        'category' => "TechB - " . $Competency_Now['technicalB'],
+                        'competency' => $Competency_Now['technicalB'],
+                        'proficiency' => $Competency_Now['proficiency'],
+                        'score' => $Competency_Now['score'],
+                        'keterangan' => 'Soft'
+                    ];
+                    array_push($CompetencyFixed, $competency);
+                }
+            }
             $company = $this->competencyCompany->getProfileCompanyCompetency($evaluation[0]['id_user']);
-            dd($company);
-            // $soft = $this->competencySoft->getProfileSoftCompetency($evaluation[0]['id_user']);
-            // $technicalB = $this->competencyTechnicalB->getProfileTechnicalCompetencyB($evaluation[0]['id_user']);
+            $Company = [];
+            foreach ($company as $DataCompany) {
+                if ($DataCompany['score_company'] < $DataCompany['proficiency']) {
+                    $competency = [
+                        'id' => $DataCompany['id_competency_company'],
+                        'category' => "Comp - " . $DataCompany['company'],
+                        'competency' => $DataCompany['company'],
+                        'proficiency' => $DataCompany['proficiency'],
+                        'score' => $DataCompany['score_company'],
+                        'keterangan' => 'Company'
+                    ];
+                    array_push($Company, $competency);
+                }
+            }
+            $soft = $this->competencySoft->getProfileSoftCompetency($evaluation[0]['id_user']);
+            $Soft = [];
+            foreach ($soft as $DataSoft) {
+                if ($DataSoft['score_soft'] < $DataSoft['proficiency']) {
+                    $competency = [
+                        'id' => $DataSoft['id_competency_soft'],
+                        'category' => "Soft - " . $DataSoft['soft'],
+                        'competency' => $DataSoft['soft'],
+                        'proficiency' => $DataSoft['proficiency'],
+                        'score' => $DataSoft['score_soft'],
+                        'keterangan' => 'Soft'
+                    ];
+                    array_push($Soft, $competency);
+                }
+            }
+            $technicalB = $this->competencyTechnicalB->getProfileTechnicalCompetencyB($evaluation[0]['id_user']);
+            $TechnicalB = [];
+            foreach ($technicalB as $dataTechnicalB) {
+                if ($dataTechnicalB['score'] < $dataTechnicalB['proficiency']) {
+                    $competency = [
+                        'id' => $dataTechnicalB['id_competency_technicalB'],
+                        'category' => "TechB - " . $dataTechnicalB['technicalB'],
+                        'competency' => $dataTechnicalB['technicalB'],
+                        'proficiency' => $dataTechnicalB['proficiency'],
+                        'score' => $dataTechnicalB['score'],
+                        'keterangan' => 'TechnicalB'
+                    ];
+                    array_push($TechnicalB, $competency);
+                }
+            }
+
+            $target = array_merge($Soft, $Company, $TechnicalB);
+            $data = [
+                'tittle' => 'Form Evaluasi Efektifitas',
+                'evaluasi' => $evaluation,
+                'competency' => $CompetencyFixed,
+                'target' => $target
+            ];
+            return view('user/formefektivitas', $data);
         }
         // dd($evaluation);
 
@@ -241,8 +332,36 @@ class EvaluasiEfektifitas extends BaseController
     public function saveEfektivitas()
     {
         $id = $this->request->getPost('id_tna');
-        // dd($id);s
-        $id_efektivitas =  $this->efektivitas->getIdEfektivitas($id);
+        $competency1 = $this->request->getVar('kompetensi1');
+        $kompetensi1 = explode(",", $competency1);
+        dd($kompetensi1);
+        $competency2 = $this->request->getVar('kompetensi2');
+        $competency3 = $this->request->getVar('kompetensi3');
+        $competency4 = $this->request->getVar('kompetensi4');
+        $competency5 = $this->request->getVar('kompetensi5');
+        if (empty($competency2)) {
+            $kompetensi2 = ["", "", "", ""];
+        } else {
+            $kompetensi2 = explode(",", $competency2);
+        }
+
+        if (empty($competency3)) {
+            $kompetensi3 = ["", "", "", ""];
+        } else {
+            $kompetensi3 = explode(",", $competency3);
+        }
+        if (empty($competency4)) {
+            $kompetensi4 = ["", "", "", ""];
+        } else {
+            $kompetensi4 = explode(",", $competency4);
+        }
+        if (empty($competency5)) {
+            $kompetensi5 = ["", "", "", ""];
+        } else {
+            $kompetensi5 = explode(",", $competency5);
+        }
+        // dd($kompetensi3[3]);
+        $id_efektivitas =  $this->evaluasiEfektivitas->getIdEfektivitas($id);
         // dd($id_efektivitas);
         $pengetahuan = $_POST['pengetahuan'];
         $keteranpilan = $_POST['keterampilan'];
@@ -258,11 +377,11 @@ class EvaluasiEfektifitas extends BaseController
             'note3' => $this->request->getVar('note3'),
             'note4' => $this->request->getVar('note4'),
             'note5' => $this->request->getVar('note5'),
-            'kompetensi1' => $this->request->getVar('kompetensi1'),
-            'kompetensi2' => $this->request->getVar('kompetensi2'),
-            'kompetensi3' => $this->request->getVar('kompetensi3'),
-            'kompetensi4' => $this->request->getVar('kompetensi4'),
-            'kompetensi5' => $this->request->getVar('kompetensi5'),
+            'kompetensi1' => $kompetensi1[3],
+            'kompetensi2' => $kompetensi2[3],
+            'kompetensi3' => $kompetensi3[3],
+            'kompetensi4' => $kompetensi4[3],
+            'kompetensi5' => $kompetensi5[3],
             'perubahan1' => $this->request->getVar('perubahan1'),
             'perubahan2' => $this->request->getVar('perubahan2'),
             'perubahan3' => $this->request->getVar('perubahan3'),
@@ -273,12 +392,37 @@ class EvaluasiEfektifitas extends BaseController
             'keterangan3' => $this->request->getVar('keterangan3'),
             'keterangan4' => $this->request->getVar('keterangan4'),
             'keterangan5' => $this->request->getVar('keterangan5'),
-            'status_efektivitas' => 1
+            'status_efektivitas' => 1,
+            'score' => $this->request->getVar('score'),
         ];
-
         //dd($data);
-        $this->efektivitas->save($data);
-        return redirect()->to('/evaluasi_efektifitas');
+
+        $id_nilai = $this->request->getVar('id_nilai');
+
+        $nilai = [
+            // 'id_nilai' => $id_nilai,
+            'id_competency1' => $kompetensi1[0],
+            'type_competency1' => $kompetensi1[1],
+            'nilai1' => $this->request->getVar('nilai1'),
+            'id_competency2' => $kompetensi2[0],
+            'type_competency2' => $kompetensi2[1],
+            'nilai2' => $this->request->getVar('nilai2'),
+            'id_competency3' => $kompetensi3[0],
+            'type_competency3' => $kompetensi3[1],
+            'nilai3' => $this->request->getVar('nilai3'),
+            'id_competency4' => $kompetensi4[0],
+            'type_competency4' => $kompetensi3[1],
+            'nilai4' => $this->request->getVar('nilai4'),
+            'id_competency5' => $kompetensi5[0],
+            'type_competency5' => $kompetensi3[1],
+            'nilai5' => $this->request->getVar('nilai5'),
+        ];
+        $Nilai_Fixed  = array_chunk($nilai, 3);
+        dd($Nilai_Fixed);
+
+        dd($data);
+        // $this->efektivitas->save($data);
+        // return redirect()->to('/evaluasi_efektifitas');
     }
 
     public function DetailEfektivitas($id)

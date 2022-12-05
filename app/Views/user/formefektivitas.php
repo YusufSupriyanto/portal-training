@@ -248,7 +248,7 @@
                 <label>Rata-Rata</label><br>
             </div>
             <div class="d-flex justify-content-center">
-                <input id="rata-rata" style="text-align:center" disabled>
+                <input id="rata-rata" name="score" style="text-align:center" readonly>
             </div>
         </div>
         <div>
@@ -271,8 +271,10 @@
                 <div class="styling">
                     <div class="d-flex justify-content-center d-flex flex-column">
                         <h6>Kompetensi yang disasar oleh pelatihan<span style="color:red;">*</span></h6>
-                        <select class="custom-select" name="kompetensi1" id="kompetensi1" style="width:200px;" disabled>
-                            <option value="" selected><?= $competency[0]['category']; ?></option>
+                        <select class="custom-select" name="kompetensi1" id="kompetensi1" style="width:200px;">
+                            <option
+                                value="<?= $competency[0]['id'] ?>,<?= $competency[0]['keterangan'] ?>,<?= $competency[0]['score'] ?>,<?= $competency[0]['category']; ?>"
+                                selected><?= $competency[0]['category']; ?></option>
                         </select>
                     </div>
                     <div class="d-flex justify-content-center d-flex flex-column">
@@ -284,11 +286,24 @@
                     </div>
                     <div class="d-flex justify-content-center d-flex flex-column">
                         <h6><span>Score Sebelumnya</span></h6>
-                        <input type="text" name="keterangan1" value="<?= $competency[0]['score']; ?>" disabled>
+                        <input type="text" class="form-control" name="keterangan1"
+                            value="<?= $competency[0]['score']; ?>" readonly>
+
                     </div>
                     <div class="d-flex justify-content-center d-flex flex-column">
                         <h6>Score Setelah Training<span style="color:red;">*</span></h6>
-                        <input type="text" name="nilai1" required>
+                        <select class="custom-select" name="nilai1" required>
+                            <option value="">Choose...</option>
+                            <option value="0.5">0,5</option>
+                            <option value="1">1</option>
+                            <option value="1.5">1,5</option>
+                            <option value="2">2</option>
+                            <option value="2.5">2,5</option>
+                            <option value="3">3</option>
+                            <option value="3.5">3,5</option>
+                            <option value="4">4</option>
+                        </select>
+                        <input type="hidden" value="<?= $evaluation['id_nilai'] ?>" name="id_nilai" name="id_nilai">
                     </div>
                 </div>
                 <div>
@@ -336,9 +351,9 @@ function adding(i) {
                 <div class="d-flex justify-content-center d-flex flex-column">
                     <h6>Kompetensi yang disasar oleh pelatihan<span style="color:red;">*</span></h6>
                      <select class="custom-select" name="kompetensi${i}" id="kompetensi${i}" style="width:200px;" onChange="getScore(${i})">
-                        <option value="Ya" selected>Choose</option>
+                        <option value="" selected>Choose</option>
                         <?php foreach ($target as $Target) : ?>
-                        <option value="<?= $Target['score'] ?>"><?= $Target['category'] ?></option>
+                        <option value="<?= $Target['id'] ?>,<?= $Target['keterangan'] ?>,<?= $Target['score'] ?>,<?= $Target['category'] ?>"><?= $Target['category'] ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -351,11 +366,21 @@ function adding(i) {
                 </div>
                 <div class="d-flex justify-content-center d-flex flex-column">
                     <h6>Score Sebelumnya</h6>
-                    <input type="text" name="keterangan${i}"  id="keterangan${i}" disabled>
+                    <input type="text"  class="form-control" name="keterangan${i}"  id="keterangan${i}" readonly>
                 </div>
                  <div class="d-flex justify-content-center d-flex flex-column">
                         <h6>Score Setelah Training<span style="color:red;">*</span></h6>
-                        <input type="text" name="nilai1">
+                        <select class="custom-select" name="nilai${i}" required>
+                          <option value="">Choose...</option>
+                            <option value="0.5">0,5</option>
+                            <option value="1">1</option>
+                            <option value="1.5">1,5</option>
+                            <option value="2">2</option>
+                            <option value="2.5">2,5</option>
+                            <option value="3">3</option>
+                            <option value="3.5">3,5</option>
+                            <option value="4">4</option>
+                        </select>
                     </div>
             </div>
             <div>
@@ -375,7 +400,8 @@ function removed(i) {
 
 function getScore(id) {
     score = $('#kompetensi' + id).val();
-    $('#keterangan' + id).val(score);
+    str = score.split(',')
+    $('#keterangan' + id).val(str[2]);
 
 }
 </script>
