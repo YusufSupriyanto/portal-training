@@ -7,7 +7,6 @@
             <div class="card-header">
                 <h3 class="card-title">Training</h3>
             </div>
-
             <!-- /.card-header -->
             <div class="card-body table-responsive p-0" style="height: 400px;">
                 <table class="table table-head-fixed display" id="example2">

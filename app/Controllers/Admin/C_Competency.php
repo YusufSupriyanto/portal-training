@@ -55,7 +55,7 @@ class C_Competency extends BaseController
             'tittle' => 'Astra Leadership Competency',
             'astra' => $astra,
             'training' => $training,
-            'check' => $this->detailAstra
+            // 'check' => $this->detailAstra
         ];
         return view('admin/competencyastra', $data);
     }
@@ -229,7 +229,7 @@ class C_Competency extends BaseController
             'tittle' => 'Expert Behavior Competencies',
             'expert' => $expert,
             'training' => $training,
-            'check' => $this->detailExpert
+            // 'check' => $this->detailExpert
         ];
         return view('admin/competencyexpert', $data);
     }

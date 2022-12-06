@@ -136,35 +136,11 @@
                     </table>
                 </div>
                 <?php else : ?>
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Soft Competency</h3>
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Competency</th>
-                                    <th>Proficiency</th>
-                                    <th>Score</th>
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($soft as $Soft) : ?>
-                                <tr>
-                                    <td><?= $Soft['competency'] ?></td>
-                                    <td><?= $Soft['proficiency'] ?></td>
-                                    <td><?= $Soft['score'] ?></td>
-                                </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="card">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Technical Competency</h3>
+                            <h3 class="card-title">Company Competency</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -178,19 +154,21 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($technicalB as $TechnicalB) : ?>
+                                    <?php foreach ($company as $Company) : ?>
                                     <tr>
-                                        <td><?= $TechnicalB['competency'] ?></td>
-                                        <td><?= $TechnicalB['proficiency'] ?></td>
-                                        <td><?= $TechnicalB['score'] ?></td>
+                                        <td><?= $Company['competency'] ?></td>
+                                        <td><?= $Company['proficiency'] ?></td>
+                                        <td><?= $Company['score'] ?></td>
                                     </tr>
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
+
+
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Company Competency</h3>
+                                <h3 class="card-title">Technical Competency</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -204,11 +182,36 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach ($company as $Company) : ?>
+                                        <?php foreach ($technicalB as $TechnicalB) : ?>
                                         <tr>
-                                            <td><?= $Company['competency'] ?></td>
-                                            <td><?= $Company['proficiency'] ?></td>
-                                            <td><?= $Company['score'] ?></td>
+                                            <td><?= $TechnicalB['competency'] ?></td>
+                                            <td><?= $TechnicalB['proficiency'] ?></td>
+                                            <td><?= $TechnicalB['score'] ?></td>
+                                        </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="card-header">
+                                <h3 class="card-title">Soft Competency</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Competency</th>
+                                            <th>Proficiency</th>
+                                            <th>Score</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($soft as $Soft) : ?>
+                                        <tr>
+                                            <td><?= $Soft['competency'] ?></td>
+                                            <td><?= $Soft['proficiency'] ?></td>
+                                            <td><?= $Soft['score'] ?></td>
                                         </tr>
                                         <?php endforeach; ?>
                                     </tbody>
@@ -217,14 +220,14 @@
                             <?php endif; ?>
                             <!-- /.card-body -->
                         </div>
-
                         <!-- form start -->
                         <form role="form" action="<?= base_url() ?>/save_form" method="post" id="form-tna">
                             <div class="card-body">
                                 <div class="form-group">
                                     <input type="hidden" id="role" name="role">
                                     <label>Target Competency<span style="color:red;">*</span></label>
-                                    <select class="form-control" name="kompetensi" id="kompetensi">
+                                    <select class="js-example-basic-single form-control" name="kompetensi"
+                                        id="kompetensi">
                                         <option selected>Choose...</option>
                                         <?php foreach ($target as $competency) : ?>
                                         <option value="<?= $competency['id'] ?>,<?= $competency['keterangan'] ?>">
@@ -402,56 +405,62 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
-                <script>
-                // $(function() {
-                //     $('.datepicker').datepicker({
-                //         format: 'mm/yyyy',
-                //         startDate: '-3d'
-                //     });
-                // });
-                $("#datepicker").datepicker({
-                    format: "M-yyyy",
-                    startView: "months",
-                    minViewMode: "months"
-                });
-                //for change kompetensi
-                $('#kompetensi').on('change', function() {
-                    var competency = this.value;
-                    console.log(competency);
-                })
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+// $(function() {
+//     $('.datepicker').datepicker({
+//         format: 'mm/yyyy',
+//         startDate: '-3d'
+//     });
+// });
+$("#datepicker").datepicker({
+    format: "M-yyyy",
+    startView: "months",
+    minViewMode: "months"
+});
+//for change kompetensi
+$('#kompetensi').on('change', function() {
+    var competency = this.value;
+    console.log(competency);
+})
 
-                //for change TNA 
-                $("#training").on('change', function() {
-                    var id_training = this.value;
-                    console.log(id_training);
+//for change TNA 
+$("#training").on('change', function() {
+    var id_training = this.value;
+    console.log(id_training);
 
-                    $.ajax({
-                        type: 'post',
-                        url: "<?= base_url(); ?>/User/FormTna",
-                        async: true,
-                        dataType: "json",
-                        data: {
-                            id_training: id_training
-                        },
-                        success: function(data) {
-
-
-                            console.log(data.jenis_training);
-
-                            const format = data.biaya.toString().split('').reverse().join('');
-                            const convert = format.match(/\d{1,3}/g);
-                            const rupiah = 'Rp ' + convert.join('.').split('').reverse().join('')
-                            console.log(rupiah)
-
-                            $("#jenis_training").val(data.jenis_training)
+    $.ajax({
+        type: 'post',
+        url: "<?= base_url(); ?>/User/FormTna",
+        async: true,
+        dataType: "json",
+        data: {
+            id_training: id_training
+        },
+        success: function(data) {
 
 
-                            $("#biaya").val(rupiah)
-                        }
+            console.log(data.jenis_training);
 
-                    })
-                })
-                </script>
-                <?= $this->endSection() ?>
+            const format = data.biaya.toString().split('').reverse().join('');
+            const convert = format.match(/\d{1,3}/g);
+            const rupiah = 'Rp ' + convert.join('.').split('').reverse().join('')
+            console.log(rupiah)
+
+            $("#jenis_training").val(data.jenis_training)
+
+
+            $("#biaya").val(rupiah)
+        }
+
+    })
+})
+$(document).ready(function() {
+    $('.js-example-basic-single').select2();
+});
+</script>
+<?= $this->endSection() ?>

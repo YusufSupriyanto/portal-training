@@ -19,7 +19,8 @@ class M_EvaluasiEfektifitas extends Model
 
     public function getIdEfektivitas($id)
     {
-        $this->select()->where(['id_tna' => $id]);
+        $this->select()->where(['evaluasi_efektivitas.id_tna' => $id]);
+        $this->join('nilai', 'nilai.id_tna = evaluasi_efektivitas.id_tna');
         return $this->get()->getResultArray();
     }
 }

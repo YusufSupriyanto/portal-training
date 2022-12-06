@@ -466,10 +466,11 @@ class M_Tna extends Model
 
     public function getDataForEvaluation($id)
     {
-        $this->select('tna.*,approval.*,user.*,nilai.*')->where('tna.id_tna', $id);
+        $this->select('tna.*,approval.*,user.*,nilai.*,evaluasi_efektivitas.*')->where('tna.id_tna', $id);
         $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept');
         $this->join('user', 'user.id_user = tna.id_user');
         $this->join('nilai', 'nilai.id_tna = tna.id_tna');
+        $this->join('evaluasi_efektivitas', 'evaluasi_efektivitas.id_tna = tna.id_tna');
         return $this->get()->getResultArray();
     }
     public function getDataForEvaluationTraining($id)

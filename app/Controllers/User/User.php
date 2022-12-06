@@ -245,31 +245,7 @@ class User extends BaseController
                         </table>
                         </div>
                ';
-            echo
-            ' <div class="card w-100 m-1">
-                <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Soft Competency</th>
-                                    <th>Proficiency</th>
-                                    <th>Score</th>
-                                </tr>
-                            </thead>
-                            <tbody>';
-            foreach ($soft as $softy) {
-                echo '<tr>
-<td>' . $softy['soft'] . '</td>
-<td>' . $softy['proficiency'] . '</td>
-<td>
-' . $softy['score_soft'] . '
-</td>
-</tr>';
-            }
 
-            echo '                           </tbody>
-                        </table>
-                        </div>
-               ';
 
 
             echo '
@@ -288,6 +264,36 @@ class User extends BaseController
 <td>' . $technical['technicalB'] . '</td>
 <td>' . $technical['proficiency'] . '</td>
 <td>' . $technical['score'] . '
+</td>
+</tr>';
+            }
+
+            echo '                           </tbody>
+                        </table>
+                        </div>
+                        
+               ';
+
+
+
+
+            echo
+            ' <div class="card w-100 m-1">
+                <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Soft Competency</th>
+                                    <th>Proficiency</th>
+                                    <th>Score</th>
+                                </tr>
+                            </thead>
+                            <tbody>';
+            foreach ($soft as $softy) {
+                echo '<tr>
+<td>' . $softy['soft'] . '</td>
+<td>' . $softy['proficiency'] . '</td>
+<td>
+' . $softy['score_soft'] . '
 </td>
 </tr>';
             }

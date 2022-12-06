@@ -234,7 +234,7 @@ class EvaluasiEfektifitas extends BaseController
                 foreach ($competency_now as $Competency_Now) {
                     $competency = [
                         'id' => $Competency_Now['id_competency_company'],
-                        'category' => "Technical Comp - " . $Competency_Now['company'],
+                        'category' => "Company - " . $Competency_Now['company'],
                         'competency' => $Competency_Now['company'],
                         'proficiency' => $Competency_Now['proficiency'],
                         'score' => $Competency_Now['score_company'],
@@ -264,7 +264,7 @@ class EvaluasiEfektifitas extends BaseController
                         'competency' => $Competency_Now['technicalB'],
                         'proficiency' => $Competency_Now['proficiency'],
                         'score' => $Competency_Now['score'],
-                        'keterangan' => 'Soft'
+                        'keterangan' => 'TechnicalB'
                     ];
                     array_push($CompetencyFixed, $competency);
                 }
@@ -275,7 +275,7 @@ class EvaluasiEfektifitas extends BaseController
                 if ($DataCompany['score_company'] < $DataCompany['proficiency']) {
                     $competency = [
                         'id' => $DataCompany['id_competency_company'],
-                        'category' => "Comp - " . $DataCompany['company'],
+                        'category' => "Company - " . $DataCompany['company'],
                         'competency' => $DataCompany['company'],
                         'proficiency' => $DataCompany['proficiency'],
                         'score' => $DataCompany['score_company'],
@@ -334,7 +334,7 @@ class EvaluasiEfektifitas extends BaseController
         $id = $this->request->getPost('id_tna');
         $competency1 = $this->request->getVar('kompetensi1');
         $kompetensi1 = explode(",", $competency1);
-        dd($kompetensi1);
+        //dd($kompetensi1);
         $competency2 = $this->request->getVar('kompetensi2');
         $competency3 = $this->request->getVar('kompetensi3');
         $competency4 = $this->request->getVar('kompetensi4');
@@ -398,9 +398,28 @@ class EvaluasiEfektifitas extends BaseController
         //dd($data);
 
         $id_nilai = $this->request->getVar('id_nilai');
+        $nilai_save = [
+            'id_nilai' => $id_nilai,
+            'id_competency1' => $kompetensi1[0],
+            'type_competency1' => $kompetensi1[1],
+            'nilai1' => $this->request->getVar('nilai1'),
+            'id_competency2' => $kompetensi2[0],
+            'type_competency2' => $kompetensi2[1],
+            'nilai2' => $this->request->getVar('nilai2'),
+            'id_competency3' => $kompetensi3[0],
+            'type_competency3' => $kompetensi3[1],
+            'nilai3' => $this->request->getVar('nilai3'),
+            'id_competency4' => $kompetensi4[0],
+            'type_competency4' => $kompetensi3[1],
+            'nilai4' => $this->request->getVar('nilai4'),
+            'id_competency5' => $kompetensi5[0],
+            'type_competency5' => $kompetensi3[1],
+            'nilai5' => $this->request->getVar('nilai5'),
+        ];
+
+        $this->nilai->save($nilai_save);
 
         $nilai = [
-            // 'id_nilai' => $id_nilai,
             'id_competency1' => $kompetensi1[0],
             'type_competency1' => $kompetensi1[1],
             'nilai1' => $this->request->getVar('nilai1'),
@@ -418,16 +437,57 @@ class EvaluasiEfektifitas extends BaseController
             'nilai5' => $this->request->getVar('nilai5'),
         ];
         $Nilai_Fixed  = array_chunk($nilai, 3);
-        dd($Nilai_Fixed);
 
-        dd($data);
-        // $this->efektivitas->save($data);
-        // return redirect()->to('/evaluasi_efektifitas');
+
+        foreach ($Nilai_Fixed as $Nilai) {
+            if ($Nilai[1] == 'Astra') {
+                $Astra = [
+                    'id_competency_astra' => $Nilai[0],
+                    'score_astra' => $Nilai[2]
+                ];
+                $this->competencyAstra->save($Astra);
+            } elseif ($Nilai[1] == 'Expert') {
+                $Expert = [
+                    'id_competency_expert' => $Nilai[0],
+                    'score_expert' => $Nilai[2]
+                ];
+                $this->competencyExpert->save($Expert);
+            } elseif ($Nilai[1] == 'TechnicalA') {
+                $Technical = [
+                    'id_competency_technical' => $Nilai[0],
+                    'score_technical' => $Nilai[2]
+                ];
+                $this->competencyTechnical->save($Technical);
+            } elseif ($Nilai[1] == 'Company') {
+                $Company = [
+                    'id_competency_company' => $Nilai[0],
+                    'score_company' => $Nilai[2]
+                ];
+                $this->competencyCompany->save($Company);
+            } elseif ($Nilai[1] == 'Soft') {
+                $Soft = [
+                    'id_competency_soft' => $Nilai[0],
+                    'score_soft' => $Nilai[2]
+                ];
+                $this->competencySoft->save($Soft);
+            } elseif ($Nilai[1] == 'TechnicalB') {
+                $TehnicalB = [
+                    'id_competency_technicalB' => $Nilai[0],
+                    'score' => $Nilai[2]
+                ];
+                $this->competencyTechnicalB->save($TehnicalB);
+            }
+        }
+
+        $this->evaluasiEfektivitas->save($data);
+        return redirect()->to('/evaluasi_efektifitas');
     }
 
     public function DetailEfektivitas($id)
     {
         $evaluation  = $this->tna->getDataForEvaluation($id);
+
+        //dd($evaluation);
         $data = [
             'tittle' => 'View Data Efektivitas',
             'evaluasi' => $evaluation
@@ -438,7 +498,7 @@ class EvaluasiEfektifitas extends BaseController
     public function DataEvaluasiEfektivitas()
     {
         $training = $this->request->getPost('id_training');
-        $data = $this->efektivitas->getIdEfektivitas($training);
+        $data = $this->evaluasiEfektivitas->getIdEfektivitas($training);
         echo json_encode($data);
     }
 

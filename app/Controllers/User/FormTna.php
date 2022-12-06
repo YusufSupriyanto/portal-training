@@ -250,7 +250,7 @@ class FormTna extends BaseController
                     if ($DataCompany['score_company'] < $DataCompany['proficiency']) {
                         $competency = [
                             'id' => $DataCompany['id_competency_company'],
-                            'category' => "Comp - " . $DataCompany['company'],
+                            'category' => "Company - " . $DataCompany['company'],
                             'competency' => $DataCompany['company'],
                             'proficiency' => $DataCompany['proficiency'],
                             'score' => $DataCompany['score_company'],
@@ -302,7 +302,7 @@ class FormTna extends BaseController
             } else {
                 $TechnicalB = [];
             }
-            $target = array_merge($Soft, $Company, $TechnicalB);
+            $target = array_merge($Company, $TechnicalB, $Soft);
             $data = [
                 'tittle' => 'TRAINING NEED ANALYSIS',
                 'user' => $user,
@@ -545,7 +545,7 @@ class FormTna extends BaseController
             'id_competency1' => $type_kompetensi[0],
             'type_competency1' => $type_kompetensi[1]
         ];
-        // dd($nilai);
+        //dd($nilai);
 
 
         $this->nilai->save($nilai);

@@ -130,8 +130,8 @@
                 </div>
                 <div class="form-group">
                     <label>keterangan</label>
-                    <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" name="note1"
-                        required></textarea>
+                    <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3"
+                        name="note1"><?= $evaluasi[0]['note1'] ?></textarea>
                 </div>
             </div>
             <p>
@@ -158,8 +158,8 @@
                 </div>
                 <div class="form-group">
                     <label>keterangan</label>
-                    <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" name="note2"
-                        required></textarea>
+                    <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3"
+                        name="note2"><?= $evaluasi[0]['note2'] ?></textarea>
                 </div>
             </div>
             <p>
@@ -185,8 +185,8 @@
                 </div>
                 <div class="form-group">
                     <label>keterangan</label>
-                    <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" name="note3"
-                        required></textarea>
+                    <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3"
+                        name="note3"><?= $evaluasi[0]['note3'] ?></textarea>
                 </div>
             </div>
             <p>
@@ -213,8 +213,8 @@
                 </div>
                 <div class="form-group">
                     <label>keterangan</label>
-                    <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" name="note4"
-                        required></textarea>
+                    <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3"
+                        name="note4"><?= $evaluasi[0]['note4'] ?></textarea>
                 </div>
             </div>
             <p>
@@ -241,8 +241,8 @@
                 </div>
                 <div class="form-group">
                     <label>keterangan</label>
-                    <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" name="note5"
-                        required></textarea>
+                    <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3"
+                        name="note5"><?= $evaluasi[0]['note5'] ?></textarea>
                 </div>
             </div>
         </div>
@@ -275,7 +275,7 @@
             <div class="styling">
                 <div class="d-flex justify-content-center d-flex flex-column">
                     <h6>Kompetensi yang disasar oleh pelatihan<span style="color:red;">*</span></h6>
-                    <input type="text" name="kompetensi1" id="kompetensi1">
+                    <input class="form-control" type="text" name="kompetensi1" id="kompetensi1" readonly>
                 </div>
                 <div class="d-flex justify-content-center d-flex flex-column">
                     <h6>Ada Peningkatan/Tidak<span style="color:red;">*</span></h6>
@@ -285,13 +285,20 @@
                     </select>
                 </div>
                 <div class="d-flex justify-content-center d-flex flex-column">
-                    <h6>Jika Ya<span style="color:red;">*</span></h6>
-                    <input type="text" name="keterangan1" id="keterangan1">
+                    <h6>Score Sebelum Training</h6>
+                    <input class="form-control" type="text" name="keterangan1" id="keterangan1" readonly>
+                </div>
+                <div class="d-flex justify-content-center d-flex flex-column">
+                    <h6>Score Setelah Training<span style="color:red;">*</span></h6>
+                    <select class="custom-select" name="nilai1" required>
+                        <option value=""><?= $evaluasi[0]['nilai1'] ?></option>
+                    </select>
                 </div>
             </div>
+
             <div>
-                <button type="button" class="btn btn-success btn-sm" onclick="adding(1)"><i
-                        class="fa-solid fa-plus"></i> Tambah Sasaran Kompetensi</button>
+                <button type="button" class="btn btn-success btn-sm mt-2" style="margin-left:38px;"
+                    onclick="adding(1)"><i class="fa-solid fa-plus"></i> Tambah Sasaran Kompetensi</button>
             </div>
         </div>
     </div>
@@ -339,7 +346,6 @@ $(document).ready(function() {
                     $('#efektivitas').find(':radio[name = pelatihan][value="' + i + '"]').prop(
                         'checked',
                         true)
-
                 }
             }
             $('#score1').html(data[0].pengetahuan)
@@ -389,7 +395,7 @@ function adding(i) {
             <div class="styling">
                 <div class="d-flex justify-content-center d-flex flex-column">
                     <h6>Kompetensi yang disasar oleh pelatihan<span style="color:red;">*</span></h6>
-                    <input type="text" name="kompetensi${i}" id="kompetensi${i}">
+                    <input class="form-control" type="text" name="kompetensi${i}" id="kompetensi${i}" readonly>
                 </div>
                 <div class="d-flex justify-content-center d-flex flex-column">
                     <h6>Ada Peningkatan/Tidak<span style="color:red;">*</span></h6>
@@ -400,13 +406,27 @@ function adding(i) {
                 </div>
                 <div class="d-flex justify-content-center d-flex flex-column">
                     <h6>Jika Ya<span style="color:red;">*</span></h6>
-                    <input type="text" name="keterangan${i}" id="keterangan${i}">
+                    <input class="form-control" type="text" name="keterangan${i}" id="keterangan${i}" readonly>
+                </div>
+                 <div class="d-flex justify-content-center d-flex flex-column">
+                    <h6>Score Setelah Training<span style="color:red;">*</span></h6>
+                    <select class="custom-select" id="nilai${i}" name="nilai${i}" required>
+                        <option value="">Choose...</option>
+                        <option value="0.5">0,5</option>
+                        <option value="1">1</option>
+                        <option value="1.5">1,5</option>
+                        <option value="2">2</option>
+                        <option value="2.5">2,5</option>
+                        <option value="3">3</option>
+                        <option value="3.5">3,5</option>
+                        <option value="4">4</option>
+                    </select>
                 </div>
             </div>
             <div>
-                <button type="button" class="btn btn-success btn-sm" onclick="adding(${i})"><i
+                <button type="button" class="btn btn-success btn-sm mt-2" onclick="adding(${i})" style="margin-left:38px;"><i
                         class="fa-solid fa-plus"></i>Tambah Sasaran Kompetensi</button>
-                        <button type="button" class="btn btn-danger btn-sm" id="removed${i}" onclick="removed(${i})"><i
+                        <button type="button" class="btn btn-danger btn-sm mt-2" id="removed${i}" onclick="removed(${i})"><i
                         class="fa fa-close"></i></button>
             </div>
         </div>
@@ -422,25 +442,34 @@ function adding(i) {
                 id_training: id_training
             },
             success: function(data) {
+                console.log(data)
                 if (i == 2) {
                     $('#kompetensi2').val(data[0].kompetensi2)
                     $('#keterangan2').val(data[0].keterangan2)
                     $("#perubahan2 option[value='" + data[0].perubahan2 + "']").attr("selected",
+                        "selected");
+                    $("#nilai2 option[value='" + data[0].nilai2 + "']").attr("selected",
                         "selected");
                 } else if (i == 3) {
                     $('#kompetensi3').val(data[0].kompetensi3)
                     $('#keterangan3').val(data[0].keterangan3)
                     $("#perubahan3 option[value='" + data[0].perubahan3 + "']").attr("selected",
                         "selected");
+                    $("#nilai3 option[value='" + data[0].nilai3 + "']").attr("selected",
+                        "selected");
                 } else if (i == 4) {
                     $('#kompetensi4').val(data[0].kompetensi4)
                     $('#keterangan4').val(data[0].keterangan4)
                     $("#perubahan4 option[value='" + data[0].perubahan4 + "']").attr("selected",
                         "selected");
+                    $("#nilai4 option[value='" + data[0].nilai4 + "']").attr("selected",
+                        "selected");
                 } else {
                     $('#kompetensi5').val(data[0].kompetensi5)
                     $('#keterangan5').val(data[0].keterangan5)
                     $("#perubahan5 option[value='" + data[0].perubahan5 + "']").attr("selected",
+                        "selected");
+                    $("#nilai5 option[value='" + data[0].nilai5 + "']").attr("selected",
                         "selected");
                 }
             }
