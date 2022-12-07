@@ -24,8 +24,6 @@
         </div>
     </div>
 </div>
-
-
 <div class="card">
     <?php foreach ($jenis as $categories) : ?>
     <div class="card card-primary card-outline">

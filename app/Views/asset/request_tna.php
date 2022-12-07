@@ -11,9 +11,8 @@ function AcceptKadiv(i) {
             id_tna: id_tna,
         },
         success: function(data) {
-            //  jQuery.noConflict()
             window.location.reload()
-            //console.log(data)
+
 
         }
 
@@ -50,7 +49,6 @@ function reject_kadiv(i) {
             },
             success: function(data) {
                 window.location.reload()
-                //console.log(data)
             }
 
         })
@@ -70,9 +68,7 @@ function AcceptBod(i) {
             id_tna: id_tna,
         },
         success: function(data) {
-            // jQuery.noConflict()
             window.location.reload()
-            //console.log(data)
         }
 
     })

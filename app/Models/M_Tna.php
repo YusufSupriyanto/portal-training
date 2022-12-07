@@ -436,7 +436,7 @@ class M_Tna extends Model
     public function getDataJadwalHome($date)
     {
 
-        $sql = $this->query("select id_training,metode_training,jenis_training, training as Training,COUNT(training) as Pendaftar,kategori_training,mulai_training,rencana_training,biaya_actual from tna where mulai_training = '$date' and kelompok_training = 'training' group by id_training,training,kategori_training,metode_training,jenis_training,mulai_training,rencana_training,biaya_actual");
+        $sql = $this->query("select id_training,metode_training,jenis_training, training as Training,COUNT(training) as Pendaftar,kategori_training,mulai_training,rencana_training,biaya_actual from tna where mulai_training = '$date'  group by id_training,training,kategori_training,metode_training,jenis_training,mulai_training,rencana_training,biaya_actual");
         return  $sql->getResultArray();
     }
 
@@ -518,30 +518,32 @@ class M_Tna extends Model
     public function getDataEfektivitas($id)
     {
         $user = $this->user->getAllUser($id);
+        $status = [0];
 
         if ($user['bagian'] == "BOD") {
             $this->select('tna.*,user.bagian,approval.*,user.id_user,user.npk,evaluasi_efektivitas.status_efektivitas')->where('kelompok_training', 'training');
-            $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept');
+            $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept')->whereNotIn('status_training', $status);
             $this->join('user', 'user.id_user = tna.id_user')->where('user.bagian', 'KADIV')->where('user.dic', $user['dic']);
             $this->join('evaluasi_efektivitas', 'evaluasi_efektivitas.id_tna = tna.id_tna');
             return $this->get()->getResultArray();
         } elseif ($user['bagian'] == "KADIV") {
             $this->select('tna.*,user.bagian,approval.*,user.id_user,user.npk,evaluasi_efektivitas.status_efektivitas')->where('kelompok_training', 'training');
-            $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept');
+            $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept')->whereNotIn('status_training', $status);
             $this->join('user', 'user.id_user = tna.id_user')->where('user.bagian', 'KADEPT')->where('user.divisi', $user['divisi']);
             $this->join('evaluasi_efektivitas', 'evaluasi_efektivitas.id_tna = tna.id_tna');
             return $this->get()->getResultArray();
         } elseif ($user['bagian']  == "KADEPT") {
             $bagian = ['KASIE', 'STAFF 4UP', 'STAFF'];
             $this->select('tna.*,user.bagian,approval.*,user.id_user,user.npk,evaluasi_efektivitas.status_efektivitas')->where('kelompok_training', 'training');
-            $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept');
+            $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept')->whereNotIn('status_training', $status);
             $this->join('user', 'user.id_user = tna.id_user')->whereIn('user.bagian', $bagian)->where('user.departemen', $user['departemen'])->where('user.level', 'USER');
             $this->join('evaluasi_efektivitas', 'evaluasi_efektivitas.id_tna = tna.id_tna');
             return $this->get()->getResultArray();
         } elseif ($user['bagian']  == "KASIE" || $user['bagian']  == "STAFF 4UP") {
             $bagian = ['STAFF 4UP', 'KASIE'];
+
             $this->select('tna.*,user.bagian,approval.*,user.id_user,user.npk,evaluasi_efektivitas.status_efektivitas')->where('kelompok_training', 'training');
-            $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept');
+            $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept')->whereNotIn('status_training', $status);
             $this->join('user', 'user.id_user = tna.id_user')->where('user.seksi', $user['seksi'])->where('user.level', 'USER')->whereNotIn('user.bagian', $bagian);
             $this->join('evaluasi_efektivitas', 'evaluasi_efektivitas.id_tna = tna.id_tna');
             return $this->get()->getResultArray();

@@ -444,7 +444,7 @@ to get the desired effect
                                 <a href="<?= base_url() ?>/massage_user" class="nav-link  <?php if ($page == 'message_user') : echo 'active';
                                                                                         endif; ?>">
                                     <i class="nav-icon fa fa-fw  fa-phone"></i>
-                                    <p>Contac Us</p>
+                                    <p>Contact Us</p>
                                 </a>
                             </li>
                         </ul>

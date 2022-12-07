@@ -15,7 +15,7 @@
             </div>
             <div class="modal-body">
                 <div class="d-flex justify-content-center">
-                    <textarea rows="4" cols="50" name="reason" id="reason"></textarea>
+                    <textarea rows="4" cols="50" name="reason" id="reason" readonly></textarea>
                 </div>
             </div>
             <div class="modal-footer">

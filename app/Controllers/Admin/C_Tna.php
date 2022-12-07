@@ -230,6 +230,7 @@ class C_Tna extends BaseController
             'mulai_training' => $this->request->getPost('mulai_training'),
             'rencana_training' => $this->request->getPost('rencana_training'),
             'biaya_actual' => $Rupiah,
+            'vendor' => $this->request->getPost('vendor')
         ];
 
         // $fulldata = array_merge($data, $data1);

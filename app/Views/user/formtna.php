@@ -1,6 +1,8 @@
 <?= $this->extend('/template/templateuser') ?>
 
 <?= $this->section('content') ?>
+
+
 <div class="success" data-success="<?= session()->get('success'); ?>"></div>
 <div class="card m-1 overflow-auto">
     <div class="card-header d-flex justify-content-center">
@@ -226,9 +228,9 @@
                                 <div class="form-group">
                                     <input type="hidden" id="role" name="role">
                                     <label>Target Competency<span style="color:red;">*</span></label>
-                                    <select class="js-example-basic-single form-control" name="kompetensi"
+                                    <select class=" js-example-basic-single form-control" name="kompetensi"
                                         id="kompetensi">
-                                        <option selected>Choose...</option>
+                                        <option selected></option>
                                         <?php foreach ($target as $competency) : ?>
                                         <option value="<?= $competency['id'] ?>,<?= $competency['keterangan'] ?>">
                                             <?= $competency['category'] ?>
@@ -240,8 +242,8 @@
                                     <input type="hidden" value="<?= $user['id_user'] ?>" name="id_user">
                                     <input type="hidden" value="<?= 0; ?>" name="deadline">
                                     <label>Training<span style="color:red;">*</span></label>
-                                    <select class="form-control" name="training" id="training">
-                                        <option selected>Choose...</option>
+                                    <select class="js-example-basic-single form-control" name="training" id="training">
+                                        <option selected></option>
                                         <?php foreach ($training as $trainings) : ?>
                                         <option value="<?= $trainings['id_training'] ?>">
                                             <?= $trainings['judul_training'] ?>
@@ -411,12 +413,7 @@
     </div>
 </div>
 <script>
-// $(function() {
-//     $('.datepicker').datepicker({
-//         format: 'mm/yyyy',
-//         startDate: '-3d'
-//     });
-// });
+$('.js-example-basic-single').select2();
 $("#datepicker").datepicker({
     format: "M-yyyy",
     startView: "months",
@@ -459,8 +456,5 @@ $("#training").on('change', function() {
 
     })
 })
-$(document).ready(function() {
-    $('.js-example-basic-single').select2();
-});
 </script>
 <?= $this->endSection() ?>

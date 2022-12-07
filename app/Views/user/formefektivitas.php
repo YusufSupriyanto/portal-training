@@ -121,7 +121,7 @@
                         <label>1(Kurang)</label>
                     </div>
                     <div class="form-group">
-                        <label>keterangan</label>
+                        <label>keterangan<span style="color:red;">*</span></label>
                         <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" name="note1"
                             required></textarea>
                     </div>
@@ -149,7 +149,7 @@
                         <label>1(Kurang)</label>
                     </div>
                     <div class="form-group">
-                        <label>keterangan</label>
+                        <label>keterangan<span style="color:red;">*</span></label>
                         <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" name="note2"
                             required></textarea>
                     </div>
@@ -176,7 +176,7 @@
                         <label>1(Kurang)</label>
                     </div>
                     <div class="form-group">
-                        <label>keterangan</label>
+                        <label>keterangan<span style="color:red;">*</span></label>
                         <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" name="note3"
                             required></textarea>
                     </div>
@@ -204,7 +204,7 @@
                         <label>1(Kurang)</label>
                     </div>
                     <div class="form-group">
-                        <label>keterangan</label>
+                        <label>keterangan<span style="color:red;">*</span></label>
                         <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" name="note4"
                             required></textarea>
                     </div>
@@ -236,7 +236,7 @@
                         <label>1(Kurang)</label>
                     </div>
                     <div class="form-group">
-                        <label>keterangan</label>
+                        <label>keterangan<span style="color:red;">*</span></label>
                         <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" name="note5"
                             required></textarea>
                     </div>

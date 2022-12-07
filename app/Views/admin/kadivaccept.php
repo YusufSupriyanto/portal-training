@@ -1,5 +1,4 @@
 <?= $this->extend('/template/template') ?>
-
 <?= $this->section('content') ?>
 <div class="card m-1">
     <div class="card-header">
@@ -15,6 +14,7 @@
                     <th>Nama</th>
                     <th>Departemen</th>
                     <th>Training</th>
+                    <th>Vendor</th>
                     <th>Mulai Training</th>
                     <th>Selesai Training</th>
                     <th>Planing Budget</th>
@@ -32,14 +32,17 @@
                     <td><?= $tnas['departemen'] ?></td>
                     <td><?= $tnas['training'] ?></td>
                     <?php if ($tnas['status_approval_2'] == null) : ?>
-                    <td><input type="date" value="<?= $tnas['mulai_training'] ?>" name="mulai-training<?= $i ?>"
-                            id="mulai-training<?= $i ?>"></td>
-                    <td><input type="date" value="<?= $tnas['rencana_training'] ?>" name="rencana-training<?= $i ?>"
-                            id="rencana-training<?= $i ?>"></td>
+                    <td><input style="width:130px;" class=" form-control" type="text" name="vendor<?= $i ?>"
+                            id="vendor<?= $i ?>" value="<?= $tnas['vendor'] ?>"></td>
+                    <td><input class="form-control" type="date" value="<?= $tnas['mulai_training'] ?>"
+                            name="mulai-training<?= $i ?>" id="mulai-training<?= $i ?>"></td>
+                    <td><input class="form-control" type="date" value="<?= $tnas['rencana_training'] ?>"
+                            name="rencana-training<?= $i ?>" id="rencana-training<?= $i ?>"></td>
                     <td><?= "Rp. " . number_format($tnas['biaya'], 0, ',', '.'); ?></td>
                     <td>
                         <div class="d-flex flex-row">
-                            <input type="text" id="biaya<?= $i ?>" name="biaya<?= $i ?>"
+                            <input style="width:130px;" class="form-control" type="text" id="biaya<?= $i ?>"
+                                name="biaya<?= $i ?>"
                                 value="<?= "Rp. " . number_format($tnas['biaya_actual'], 0, ',', '.'); ?>"
                                 onkeyup="rupiah('biaya<?= $i ?>')">
                         </div>
@@ -56,6 +59,7 @@
 
                     </td>
                     <?php else : ?>
+                    <td><?= $tnas['vendor'] ?></td>
                     <td><?= $tnas['mulai_training'] ?></td>
                     <td><?= $tnas['rencana_training'] ?></td>
                     <td>Rp<?= " " . number_format($tnas['biaya'], 0, ',', '.') ?></td>
@@ -104,7 +108,7 @@
         <div><strong>Available
                 Budget : </strong><?= "Rp " . number_format($budgets['available_budget'], 0, ',', '.') ?></div>
         <div><strong>Used Budget : </strong><?= "Rp " . number_format($budgets['used_budget'], 0, ',', '.') ?></div>
-        <div><strong>Jumlah Actual Budget:
+        <div><strong>Accrual Budget:
 
             </strong><?= "Rp " . number_format($budgets['temporary_calculation'], 0, ',', '.') ?>
         </div>

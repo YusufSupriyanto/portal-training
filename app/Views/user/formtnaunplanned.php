@@ -227,8 +227,8 @@
                             <div class="form-group">
                                 <input type="hidden" id="role" name="role">
                                 <label>Target Competency<span style="color:red;">*</span></label>
-                                <select class="form-control" name="kompetensi" id="kompetensi">
-                                    <option selected>Choose...</option>
+                                <select class="js-example-basic-single form-control" name="kompetensi" id="kompetensi">
+                                    <option selected></option>
                                     <?php foreach ($target as $competency) : ?>
                                     <option value="<?= $competency['id'] ?>,<?= $competency['keterangan'] ?>">
                                         <?= $competency['category'] ?>
@@ -241,8 +241,8 @@
                                 <input type="hidden" value="<?= 1; ?>" name="deadline">
                                 <label>Training<span style="color:red;">*</span></label>
                                 <input type="hidden" name="trainingunplanned" id="trainingunplanned">
-                                <select class="form-control" name="training" id="training">
-                                    <option selected>Choose...</option>
+                                <select class="js-example-basic-single form-control" name="training" id="training">
+                                    <option selected></option>
                                     <?php foreach ($training as $trainings) : ?>
                                     <option value="<?= $trainings['id_training'] ?>">
                                         <?= $trainings['judul_training'] ?>
@@ -411,74 +411,78 @@
                     </div>
                 </div>
             </div>
-            <script>
-            $("#datepicker").datepicker({
-                format: "M-yyyy",
-                startView: "months",
-                minViewMode: "months"
-            });
-            let data = $('#data').val()
-            if (data != null) {
-                $.ajax({
-                    type: 'post',
-                    url: "<?= base_url(); ?>/User/FormTna",
-                    async: true,
-                    dataType: "json",
-                    data: {
-                        id_training: data
-                    },
-                    success: function(data) {
+        </div>
+    </div>
+</div>
+<script>
+$('.js-example-basic-single').select2();
+$("#datepicker").datepicker({
+    format: "M-yyyy",
+    startView: "months",
+    minViewMode: "months"
+});
+let data = $('#data').val()
+if (data != null) {
+    $.ajax({
+        type: 'post',
+        url: "<?= base_url(); ?>/User/FormTna",
+        async: true,
+        dataType: "json",
+        data: {
+            id_training: data
+        },
+        success: function(data) {
 
 
-                        console.log(data);
+            console.log(data);
 
-                        const format = data.biaya.toString().split('').reverse().join('');
-                        const convert = format.match(/\d{1,3}/g);
-                        const rupiah = 'Rp ' + convert.join('.').split('').reverse().join('')
-                        $("#training").val(data.id_training).prop(
-                            'disabled', true)
-                        $("#trainingunplanned").val(data.id_training)
-                        $("#jenis_training").val(data.jenis_training)
-
-
-                        $("#biaya").val(rupiah)
-                    }
-
-                })
-
-            }
+            const format = data.biaya.toString().split('').reverse().join('');
+            const convert = format.match(/\d{1,3}/g);
+            const rupiah = 'Rp ' + convert.join('.').split('').reverse().join('')
+            $("#training").val(data.id_training).prop(
+                'disabled', true)
+            $("#trainingunplanned").val(data.id_training)
+            $("#jenis_training").val(data.jenis_training)
 
 
-            //for change TNA 
-            $("#training").on('change', function() {
-                var id_training = this.value;
-                console.log(id_training);
+            $("#biaya").val(rupiah)
+        }
 
-                $.ajax({
-                    type: 'post',
-                    url: "<?= base_url(); ?>/User/FormTna",
-                    async: true,
-                    dataType: "json",
-                    data: {
-                        id_training: id_training
-                    },
-                    success: function(data) {
+    })
+
+}
 
 
-                        console.log(data.jenis_training);
+//for change TNA 
+$("#training").on('change', function() {
+    var id_training = this.value;
+    console.log(id_training);
 
-                        const format = data.biaya.toString().split('').reverse().join('');
-                        const convert = format.match(/\d{1,3}/g);
-                        const rupiah = 'Rp ' + convert.join('.').split('').reverse().join('')
-                        console.log(rupiah)
+    $.ajax({
+        type: 'post',
+        url: "<?= base_url(); ?>/User/FormTna",
+        async: true,
+        dataType: "json",
+        data: {
+            id_training: id_training
+        },
+        success: function(data) {
 
-                        $("#jenis_training").val(data.jenis_training)
+
+            console.log(data.jenis_training);
+
+            const format = data.biaya.toString().split('').reverse().join('');
+            const convert = format.match(/\d{1,3}/g);
+            const rupiah = 'Rp ' + convert.join('.').split('').reverse().join('')
+            console.log(rupiah)
+
+            $("#jenis_training").val(data.jenis_training)
 
 
-                        $("#biaya").val(rupiah)
-                    }
+            $("#biaya").val(rupiah)
+        }
 
-                })
-            })
-            </script>
-            <?= $this->endSection() ?>
+    })
+})
+</script>
+<?= $this->endSection() ?>

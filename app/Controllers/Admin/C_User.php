@@ -785,7 +785,7 @@ class C_User extends BaseController
                     'id_competency_astra' => $Astra[0],
                     'score_astra' => $Astra[1]
                 ];
-                //$this->competencyAstra->save($AstraData);
+                $this->competencyAstra->save($AstraData);
             }
             $technical = $this->request->getVar('technical');
             $TehnicalCompetency = array_chunk($technical, 2);
@@ -794,7 +794,7 @@ class C_User extends BaseController
                     'id_competency_technical' => $Technical[0],
                     'score_technical' => $Technical[1]
                 ];
-                // $this->competencyTechnical->save($TechnicalData);
+                $this->competencyTechnical->save($TechnicalData);
             }
             return redirect()->to('/user');
         } elseif ($competency == 'Expert') {
@@ -806,7 +806,7 @@ class C_User extends BaseController
                     'id_competency_expert' => $Expert[0],
                     'score_expert' => $Expert[1]
                 ];
-                // $this->competencyExpert->save($ExpertData);
+                $this->competencyExpert->save($ExpertData);
             }
             $technical = $this->request->getVar('technical');
             $TehnicalCompetency = array_chunk($technical, 2);
@@ -815,7 +815,7 @@ class C_User extends BaseController
                     'id_competency_technical' => $Technical[0],
                     'score_technical' => $Technical[1]
                 ];
-                //$this->competencyTechnical->save($TechnicalData);
+                $this->competencyTechnical->save($TechnicalData);
             }
             return redirect()->to('/user');
         } else {
@@ -827,7 +827,7 @@ class C_User extends BaseController
                     'id_competency_company' => $Company[0],
                     'score_company' => $Company[1]
                 ];
-                //$this->competencyCompany->save($CompanyData);
+                $this->competencyCompany->save($CompanyData);
             }
             $soft = $this->request->getVar('soft');
             $SoftCompetency = array_chunk($soft, 2);
@@ -836,7 +836,7 @@ class C_User extends BaseController
                     'id_competency_soft' => $Soft[0],
                     'score_soft' => $Soft[1]
                 ];
-                // $this->competencySoft->save($SoftData);
+                $this->competencySoft->save($SoftData);
             }
             $technicalB = $this->request->getVar('technicalB');
             $TechnicalBCompetency = array_chunk($technicalB, 2);

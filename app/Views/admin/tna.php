@@ -99,7 +99,7 @@
             <div><strong>Available
                     Budget : </strong><?= "Rp " . number_format($budgets['available_budget'], 0, ',', '.') ?></div>
             <div><strong>Used Budget : </strong><?= "Rp " . number_format($budgets['used_budget'], 0, ',', '.') ?></div>
-            <div><strong>Actual Jumlah :
+            <div><strong>Accrual Budget :
                 </strong><?= "Rp " . number_format($budgets['temporary_calculation'], 0, ',', '.') ?>
             </div>
         </div>
