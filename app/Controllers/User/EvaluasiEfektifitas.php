@@ -111,7 +111,7 @@ class EvaluasiEfektifitas extends BaseController
                 foreach ($competency_now as $Competency_Now) {
                     $competency = [
                         'id' => $Competency_Now['id_competency_technical'],
-                        'category' => "Technical Comp - " . $Competency_Now['technical'],
+                        'category' => "TC - " . $Competency_Now['technical'],
                         'competency' => $Competency_Now['technical'],
                         'proficiency' => $Competency_Now['proficiency'],
                         'score' => $Competency_Now['score_technical'],
@@ -142,7 +142,7 @@ class EvaluasiEfektifitas extends BaseController
                 if ($dataTech['score_technical'] < $dataTech['proficiency']) {
                     $competencyTech = [
                         'id' => $dataTech['id_competency_technical'],
-                        'category' => "Technical Comp - " . $dataTech['technical'],
+                        'category' => "TC - " . $dataTech['technical'],
                         'competency' => $dataTech['technical'],
                         'proficiency' => $dataTech['proficiency'],
                         'score' => $dataTech['score_technical'],
@@ -167,7 +167,7 @@ class EvaluasiEfektifitas extends BaseController
                 foreach ($competency_now as $Competency_Now) {
                     $competency = [
                         'id' => $Competency_Now['id_competency_expert'],
-                        'category' => "Exp - " . $Competency_Now['expert'],
+                        'category' => "EBC - " . $Competency_Now['expert'],
                         'competency' => $Competency_Now['expert'],
                         'proficiency' => $Competency_Now['proficiency'],
                         'score' => $Competency_Now['score_expert'],
@@ -180,7 +180,7 @@ class EvaluasiEfektifitas extends BaseController
                 foreach ($competency_now as $Competency_Now) {
                     $competency = [
                         'id' => $Competency_Now['id_competency_technical'],
-                        'category' => "Technical Comp - " . $Competency_Now['technical'],
+                        'category' => "TC - " . $Competency_Now['technical'],
                         'competency' => $Competency_Now['technical'],
                         'proficiency' => $Competency_Now['proficiency'],
                         'score' => $Competency_Now['score_technical'],
@@ -195,7 +195,7 @@ class EvaluasiEfektifitas extends BaseController
                 if ($DataExpert['score_expert'] < $DataExpert['proficiency']) {
                     $competency = [
                         'id' => $DataExpert['id_competency_expert'],
-                        'category' => "Exp - " . $DataExpert['expert'],
+                        'category' => "EBC - " . $DataExpert['expert'],
                         'competency' => $DataExpert['expert'],
                         'proficiency' => $DataExpert['proficiency'],
                         'score' => $DataExpert['score_expert'],
@@ -210,7 +210,7 @@ class EvaluasiEfektifitas extends BaseController
                 if ($dataTech['score_technical'] < $dataTech['proficiency']) {
                     $competencyTech = [
                         'id' => $dataTech['id_competency_technical'],
-                        'category' => "Technical Comp - " . $dataTech['technical'],
+                        'category' => "TC - " . $dataTech['technical'],
                         'competency' => $dataTech['technical'],
                         'proficiency' => $dataTech['proficiency'],
                         'score' => $dataTech['score_technical'],
@@ -234,7 +234,7 @@ class EvaluasiEfektifitas extends BaseController
                 foreach ($competency_now as $Competency_Now) {
                     $competency = [
                         'id' => $Competency_Now['id_competency_company'],
-                        'category' => "Company - " . $Competency_Now['company'],
+                        'category' => "CGC - " . $Competency_Now['company'],
                         'competency' => $Competency_Now['company'],
                         'proficiency' => $Competency_Now['proficiency'],
                         'score' => $Competency_Now['score_company'],
@@ -247,7 +247,7 @@ class EvaluasiEfektifitas extends BaseController
                 foreach ($competency_now as $Competency_Now) {
                     $competency = [
                         'id' => $Competency_Now['id_competency_soft'],
-                        'category' => "Soft - " . $Competency_Now['soft'],
+                        'category' => "SC - " . $Competency_Now['soft'],
                         'competency' => $Competency_Now['soft'],
                         'proficiency' => $Competency_Now['proficiency'],
                         'score' => $Competency_Now['score_soft'],
@@ -260,7 +260,7 @@ class EvaluasiEfektifitas extends BaseController
                 foreach ($competency_now as $Competency_Now) {
                     $competency = [
                         'id' => $Competency_Now['id_competency_technicalB'],
-                        'category' => "TechB - " . $Competency_Now['technicalB'],
+                        'category' => "TC - " . $Competency_Now['technicalB'],
                         'competency' => $Competency_Now['technicalB'],
                         'proficiency' => $Competency_Now['proficiency'],
                         'score' => $Competency_Now['score'],
@@ -275,7 +275,7 @@ class EvaluasiEfektifitas extends BaseController
                 if ($DataCompany['score_company'] < $DataCompany['proficiency']) {
                     $competency = [
                         'id' => $DataCompany['id_competency_company'],
-                        'category' => "Company - " . $DataCompany['company'],
+                        'category' => "CGC - " . $DataCompany['company'],
                         'competency' => $DataCompany['company'],
                         'proficiency' => $DataCompany['proficiency'],
                         'score' => $DataCompany['score_company'],
@@ -290,7 +290,7 @@ class EvaluasiEfektifitas extends BaseController
                 if ($DataSoft['score_soft'] < $DataSoft['proficiency']) {
                     $competency = [
                         'id' => $DataSoft['id_competency_soft'],
-                        'category' => "Soft - " . $DataSoft['soft'],
+                        'category' => "SC - " . $DataSoft['soft'],
                         'competency' => $DataSoft['soft'],
                         'proficiency' => $DataSoft['proficiency'],
                         'score' => $DataSoft['score_soft'],
@@ -305,7 +305,7 @@ class EvaluasiEfektifitas extends BaseController
                 if ($dataTechnicalB['score'] < $dataTechnicalB['proficiency']) {
                     $competency = [
                         'id' => $dataTechnicalB['id_competency_technicalB'],
-                        'category' => "TechB - " . $dataTechnicalB['technicalB'],
+                        'category' => "TC - " . $dataTechnicalB['technicalB'],
                         'competency' => $dataTechnicalB['technicalB'],
                         'proficiency' => $dataTechnicalB['proficiency'],
                         'score' => $dataTechnicalB['score'],

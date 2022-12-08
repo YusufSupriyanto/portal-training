@@ -188,7 +188,7 @@ class C_User extends BaseController
                         $this->competencyAstra->save($Astra);
                     }
                     $departmentUser = $this->technical->getDataTechnicalDepartemen($user['departemen']);
-                    if (!isEmpty($departmentUser)) {
+                    if (!is_null($departmentUser)) {
                         foreach ($departmentUser as $departmentUsers) {
                             $technical = [
                                 'id_user' => $last->id_user,
@@ -211,7 +211,7 @@ class C_User extends BaseController
                         $this->competencyExpert->save($Expert);
                     }
                     $departmentUser = $this->technical->getDataTechnicalDepartemen($user['departemen']);
-                    if (!isEmpty($departmentUser)) {
+                    if (!is_null($departmentUser)) {
                         foreach ($departmentUser as $departmentUsers) {
                             $technical = [
                                 'id_user' => $last->id_user,
@@ -234,7 +234,7 @@ class C_User extends BaseController
                     //save
                     $this->competencyCompany->save($company);
                 }
-                $TechnicalBList = $this->technicalB->getDataTechnicalBDepartemen($user['departemen']);
+                $TechnicalBList = $this->technicalB->getDataTechnicalBDepartemen($user['departemen'], $user['nama_jabatan']);
                 foreach ($TechnicalBList as $TBList) {
                     $TechnicalB = [
                         'id_user' => $last->id_user,
@@ -262,6 +262,16 @@ class C_User extends BaseController
 
     public function addUser()
     {
+
+        // $departmentUser = $this->technical->getDataTechnicalDepartemen('HRD');
+        // if (!is_null($departmentUser)) {
+        //     dd('ada');
+        // } else {
+        //     dd('kosong');
+        // }
+        // dd($departmentUser);
+
+
         ini_set('max_execution_time', 300);
         $file = $this->request->getFile('file');
         //dd($file);
@@ -279,6 +289,7 @@ class C_User extends BaseController
 
         $spreadsheet = $render->load($file);
         $sheet = $spreadsheet->getActiveSheet()->toArray();
+        // dd($sheet);
 
         $user = [];
         $total = count($sheet) - 1;
@@ -298,13 +309,13 @@ class C_User extends BaseController
                 'level' => $sheet[$i][10],
                 'type_golongan' => $sheet[$i][11],
                 'nama_jabatan' => $sheet[$i][12],
+                'type_user' => $sheet[$i][13],
             ];
             $this->user->save($data);
             $last = $this->user->getLastUser();
             $user = $this->user->getAllUser($last->id_user);
-            //d($user);
-            if ($user['type_golongan'] == 'A') {
-                if ($user['type_user'] == 'REGULAR') {
+            if ($user['type_golongan'] == 'A         ') {
+                if ($user['type_user'] == 'REGULAR             ') {
                     $AstraList = $this->astra->getDataAstra();
                     // dd($AstraList);
                     foreach ($AstraList as $list) {
@@ -317,7 +328,7 @@ class C_User extends BaseController
                         $this->competencyAstra->save($Astra);
                     }
                     $departmentUser = $this->technical->getDataTechnicalDepartemen($user['departemen']);
-                    if (!isEmpty($departmentUser)) {
+                    if (!is_null($departmentUser)) {
                         foreach ($departmentUser as $departmentUsers) {
                             $technical = [
                                 'id_user' => $last->id_user,
@@ -340,7 +351,7 @@ class C_User extends BaseController
                         $this->competencyExpert->save($Expert);
                     }
                     $departmentUser = $this->technical->getDataTechnicalDepartemen($user['departemen']);
-                    if (!isEmpty($departmentUser)) {
+                    if (!is_null($departmentUser)) {
                         foreach ($departmentUser as $departmentUsers) {
                             $technical = [
                                 'id_user' => $last->id_user,
@@ -363,7 +374,7 @@ class C_User extends BaseController
                     //save
                     $this->competencyCompany->save($company);
                 }
-                $TechnicalBList = $this->technicalB->getDataTechnicalBDepartemen($user['departemen']);
+                $TechnicalBList = $this->technicalB->getDataTechnicalBDepartemen($user['departemen'], $user['nama_jabatan']);
                 foreach ($TechnicalBList as $TBList) {
                     $TechnicalB = [
                         'id_user' => $last->id_user,
@@ -380,12 +391,11 @@ class C_User extends BaseController
                         'id_soft' => $SList['id_soft'],
                         'score_soft' => 0,
                     ];
-                    // save
+
                     $this->competencySoft->save($Soft);
                 }
             }
         }
-        //dd($user);
 
         session()->setFlashdata('success', 'Data Berhasil Di Import');
         return redirect()->to('/user');
@@ -694,7 +704,7 @@ class C_User extends BaseController
                 <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>Company Competency</th>
+                                    <th>Company General Competency</th>
                                     <th>Proficiency</th>
                                     <th>Score</th>
                                 </tr>
@@ -715,33 +725,6 @@ class C_User extends BaseController
                         </table>
                         </div>
                ';
-            echo
-            ' <div class="card w-100 m-1">
-                <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Soft Competency</th>
-                                    <th>Proficiency</th>
-                                    <th>Score</th>
-                                </tr>
-                            </thead>
-                            <tbody>';
-            foreach ($soft as $softy) {
-                echo '<tr>
-<td>' . $softy['soft'] . '</td>
-<td>' . $softy['proficiency'] . '</td>
-<td>
-<input type="hidden" name="soft[]" value="' . $softy['id_competency_soft'] . '">
-<input style="width:30px;" name="soft[]" value="' . $softy['score_soft'] . '">
-</td>
-</tr>';
-            }
-
-            echo '                           </tbody>
-                        </table>
-                        </div>
-               ';
-
 
             echo '
              <div class="card w-100 m-1">
@@ -768,7 +751,35 @@ class C_User extends BaseController
             echo '                           </tbody>
                         </table>
                         </div>
-                         </div>
+                       
+               ';
+
+            echo
+            ' <div class="card w-100 m-1">
+                <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Soft Competency</th>
+                                    <th>Proficiency</th>
+                                    <th>Score</th>
+                                </tr>
+                            </thead>
+                            <tbody>';
+            foreach ($soft as $softy) {
+                echo '<tr>
+<td>' . $softy['soft'] . '</td>
+<td>' . $softy['proficiency'] . '</td>
+<td>
+<input type="hidden" name="soft[]" value="' . $softy['id_competency_soft'] . '">
+<input style="width:30px;" name="soft[]" value="' . $softy['score_soft'] . '">
+</td>
+</tr>';
+            }
+
+            echo '                           </tbody>
+                        </table>
+                        </div>
+                          </div>
                ';
         }
     }

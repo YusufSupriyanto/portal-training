@@ -64,9 +64,13 @@ class UnplannedTraining extends BaseController
     {
         $id = session()->get('id');
         $user = $this->user->filter($id);
+
         $departemen = $this->unplanned->getTnaFilterDistinct($id);
+
         $tna = $this->unplanned->getTnaFilterUnplanned($id);
+
         $budget = $this->budget->getBudgetCurrent(session()->get('departemen'));
+        // dd($tna);
         //  dd($departemen);
         $data = [
             'tittle' => 'Data Member',

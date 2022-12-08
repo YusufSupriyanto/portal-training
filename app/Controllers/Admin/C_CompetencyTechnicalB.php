@@ -86,12 +86,9 @@ class C_CompetencyTechnicalB extends BaseController
 
     public function DetailTechnical($department)
     {
-        $department0 = $this->technicalB->getDataTechnicalBDepartemen($department);
+        $department0 = $this->technicalB->getDataTechnicalBDepartemenAdmin($department);
         $jabatan = $this->technicalB->getDataTechnicalBJabatan($department);
 
-        // echo ''
-
-        // dd($department0);
         $data = [
             'tittle' => 'Technical Competency',
             'department' => $department,

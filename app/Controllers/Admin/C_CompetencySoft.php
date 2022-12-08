@@ -39,7 +39,7 @@ class C_CompetencySoft extends BaseController
 
 
         $data = [
-            'tittle' => 'Astra Leadership Competency',
+            'tittle' => 'Soft Competency',
             'soft' => $soft
         ];
         return view('admin/list_soft', $data);

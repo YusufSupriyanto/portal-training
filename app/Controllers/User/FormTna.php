@@ -4,7 +4,6 @@ namespace App\Controllers\User;
 
 use App\Controllers\BaseController;
 use App\Models\M_Approval;
-use App\Models\M_Deadline;
 use App\Models\M_EvaluasiEfektifitas;
 use App\Models\M_EvaluasiReaksi;
 use App\Models\M_History;
@@ -73,8 +72,11 @@ class FormTna extends BaseController
         $id = session()->get('id');
         $user = $this->user->filter($id);
         $departemen = $this->tna->getTnaFilterDistinct($id);
+
         $tna = $this->tna->getTnaFilter($id);
+        //dd('test');
         $budget = $this->budget->getBudgetCurrent(session()->get('departemen'));
+        // dd('test');
         //d($user);
         $data = [
             'tittle' => 'Data Member',
@@ -161,7 +163,7 @@ class FormTna extends BaseController
                     if ($dataTech['score_technical'] < $dataTech['proficiency']) {
                         $competencyTech = [
                             'id' => $dataTech['id_competency_technical'],
-                            'category' => "Technical Comp - " . $dataTech['technical'],
+                            'category' => "TC - " . $dataTech['technical'],
                             'competency' => $dataTech['technical'],
                             'proficiency' => $dataTech['proficiency'],
                             'score' => $dataTech['score_technical'],
@@ -195,7 +197,7 @@ class FormTna extends BaseController
                     if ($DataExpert['score_expert'] < $DataExpert['proficiency']) {
                         $competency = [
                             'id' => $DataExpert['id_competency_expert'],
-                            'category' => "Exp - " . $DataExpert['expert'],
+                            'category' => "EBC - " . $DataExpert['expert'],
                             'competency' => $DataExpert['expert'],
                             'proficiency' => $DataExpert['proficiency'],
                             'score' => $DataExpert['score_expert'],
@@ -217,7 +219,7 @@ class FormTna extends BaseController
                     if ($dataTech['score_technical'] < $dataTech['proficiency']) {
                         $competencyTech = [
                             'id' => $dataTech['id_competency_technical'],
-                            'category' => "Technical Comp - " . $dataTech['technical'],
+                            'category' => "TC - " . $dataTech['technical'],
                             'competency' => $dataTech['technical'],
                             'proficiency' => $dataTech['proficiency'],
                             'score' => $dataTech['score_technical'],
@@ -250,7 +252,7 @@ class FormTna extends BaseController
                     if ($DataCompany['score_company'] < $DataCompany['proficiency']) {
                         $competency = [
                             'id' => $DataCompany['id_competency_company'],
-                            'category' => "Company - " . $DataCompany['company'],
+                            'category' => "CGC - " . $DataCompany['company'],
                             'competency' => $DataCompany['company'],
                             'proficiency' => $DataCompany['proficiency'],
                             'score' => $DataCompany['score_company'],
@@ -270,7 +272,7 @@ class FormTna extends BaseController
                     if ($DataSoft['score_soft'] < $DataSoft['proficiency']) {
                         $competency = [
                             'id' => $DataSoft['id_competency_soft'],
-                            'category' => "Soft - " . $DataSoft['soft'],
+                            'category' => "SC - " . $DataSoft['soft'],
                             'competency' => $DataSoft['soft'],
                             'proficiency' => $DataSoft['proficiency'],
                             'score' => $DataSoft['score_soft'],
@@ -290,7 +292,7 @@ class FormTna extends BaseController
                     if ($dataTechnicalB['score'] < $dataTechnicalB['proficiency']) {
                         $competency = [
                             'id' => $dataTechnicalB['id_competency_technicalB'],
-                            'category' => "TechB - " . $dataTechnicalB['technicalB'],
+                            'category' => "TC - " . $dataTechnicalB['technicalB'],
                             'competency' => $dataTechnicalB['technicalB'],
                             'proficiency' => $dataTechnicalB['proficiency'],
                             'score' => $dataTechnicalB['score'],
@@ -503,12 +505,8 @@ class FormTna extends BaseController
             'id_user' => $id_user,
             'id_training' => $id_training,
             'id_budget' => $budget['id_budget'],
-            'dic' => $user['dic'],
-            'divisi' => $user['divisi'],
-            'departemen' => $user['departemen'],
             'nama' => $user['nama'],
             'golongan' => null,
-            'seksi' => $user['seksi'],
             'jenis_training' => $jenis_trainng['jenis_training'],
             'kategori_training' => $this->request->getVar('kategori'),
             'training' => $jenis_trainng['judul_training'],

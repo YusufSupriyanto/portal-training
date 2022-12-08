@@ -51,7 +51,7 @@ class Competency extends BaseController
         $education = $this->education->getDataEducation($id);
         $career = $this->career->getDataCareer($id);
         $astraCompetency = $this->competencyAstra->getProfileAstraCompetency($id);
-        $technicalCompetency = $this->competencyTechnical->getProfileTechnicalCompetency($id, $user['departemen']);
+        $technicalCompetency = $this->competencyTechnical->getProfileTechnicalCompetency($id);
         // dd($technicalCompetency);
 
         //dd($astraCompetency);

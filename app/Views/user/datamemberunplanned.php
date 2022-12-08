@@ -229,6 +229,7 @@
                             <tbody>
                                 <?php
                                     $sum = 0;
+
                                     $tnafixes = $tnaKadept->getTnaFilterKadept(session()->get('id'), $dept->departemen);
                                     foreach ($tnafixes as $Forms) : ?>
                                 <tr>

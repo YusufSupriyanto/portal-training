@@ -30,11 +30,15 @@
                     </thead>
                     <tbody>
                         <?php $i = 0;
+
                         foreach ($department0 as $department1) : ?>
                         <tr>
                             <td><?= $department1['technicalB'] ?></td>
                             <?php foreach ($jabatan as $Jabatan) : ?>
-                            <?php $values = $value->getDataValue($Jabatan['nama_jabatan'], $department1['technicalB'], $department) ?>
+                            <?php $values = $value->getDataValue($Jabatan['nama_jabatan'], $department1['technicalB'], $department);
+                                    // dd($values);
+
+                                    ?>
                             <td><input type="button" value="<?= $values['proficiency'] ?>"
                                     onclick="ModalCompetency('<?= $values['id_technicalB'] ?>','<?= $values['technicalB'] ?>','<?= $values['proficiency'] ?>','<?= $values['nama_jabatan'] ?>')">
                             </td>
