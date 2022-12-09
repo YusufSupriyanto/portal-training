@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use App\Controllers\User\FormTna;
 use App\Models\M_Approval;
 use App\Models\M_Budget;
 use App\Models\M_Deadline;
@@ -22,6 +23,8 @@ class C_Tna extends BaseController
 
     private M_TnaUnplanned $unplanned;
 
+    private FormTna $UserTna;
+
 
 
 
@@ -33,6 +36,7 @@ class C_Tna extends BaseController
         $this->unplanned = new M_TnaUnplanned();
         $this->budget = new M_Budget();
         $this->budgetC = new C_Budget();
+        $this->UserTna = new FormTna();
     }
     public function index()
     {
@@ -242,11 +246,16 @@ class C_Tna extends BaseController
 
     public function rejectAdmin()
     {
+        $id = $this->request->getPost('id_tna');
 
-        $approve = $this->approval->getIdApproval($this->request->getPost('id_tna'));
+        $approve = $this->approval->getIdApproval($id);
+        $biaya_actual = $this->request->getPost('biaya_actual');
+        $Rupiah  = $this->budgetC->strFilter($biaya_actual);
+        $training = $this->tna->getAllTna($id);
+        $this->UserTna->subtraction($Rupiah, $training[0]->departemen);
         $data1 = [
             'id_tna' => $this->request->getPost('id_tna'),
-            'biaya_actual' => $this->request->getPost('biaya_actual'),
+            'biaya_actual' => $Rupiah,
         ];
 
         $data = [

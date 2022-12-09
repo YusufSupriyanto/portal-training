@@ -196,6 +196,9 @@ $routes->post('/detail_competency_checked', 'Admin\C_CompetencyAstra::CheckedAst
 $routes->get('/budget', 'Admin\C_Budget::index', ['filter' => 'Auth']);
 $routes->post('/save_budget', 'Admin\C_Budget::SaveBudget', ['filter' => 'Auth']);
 
+//Database Department
+$routes->get('/database_department', 'Admin\C_Department::index', ['filter' => 'Auth']);
+
 
 //USER
 

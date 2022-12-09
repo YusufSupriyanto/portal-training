@@ -225,7 +225,7 @@ class User extends BaseController
                 <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>Company Competency</th>
+                                    <th>Company General Competency</th>
                                     <th>Proficiency</th>
                                     <th>Score</th>
                                 </tr>

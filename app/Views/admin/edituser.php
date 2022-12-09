@@ -28,24 +28,49 @@
                     name="profile[]">
             </div>
             <div class="form-group">
+                <label>Dic</label>
+                <select class="form-control" name="profile[]">
+                    <option value="<?= $user['dic'] ?>" selected><?= $user['dic'] ?></option>
+                    <?php foreach ($dic as $Dic) : ?>
+                    <option><?= $Dic['dic'] ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="form-group">
                 <label>Divisi</label>
-                <input type="text" class="form-control" placeholder="Input Divisi" value="<?= $user['divisi'] ?>"
-                    name="profile[]">
+                <select class="form-control" name="profile[]">
+                    <option value="<?= $user['divisi'] ?>" selected><?= $user['divisi'] ?></option>
+                    <?php foreach ($divisi as $Divisi) : ?>
+                    <option><?= $Divisi['divisi'] ?></option>
+                    <?php endforeach; ?>
+                </select>
             </div>
             <div class="form-group">
                 <label>Departemen</label>
-                <input type="text" class="form-control" placeholder="Input Departemen"
-                    value="<?= $user['departemen'] ?>" name="profile[]">
+                <select class="form-control" name="profile[]">
+                    <option value="<?= $user['departemen'] ?>" selected><?= $user['departemen'] ?></option>
+                    <?php foreach ($departemen as $Departemen) : ?>
+                    <option><?= $Departemen['departemen'] ?></option>
+                    <?php endforeach; ?>
+                </select>
             </div>
             <div class="form-group">
                 <label>Seksi</label>
-                <input type="text" class="form-control" placeholder="Input Seksi" value="<?= $user['seksi'] ?>"
-                    name="profile[]">
+                <select class="form-control" name="profile[]">
+                    <option value="<?= $user['seksi'] ?>" selected><?= $user['seksi'] ?></option>
+                    <?php foreach ($seksi as $Seksi) : ?>
+                    <option><?= $Seksi['seksi'] ?></option>
+                    <?php endforeach; ?>
+                </select>
             </div>
             <div class="form-group">
                 <label>Bagian</label>
-                <input type="text" class="form-control" placeholder="Input Bagian" value="<?= $user['bagian'] ?>"
-                    name="profile[]">
+                <select class="form-control" name="profile[]">
+                    <option value="<?= $user['bagian'] ?>" selected><?= $user['bagian'] ?></option>
+                    <?php foreach ($bagian as $Bagian) : ?>
+                    <option><?= $Bagian['bagian'] ?></option>
+                    <?php endforeach; ?>
+                </select>
             </div>
             <div class="form-group">
                 <label>Promosi Terakhir</label>
@@ -64,17 +89,17 @@
                 <div class="d-flex">
 
                     <input type="text" class="form-control" value="<?= $user['tahun'] ?>" name="profile[]"
-                        style="width:100px;">
+                        style="width:100px;" readonly>
                     <label class="m-2">Tahun </label>
 
                     <input type="text" class="form-control" value="<?= $user['bulan'] ?>" name="profile[]"
-                        style="width:100px;">
+                        style="width:100px;" readonly>
                     <label class="m-2">Bulan </label>
                 </div>
             </div>
             <div class="form-group">
                 <label>Email</label>
-                <input type="text" class="form-control" placeholder="Input Nama" value="<?= $user['email'] ?>"
+                <input type="text" class="form-control" placeholder="Input Email" value="<?= $user['email'] ?>"
                     name="profile[]">
             </div>
             <h6>Education</h6>
@@ -189,7 +214,7 @@ function addCareers(i) {
 }
 
 function saveAll() {
-    let data = $("input[name='profile[]']").map(function() {
+    let data = $("[name='profile[]']").map(function() {
         return $(this).val();
     }).get();
     console.log(data)
@@ -268,8 +293,8 @@ function saveAll() {
 
         },
         success: function(data) {
-            window.location.reload()
-            // console.log(data)
+            // window.location.reload()
+            console.log(data)
         }
     })
     // console.log(result)

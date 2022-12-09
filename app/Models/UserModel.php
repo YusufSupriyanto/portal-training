@@ -102,6 +102,11 @@ class UserModel extends Model
         $this->select('nama_jabatan')->distinct();
         return $this->get()->getResultArray();
     }
+    public function DistinctBagian()
+    {
+        $this->select('bagian')->distinct();
+        return $this->get()->getResultArray();
+    }
     public function getLastUser()
     {
         $this->select('id_user');

@@ -329,18 +329,25 @@ to get the desired effect
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link <?php if ($page == 'user') : echo 'active';
                                                         endif; ?>">
-                                    <i class="nav-icon fas fa-fw fa-user-plus"></i>
+                                    <i class="nav-icon fa-solid fa-database"></i>
                                     <p>
-                                        User
+                                        Database
                                         <i class="right fas fa-angle-left"></i>
                                     </p>
                                 </a>
                                 <ul class="nav nav-treeview" style="display: none;">
                                     <li class="nav-item">
-                                        <a href="<?= base_url() ?>/user" class="nav-link  <?php if ($page == 'user') : echo 'active';
+                                        <a href="<?= base_url() ?>/user" class="nav-link  <?php if (($page == 'user') || ($page == 'database_department')) : echo 'active';
                                                                                         endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>Detail User</p>
+                                            <p>Database User</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="<?= base_url() ?>/database_department" class="nav-link <?php if ($page == 'database_department') : echo 'active';
+                                                                                                    endif; ?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Database Department</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">

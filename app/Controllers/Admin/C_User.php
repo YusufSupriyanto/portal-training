@@ -405,11 +405,24 @@ class C_User extends BaseController
     {
         $id = $this->request->getVar('update');
 
+        $dic = $this->user->DistinctDic();
+        $divisi = $this->user->DistinctDivisi();
+        $departemen = $this->user->DistinctDepartemen();
+        $seksi = $this->user->DistinctSeksi();
+        $jabatan = $this->user->DistinctJabatan();
+        $bagian = $this->user->DistinctBagian();
+
         $data = [
             'tittle' => 'Edit User',
             'user' => $this->user->getAllUser($id),
             'education' => $this->education->getDataEducation($id),
             'career' => $this->career->getDataCareer($id),
+            'dic' => $dic,
+            'divisi' => $divisi,
+            'departemen' => $departemen,
+            'seksi' => $seksi,
+            'bagian' => $bagian,
+            'jabatan' => $jabatan
         ];
 
         return view('admin/edituser', $data);
@@ -419,7 +432,7 @@ class C_User extends BaseController
     {
         $dataFixes = [];
         $profile = $this->request->getPost('individual');
-        $tgl_masuk = date_create($profile[10]);
+        $tgl_masuk = date_create($profile[11]);
         $today = date('d-m-Y');
         $interval = date_diff($tgl_masuk, date_create($today));
         $interval->format('%R%y years %m months');
@@ -428,16 +441,17 @@ class C_User extends BaseController
             'npk' => $profile[1],
             'nama' => $profile[2],
             'status' => $profile[3],
-            'divisi' => $profile[4],
-            'department' => $profile[5],
-            'seksi' => $profile[6],
-            'bagian' => $profile[7],
-            'promosi_terakhir' => $profile[8],
-            'golongan' => $profile[9],
-            'tgl_masuk' => $profile[10],
+            'dic' => $profile[4],
+            'divisi' => $profile[5],
+            'department' => $profile[6],
+            'seksi' => $profile[7],
+            'bagian' => $profile[8],
+            'promosi_terakhir' => $profile[9],
+            'golongan' => $profile[10],
+            'tgl_masuk' => $profile[11],
             'tahun' => $interval->format('%y'),
             'bulan' => $interval->format('%m'),
-            'email' => $profile[13],
+            'email' => $profile[14],
         ];
 
         array_push($dataFixes, $data);
@@ -511,7 +525,7 @@ class C_User extends BaseController
             }
             array_push($dataFixes, $newfixCareer);
         }
-        echo json_encode($data);
+        echo json_encode('Sucess');
     }
 
     public function delete($id)
