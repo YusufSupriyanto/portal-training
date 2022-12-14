@@ -56,4 +56,10 @@ class M_TechnicalB extends Model
         $this->select('id_technicalB');
         return $this->get()->getLastRow();
     }
+
+    public function getDataByDepartment($department)
+    {
+        $this->select()->where('department', $department);
+        return $this->get()->getResultArray();
+    }
 }

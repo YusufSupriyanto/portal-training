@@ -190,4 +190,24 @@ class UserModel extends Model
         $data = $this->get();
         return $data;
     }
+    public function getDataByDic($dic)
+    {
+        $this->select('id_user,npk,nama,dic')->where('dic', $dic);
+        return $this->get()->getResultArray();
+    }
+    public function getDataByDivisi($divisi)
+    {
+        $this->select('id_user,npk,nama,divisi')->where('divisi', $divisi);
+        return $this->get()->getResultArray();
+    }
+    public function getDataByDepartment($department)
+    {
+        $this->select('id_user,npk,nama,departemen')->where('departemen', $department);
+        return $this->get()->getResultArray();
+    }
+    public function getDataBySeksi($seksi)
+    {
+        $this->select('id_user,npk,nama,seksi')->where('seksi', $seksi);
+        return $this->get()->getResultArray();
+    }
 }

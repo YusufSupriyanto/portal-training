@@ -327,7 +327,7 @@ to get the desired effect
                                 </ul>
                             </li>
                             <li class="nav-item has-treeview">
-                                <a href="#" class="nav-link <?php if ($page == 'user') : echo 'active';
+                                <a href="#" class="nav-link <?php if (($page == 'user') || ($page == 'database_department')) : echo 'active';
                                                         endif; ?>">
                                     <i class="nav-icon fa-solid fa-database"></i>
                                     <p>
@@ -337,7 +337,7 @@ to get the desired effect
                                 </a>
                                 <ul class="nav nav-treeview" style="display: none;">
                                     <li class="nav-item">
-                                        <a href="<?= base_url() ?>/user" class="nav-link  <?php if (($page == 'user') || ($page == 'database_department')) : echo 'active';
+                                        <a href="<?= base_url() ?>/user" class="nav-link  <?php if ($page == 'user') : echo 'active';
                                                                                         endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Database User</p>
