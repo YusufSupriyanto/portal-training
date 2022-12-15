@@ -122,5 +122,6 @@ class C_Department extends BaseController
                 //save
             }
         }
+        return redirect()->to('/database_department');
     }
 }

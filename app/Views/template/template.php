@@ -27,9 +27,6 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css">
 
         <script src="https://cdn.jsdelivr.net/npm/autonumeric@4.1.0"></script>
-
-
-
         <style>
         body {
             font-size: 15px;

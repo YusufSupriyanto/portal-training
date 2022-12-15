@@ -73,6 +73,24 @@
                 </select>
             </div>
             <div class="form-group">
+                <label>Type Golongan</label>
+                <select class="form-control" name="profile[]">
+                    <option value="<?= $user['type_golongan'] ?>" selected><?= $user['type_golongan'] ?></option>
+                    <?php foreach ($type_golongan as $golongan) : ?>
+                    <option><?= $golongan['type_golongan'] ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Type User</label>
+                <select class="form-control" name="profile[]">
+                    <option value="<?= $user['type_user'] ?>" selected><?= $user['type_user'] ?></option>
+                    <?php foreach ($type_user as $TypeUser) : ?>
+                    <option><?= $TypeUser['type_user'] ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="form-group">
                 <label>Promosi Terakhir</label>
                 <input type="date" class="form-control" value="<?= $user['promosi_terakhir'] ?>" name="profile[]">
             </div>
@@ -87,7 +105,6 @@
             <div class="form-group">
                 <label>Masa Kerja</label>
                 <div class="d-flex">
-
                     <input type="text" class="form-control" value="<?= $user['tahun'] ?>" name="profile[]"
                         style="width:100px;" readonly>
                     <label class="m-2">Tahun </label>
@@ -214,6 +231,8 @@ function addCareers(i) {
 }
 
 function saveAll() {
+
+
     let data = $("[name='profile[]']").map(function() {
         return $(this).val();
     }).get();

@@ -471,7 +471,7 @@ class M_Tna extends Model
 
     public function getEvaluasiReaksi($id)
     {
-        $this->select('tna.*,approval.*,user.bagian,user.id_user,evaluasi_reaksi.*')->where('user.id_user', $id)->where('kelompok_training', 'training');
+        $this->select('tna.*,approval.*,user.*,evaluasi_reaksi.*')->where('user.id_user', $id)->where('kelompok_training', 'training');
         $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept')->where('status_training', 1);
         $this->join('user', 'user.id_user = tna.id_user');
         $this->join('evaluasi_reaksi', 'evaluasi_reaksi.id_tna = tna.id_tna');

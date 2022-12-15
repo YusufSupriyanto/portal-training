@@ -210,4 +210,16 @@ class UserModel extends Model
         $this->select('id_user,npk,nama,seksi')->where('seksi', $seksi);
         return $this->get()->getResultArray();
     }
+
+    public function getTypeGolongan()
+    {
+        $this->select('type_golongan')->distinct();
+        return $this->get()->getResultArray();
+    }
+
+    public function getTypeUser()
+    {
+        $this->select('type_user')->distinct();
+        return $this->get()->getResultArray();
+    }
 }

@@ -411,6 +411,10 @@ class C_User extends BaseController
         $seksi = $this->user->DistinctSeksi();
         $jabatan = $this->user->DistinctJabatan();
         $bagian = $this->user->DistinctBagian();
+        $type_golongan = $this->user->getTypeGolongan();
+        $type_user = $this->user->getTypeUser();
+        // d($type_golongan);
+        // dd($type_user);
 
         $data = [
             'tittle' => 'Edit User',
@@ -422,7 +426,9 @@ class C_User extends BaseController
             'departemen' => $departemen,
             'seksi' => $seksi,
             'bagian' => $bagian,
-            'jabatan' => $jabatan
+            'jabatan' => $jabatan,
+            'type_golongan' => $type_golongan,
+            'type_user' => $type_user
         ];
 
         return view('admin/edituser', $data);
@@ -430,102 +436,136 @@ class C_User extends BaseController
 
     public function EditUser()
     {
-        $dataFixes = [];
+
+
+        // $dataFixes = [];
         $profile = $this->request->getPost('individual');
-        $tgl_masuk = date_create($profile[11]);
-        $today = date('d-m-Y');
-        $interval = date_diff($tgl_masuk, date_create($today));
-        $interval->format('%R%y years %m months');
+        $Equate = $this->EquateArray($profile[0]);
+        //  dd($Equate);
+        //  dd($profile);
+        // $tgl_masuk = date_create($profile[11]);
+        // $today = date('d-m-Y');
+        // $interval = date_diff($tgl_masuk, date_create($today));
+        // $interval->format('%R%y years %m months');
+        // $data = [
+        //     'id_user' => $profile[0],
+        //     'npk' => $profile[1],
+        //     'nama' => $profile[2],
+        //     'status' => $profile[3],
+        //     'dic' => $profile[4],
+        //     'divisi' => $profile[5],
+        //     'department' => $profile[6],
+        //     'seksi' => $profile[7],
+        //     'bagian' => $profile[8],
+        //     'promosi_terakhir' => $profile[9],
+        //     'golongan' => $profile[10],
+        //     'tgl_masuk' => $profile[11],
+        //     'tahun' => $interval->format('%y'),
+        //     'bulan' => $interval->format('%m'),
+        //     'email' => $profile[14],
+        // ];
+
+        // array_push($dataFixes, $data);
+        // $this->user->save($data);
+        // $old_education = $this->request->getPost('education_old');
+        // if (!empty($old_education)) {
+        //     $oldfix = [];
+        //     foreach ($old_education as $old) {
+        //         $education_old = [
+        //             'id_education' => $old[1],
+        //             'grade' => $old[0],
+        //             'year' => $old[2],
+        //             'institution' => $old[3],
+        //             'major' => $old[4],
+        //         ];
+        //         array_push($oldfix, $education_old);
+        //         $this->education->save($education_old);
+        //     }
+
+        //     array_push($dataFixes, $oldfix);
+        // }
+        // $new_education = $this->request->getPost('education_new');
+        // if (!empty($new_education)) {
+        //     $newfix = [];
+        //     foreach ($new_education as $new) {
+        //         $education_new = [
+        //             'id_user' => $profile[0],
+        //             'grade' => $new[0],
+        //             'year' => $new[1],
+        //             'institution' => $new[2],
+        //             'major' => $new[3],
+        //         ];
+        //         array_push($newfix, $education_new);
+        //         $this->education->save($education_new);
+        //     }
+        //     array_push($dataFixes, $newfix);
+        // }
+        // $old_career = $this->request->getPost('career_old');
+        // if (!empty($old_career)) {
+        //     $oldfixCareer = [];
+        //     foreach ($old_career as $old_career) {
+        //         $career_old = [
+        //             'id_career' => $old_career[0],
+        //             'year_start' => $old_career[1],
+        //             'year_end' => $old_career[2],
+        //             'position' => $old_career[3],
+        //             'departement' => $old_career[4],
+        //             'division' => $old_career[5],
+        //             'company' => $old_career[6],
+        //         ];
+        //         array_push($oldfixCareer, $career_old);
+        //         $this->career->save($career_old);
+        //     }
+        //     array_push($dataFixes, $oldfixCareer);
+        // }
+        // $new_career = $this->request->getPost('career_new');
+        // if (!empty($new_career)) {
+        //     $newfixCareer = [];
+        //     foreach ($new_career as $new_careers) {
+        //         $career_new = [
+        //             'id_user' => $profile[0],
+        //             'year_start' => $new_careers[0],
+        //             'year_end' => $new_careers[1],
+        //             'position' => $new_careers[2],
+        //             'departement' => $new_careers[3],
+        //             'division' => $new_careers[4],
+        //             'company' => $new_careers[5],
+        //         ];
+        //         array_push($newfixCareer, $career_new);
+        //         $this->career->save($career_new);
+        //     }
+        //     array_push($dataFixes, $newfixCareer);
+        // }
+        //$changes = $this->UpdatedCompetencyUser($profile[0]);
+
+
+        echo json_encode($Equate);
+    }
+
+
+    public function UpdatedCompetencyUser($id)
+    {
+
+
+        // if($user['type_golongan']==){
+
+        // }else{
+
+        // }
+        //  return $user;
+    }
+
+    public function EquateArray($id)
+    {
+        $user  = $this->user->getAllUser($id);
         $data = [
-            'id_user' => $profile[0],
-            'npk' => $profile[1],
-            'nama' => $profile[2],
-            'status' => $profile[3],
-            'dic' => $profile[4],
-            'divisi' => $profile[5],
-            'department' => $profile[6],
-            'seksi' => $profile[7],
-            'bagian' => $profile[8],
-            'promosi_terakhir' => $profile[9],
-            'golongan' => $profile[10],
-            'tgl_masuk' => $profile[11],
-            'tahun' => $interval->format('%y'),
-            'bulan' => $interval->format('%m'),
-            'email' => $profile[14],
+            'divisi' => $user->divisi,
+            'department' => $user->departemen,
+            'type_golongan' => $user->type_golongan,
+            'type_user' => $user->type_user
         ];
 
-        array_push($dataFixes, $data);
-        $this->user->save($data);
-        $old_education = $this->request->getPost('education_old');
-        if (!empty($old_education)) {
-            $oldfix = [];
-            foreach ($old_education as $old) {
-                $education_old = [
-                    'id_education' => $old[1],
-                    'grade' => $old[0],
-                    'year' => $old[2],
-                    'institution' => $old[3],
-                    'major' => $old[4],
-                ];
-                array_push($oldfix, $education_old);
-                $this->education->save($education_old);
-            }
-
-            array_push($dataFixes, $oldfix);
-        }
-        $new_education = $this->request->getPost('education_new');
-        if (!empty($new_education)) {
-            $newfix = [];
-            foreach ($new_education as $new) {
-                $education_new = [
-                    'id_user' => $profile[0],
-                    'grade' => $new[0],
-                    'year' => $new[1],
-                    'institution' => $new[2],
-                    'major' => $new[3],
-                ];
-                array_push($newfix, $education_new);
-                $this->education->save($education_new);
-            }
-            array_push($dataFixes, $newfix);
-        }
-        $old_career = $this->request->getPost('career_old');
-        if (!empty($old_career)) {
-            $oldfixCareer = [];
-            foreach ($old_career as $old_career) {
-                $career_old = [
-                    'id_career' => $old_career[0],
-                    'year_start' => $old_career[1],
-                    'year_end' => $old_career[2],
-                    'position' => $old_career[3],
-                    'departement' => $old_career[4],
-                    'division' => $old_career[5],
-                    'company' => $old_career[6],
-                ];
-                array_push($oldfixCareer, $career_old);
-                $this->career->save($career_old);
-            }
-            array_push($dataFixes, $oldfixCareer);
-        }
-        $new_career = $this->request->getPost('career_new');
-        if (!empty($new_career)) {
-            $newfixCareer = [];
-            foreach ($new_career as $new_careers) {
-                $career_new = [
-                    'id_user' => $profile[0],
-                    'year_start' => $new_careers[0],
-                    'year_end' => $new_careers[1],
-                    'position' => $new_careers[2],
-                    'departement' => $new_careers[3],
-                    'division' => $new_careers[4],
-                    'company' => $new_careers[5],
-                ];
-                array_push($newfixCareer, $career_new);
-                $this->career->save($career_new);
-            }
-            array_push($dataFixes, $newfixCareer);
-        }
-        echo json_encode('Sucess');
+        return $data;
     }
 
     public function delete($id)
