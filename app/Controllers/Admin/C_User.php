@@ -436,11 +436,100 @@ class C_User extends BaseController
 
     public function EditUser()
     {
-
-
         // $dataFixes = [];
         $profile = $this->request->getPost('individual');
         $Equate = $this->EquateArray($profile[0]);
+        $input = [
+            'divisi' => $profile[5],
+            'department' => $profile[6],
+            'type_golongan' => $profile[9],
+            'type_user' => $profile[10]
+        ];
+
+        $compare = array_diff($input, $Equate);
+        if (!empty($compare)) {
+            if (array_key_exists("type_golongan", $compare)) {
+                if ($compare['type_golongan'] == 'A         ') {
+                    if (array_key_exists("type_user", $compare)) {
+                        if ($compare['type_user'] == 'REGULAR             ') {
+                            //$Astra = "Check";
+                            $old_competency = $this->competencyAstra->getAstraIdCompetency($profile[0]);
+                            //check data sudah ada atau belum
+                            if (!empty($old_competency)) {
+                                $Astra = "Ada";
+                                //     $Astra = $this->astra->getAllIdAstra();
+                                //     for ($i = 0; $i < count($old_competency); $i++) {
+                                //         foreach ($Astra as $key => $values) {
+                                //             if (in_array($values['id_astra'], $old_competency[$i])) {
+                                //                 unset($Astra[$key]);
+                                //             }
+                                //         }
+                                //     }
+
+                            } else {
+                                $Astra = "Kosong";
+                                //     $Astra = $this->astra->getAllIdAstra();
+                                //     foreach ($Astra as $AstraCompetency) {
+                                //         $DataAstra = [
+                                //             'id_astra' => $AstraCompetency['id_astra'],
+                                //             'id_user' => $profile[0],
+                                //             'score_astra' => 0
+                                //         ];
+                                //         //save
+                                //     }
+                            }
+                        } else {
+                            $old_competency  = $this->competencyExpert->getProfileExpertCompetency($profile[0]);
+                            // check data sudah ada atau belum
+                            if (!empty($Expert)) {
+                                $Expert =  $this->expert->getAllIdExpert();
+                            } else {
+                            }
+                        }
+                    }
+                } else {
+                    $old_competency =  $this->competencySoft->getProfileSoftCompetency($profile[0]);
+                    //check data sudah ada atau belum
+                    if (!empty($soft)) {
+                        $Soft = $this->soft->getAllIdSoft();
+                    } else {
+                    }
+                }
+            }
+            // if (array_key_exists("divisi", $compare)) {
+            //     $CompanyUser = $this->company->getDataCompanyDivisi($compare['divisi']);
+            //     foreach ($CompanyUser as $CompanyUser) {
+            //         $DataCompany = [
+            //             'id_company' => $CompanyUser['id_company'],
+            //             'id_user' => $profile[0],
+            //             'score_company' => 0
+            //         ];
+            //     }
+            // }
+            // if (array_key_exists("department", $compare)) {
+            //     $DataUser = $this->user->getAllUser($profile[0]);
+            //     if ($DataUser['type_golongan'] == 'A         ') {
+            //         $department =  $this->technical->getDataTechnicalDepartemen($compare['department']);
+            //         foreach ($department as $Department) {
+            //             $DataTechnical = [
+            //                 'id_technical' => $Department['id_department'],
+            //                 'id_user' => $profile[0],
+            //                 'score_technical' => 0
+            //             ];
+            //             // save
+            //         }
+            //     } else {
+            //         $department = $this->technicalB->getDataByDepartment($compare['department']);
+            //         foreach ($department as $Department) {
+            //             $DataTechnical = [
+            //                 'id_technicalB' => $Department['id_department'],
+            //                 'id_user' => $profile[0],
+            //                 'score' => 0
+            //             ];
+            //         }
+            //     }
+            // }
+        }
         //  dd($Equate);
         //  dd($profile);
         // $tgl_masuk = date_create($profile[11]);
@@ -539,7 +628,7 @@ class C_User extends BaseController
         //$changes = $this->UpdatedCompetencyUser($profile[0]);
 
 
-        echo json_encode($Equate);
+        echo json_encode($Astra);
     }
 
 
@@ -559,14 +648,15 @@ class C_User extends BaseController
     {
         $user  = $this->user->getAllUser($id);
         $data = [
-            'divisi' => $user->divisi,
-            'department' => $user->departemen,
-            'type_golongan' => $user->type_golongan,
-            'type_user' => $user->type_user
+            'divisi' => $user['divisi'],
+            'department' => $user['departemen'],
+            'type_golongan' => 'B         ',
+            'type_user' => 'EXPERT              '
         ];
-
         return $data;
     }
+
+
 
     public function delete($id)
     {

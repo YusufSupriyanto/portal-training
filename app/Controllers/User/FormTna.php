@@ -109,7 +109,6 @@ class FormTna extends BaseController
         $array = [];
         foreach ($tnaUser as $usersTna) {
             $trainingUser = $this->training->getIdTraining($usersTna['id_training']);
-
             $trainingProcess =
                 [
                     'id_training' => $usersTna['id_training'],
@@ -519,6 +518,7 @@ class FormTna extends BaseController
             'kelompok_training' => $kelompok
         ];
         //dd($data);
+
         $this->tna->save($data);
 
 

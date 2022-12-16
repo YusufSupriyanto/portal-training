@@ -77,7 +77,7 @@
                 <select class="form-control" name="profile[]">
                     <option value="<?= $user['type_golongan'] ?>" selected><?= $user['type_golongan'] ?></option>
                     <?php foreach ($type_golongan as $golongan) : ?>
-                    <option><?= $golongan['type_golongan'] ?></option>
+                    <option value="<?= $golongan['type_golongan'] ?>"><?= $golongan['type_golongan'] ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -86,7 +86,7 @@
                 <select class="form-control" name="profile[]">
                     <option value="<?= $user['type_user'] ?>" selected><?= $user['type_user'] ?></option>
                     <?php foreach ($type_user as $TypeUser) : ?>
-                    <option><?= $TypeUser['type_user'] ?></option>
+                    <option value="<?= $TypeUser['type_user'] ?>"><?= $TypeUser['type_user'] ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>

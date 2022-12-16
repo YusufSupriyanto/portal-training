@@ -28,4 +28,10 @@ class M_Soft extends Model
         $this->select('id_soft');
         return $this->get()->getLastRow();
     }
+
+    public function getAllIdSoft()
+    {
+        $this->select('id_soft');
+        return $this->get()->getResultArray();
+    }
 }
