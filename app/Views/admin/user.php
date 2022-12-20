@@ -62,7 +62,6 @@
                     <th>Departemen</th>
                     <th>Seksi</th>
                     <th>Bagian</th>
-                    <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -76,7 +75,6 @@
                     <td><?= $users->departemen ?></td>
                     <td><?= $users->seksi ?></td>
                     <td><?= $users->bagian ?></td>
-                    <td><?= $users->level ?></td>
                     <td>
                         <div class="column">
                             <form action="<?= base_url() ?>\delete\user\<?= $users->id_user ?>" method="post">

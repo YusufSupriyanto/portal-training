@@ -28,12 +28,10 @@ class C_CompetencyTechnical extends BaseController
         $this->user = new UserModel();
     }
 
-
     public function InputExcel()
     {
         $department = $this->request->getVar('department');
         $golongan = $this->request->getVar('golongan');
-
 
         $file = $this->request->getFile('technical');
         if ($file == "") {

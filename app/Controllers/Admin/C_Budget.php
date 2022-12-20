@@ -92,4 +92,10 @@ class C_Budget extends BaseController
             return redirect()->to('/budget');
         }
     }
+
+
+    //function run from cron cob
+    public function UpdateBudget()
+    {
+    }
 }

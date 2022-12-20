@@ -25,9 +25,6 @@ class C_Tna extends BaseController
 
     private FormTna $UserTna;
 
-
-
-
     public function __construct()
     {
         $this->tna = new M_Tna();

@@ -36,7 +36,7 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 //test
-$routes->get('/test', 'Admin\C_User::test');
+$routes->get('/test', 'Test::test');
 $routes->get('/edu', 'Admin\C_User::addIdEducation');
 
 
@@ -199,6 +199,7 @@ $routes->post('/save_budget', 'Admin\C_Budget::SaveBudget', ['filter' => 'Auth']
 //Database Department
 $routes->get('/database_department', 'Admin\C_Department::index', ['filter' => 'Auth']);
 $routes->post('/change_structure', 'Admin\C_Department::ChangeStructure', ['filter' => 'Auth']);
+$routes->post('/new_department', 'Admin\C_Department::NewDepartment', ['filter' => 'Auth']);
 
 
 //USER

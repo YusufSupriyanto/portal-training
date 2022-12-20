@@ -31,12 +31,9 @@ class C_CompetencySoft extends BaseController
         // $this->competencySoft = new M_CompetencySoft();
     }
 
-
     public function index()
     {
         $soft = $this->Soft->getDatasoft();
-
-
 
         $data = [
             'tittle' => 'Soft Competency',

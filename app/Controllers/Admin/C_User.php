@@ -436,199 +436,331 @@ class C_User extends BaseController
 
     public function EditUser()
     {
-        // $dataFixes = [];
+        $dataFixes = [];
         $profile = $this->request->getPost('individual');
         $Equate = $this->EquateArray($profile[0]);
         $input = [
             'divisi' => $profile[5],
             'department' => $profile[6],
-            'type_golongan' => $profile[9],
-            'type_user' => $profile[10]
+            'type_golongan' => trim($profile[9]),
+            'type_user' => trim($profile[10])
         ];
-
+        //create competency
         $compare = array_diff($input, $Equate);
-        if (!empty($compare)) {
-            if (array_key_exists("type_golongan", $compare)) {
-                if ($compare['type_golongan'] == 'A         ') {
-                    if (array_key_exists("type_user", $compare)) {
-                        if ($compare['type_user'] == 'REGULAR             ') {
-                            //$Astra = "Check";
-                            $old_competency = $this->competencyAstra->getAstraIdCompetency($profile[0]);
-                            //check data sudah ada atau belum
-                            if (!empty($old_competency)) {
-                                $Astra = "Ada";
-                                //     $Astra = $this->astra->getAllIdAstra();
-                                //     for ($i = 0; $i < count($old_competency); $i++) {
-                                //         foreach ($Astra as $key => $values) {
-                                //             if (in_array($values['id_astra'], $old_competency[$i])) {
-                                //                 unset($Astra[$key]);
-                                //             }
-                                //         }
-                                //     }
-
-                            } else {
-                                $Astra = "Kosong";
-                                //     $Astra = $this->astra->getAllIdAstra();
-                                //     foreach ($Astra as $AstraCompetency) {
-                                //         $DataAstra = [
-                                //             'id_astra' => $AstraCompetency['id_astra'],
-                                //             'id_user' => $profile[0],
-                                //             'score_astra' => 0
-                                //         ];
-                                //         //save
-                                //     }
-                            }
-                        } else {
-                            $old_competency  = $this->competencyExpert->getProfileExpertCompetency($profile[0]);
-                            // check data sudah ada atau belum
-                            if (!empty($Expert)) {
-                                $Expert =  $this->expert->getAllIdExpert();
-                            } else {
+        if (trim($input['type_golongan']) == 'A') {
+            if (trim($input['type_user']) == 'REGULAR') {
+                //$Astra = "Check";
+                $old_competency = $this->competencyAstra->getAstraIdCompetency($profile[0]);
+                //check data sudah ada atau belum
+                if (!empty($old_competency)) {
+                    $Astra = $this->astra->getAllIdAstra();
+                    for ($i = 0; $i < count($old_competency); $i++) {
+                        foreach ($Astra as $key => $values) {
+                            if (in_array($values['id_astra'], $old_competency[$i])) {
+                                unset($Astra[$key]);
                             }
                         }
                     }
+                    foreach ($Astra as $astra) {
+                        $DataAstra = [
+                            'id_user' => $profile[0],
+                            'id_astra' => $astra['id_astra'],
+                            'score_astra' => 0
+                        ];
+                        $this->competencyAstra->save($DataAstra);
+                        //dd($DataAstra);
+                    }
                 } else {
-                    $old_competency =  $this->competencySoft->getProfileSoftCompetency($profile[0]);
-                    //check data sudah ada atau belum
-                    if (!empty($soft)) {
-                        $Soft = $this->soft->getAllIdSoft();
-                    } else {
+                    $Astra = $this->astra->getAllIdAstra();
+                    foreach ($Astra as $AstraCompetency) {
+                        $DataAstraEmpty = [
+                            'id_astra' => $AstraCompetency['id_astra'],
+                            'id_user' => $profile[0],
+                            'score_astra' => 0
+                        ];
+
+                        //save
+                        $this->competencyAstra->save($DataAstraEmpty);
+                    }
+                }
+            } else {
+                $old_competency = $this->competencyExpert->getProfileExpertCompetency($profile[0]);
+                // check data sudah ada atau belum
+                if (!empty($old_competency)) {
+                    $Expert = $this->expert->getAllIdExpert();
+                    for ($i = 0; $i < count($old_competency); $i++) {
+                        foreach ($Expert as $key => $values) {
+                            if (in_array($values['id_expert'], $old_competency[$i])) {
+                                unset($Expert[$key]);
+                            }
+                        }
+                    }
+                    foreach ($Expert as $expert) {
+                        $DataExpert = [
+                            'id_user' => $profile[0],
+                            'id_astra' => $expert['id_expert'],
+                            'score_expert' => 0
+                        ];
+                        // save
+                        $this->competencyExpert->save($DataExpert);
+                    }
+                } else {
+                    $Expert = $this->expert->getAllIdExpert();
+                    //$test = 'Masuk';
+                    foreach ($Expert as $expert) {
+                        $DataExpert = [
+                            'id_user' => $profile[0],
+                            'id_expert' => $expert['id_expert'],
+                            'score_expert' => 0
+                        ];
+                        //save
+                        $this->competencyExpert->save($DataExpert);
                     }
                 }
             }
-            // if (array_key_exists("divisi", $compare)) {
-            //     $CompanyUser = $this->company->getDataCompanyDivisi($compare['divisi']);
-            //     foreach ($CompanyUser as $CompanyUser) {
-            //         $DataCompany = [
-            //             'id_company' => $CompanyUser['id_company'],
-            //             'id_user' => $profile[0],
-            //             'score_company' => 0
-            //         ];
-            //     }
-            // }
-            // if (array_key_exists("department", $compare)) {
-            //     $DataUser = $this->user->getAllUser($profile[0]);
-            //     if ($DataUser['type_golongan'] == 'A         ') {
-            //         $department =  $this->technical->getDataTechnicalDepartemen($compare['department']);
-            //         foreach ($department as $Department) {
-            //             $DataTechnical = [
-            //                 'id_technical' => $Department['id_department'],
-            //                 'id_user' => $profile[0],
-            //                 'score_technical' => 0
-            //             ];
-            //             // save
-            //         }
-            //     } else {
-            //         $department = $this->technicalB->getDataByDepartment($compare['department']);
-            //         foreach ($department as $Department) {
-            //             $DataTechnical = [
-            //                 'id_technicalB' => $Department['id_department'],
-            //                 'id_user' => $profile[0],
-            //                 'score' => 0
-            //             ];
-            //         }
-            //     }
-            // }
+        } else {
+            $old_competency = $this->competencySoft->getProfileSoftCompetency($profile[0]);
+            //check data sudah ada atau belum
+            if (!empty($old_competency)) {
+                $Soft = $this->soft->getAllIdSoft();
+                for ($i = 0; $i < count($old_competency); $i++) {
+                    foreach ($Soft as $key => $values) {
+                        if (in_array($values['id_soft'], $old_competency[$i])) {
+                            unset($Soft[$key]);
+                        }
+                    }
+                }
+                foreach ($Soft as $soft) {
+                    $DataSoft = [
+                        'id_user' => $profile[0],
+                        'id_soft' => $soft['id_soft'],
+                        'score_soft' => 0
+                    ];
+                    //save 
+                    //$this->competencySoft->save($DataSoft);
+                }
+            } else {
+                $Soft = $this->soft->getAllIdSoft();
+                foreach ($Soft as $soft) {
+                    $DataSoft = [
+                        'id_user' => $profile[0],
+                        'id_soft' => $soft['id_soft'],
+                        'score_soft' => 0
+                    ];
+                    //save 
+                    // $this->competencySoft->save($DataSoft);
+                }
+            }
         }
-        //  dd($Equate);
-        //  dd($profile);
-        // $tgl_masuk = date_create($profile[11]);
-        // $today = date('d-m-Y');
-        // $interval = date_diff($tgl_masuk, date_create($today));
-        // $interval->format('%R%y years %m months');
-        // $data = [
-        //     'id_user' => $profile[0],
-        //     'npk' => $profile[1],
-        //     'nama' => $profile[2],
-        //     'status' => $profile[3],
-        //     'dic' => $profile[4],
-        //     'divisi' => $profile[5],
-        //     'department' => $profile[6],
-        //     'seksi' => $profile[7],
-        //     'bagian' => $profile[8],
-        //     'promosi_terakhir' => $profile[9],
-        //     'golongan' => $profile[10],
-        //     'tgl_masuk' => $profile[11],
-        //     'tahun' => $interval->format('%y'),
-        //     'bulan' => $interval->format('%m'),
-        //     'email' => $profile[14],
-        // ];
+
+        if (array_key_exists("divisi", $compare)) {
+            $old_divisi_competency = $this->competencyCompany->getProfileCompanyCompetency($profile[0]);
+            if (!empty($old_divisi_competency)) {
+                $Company = $this->company->getDataCompanyDivisi($compare['divisi']);
+                for ($i = 0; $i < count($old_divisi_competency); $i++) {
+                    foreach ($Company as $key => $values) {
+                        if (in_array($values['id_company'], $old_divisi_competency[$i])) {
+                            unset($Company[$key]);
+                        }
+                    }
+                }
+                foreach ($Company as $CompanyUser) {
+                    $DataCompany = [
+                        'id_company' => $CompanyUser['id_company'],
+                        'id_user' => $profile[0],
+                        'score_company' => 0
+                    ];
+                    //save
+                    //$this->competencyCompany->save($DataCompany);
+                }
+            } else {
+                $CompanyUser = $this->company->getDataCompanyDivisi($compare['divisi']);
+                foreach ($CompanyUser as $CompanyUser) {
+                    $DataCompany = [
+                        'id_company' => $CompanyUser['id_company'],
+                        'id_user' => $profile[0],
+                        'score_company' => 0
+                    ];
+                    //save
+                    // $this->competencyCompany->save($DataCompany);
+                }
+            }
+        }
+
+        // save data user
+        $tgl_masuk = date_create($profile[11]);
+        $today = date('d-m-Y');
+        $interval = date_diff($tgl_masuk, date_create($today));
+        $interval->format('%R%y years %m months');
+        $data = [
+            'id_user' => $profile[0],
+            'npk' => $profile[1],
+            'nama' => $profile[2],
+            'status' => $profile[3],
+            'dic' => $profile[4],
+            'divisi' => $profile[5],
+            'departemen' => $profile[6],
+            'seksi' => $profile[7],
+            'bagian' => $profile[8],
+            'type_golongan' => $profile[9],
+            'type_user' => $profile[10],
+            'promosi_terakhir' => $profile[11],
+            'golongan' => $profile[12],
+            'tgl_masuk' => $profile[13],
+            'tahun' => $interval->format('%y'),
+            'bulan' => $interval->format('%m'),
+            'email' => $profile[16],
+        ];
 
         // array_push($dataFixes, $data);
-        // $this->user->save($data);
-        // $old_education = $this->request->getPost('education_old');
-        // if (!empty($old_education)) {
-        //     $oldfix = [];
-        //     foreach ($old_education as $old) {
-        //         $education_old = [
-        //             'id_education' => $old[1],
-        //             'grade' => $old[0],
-        //             'year' => $old[2],
-        //             'institution' => $old[3],
-        //             'major' => $old[4],
-        //         ];
-        //         array_push($oldfix, $education_old);
-        //         $this->education->save($education_old);
-        //     }
+        $this->user->save($data);
 
-        //     array_push($dataFixes, $oldfix);
-        // }
-        // $new_education = $this->request->getPost('education_new');
-        // if (!empty($new_education)) {
-        //     $newfix = [];
-        //     foreach ($new_education as $new) {
-        //         $education_new = [
-        //             'id_user' => $profile[0],
-        //             'grade' => $new[0],
-        //             'year' => $new[1],
-        //             'institution' => $new[2],
-        //             'major' => $new[3],
-        //         ];
-        //         array_push($newfix, $education_new);
-        //         $this->education->save($education_new);
-        //     }
-        //     array_push($dataFixes, $newfix);
-        // }
-        // $old_career = $this->request->getPost('career_old');
-        // if (!empty($old_career)) {
-        //     $oldfixCareer = [];
-        //     foreach ($old_career as $old_career) {
-        //         $career_old = [
-        //             'id_career' => $old_career[0],
-        //             'year_start' => $old_career[1],
-        //             'year_end' => $old_career[2],
-        //             'position' => $old_career[3],
-        //             'departement' => $old_career[4],
-        //             'division' => $old_career[5],
-        //             'company' => $old_career[6],
-        //         ];
-        //         array_push($oldfixCareer, $career_old);
-        //         $this->career->save($career_old);
-        //     }
-        //     array_push($dataFixes, $oldfixCareer);
-        // }
-        // $new_career = $this->request->getPost('career_new');
-        // if (!empty($new_career)) {
-        //     $newfixCareer = [];
-        //     foreach ($new_career as $new_careers) {
-        //         $career_new = [
-        //             'id_user' => $profile[0],
-        //             'year_start' => $new_careers[0],
-        //             'year_end' => $new_careers[1],
-        //             'position' => $new_careers[2],
-        //             'departement' => $new_careers[3],
-        //             'division' => $new_careers[4],
-        //             'company' => $new_careers[5],
-        //         ];
-        //         array_push($newfixCareer, $career_new);
-        //         $this->career->save($career_new);
-        //     }
-        //     array_push($dataFixes, $newfixCareer);
-        // }
-        //$changes = $this->UpdatedCompetencyUser($profile[0]);
+        // copetency technical save
+        if (array_key_exists("department", $compare)) {
+            $DataUser = $this->user->getAllUser($profile[0]);
+            if (trim($DataUser['type_golongan']) == 'A') {
+                $old_department_competency = $this->competencyTechnical->getProfileTechnicalCompetency($profile[0]);
+                if (!empty($old_department_competency)) {
+                    $department =  $this->technical->getDataTechnicalDepartemen($compare['department']);
+                    for ($i = 0; $i < count($old_competency); $i++) {
+                        foreach ($department as $key => $values) {
+                            if (in_array($values['id_technical'], $old_competency[$i])) {
+                                unset($department[$key]);
+                            }
+                        }
+                    }
+                    foreach ($department as $Department) {
+                        $DataTechnical = [
+                            'id_technical' => $Department['id_technical'],
+                            'id_user' => $profile[0],
+                            'score_technical' => 0
+                        ];
+                        // save
+                        $this->competencyTechnical->save($DataTechnical);
+                    }
+                } else {
+                    $department =  $this->technical->getDataTechnicalDepartemen($compare['department']);
+                    foreach ($department as $Department) {
+                        $DataTechnical = [
+                            'id_technical' => $Department['id_technical'],
+                            'id_user' => $profile[0],
+                            'score_technical' => 0
+                        ];
+                        // save
+                        $this->competencyTechnical->save($DataTechnical);
+                    }
+                }
+            } else {
+                $old_department_competency = $this->competencyTechnicalB->getProfileTechnicalCompetencyB($profile[0]);
+                if (!empty($old_department_competency)) {
+                    $department = $this->technicalB->getDataByDepartment($compare['department']);
+                    for ($i = 0; $i < count($old_department_competency); $i++) {
+                        foreach ($department as $key => $values) {
+                            if (in_array($values['id_technicalB'], $old_department_competency[$i])) {
+                                unset($department[$key]);
+                            }
+                        }
+                    }
+                    foreach ($department as $Department) {
+                        $DataTechnicalB = [
+                            'id_technicalB' => $Department['id_technicalB'],
+                            'id_user' => $profile[0],
+                            'score' => 0
+                        ];
+                        //save
+                        $this->competencyTechnicalB->save($DataTechnicalB);
+                    }
+                } else {
+                    $department = $this->technicalB->getDataByDepartment($compare['department']);
+                    foreach ($department as $Department) {
+                        $DataTechnicalB = [
+                            'id_technicalB' => $Department['id_technicalB'],
+                            'id_user' => $profile[0],
+                            'score' => 0
+                        ];
+                        //save
+                        $this->competencyTechnicalB->save($DataTechnicalB);
+                    }
+                }
+            }
+        }
+
+        //user education save 
+        $old_education = $this->request->getPost('education_old');
+        if (!empty($old_education)) {
+            $oldfix = [];
+            foreach ($old_education as $old) {
+                $education_old = [
+                    'id_education' => $old[1],
+                    'grade' => $old[0],
+                    'year' => $old[2],
+                    'institution' => $old[3],
+                    'major' => $old[4],
+                ];
+                array_push($oldfix, $education_old);
+                $this->education->save($education_old);
+            }
+
+            array_push($dataFixes, $oldfix);
+        }
+        $new_education = $this->request->getPost('education_new');
+        if (!empty($new_education)) {
+            $newfix = [];
+            foreach ($new_education as $new) {
+                $education_new = [
+                    'id_user' => $profile[0],
+                    'grade' => $new[0],
+                    'year' => $new[1],
+                    'institution' => $new[2],
+                    'major' => $new[3],
+                ];
+                array_push($newfix, $education_new);
+                $this->education->save($education_new);
+            }
+            array_push($dataFixes, $newfix);
+        }
+
+        //career user save
+        $old_career = $this->request->getPost('career_old');
+        if (!empty($old_career)) {
+            $oldfixCareer = [];
+            foreach ($old_career as $old_career) {
+                $career_old = [
+                    'id_career' => $old_career[0],
+                    'year_start' => $old_career[1],
+                    'year_end' => $old_career[2],
+                    'position' => $old_career[3],
+                    'departement' => $old_career[4],
+                    'division' => $old_career[5],
+                    'company' => $old_career[6],
+                ];
+                array_push($oldfixCareer, $career_old);
+                $this->career->save($career_old);
+            }
+            array_push($dataFixes, $oldfixCareer);
+        }
+        $new_career = $this->request->getPost('career_new');
+        if (!empty($new_career)) {
+            $newfixCareer = [];
+            foreach ($new_career as $new_careers) {
+                $career_new = [
+                    'id_user' => $profile[0],
+                    'year_start' => $new_careers[0],
+                    'year_end' => $new_careers[1],
+                    'position' => $new_careers[2],
+                    'departement' => $new_careers[3],
+                    'division' => $new_careers[4],
+                    'company' => $new_careers[5],
+                ];
+                array_push($newfixCareer, $career_new);
+                $this->career->save($career_new);
+            }
+            array_push($dataFixes, $newfixCareer);
+        }
+        //  $changes = $this->UpdatedCompetencyUser($profile[0]);
 
 
-        echo json_encode($Astra);
+        echo json_encode('success');
     }
 
 
@@ -650,8 +782,8 @@ class C_User extends BaseController
         $data = [
             'divisi' => $user['divisi'],
             'department' => $user['departemen'],
-            'type_golongan' => 'B         ',
-            'type_user' => 'EXPERT              '
+            'type_golongan' => trim($user['type_golongan']),
+            'type_user' => trim($user['type_user'])
         ];
         return $data;
     }

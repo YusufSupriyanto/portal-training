@@ -222,4 +222,9 @@ class UserModel extends Model
         $this->select('type_user')->distinct();
         return $this->get()->getResultArray();
     }
+
+    public function GetUserByNPK($NPK)
+    {
+        return $this->where(['npk' => $NPK])->first();
+    }
 }

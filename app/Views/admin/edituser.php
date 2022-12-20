@@ -5,9 +5,7 @@
     <div class="card-header">
         <h3 class="card-title"><?= $tittle ?></h3>
     </div>
-    <!-- /.card-header -->
     <!-- form start -->
-
     <div class="card-body overflow-auto">
         <form role="form" action="" method="POST">
             <div class="form-group">
@@ -212,6 +210,8 @@ function addEducation(i) {
         `)
 }
 
+
+
 function addCareers(i) {
     i++
     $('#career-table').append(`
@@ -230,8 +230,8 @@ function addCareers(i) {
         `)
 }
 
+//function for save all
 function saveAll() {
-
 
     let data = $("[name='profile[]']").map(function() {
         return $(this).val();
@@ -255,8 +255,6 @@ function saveAll() {
         return $(this).val();
     }).get();
     console.log(career_new)
-
-
 
     if (edu_old.length == 0 || edu_old == undefined) {
         old_education = []
@@ -288,7 +286,6 @@ function saveAll() {
         console.log(old_career)
     }
 
-
     if (career_new.length == 0 || career_new == undefined) {
         new_career = []
     } else {
@@ -298,6 +295,7 @@ function saveAll() {
         }
         console.log(new_career)
     }
+
     $.ajax({
         type: 'POST',
         url: "<?= base_url(); ?>/edit_user",
@@ -312,7 +310,7 @@ function saveAll() {
 
         },
         success: function(data) {
-            // window.location.reload()
+            //window.location.reload()
             console.log(data)
         }
     })
@@ -340,6 +338,7 @@ function changeEducation(id) {
         }
     })
 }
+
 
 function removeEducation(i) {
     $('#column' + i).remove();
