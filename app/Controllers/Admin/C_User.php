@@ -571,7 +571,7 @@ class C_User extends BaseController
                         'score_company' => 0
                     ];
                     //save
-                    //$this->competencyCompany->save($DataCompany);
+                    $this->competencyCompany->save($DataCompany);
                 }
             } else {
                 $CompanyUser = $this->company->getDataCompanyDivisi($compare['divisi']);
@@ -582,7 +582,7 @@ class C_User extends BaseController
                         'score_company' => 0
                     ];
                     //save
-                    // $this->competencyCompany->save($DataCompany);
+                    $this->competencyCompany->save($DataCompany);
                 }
             }
         }
@@ -622,6 +622,7 @@ class C_User extends BaseController
                 $old_department_competency = $this->competencyTechnical->getProfileTechnicalCompetency($profile[0]);
                 if (!empty($old_department_competency)) {
                     $department =  $this->technical->getDataTechnicalDepartemen($compare['department']);
+                    //Filter Different Value
                     for ($i = 0; $i < count($old_competency); $i++) {
                         foreach ($department as $key => $values) {
                             if (in_array($values['id_technical'], $old_competency[$i])) {
@@ -651,25 +652,28 @@ class C_User extends BaseController
                     }
                 }
             } else {
-                $old_department_competency = $this->competencyTechnicalB->getProfileTechnicalCompetencyB($profile[0]);
+                $old_department_competency = $this->competencyTechnicalB->getProfileTechnicalCompetencyBWithDepartment($profile[0], $compare['department']);
                 if (!empty($old_department_competency)) {
+                    // bug duplikat competency
                     $department = $this->technicalB->getDataByDepartment($compare['department']);
                     for ($i = 0; $i < count($old_department_competency); $i++) {
                         foreach ($department as $key => $values) {
-                            if (in_array($values['id_technicalB'], $old_department_competency[$i])) {
+                            if (in_array($values['technicalB'], $old_department_competency[$i])) {
                                 unset($department[$key]);
                             }
                         }
                     }
-                    foreach ($department as $Department) {
-                        $DataTechnicalB = [
-                            'id_technicalB' => $Department['id_technicalB'],
-                            'id_user' => $profile[0],
-                            'score' => 0
-                        ];
-                        //save
-                        $this->competencyTechnicalB->save($DataTechnicalB);
-                    }
+                    // foreach ($department as $Department) {
+                    //     $DataTechnicalB = [
+                    //         'id_technicalB' => $Department['id_technicalB'],
+                    //         'id_user' => $profile[0],
+                    //         'score' => 0
+                    //     ];
+
+                    //save
+                    // $this->competencyTechnicalB->save($DataTechnicalB);
+                    //}
+
                 } else {
                     $department = $this->technicalB->getDataByDepartment($compare['department']);
                     foreach ($department as $Department) {
@@ -678,9 +682,11 @@ class C_User extends BaseController
                             'id_user' => $profile[0],
                             'score' => 0
                         ];
+
                         //save
-                        $this->competencyTechnicalB->save($DataTechnicalB);
+                        // $this->competencyTechnicalB->save($DataTechnicalB);
                     }
+                    $variable = 'B';
                 }
             }
         }
@@ -698,7 +704,7 @@ class C_User extends BaseController
                     'major' => $old[4],
                 ];
                 array_push($oldfix, $education_old);
-                $this->education->save($education_old);
+                // $this->education->save($education_old);
             }
 
             array_push($dataFixes, $oldfix);
@@ -715,7 +721,7 @@ class C_User extends BaseController
                     'major' => $new[3],
                 ];
                 array_push($newfix, $education_new);
-                $this->education->save($education_new);
+                // $this->education->save($education_new);
             }
             array_push($dataFixes, $newfix);
         }
@@ -735,7 +741,7 @@ class C_User extends BaseController
                     'company' => $old_career[6],
                 ];
                 array_push($oldfixCareer, $career_old);
-                $this->career->save($career_old);
+                // $this->career->save($career_old);
             }
             array_push($dataFixes, $oldfixCareer);
         }
@@ -753,14 +759,14 @@ class C_User extends BaseController
                     'company' => $new_careers[5],
                 ];
                 array_push($newfixCareer, $career_new);
-                $this->career->save($career_new);
+                // $this->career->save($career_new);
             }
             array_push($dataFixes, $newfixCareer);
         }
         //  $changes = $this->UpdatedCompetencyUser($profile[0]);
 
 
-        echo json_encode('success');
+        echo json_encode($department);
     }
 
 

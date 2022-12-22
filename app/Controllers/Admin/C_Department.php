@@ -181,119 +181,114 @@ class C_Department extends BaseController
                 'type_golongan' => $sheet[$i][5],
                 'type_user' => $sheet[$i][6]
             ];
-
-            $compare = array_diff($data_new, $data_old);
-            // dd($different);
-            if (!empty($compare)) {
-                if (array_key_exists("type_golongan", $compare)) {
-                    if (trim($compare['type_golongan']) == 'A') {
-                        if (array_key_exists("type_user", $compare)) {
-                            if (trim($compare['type_user']) == 'REGULAR') {
-                                //$Astra = "Check";
-                                $old_competency = $this->competencyAstra->getAstraIdCompetency($user['id_user']);
-                                //check data sudah ada atau belum
-                                if (!empty($old_competency)) {
-                                    $Astra = $this->astra->getAllIdAstra();
-                                    for ($i = 0; $i < count($old_competency); $i++) {
-                                        foreach ($Astra as $key => $values) {
-                                            if (in_array($values['id_astra'], $old_competency[$i])) {
-                                                unset($Astra[$key]);
-                                            }
-                                        }
-                                    }
-                                    foreach ($Astra as $astra) {
-                                        $DataAstra = [
-                                            'id_user' => $user['id_user'],
-                                            'id_astra' => $astra['id_astra'],
-                                            'score_astra' => 0
-                                        ];
-                                        $this->competencyAstra->save($DataAstra);
-                                    }
-                                } else {
-                                    $Astra = $this->astra->getAllIdAstra();
-                                    foreach ($Astra as $AstraCompetency) {
-                                        $DataAstraEmpty = [
-                                            'id_astra' => $AstraCompetency['id_astra'],
-                                            'id_user' => $user['id_user'],
-                                            'score_astra' => 0
-                                        ];
-                                        //save
-                                        $this->competencyAstra->save($DataAstraEmpty);
-                                    }
-                                }
-                            } else {
-                                $old_competency  = $this->competencyExpert->getProfileExpertCompetency($user['id_user']);
-                                // check data sudah ada atau belum
-                                if (!empty($Expert)) {
-                                    $Expert =  $this->expert->getAllIdExpert();
-                                    for ($i = 0; $i < count($old_competency); $i++) {
-                                        foreach ($Expert as $key => $values) {
-                                            if (in_array($values['id_expert'], $old_competency[$i])) {
-                                                unset($Expert[$key]);
-                                            }
-                                        }
-                                    }
-                                    foreach ($Expert as $expert) {
-                                        $DataExpert = [
-                                            'id_user' => $user['id_user'],
-                                            'id_astra' => $expert['id_expert'],
-                                            'score_expert' => 0
-                                        ];
-                                        // save
-                                        $this->competencyExpert->save($DataExpert);
-                                    }
-                                } else {
-                                    $Expert =  $this->expert->getAllIdExpert();
-                                    foreach ($Expert as $expert) {
-                                        $DataExpert = [
-                                            'id_user' => $user['id_user'],
-                                            'id_expert' => $expert['id_expert'],
-                                            'score_expert' => 0
-                                        ];
-                                        //save
-                                        $this->competencyExpert->save($DataExpert);
-                                    }
+            //$compare = array_diff($data_new, $data_old);
+            if (trim($data_new['type_golongan']) == 'A') {
+                if (trim($data_new['type_user']) == 'REGULAR') {
+                    //$Astra = "Check";
+                    $old_competency = $this->competencyAstra->getAstraIdCompetency($user['id_user']);
+                    //check data sudah ada atau belum
+                    if (!empty($old_competency)) {
+                        $Astra = $this->astra->getAllIdAstra();
+                        for ($i = 0; $i < count($old_competency); $i++) {
+                            foreach ($Astra as $key => $values) {
+                                if (in_array($values['id_astra'], $old_competency[$i])) {
+                                    unset($Astra[$key]);
                                 }
                             }
                         }
+                        foreach ($Astra as $astra) {
+                            $DataAstra = [
+                                'id_user' => $user['id_user'],
+                                'id_astra' => $astra['id_astra'],
+                                'score_astra' => 0
+                            ];
+                            //$this->competencyAstra->save($DataAstra);
+                            //dd($DataAstra);
+                        }
                     } else {
-                        $old_competency =  $this->competencySoft->getProfileSoftCompetency($user['id_user']);
-                        //check data sudah ada atau belum
-                        if (!empty($old_competency)) {
-                            $Soft = $this->soft->getAllIdSoft();
-                            for ($i = 0; $i < count($old_competency); $i++) {
-                                foreach ($Soft as $key => $values) {
-                                    if (in_array($values['id_soft'], $old_competency[$i])) {
-                                        unset($Soft[$key]);
-                                    }
+                        $Astra = $this->astra->getAllIdAstra();
+                        foreach ($Astra as $AstraCompetency) {
+                            $DataAstraEmpty = [
+                                'id_astra' => $AstraCompetency['id_astra'],
+                                'id_user' => $user['id_user'],
+                                'score_astra' => 0
+                            ];
+
+                            //save
+                            // $this->competencyAstra->save($DataAstraEmpty);
+                        }
+                    }
+                } else {
+                    $old_competency = $this->competencyExpert->getProfileExpertCompetency($user['id_user']);
+                    // check data sudah ada atau belum
+                    if (!empty($old_competency)) {
+                        $Expert = $this->expert->getAllIdExpert();
+                        for ($i = 0; $i < count($old_competency); $i++) {
+                            foreach ($Expert as $key => $values) {
+                                if (in_array($values['id_expert'], $old_competency[$i])) {
+                                    unset($Expert[$key]);
                                 }
                             }
-                            foreach ($Soft as $soft) {
-                                $DataSoft = [
-                                    'id_user' => $user['id_user'],
-                                    'id_soft' => $soft['id_soft'],
-                                    'score_soft' => 0
-                                ];
-                                //save 
-                                $this->competencySoft->save($DataSoft);
-                            }
-                        } else {
-                            $Soft = $this->soft->getAllIdSoft();
-                            foreach ($Soft as $soft) {
-                                $DataSoft = [
-                                    'id_user' => $user['id_user'],
-                                    'id_soft' => $soft['id_soft'],
-                                    'score_soft' => 0
-                                ];
-                                //save 
-                                $this->competencySoft->save($DataSoft);
-                            }
+                        }
+                        foreach ($Expert as $expert) {
+                            $DataExpert = [
+                                'id_user' => $user['id_user'],
+                                'id_astra' => $expert['id_expert'],
+                                'score_expert' => 0
+                            ];
+                            // save
+                            // $this->competencyExpert->save($DataExpert);
+                        }
+                    } else {
+                        $Expert = $this->expert->getAllIdExpert();
+                        //$test = 'Masuk';
+                        foreach ($Expert as $expert) {
+                            $DataExpert = [
+                                'id_user' => $user['id_user'],
+                                'id_expert' => $expert['id_expert'],
+                                'score_expert' => 0
+                            ];
+                            //save
+                            //  $this->competencyExpert->save($DataExpert);
                         }
                     }
                 }
+            } else {
+                $old_competency = $this->competencySoft->getProfileSoftCompetency($user['id_user']);
+                //check data sudah ada atau belum
+                if (!empty($old_competency)) {
+                    $Soft = $this->soft->getAllIdSoft();
+                    for ($i = 0; $i < count($old_competency); $i++) {
+                        foreach ($Soft as $key => $values) {
+                            if (in_array($values['id_soft'], $old_competency[$i])) {
+                                unset($Soft[$key]);
+                            }
+                        }
+                    }
+                    foreach ($Soft as $soft) {
+                        $DataSoft = [
+                            'id_user' => $user['id_user'],
+                            'id_soft' => $soft['id_soft'],
+                            'score_soft' => 0
+                        ];
+                        //save 
+                        //$this->competencySoft->save($DataSoft);
+                    }
+                } else {
+                    $Soft = $this->soft->getAllIdSoft();
+                    foreach ($Soft as $soft) {
+                        $DataSoft = [
+                            'id_user' => $user['id_user'],
+                            'id_soft' => $soft['id_soft'],
+                            'score_soft' => 0
+                        ];
+                        //save 
+                        // $this->competencySoft->save($DataSoft);
+                    }
+                }
             }
-            $this->user->save($users);
+            //  $this->user->save($users);
         }
-        return redirect()->to('/database_department');
+        //  return redirect()->to('/database_department');
     }
 }

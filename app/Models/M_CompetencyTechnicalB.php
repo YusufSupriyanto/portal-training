@@ -18,6 +18,13 @@ class M_CompetencyTechnicalB extends Model
         return $this->get()->getResultArray();
     }
 
+    public function getProfileTechnicalCompetencyBWithDepartment($id, $department)
+    {
+        $this->select()->where('id_user', $id)->where('department', $department);
+        $this->join('competency_technicalB', 'competency_technicalB.id_technicalB =competency_profile_technicalB.id_technicalB');
+        return $this->get()->getResultArray();
+    }
+
     public function getTechnicalByIdCompetencyB($id)
     {
         $this->select()->where('id_competency_technicalB', $id);
@@ -27,7 +34,7 @@ class M_CompetencyTechnicalB extends Model
 
     public function getProfileTechnicalCompetencyBDistinct($id)
     {
-        $this->select('competency_technicalB.departemen')->where('id_user', $id)->distinct();
+        $this->select('competency_technicalB.department')->where('id_user', $id)->distinct();
         $this->join('competency_technicalB', 'competency_technicalB.id_technicalB =competency_profile_technicalB.id_technicalB');
         return $this->get()->getResultArray();
     }

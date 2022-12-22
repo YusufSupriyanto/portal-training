@@ -122,7 +122,12 @@ class User extends BaseController
             }
             $technicalB = $this->competencyTechnicalB->getProfileTechnicalCompetencyB($id);
             if (!empty($technicalB)) {
-                $this->TechnicalCompetencyB($id, $string);
+                $dept = $this->competencyTechnicalB->getProfileTechnicalCompetencyBDistinct($id);
+                foreach ($dept as $department) {
+                    if ($department['department'] != $user['departemen']) {
+                        $this->TechnicalCompetencyB($id, $department['department']);
+                    }
+                }
             }
             $soft = $this->competencySoft->getProfileSoftCompetency($id);
             if (!empty($soft)) {
@@ -145,7 +150,12 @@ class User extends BaseController
             }
             $technicalB = $this->competencyTechnicalB->getProfileTechnicalCompetencyB($id);
             if (!empty($technicalB)) {
-                $this->TechnicalCompetencyB($id, $string);
+                $dept = $this->competencyTechnicalB->getProfileTechnicalCompetencyBDistinct($id);
+                foreach ($dept as $department) {
+                    if ($department['department'] != $user['departemen']) {
+                        $this->TechnicalCompetencyB($id, $department['department']);
+                    }
+                }
             }
             $soft = $this->competencySoft->getProfileSoftCompetency($id);
             if (!empty($soft)) {
@@ -153,7 +163,6 @@ class User extends BaseController
             }
             echo '</div>';
         } else {
-
             echo '<div class="d-flex">';
             $this->CompanyCompetency($id);
             $this->TechnicalCompetencyB($id);
@@ -166,7 +175,12 @@ class User extends BaseController
             }
             $technical = $this->competencyTechnical->getProfileTechnicalCompetency($id);
             if (!empty($technical)) {
-                $this->TechnicalCompetencyA($id, $string);
+                $dept = $this->competencyTechnical->getProfileTechnicalCompetencyDepartment($id);
+                foreach ($dept as $department) {
+                    if ($department['departemen'] != $user['departemen']) {
+                        $this->TechnicalCompetencyA($id, $department['departemen']);
+                    }
+                }
             }
             echo '</div>';
             echo '<div class="d-flex">';
@@ -211,20 +225,26 @@ class User extends BaseController
     }
 
 
-    public function TechnicalCompetencyA($id, $string = false)
+    public function TechnicalCompetencyA($id, $department = false)
     {
-
         //competency saat ini
         //  $technicalA = $this->competencyTechnical->getProfileTechnicalCompetency($id);
         $user = $this->user->getAllUser($id);
+
         echo '
              <div class="card w-100 m-1">';
-        $variavlle = ($string != false)  ? '<div class="card-header">
-                        <h3 class="card-title">Copetency Sebelumnya Department ' . $user['departemen'] . '</h3>
-                      </div>' : '<div class="card-header">
+        if ($department != false) {
+            $variable = '<div class="card-header">
+                        <h3 class="card-title">Copetency Sebelumnya Department ' . $department . '</h3>
+                      </div>';
+            $technicalA = $this->competencyTechnical->getProfileTechnicalCompetencyDept($id, $department);
+        } else {
+            $variable =  '<div class="card-header">
                         <h3 class="card-title">Copetency Department ' . $user['departemen'] . '</h3>
                       </div>';
-        echo $variavlle;
+            $technicalA = $this->competencyTechnical->getProfileTechnicalCompetencyDept($id, $user['departemen']);
+        }
+        echo $variable;
         echo   '<table class="table table-striped">
           
                             <thead>
@@ -235,7 +255,7 @@ class User extends BaseController
                                 </tr>
                             </thead>
                             <tbody>';
-        $technicalA = $this->competencyTechnical->getProfileTechnicalCompetencyDept($id, $user['departemen']);
+
         foreach ($technicalA as $technicals) {
             echo '<tr>
 <td>' . $technicals['technical'] . '</td>
@@ -249,59 +269,7 @@ class User extends BaseController
                         </div>
                         
                ';
-
-
-        //Competency Sebelumnya
-        $dept = $this->competencyTechnical->getProfileTechnicalCompetencyDepartment($id);
-
-        if (!empty($dept)) {
-            $departemen = [];
-            $array = [
-                'departemen' => $user['departemen']
-            ];
-            array_push($departemen, $array);
-            for ($i = 0; $i < count($departemen); $i++) {
-                foreach ($dept as $key => $values) {
-                    if (in_array($values['departemen'], $departemen[$i])) {
-                        unset($dept[$key]);
-                    }
-                }
-            }
-            $loop = 0;
-            foreach ($dept as $department) {
-                echo '
-                     <div class="card w-100 m-1">';
-                echo ($loop >= 0) ? '<div class="card-header">
-                        <h3 class="card-title">Copetency Sebelumnya Department ' . $department['departemen'] . '</h3>
-                      </div>' : '';
-                echo '<table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Technical Competency</th>
-                                            <th>Proficiency</th>
-                                            <th>Score</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>';
-                $technicalA = $this->competencyTechnical->getProfileTechnicalCompetencyDept($id, $department['departemen']);
-                foreach ($technicalA as $technicals) {
-                    echo '<tr>
-        <td>' . $technicals['technical'] . '</td>
-        <td>' . $technicals['proficiency'] . '</td>
-        <td>
-        ' . $technicals['score_technical'] . '
-        </tr>';
-                }
-                echo '                           </tbody>
-                                </table>
-                                </div>
-
-                       ';
-                $loop++;
-            }
-        }
     }
-
 
     public function ExpertCompetency($id, $string = false)
     {
@@ -396,83 +364,47 @@ class User extends BaseController
                ';
     }
 
-    public function TechnicalCompetencyB($id, $string = false)
+    public function TechnicalCompetencyB($id, $department = false)
     {
 
         $user = $this->user->getAllUser($id);
+
         echo '
-             <div class="card w-100 m-1">';
-        echo $string;
+                     <div class="card w-100 m-1">';
+        if ($department != false) {
+            $variable = '<div class="card-header">
+                                <h3 class="card-title">Copetency Sebelumnya Department ' . $department . '</h3>
+                              </div>';
+            $technicalB = $this->competencyTechnicalB->getProfileTechnicalCompetencyBDepartment($id, $department);
+        } else {
+            $variable =  '<div class="card-header">
+                                <h3 class="card-title">Copetency Department ' . $user['departemen'] . '</h3>
+                              </div>';
+            $technicalB = $this->competencyTechnicalB->getProfileTechnicalCompetencyBDepartment($id, $user['departemen']);
+        }
+        echo $variable;
         echo   '<table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Technical Competency</th>
-                                    <th>Proficiency</th>
-                                    <th>Score</th>
-                                </tr>
-                            </thead>
-                            <tbody>';
-        $technicalB = $this->competencyTechnicalB->getProfileTechnicalCompetencyBDepartment($id, $user['departemen']);
+                                    <thead>
+                                        <tr>
+                                            <th>Technical Competency</th>
+                                            <th>Proficiency</th>
+                                            <th>Score</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>';
+
         foreach ($technicalB as $technical) {
             echo '<tr>
-<td>' . $technical['technicalB'] . '</td>
-<td>' . $technical['proficiency'] . '</td>
-<td>' . $technical['score'] . '
-</td>
-</tr>';
+        <td>' . $technical['technicalB'] . '</td>
+        <td>' . $technical['proficiency'] . '</td>
+        <td>' . $technical['score'] . '
+        </td>
+        </tr>';
         }
         echo '                           </tbody>
-                        </table>
-                        </div>
-                        
-               ';
+                                </table>
+                                </div>
 
-        $dept = $this->competencyTechnicalB->getProfileTechnicalCompetencyB($id);
-        if (!empty($TechnicalB)) {
-            $departemen = [];
-            $array = [
-                'departemen' => $user['departemen']
-            ];
-            array_push($departemen, $array);
-            for ($i = 0; $i < count($departemen); $i++) {
-                foreach ($dept as $key => $values) {
-                    if (in_array($values['departemen'], $departemen[$i])) {
-                        unset($dept[$key]);
-                    }
-                }
-            }
-            $loop = 0;
-            foreach ($dept as $department) {
-                echo '
-             <div class="card w-100 m-1">';
-                echo ($loop >= 0) ? '<div class="card-header">
-                        <h3 class="card-title">Copetency Sebelumnya Department ' . $department['departemen'] . '</h3>
-                      </div>' : '';
-                echo   '<table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Technical Competency</th>
-                                    <th>Proficiency</th>
-                                    <th>Score</th>
-                                </tr>
-                            </thead>
-                            <tbody>';
-                $technicalB = $this->competencyTechnicalB->getProfileTechnicalCompetencyBDepartment($id, $department['departemen']);
-                foreach ($technicalB as $technical) {
-                    echo '<tr>
-<td>' . $technical['technicalB'] . '</td>
-<td>' . $technical['proficiency'] . '</td>
-<td>' . $technical['score'] . '
-</td>
-</tr>';
-                }
-                echo '                           </tbody>
-                        </table>
-                        </div>
-                        
-               ';
-                $loop++;
-            }
-        }
+                       ';
     }
 }

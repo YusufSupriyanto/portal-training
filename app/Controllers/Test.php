@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\User\FormTna;
 use App\Models\M_Categories;
 use App\Models\M_CompetencyTechnical;
+use App\Models\M_CompetencyTechnicalB;
 use App\Models\M_ListTraining;
 use App\Models\UserModel;
 
@@ -20,6 +21,8 @@ class Test extends BaseController
 
     private M_CompetencyTechnical $competencyTechnical;
 
+    private M_CompetencyTechnicalB $competencyTechnicalB;
+
     private UserModel $user;
 
     public function __construct()
@@ -30,29 +33,45 @@ class Test extends BaseController
         $this->tna = new FormTna();
         $this->competencyTechnical = new M_CompetencyTechnical();
         $this->user = new UserModel();
+        $this->competencyTechnicalB = new M_CompetencyTechnicalB();
     }
     public function test()
     {
         // $value = $this->userModel->M_test();
         $id = 11754;
-        // $dept = $this->competencyTechnical->getProfileTechnicalCompetencyDepartment($id);
+        $dept  = $this->competencyTechnical->getProfileTechnicalCompetency($id);
+        //  $dept = $this->competencyTechnicalB->getProfileTechnicalCompetencyBDistinct($id);
+        $department = $this->competencyTechnical->getProfileTechnicalCompetency($id);
 
-        $dept = $this->competencyTechnical->getProfileTechnicalCompetencyDepartment($id);
-        $user = $this->user->getAllUser($id);
-        $department = [];
-        $test = [
-            'departemen' => $user['departemen']
-        ];
-        array_push($department, $test);
+        // foreach ($comp0 as $comp1) {
+
+        //     $data1[] = $comp1['technical'];
+        // }
+
+        // foreach ($comp2 as $comp3) {
+        //     $data2[] = $comp3['technical'];
+        // }
+
+        // $data = array_intersect($data1, $data2);
+        //$user = $this->user->getAllUser($id);
+        // $department = [];
+        // $test = [
+        //     'departemen' => $user['departemen']
+        // ];
+        // array_push($department, $test);
+        $data = [];
         for ($i = 0; $i < count($department); $i++) {
-            foreach ($dept as $key => $values) {
-                if (in_array($values['departemen'], $department[$i])) {
-                    unset($dept[$key]);
+            foreach ($dept as  $values) {
+                if (in_array($values['technical'], $department[$i])) {
+                    $value = [
+                        'technica' => $values['technical']
+                    ];
+                    array_push($data, $value);
                 }
             }
         }
 
-        dd($dept);
+        dd($data);
     }
 
     public function testGetListTraining($category = 'Cultural Training')
