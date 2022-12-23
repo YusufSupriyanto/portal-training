@@ -111,6 +111,14 @@ class User extends BaseController
             $this->AstraCompetency($id);
             $this->TechnicalCompetencyA($id);
             echo '</div>';
+            echo '<div class="d-flex">';
+            $technicalA = $this->competencyTechnical->getProfileTechnicalCompetencyDepartment($id);
+            foreach ($technicalA as $technical) {
+                if ($technical['departemen'] != $user['departemen']) {
+                    $this->TechnicalCompetencyA($id, $technical['departemen']);
+                }
+            }
+            echo '</div>';
             $expert = $this->competencyExpert->getProfileExpertCompetency($id);
             if (!empty($expert)) {
                 $this->ExpertCompetency($id, $string);
@@ -120,13 +128,14 @@ class User extends BaseController
             if (!empty($company)) {
                 $this->CompanyCompetency($id, $string);
             }
+            // $technicalB = $this->competencyTechnicalB->getProfileTechnicalCompetencyB($id);
+
             $technicalB = $this->competencyTechnicalB->getProfileTechnicalCompetencyB($id);
             if (!empty($technicalB)) {
                 $dept = $this->competencyTechnicalB->getProfileTechnicalCompetencyBDistinct($id);
                 foreach ($dept as $department) {
-                    if ($department['department'] != $user['departemen']) {
-                        $this->TechnicalCompetencyB($id, $department['department']);
-                    }
+
+                    $this->TechnicalCompetencyB($id, $department['department']);
                 }
             }
             $soft = $this->competencySoft->getProfileSoftCompetency($id);
@@ -138,6 +147,14 @@ class User extends BaseController
             echo '<div class="d-flex">';
             $this->ExpertCompetency($id);
             $this->TechnicalCompetencyA($id);
+            echo '</div>';
+            echo '<div class="d-flex">';
+            $technicalA = $this->competencyTechnical->getProfileTechnicalCompetencyDepartment($id);
+            foreach ($technicalA as $technical) {
+                if ($technical['departemen'] != $user['departemen']) {
+                    $this->TechnicalCompetencyA($id, $technical['departemen']);
+                }
+            }
             echo '</div>';
             $Astra = $this->competencyAstra->getProfileAstraCompetency($id);
             if (!empty($Astra)) {
@@ -152,9 +169,8 @@ class User extends BaseController
             if (!empty($technicalB)) {
                 $dept = $this->competencyTechnicalB->getProfileTechnicalCompetencyBDistinct($id);
                 foreach ($dept as $department) {
-                    if ($department['department'] != $user['departemen']) {
-                        $this->TechnicalCompetencyB($id, $department['department']);
-                    }
+
+                    $this->TechnicalCompetencyB($id, $department['department']);
                 }
             }
             $soft = $this->competencySoft->getProfileSoftCompetency($id);
@@ -167,6 +183,17 @@ class User extends BaseController
             $this->CompanyCompetency($id);
             $this->TechnicalCompetencyB($id);
             $this->SoftCompetency($id);
+            echo '</div>';
+            echo '<div class="d-flex">';
+            $technicalB = $this->competencyTechnicalB->getProfileTechnicalCompetencyB($id);
+            if (!empty($technicalB)) {
+                $dept = $this->competencyTechnicalB->getProfileTechnicalCompetencyBDistinct($id);
+                foreach ($dept as $department) {
+                    if ($department['department'] != $user['departemen']) {
+                        $this->TechnicalCompetencyB($id, $department['department']);
+                    }
+                }
+            }
             echo '</div>';
             echo '<div class="d-flex">';
             $Astra = $this->competencyAstra->getProfileAstraCompetency($id);
