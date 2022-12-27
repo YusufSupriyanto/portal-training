@@ -36,7 +36,7 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 //test
-$routes->get('/test', 'Test::test');
+$routes->get('/test', 'Test::test1');
 $routes->get('/edu', 'Admin\C_User::addIdEducation');
 
 
@@ -46,6 +46,11 @@ $routes->get('/edu', 'Admin\C_User::addIdEducation');
 $routes->get('/', 'Login::index', ['filter' => 'NAuth']);
 $routes->post('/verify', 'Login::validation', ['filter' => 'NAuth']);
 $routes->get('/logout', 'Login::logout', ['filter' => 'Auth']);
+
+
+//dashboard
+$routes->get('/dashboard', 'Admin\C_Dashboard::index', ['filter' => 'Auth']);
+
 
 //Home
 $routes->get('/home', 'Home::index', ['filter' => 'Auth']);

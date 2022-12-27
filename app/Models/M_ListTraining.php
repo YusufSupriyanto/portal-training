@@ -57,4 +57,16 @@ class M_ListTraining extends Model
     //     $this->select('id_training')->like('judul_training', urlDecode($training));
     //     $this->get()->getResultArray();
     // }
+
+
+    public function getJenisTrainining()
+    {
+        $this->select('jenis_training')->distinct();
+        return $this->get()->getResult();
+    }
+
+    public function CountJenisTraining($training)
+    {
+        return $this->selectCount('jenis_training')->where('jenis_training', $training)->first();
+    }
 }

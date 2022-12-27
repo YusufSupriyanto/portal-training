@@ -434,6 +434,9 @@ class C_User extends BaseController
         return view('admin/edituser', $data);
     }
 
+
+    //stuck 
+
     public function EditUser()
     {
         $dataFixes = [];
@@ -467,7 +470,7 @@ class C_User extends BaseController
                             'id_astra' => $astra['id_astra'],
                             'score_astra' => 0
                         ];
-                        $this->competencyAstra->save($DataAstra);
+                        // $this->competencyAstra->save($DataAstra);
                         //dd($DataAstra);
                     }
                 } else {
@@ -480,7 +483,7 @@ class C_User extends BaseController
                         ];
 
                         //save
-                        $this->competencyAstra->save($DataAstraEmpty);
+                        // $this->competencyAstra->save($DataAstraEmpty);
                     }
                 }
             } else {
@@ -502,7 +505,7 @@ class C_User extends BaseController
                             'score_expert' => 0
                         ];
                         // save
-                        $this->competencyExpert->save($DataExpert);
+                        // $this->competencyExpert->save($DataExpert);
                     }
                 } else {
                     $Expert = $this->expert->getAllIdExpert();
@@ -514,7 +517,7 @@ class C_User extends BaseController
                             'score_expert' => 0
                         ];
                         //save
-                        $this->competencyExpert->save($DataExpert);
+                        // $this->competencyExpert->save($DataExpert);
                     }
                 }
             }
@@ -553,7 +556,6 @@ class C_User extends BaseController
             }
         }
 
-
         //
         if (array_key_exists("divisi", $compare)) {
             $old_divisi_competency = $this->competencyCompany->getProfileCompanyCompetency($profile[0]);
@@ -579,7 +581,7 @@ class C_User extends BaseController
                         'score_company' => 0
                     ];
                     //save
-                    $this->competencyCompany->save($DataCompany);
+                    // $this->competencyCompany->save($DataCompany);
                 }
             } else {
                 $CompanyUser = $this->company->getDataCompanyDivisi($compare['divisi']);
@@ -590,7 +592,7 @@ class C_User extends BaseController
                         'score_company' => 0
                     ];
                     //save
-                    $this->competencyCompany->save($DataCompany);
+                    // $this->competencyCompany->save($DataCompany);
                 }
             }
         }
@@ -634,24 +636,7 @@ class C_User extends BaseController
 
                 if (!empty($old_department_competency)) {
 
-                    $DuplicateCompetency = [];
-
                     $department =  $this->technical->getDataTechnicalDepartemen($compare['department']);
-
-                    for ($i = 0; $i < count($old_competency); $i++) {
-
-                        foreach ($department as $key => $values) {
-
-                            if (in_array($values['technical'], $old_competency[$i])) {
-
-                                array_push($DuplicateCompetency, $department[$key]);
-                            }
-                        }
-                    }
-
-                    ///delete duplicate data
-                    $try = array_map("unserialize", array_unique(array_map("serialize", $DuplicateCompetency)));
-
 
                     //Filter Different Value
                     for ($i = 0; $i < count($old_competency); $i++) {
@@ -664,6 +649,7 @@ class C_User extends BaseController
                             }
                         }
                     }
+
                     foreach ($department as $Department) {
 
                         $DataTechnical = [
@@ -784,7 +770,7 @@ class C_User extends BaseController
                     'major' => $old[4],
                 ];
                 array_push($oldfix, $education_old);
-                $this->education->save($education_old);
+                // $this->education->save($education_old);
             }
             array_push($dataFixes, $oldfix);
         }
@@ -802,7 +788,7 @@ class C_User extends BaseController
                     'major' => $new[3],
                 ];
                 array_push($newfix, $education_new);
-                $this->education->save($education_new);
+                // $this->education->save($education_new);
             }
             array_push($dataFixes, $newfix);
         }
@@ -823,7 +809,7 @@ class C_User extends BaseController
                     'company' => $old_career[6],
                 ];
                 array_push($oldfixCareer, $career_old);
-                $this->career->save($career_old);
+                //  $this->career->save($career_old);
             }
             array_push($dataFixes, $oldfixCareer);
         }
@@ -841,7 +827,7 @@ class C_User extends BaseController
                     'company' => $new_careers[5],
                 ];
                 array_push($newfixCareer, $career_new);
-                $this->career->save($career_new);
+                // $this->career->save($career_new);
             }
             array_push($dataFixes, $newfixCareer);
         }
@@ -849,6 +835,33 @@ class C_User extends BaseController
 
 
         echo json_encode($try);
+    }
+
+
+
+    public function DuplicateCompetncy($department, $old_competency)
+    {
+
+        $DuplicateCompetency = [];
+
+        for ($i = 0; $i < count($old_competency); $i++) {
+
+            foreach ($department as $key => $values) {
+
+                if (in_array($values['technical'], $old_competency[$i])) {
+
+                    array_push($DuplicateCompetency, $department[$key]);
+                }
+            }
+        }
+
+        ///delete duplicate data
+        $try = array_map("unserialize", array_unique(array_map("serialize", $DuplicateCompetency)));
+    }
+
+
+    public function UnsetCompetency()
+    {
     }
 
 

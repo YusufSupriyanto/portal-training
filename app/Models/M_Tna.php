@@ -13,7 +13,7 @@ class M_Tna extends Model
         'id_user', 'id_training', 'dic', 'divisi',
         'departemen', 'nama', 'jabatan', 'golongan', 'seksi', 'jenis_training',
         'kategori_training', 'training', 'vendor', 'tempat', 'metode_training', 'request_training', 'mulai_training', 'rencana_training',
-        'tujuan_training', 'notes', 'biaya', 'biaya_actual', 'status', 'kelompok_training', 'id_budget', 'id_competency', 'type_competency'
+        'tujuan_training', 'notes', 'biaya', 'biaya_actual', 'status', 'kelompok_training', 'id_budget', 'id_competency', 'type_competency', 'year'
     ];
 
 
@@ -613,6 +613,40 @@ class M_Tna extends Model
         $this->select()->where('tna.id_user', $id)->where('kelompok_training', 'training');
         $this->join('approval', 'approval.id_tna = tna.id_tna');
         $this->join('evaluasi_reaksi', 'evaluasi_reaksi.id_tna = tna.id_tna')->where('status_evaluasi', null);
+        return $this->get()->getResult();
+    }
+
+    //Dashboard Function Model
+
+    public function getJenisTraining()
+    {
+        $this->select('tna.jenis_training')->Distinct();
+        $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept');
+        $this->join('evaluasi_reaksi', 'evaluasi_reaksi.id_tna = tna.id_tna')->where('status_evaluasi', '1');
+        return $this->get()->getResult();
+    }
+
+    public function CountJenisTraining($jenis, $date)
+    {
+        $this->selectCount('tna.jenis_training')->where('tna.jenis_training', $jenis)->where('tna.year', $date);
+        $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept');
+        $this->join('evaluasi_reaksi', 'evaluasi_reaksi.id_tna = tna.id_tna')->where('status_evaluasi', '1');
+        return $this->get()->getResult();
+    }
+
+    public function getCategory()
+    {
+        $this->select('tna.kategori_training')->Distinct();
+        $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept');
+        $this->join('evaluasi_reaksi', 'evaluasi_reaksi.id_tna = tna.id_tna')->where('status_evaluasi', '1');
+        return $this->get()->getResult();
+    }
+
+    public function CountCategory($category, $date)
+    {
+        $this->selectCount('tna.kategori_training')->where('tna.kategori_training', $category)->where('tna.year', $date);
+        $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept');
+        $this->join('evaluasi_reaksi', 'evaluasi_reaksi.id_tna = tna.id_tna')->where('status_evaluasi', '1');
         return $this->get()->getResult();
     }
 }

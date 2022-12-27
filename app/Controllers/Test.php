@@ -8,6 +8,7 @@ use App\Models\M_CompetencyTechnical;
 use App\Models\M_CompetencyTechnicalB;
 use App\Models\M_ListTraining;
 use App\Models\M_Technical;
+use App\Models\M_Tna;
 use App\Models\UserModel;
 
 
@@ -28,6 +29,10 @@ class Test extends BaseController
 
     private M_Technical $technical;
 
+    private M_Tna $Tna;
+
+
+
     public function __construct()
     {
         $this->userModel = new UserModel();
@@ -38,6 +43,8 @@ class Test extends BaseController
         $this->user = new UserModel();
         $this->competencyTechnicalB = new M_CompetencyTechnicalB();
         $this->technical = new M_Technical();
+
+        $this->Tna = new M_Tna();
     }
     public function test()
     {
@@ -120,6 +127,25 @@ class Test extends BaseController
 
 
         dd($data);
+    }
+
+
+
+    public function test1()
+    {
+        $jenis = $this->Tna->getJenisTraining();
+        $JenisTrainings = [];
+        foreach ($jenis as $Jenis) {
+            $count = $this->Tna->CountJenisTraining($Jenis->jenis_training, date('Y'));
+
+            $JenisTraining = [
+                'name' => $Jenis->jenis_training,
+                'y' => $count[0]->jenis_training
+            ];
+
+            array_push($JenisTrainings, $JenisTraining);
+        }
+        dd($JenisTrainings);
     }
 
     public function testGetListTraining($category = 'Cultural Training')
