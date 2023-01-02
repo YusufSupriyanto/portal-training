@@ -136,19 +136,20 @@ to get the desired effect
                             data-accordion="false">
                             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-                            <li class="nav-item">
-                                <a href="<?= base_url() ?>/dashboard" class="nav-link  <?php if ($page == 'dashboard') : echo 'active';
-                                                                                    endif; ?>">
-                                    <i class="nav-icon fa-solid fa-chart-line"></i>
-                                    <p>Dashboard</p>
-                                </a>
-                            </li>
+
 
                             <li class="nav-item">
                                 <a href="<?= base_url() ?>/home" class="nav-link  <?php if ($page == 'home') : echo 'active';
                                                                                 endif; ?>">
                                     <i class="nav-icon fa fa-fw  fa-home"></i>
                                     <p>Home</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?= base_url() ?>/dashboard" class="nav-link  <?php if ($page == 'dashboard') : echo 'active';
+                                                                                    endif; ?>">
+                                    <i class="nav-icon fa-solid fa-chart-line"></i>
+                                    <p>Dashboard</p>
                                 </a>
                             </li>
                             <li class="nav-item has-treeview">

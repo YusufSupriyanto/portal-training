@@ -133,19 +133,22 @@ class Test extends BaseController
 
     public function test1()
     {
-        $jenis = $this->Tna->getJenisTraining();
-        $JenisTrainings = [];
-        foreach ($jenis as $Jenis) {
-            $count = $this->Tna->CountJenisTraining($Jenis->jenis_training, date('Y'));
+        // $jenis = $this->Tna->getJenisTraining();
+        // $JenisTrainings = [];
+        // foreach ($jenis as $Jenis) {
+        //     $count = $this->Tna->CountJenisTraining($Jenis->jenis_training, date('Y'));
 
-            $JenisTraining = [
-                'name' => $Jenis->jenis_training,
-                'y' => $count[0]->jenis_training
-            ];
+        //     $JenisTraining = [
+        //         'name' => $Jenis->jenis_training,
+        //         'y' => $count[0]->jenis_training
+        //     ];
 
-            array_push($JenisTrainings, $JenisTraining);
-        }
-        dd($JenisTrainings);
+        //     array_push($JenisTrainings, $JenisTraining);
+        // }
+        // dd($JenisTrainings);
+
+        $data = $this->Tna->DashboardTrainingLine(date('Y'));
+        dd($data);
     }
 
     public function testGetListTraining($category = 'Cultural Training')

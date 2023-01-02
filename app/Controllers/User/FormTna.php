@@ -130,7 +130,7 @@ class FormTna extends BaseController
             }
         }
 
-        if ($user['type_golongan'] == 'A         ' && $user['type_user'] == 'REGULAR             ') {
+        if (trim($user['type_golongan']) == 'A' && trim($user['type_user']) == 'REGULAR') {
             //Filter Astra Competency
             $datas  = $this->competencyAstra->getProfileAstraCompetency($id);
             $astra = [];
@@ -186,7 +186,7 @@ class FormTna extends BaseController
                 'target' => $target,
                 'validation' => \Config\Services::validation(),
             ];
-        } elseif ($user['type_golongan'] == 'A         ' && $user['type_user'] == 'EXPERT              ') {
+        } elseif (trim($user['type_golongan']) == 'A' && trim($user['type_user']) == 'EXPERT') {
             //Filter Expert Competency
             $dataExpert  = $this->competencyExpert->getProfileExpertCompetency($id);
             $Expert = [];
@@ -515,6 +515,7 @@ class FormTna extends BaseController
             'notes' => $this->request->getVar('notes'),
             'biaya' => $jenis_trainng['biaya'],
             'status' => 'save',
+            'year' => date('Y'),
             'kelompok_training' => $kelompok
         ];
         //dd($data);

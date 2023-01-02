@@ -17,6 +17,12 @@ class M_Budget extends Model
         return $this->get()->getResultArray();
     }
 
+    public function BudgetDashboard($date)
+    {
+        $this->select()->where('year', $date);
+        return $this->get()->getResultArray();
+    }
+
     public function getBudgetCurrent($department)
     {
 

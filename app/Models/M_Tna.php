@@ -618,6 +618,15 @@ class M_Tna extends Model
 
     //Dashboard Function Model
 
+
+    public function getCountTrainingByYear($year)
+    {
+        $this->selectCount('tna.id_tna')->where('year', $year);
+        $this->join('approval', 'approval.id_tna = tna.id_tna')->where('year', $year);
+        $this->join('user', 'user.id_user = tna.id_user');
+        return $this->get()->getResultArray();
+    }
+
     public function getJenisTraining()
     {
         $this->select('tna.jenis_training')->Distinct();
@@ -649,4 +658,73 @@ class M_Tna extends Model
         $this->join('evaluasi_reaksi', 'evaluasi_reaksi.id_tna = tna.id_tna')->where('status_evaluasi', '1');
         return $this->get()->getResult();
     }
+
+
+    public function DashboardTraining($date)
+    {
+        // $sql =  $this->query("Select count(mulai_training) as counted_leads,mulai_training as count_date from tna group by mulai_training")->getResultArray();
+        $sql =  $this->query("SELECT MONTH(mulai_training) as Bulan,COUNT(mulai_training) as total  FROM  tna join approval on approval.id_tna = tna.id_tna where status_approval_3 = 'accept' and YEAR(mulai_training) = $date GROUP BY  MONTH(mulai_training)")->getResultArray();
+        return $sql;
+    }
+
+    public function DashboardTrainingLine($date)
+    {
+        // $sql =  $this->query("Select count(mulai_training) as counted_leads,mulai_training as count_date from tna group by mulai_training")->getResultArray();
+        $sql =  $this->query("SELECT MONTH(mulai_training) as Bulan,COUNT(mulai_training) as total  FROM  tna join approval on approval.id_tna = tna.id_tna where status_approval_3 = 'accept'and status_training = 1 and YEAR(mulai_training) = $date GROUP BY  MONTH(mulai_training)")->getResultArray();
+
+        return $sql;
+    }
+
+
+    //Departemen Dashboard
+
+    public function DashboardTrainingDepartment($date, $department)
+    {
+        // $sql =  $this->query("Select count(mulai_training) as counted_leads,mulai_training as count_date from tna group by mulai_training")->getResultArray();
+        $sql =  $this->query("SELECT MONTH(mulai_training) as Bulan,COUNT(mulai_training) as total  FROM  tna join approval on approval.id_tna = tna.id_tna join [dbo].[user] on [dbo].[user].id_user = tna.id_user where status_approval_3 = 'accept' and departemen = '$department' and YEAR(mulai_training) = $date GROUP BY  MONTH(mulai_training)")->getResultArray();
+
+        return $sql;
+    }
+
+    public function DashboardTrainingLineDepartment($date, $department)
+    {
+        //$sql =  $this->query("SELECT MONTH(mulai_training) as Bulan,COUNT(mulai_training) as total  FROM  tna join approval on approval.id_tna = tna.id_tna join [user] on [user].id_user = tna.id_user where status_approval_3 = 'accept' and departemen = $department and status_training = 1 and YEAR(mulai_training) = $date GROUP BY  MONTH(mulai_training)")->getResultArray();
+        $sql =  $this->query("SELECT MONTH(mulai_training) as Bulan,COUNT(mulai_training) as total  FROM  tna join approval on approval.id_tna = tna.id_tna join [dbo].[user] on [dbo].[user].id_user = tna.id_user where status_approval_3 = 'accept' and departemen = '$department' and status_training = 1 and YEAR(mulai_training) = $date GROUP BY  MONTH(mulai_training)")->getResultArray();
+
+        return $sql;
+    }
+
+
+    public function getDashboardTrainingReject($year)
+    {
+        $this->selectCount('tna.id_tna')->where('year', $year);
+        $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_1', 'reject')->orWhere('status_approval_2', 'reject')->orWhere('status_approval_3', 'reject');
+        $this->join('user', 'user.id_user = tna.id_user');
+        return $this->get()->getResultArray();
+    }
+
+
+    public function getDashboardTrainingApproved($year)
+    {
+        $this->selectCount('tna.id_tna')->where('year', $year);
+        $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept');
+        $this->join('evaluasi_reaksi', 'evaluasi_reaksi.id_tna = tna.id_tna')->where('status_training', '1');
+        return $this->get()->getResultArray();
+    }
+
+    public function getDashboardTrainingNeedApproval($year)
+    {
+        $this->selectCount('tna.id_tna')->where('year', $year);
+        $this->join('approval', 'approval.id_tna = tna.id_tna')->Where('status_approval_1', NULL)->orWhere('status_approval_3', NULL);
+        $this->join('user', 'user.id_user = tna.id_user');
+        return $this->get()->getResultArray();
+    }
+
+    // public function getDasboardTrainingNeedApproved($year)
+    // {
+    //     $this->selectCount('tna.id_tna')->where('year', $year);
+    //     $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_1', NULL)->orWhere('status_approval_2', NULL)->orWhere('status_approval_3', NULL);
+    //     $this->join('user', 'user.id_user = tna.id_user');
+    //     return $this->get()->getResultArray();
+    //}
 }
