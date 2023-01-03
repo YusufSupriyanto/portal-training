@@ -32,6 +32,13 @@ class M_CompetencyTechnicalB extends Model
         return $this->get()->getResultArray();
     }
 
+    public function getTechnicalByIdCompetencyBValue($id, $technical)
+    {
+        $this->select()->where('id_competency_technicalB', $id);
+        $this->join('competency_technicalB', 'competency_technicalB.id_technicalB =competency_profile_technicalB.id_technicalB')->where('technical', $technical);
+        return $this->get()->getResultArray();
+    }
+
     public function getProfileTechnicalCompetencyBDistinct($id)
     {
         $this->select('competency_technicalB.department')->where('id_user', $id)->distinct();
