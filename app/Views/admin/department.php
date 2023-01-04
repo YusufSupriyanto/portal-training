@@ -2,11 +2,37 @@
 
 <?= $this->section('content') ?>
 <div class="card m-1">
-    <div class="card m-3" style="width:100px;">
-        <button class="btn btn-primary btn-sm" id="department-file" onclick="ModalDepartment()"><i
-                class="fa fa-plus"></i></button>
+    <div class="d-flex flex-row">
+        <div class="card m-3">
+            <button class="btn btn-primary btn-xl" id="department-file" onclick="ModalDepartment()"><i
+                    class="fa fa-plus"></i> Add New Department</button>
+        </div>
+        <div class="card m-3">
+            <button class="btn btn-primary btn-xl" onclick="UpdateDepartment()">
+                <i class="fa-solid fa-pen"></i>Update Name Department
+            </button>
+        </div>
     </div>
-    <!-- Modal -->
+    <!-- Modal Update Name Department -->
+    <div class="modal fade" id="update-department" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update New Department</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="<?= base_url() ?>/update_department" method="POST">
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal New Name Department -->
     <div class="modal fade" id="Modal-department" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -40,7 +66,7 @@
         <form action="<?= base_url() ?>/change_structure" method="POST">
             <label>Change Name DIC</label>
             <select class="form-control" name="dic[]" required>
-                <option value="">Chosee DIC</option>
+                <option value="">CHOOSE DIC</option>
                 <?php foreach ($dic as $dic) : ?>
                 <option value="<?= $dic['dic'] ?>"><?= $dic['dic'] ?></option>
                 <?php endforeach; ?>
@@ -55,9 +81,9 @@
     </div>
     <div class="form-group m-2">
         <form action="<?= base_url() ?>/change_structure" method="POST">
-            <label>Change Name Divisi</label>
+            <label>Change Name DIVISI</label>
             <select class="form-control" name="divisi[]" required>
-                <option value="">Chosee Divisi</option>
+                <option value="">CHOOSE Divisi</option>
                 <?php foreach ($divisi as $divisi) : ?>
                 <option value="<?= $divisi['divisi'] ?>"><?= $divisi['divisi'] ?></option>
                 <?php endforeach; ?>
@@ -74,7 +100,7 @@
         <form action="<?= base_url() ?>/change_structure" method="POST">
             <label>Change Name Department</label>
             <select class="form-control" name="department[]" required>
-                <option value="">Chosee Department</option>
+                <option value="">CHOOSE DEPARTMENT</option>
                 <?php foreach ($department as $Department) : ?>
                 <option value="<?= $Department['departemen'] ?>"><?= $Department['departemen'] ?></option>
                 <?php endforeach; ?>
@@ -91,7 +117,7 @@
         <form action="<?= base_url() ?>/change_structure" method="POST">
             <label>Change Name Seksi</label>
             <select class="form-control" name="seksi[]" required>
-                <option value="">Chosee seksi</option>
+                <option value="">CHOOSE SEKSI</option>
                 <?php foreach ($seksi as $seksi) : ?>
                 <option value="<?= $seksi['seksi'] ?>"><?= $seksi['seksi'] ?></option>
                 <?php endforeach; ?>
@@ -109,6 +135,11 @@
 function ModalDepartment() {
     jQuery.noConflict()
     $('#Modal-department').modal('show')
+}
+
+function UpdateDepartment() {
+    jQuery.noConflict()
+    $('#update-department').modal('show')
 }
 </script>
 <?= $this->endSection() ?>

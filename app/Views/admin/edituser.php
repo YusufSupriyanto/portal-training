@@ -16,17 +16,17 @@
                     name="profile[]">
             </div>
             <div class="form-group">
-                <label>Nama</label>
+                <label>NAME</label>
                 <input type="text" class="form-control" placeholder="Input Nama" value="<?= $user['nama'] ?>"
                     name="profile[]">
             </div>
             <div class="form-group">
-                <label>Status</label>
+                <label>STATUS</label>
                 <input type="text" class="form-control" placeholder="Input Status" value="<?= $user['status'] ?>"
                     name="profile[]">
             </div>
             <div class="form-group">
-                <label>Dic</label>
+                <label>DIC</label>
                 <select class="form-control" name="profile[]">
                     <option value="<?= $user['dic'] ?>" selected><?= $user['dic'] ?></option>
                     <?php foreach ($dic as $Dic) : ?>
@@ -35,7 +35,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label>Divisi</label>
+                <label>DIVISI</label>
                 <select class="form-control" name="profile[]">
                     <option value="<?= $user['divisi'] ?>" selected><?= $user['divisi'] ?></option>
                     <?php foreach ($divisi as $Divisi) : ?>
@@ -44,7 +44,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label>Departemen</label>
+                <label>DEPARTMENT</label>
                 <select class="form-control" name="profile[]">
                     <option value="<?= $user['departemen'] ?>" selected><?= $user['departemen'] ?></option>
                     <?php foreach ($departemen as $Departemen) : ?>
@@ -53,7 +53,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label>Seksi</label>
+                <label>SEKSI</label>
                 <select class="form-control" name="profile[]">
                     <option value="<?= $user['seksi'] ?>" selected><?= $user['seksi'] ?></option>
                     <?php foreach ($seksi as $Seksi) : ?>
@@ -62,7 +62,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label>Bagian</label>
+                <label>BAGIAN</label>
                 <select class="form-control" name="profile[]">
                     <option value="<?= $user['bagian'] ?>" selected><?= $user['bagian'] ?></option>
                     <?php foreach ($bagian as $Bagian) : ?>
@@ -71,7 +71,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label>Type Golongan</label>
+                <label>TYPE GROUP</label>
                 <select class="form-control" name="profile[]">
                     <option value="<?= $user['type_golongan'] ?>" selected><?= $user['type_golongan'] ?></option>
                     <?php foreach ($type_golongan as $golongan) : ?>
@@ -80,7 +80,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label>Type User</label>
+                <label>TYPE USER</label>
                 <select class="form-control" name="profile[]">
                     <option value="<?= $user['type_user'] ?>" selected><?= $user['type_user'] ?></option>
                     <?php foreach ($type_user as $TypeUser) : ?>
@@ -89,35 +89,35 @@
                 </select>
             </div>
             <div class="form-group">
-                <label>Promosi Terakhir</label>
+                <label>LAST PROMOTION</label>
                 <input type="date" class="form-control" value="<?= $user['promosi_terakhir'] ?>" name="profile[]">
             </div>
             <div class="form-group">
-                <label>Golongan</label>
+                <label>GROUP</label>
                 <input type="text" class="form-control" value="<?= $user['golongan'] ?>" name="profile[]">
             </div>
             <div class="form-group">
-                <label>Tanggal Masuk</label>
+                <label>DATE OF ENTRY</label>
                 <input type="date" class="form-control" value="<?= $user['tgl_masuk'] ?>" name="profile[]">
             </div>
             <div class="form-group">
-                <label>Masa Kerja</label>
+                <label>YEARS OF SERVICE</label>
                 <div class="d-flex">
                     <input type="text" class="form-control" value="<?= $user['tahun'] ?>" name="profile[]"
                         style="width:100px;" readonly>
-                    <label class="m-2">Tahun </label>
+                    <label class="m-2">YEAR </label>
 
                     <input type="text" class="form-control" value="<?= $user['bulan'] ?>" name="profile[]"
                         style="width:100px;" readonly>
-                    <label class="m-2">Bulan </label>
+                    <label class="m-2">MONTH </label>
                 </div>
             </div>
             <div class="form-group">
-                <label>Email</label>
+                <label>EMAIL</label>
                 <input type="text" class="form-control" placeholder="Input Email" value="<?= $user['email'] ?>"
                     name="profile[]">
             </div>
-            <h6>Education</h6>
+            <h6>EDUCATION</h6>
             <table class="table table-bordered overflow-auto">
                 <thead>
                     <tr>
@@ -149,7 +149,7 @@
             </table>
             <div class="m-2"> <button type="button" class="btn btn-success btn-sm" onclick="addEducation(0)"><i
                         class="fa fa-plus"></i></button></div>
-            <h6>Career</h6>
+            <h6>CAREER</h6>
             <table class="table table-bordered">
                 <thead>
                     <tr>

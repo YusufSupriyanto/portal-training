@@ -25,14 +25,14 @@
                     if ($page == 'training_monthly') : ?>
                 <td>
                     <a
-                        href="<?= base_url() ?>/kadiv_accept/<?= $dates['Planing Training'] ?>"><?php $newDate = date('F d, Y', strtotime($dates['Planing Training']));
+                        href="<?= base_url() ?>/kadiv_accept/<?= $dates['Planning Training'] ?>"><?php $newDate = date('F, Y', strtotime($dates['Planning Training']));
                                                                                                         echo $newDate   ?></a>
                 </td>
                 <?php else : ?>
-                <td>
-                    <a
-                        href="<?= base_url() ?>/kadiv_accept_unplanned/<?= $dates['Planing Training'] ?>"><?php $newDate = date('F d, Y', strtotime($dates['Planing Training']));
-                                                                                                                    echo $newDate   ?></a>
+                <td></td>
+                <a
+                    href="<?= base_url() ?>/kadiv_accept_unplanned/<?= $dates['Planning Training'] ?>"><?php $newDate = date('F, Y', strtotime($dates['Planning Training']));
+                                                                                                                echo $newDate   ?></a>
                 </td>
                 <?php endif; ?>
 

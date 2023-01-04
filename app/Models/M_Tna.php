@@ -320,6 +320,7 @@ class M_Tna extends Model
     public function getKadivAccept($date, $departemen)
     {
 
+
         $this->select('tna.*,user.*,approval.*')->where('mulai_training', $date)->where('user.departemen', $departemen)->where('kelompok_training', 'training');
         $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_1', 'accept');
         $this->join('user', 'user.id_user = tna.id_user');
@@ -329,7 +330,7 @@ class M_Tna extends Model
     public function getKadivAcceptDistinct($date)
     {
 
-        $this->select('user.departemen')->where('mulai_training', $date)->where('kelompok_training', 'training')->distinct();
+        $this->select('user.departemen')->where(date('m', 'mulai_training'), $date)->where('kelompok_training', 'training')->distinct();
         $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_1', 'accept');
         $this->join('user', 'user.id_user = tna.id_user');
         return $this->get()->getResultArray();
@@ -358,10 +359,13 @@ class M_Tna extends Model
 
 
 
+    //moderate Improvement
     public function getTrainingMonthly()
     {
-        $sql = $this->query("select tna.mulai_training as 'Planing Training', count(distinct tna.training) as 'Jumlah Training',count(distinct approval.status_approval_2) as 'Admin Approval',count(distinct approval.status_approval_3) as 'BOD Approval'
-            from tna join approval on approval.id_tna = tna.id_tna where tna.kelompok_training = 'training' and approval.status_approval_1 = 'accept' group by tna.mulai_training")->getResultArray();
+        // $sql = $this->query("select MONTH(tna.mulai_training) as 'Planing Training', count(distinct tna.training) as 'Jumlah Training',count(distinct approval.status_approval_2) as 'Admin Approval',count(distinct approval.status_approval_3) as 'BOD Approval'
+        //     from tna join approval on approval.id_tna = tna.id_tna where tna.kelompok_training = 'training' and approval.status_approval_1 = 'accept' group by MONTH(tna.mulai_training)")->getResultArray();
+        $sql = $this->query("select MONTH(tna.mulai_training) as 'Planing Training', count(distinct tna.training) as 'Jumlah Training',count(distinct approval.status_approval_2) as 'Admin Approval',count(distinct approval.status_approval_3) as 'BOD Approval'
+            from tna join approval on approval.id_tna = tna.id_tna where tna.kelompok_training = 'training' group by MONTH(tna.mulai_training)")->getResultArray();
 
         return $sql;
     }

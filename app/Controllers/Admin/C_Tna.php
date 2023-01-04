@@ -70,16 +70,28 @@ class C_Tna extends BaseController
     //     }
     // }
 
-
+    //moderate improvement
     public function trainingMonthly()
     {
 
         $TrainingMonthly = $this->tna->getTrainingMonthly();
-        //dd($TrainingMonthly);
+
+        $TrainingMothlyName = [];
+
+        foreach ($TrainingMonthly as $Month) {
+            $MONTH = [
+                'Planning Training' => date("F", mktime(0, 0, 0, $Month['Planing Training'], 10)),
+                'Jumlah Training' => $Month['Jumlah Training'],
+                'Admin Approval' => $Month['Admin Approval'],
+                'BOD Approval' => $Month['BOD Approval']
+            ];
+            array_push($TrainingMothlyName, $MONTH);
+        }
+        //   dd($TrainingMothlyName);
 
         $data = [
             'tittle' => 'Training Monthly',
-            'training' => $TrainingMonthly
+            'training' => $TrainingMothlyName
         ];
         return view('admin/trainingmonthly', $data);
     }

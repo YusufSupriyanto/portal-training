@@ -639,12 +639,14 @@ class C_User extends BaseController
             //Mengecek Apakah data type golongan Sebelumnya
             //Jika Type Golongan A
             if (trim($DataUser['type_golongan']) == 'A') {
+                $check = 'Competency A Susah Ada';
 
                 $old_department_competency = $this->competencyTechnical->getProfileTechnicalCompetencyDept($profile[0], $compare['department']);
 
                 //mengecek Apakah Competency Sebelumnya Sudah Ada
                 //Jika Competency Sebelumnya Ada
                 if (!empty($old_department_competency)) {
+
 
                     //department sudah ada isinya
                     $department =  $this->technical->getDataTechnicalDepartemen($compare['department']);
@@ -678,6 +680,7 @@ class C_User extends BaseController
                                         'id_technical' => $values['id_technical'],
                                         'score_technical' => 0
                                     ];
+                                    //save
                                 }
                             }
                         }
@@ -785,12 +788,21 @@ class C_User extends BaseController
 
                     //Jika Copetency Golongan B sSebelumnya Kosong
                 } else {
-
+                    $technicalBKosong = [];
                     $check = 'Competency B Kosong';
-                    $department = $this->technicalB->getDataByDepartment($compare['department']);
+                    $department = $this->technicalB->getDataByDepartmentSeksi($DataUser['nama_jabatan'], $compare['department']);
+
 
                     $all_competency = $this->competencyTechnicalB->getProfileTechnicalCompetencyB($profile[0]);
 
+
+                    if (!empty($all_competency)) {
+                        $test = 'Ada';
+                    } else {
+                        $test = 'kosong';
+                    }
+
+                    echo json_encode($test);
                     $DuplicateCompetency = [];
 
                     for ($i = 0; $i < count($all_competency); $i++) {
@@ -800,15 +812,21 @@ class C_User extends BaseController
                             if (in_array($values['technicalB'], $all_competency[$i])) {
                                 array_push($DuplicateCompetency, $department[$key]);
                             } else {
-                                $data = [
+                                $NewTechnical = [
                                     'id_user' => $profile[0],
                                     'id_technicalB' => $department['id_technicalB'],
                                     'score' => 0
                                 ];
+                                array_push($technicalBKosong, $NewTechnical);
+
+                                // log_message('debug', 'User {id} logged into the system from {ip_address}', $data);
                                 //save
+                                //$this->competencyTechnicalB->save($data);
                             }
                         }
                     }
+
+
 
                     if (!empty($DuplicateCompetency)) {
                         //delete duplicate data
@@ -822,6 +840,7 @@ class C_User extends BaseController
 
                             ];
                             //save
+                            //$this->competencyTechnicalB->save($data);
                         }
                     }
 
@@ -921,8 +940,8 @@ class C_User extends BaseController
         }
         //  $changes = $this->UpdatedCompetencyUser($profile[0]);
 
+        //    echo json_encode($check);
 
-        echo json_encode($DuplicateCompetency);
     }
 
 

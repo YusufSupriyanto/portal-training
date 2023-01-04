@@ -66,6 +66,8 @@ class C_Department extends BaseController
         return view('admin/department', $data);
     }
 
+
+    // this function just for change name dic,division,department,seksi
     public function changeStructure()
     {
         $dic = $this->request->getPost('dic');
@@ -80,27 +82,34 @@ class C_Department extends BaseController
                     'id_user' => $DataDic['id_user'],
                     'dic' => $dic[1]
                 ];
-                //$this->user->save($Data);
+                $this->user->save($Data);
             }
         }
         if ($divisi != null) {
             $Datadivisi = $this->user->getDataByDivisi($divisi[0]);
-            $Datadivisicompetency = $this->company->getDataCompanyDivisi($divisi[0]);
+
             foreach ($Datadivisi as $DataDivisi) {
                 $Data = [
                     'id_user' => $DataDivisi['id_user'],
                     'divisi' => $divisi[1]
                 ];
-                // d($Data);
+                $this->user->save($Data);
                 //save
             }
-            foreach ($Datadivisicompetency as $DataCompetency) {
-                $DataCompetency = [
-                    'id_company' => $DataCompetency['id_company'],
-                    'divisi' => $divisi[1]
-                ];
-                // d($DataCompetency);
-                //save
+
+            // change name Division In Company Technical
+            $Datadivisicompetency = $this->company->getDataCompanyDivisi($divisi[0]);
+
+            if (!empty($Datadivisicompetency)) {
+                foreach ($Datadivisicompetency as $DataCompetency) {
+                    $DataCompetency = [
+                        'id_company' => $DataCompetency['id_company'],
+                        'divisi' => $divisi[1]
+                    ];
+                    //just save name division in database
+                    //save 
+                    $this->company->save($DataCompetency);
+                }
             }
         }
         if ($department != null) {
@@ -110,38 +119,54 @@ class C_Department extends BaseController
                     'id_user' => $DataDepartment['id_user'],
                     'departemen' => $department[1]
                 ];
-                //  $this->
+                $this->user->save($Data);
             }
+
+            // change name department in Database Technical Group A
             $DataCompetencyTechnicalA =  $this->technical->getDataTechnicalDepartemen($department[0]);
-            foreach ($DataCompetencyTechnicalA as $DataDepartmentA) {
-                $DataTechnicalA = [
-                    'id_technical' => $DataDepartmentA['id_technical'],
-                    'departemen' => $department[1]
-                ];
-                //save
+
+            if (!empty($DataCompetencyTechnicalA)) {
+                foreach ($DataCompetencyTechnicalA as $DataDepartmentA) {
+                    $DataTechnicalA = [
+                        'id_technical' => $DataDepartmentA['id_technical'],
+                        'departemen' => $department[1]
+                    ];
+                    // just save name department in database
+                    //save
+                    $this->technical->save($DataTechnicalA);
+                }
             }
+
             $DataCompetencyTechnicalB = $this->technicalB->getDataByDepartment($department[0]);
-            foreach ($DataCompetencyTechnicalB as $DataDepartmentB) {
-                $DataTechnicalB = [
-                    'id_technicalB' => $DataDepartmentB['id_technicalB'],
-                    'departemen' => $department[1]
-                ];
-                //save
+            if (!empty($DataCompetencyTechnicalB)) {
+                foreach ($DataCompetencyTechnicalB as $DataDepartmentB) {
+                    $DataTechnicalB = [
+                        'id_technicalB' => $DataDepartmentB['id_technicalB'],
+                        'departemen' => $department[1]
+                    ];
+                    // just save name department in database
+                    //save
+                    $this->technicalB->save($DataCompetencyTechnicalB);
+                }
             }
         }
         if ($seksi != null) {
-            $Dataseksi = $this->user->getDataByDepartment($seksi[0]);
+            $Dataseksi = $this->user->getDataBySeksi($seksi[0]);
             foreach ($Dataseksi as $DataSeksi) {
                 $DataSeksi = [
-                    'id_technicalB' => $DataDepartmentB['id_technicalB'],
-                    'departemen' => $department[1]
+                    'id_user' => $DataSeksi['id_user'],
+                    'seksi' => $seksi[1]
                 ];
+                //just save name seksi
                 //save
+                $this->user->save($DataSeksi);
             }
         }
         return redirect()->to('/database_department');
     }
 
+
+    //this function for Add New Name Department
     public function NewDepartment()
     {
         ini_set('max_execution_time', 300);
@@ -160,6 +185,7 @@ class C_Department extends BaseController
         }
         $spreadsheet = $render->load($file);
         $sheet = $spreadsheet->getActiveSheet()->toArray();
+
         for ($i = 1; $i < count($sheet); $i++) {
             $user = $this->user->GetUserByNPK($sheet[$i][0]);
             // dd($user);
@@ -172,10 +198,10 @@ class C_Department extends BaseController
                 'type_user' => $sheet[$i][6]
             ];
 
-            $data_old = [
-                'type_golongan' => trim($user['type_golongan'], " "),
-                'type_user' => trim($user['type_user'], " ")
-            ];
+            // $data_old = [
+            //     'type_golongan' => trim($user['type_golongan'], " "),
+            //     'type_user' => trim($user['type_user'], " ")
+            // ];
 
             $data_new = [
                 'type_golongan' => $sheet[$i][5],
@@ -202,7 +228,7 @@ class C_Department extends BaseController
                                 'id_astra' => $astra['id_astra'],
                                 'score_astra' => 0
                             ];
-                            //$this->competencyAstra->save($DataAstra);
+                            $this->competencyAstra->save($DataAstra);
                             //dd($DataAstra);
                         }
                     } else {
@@ -215,7 +241,7 @@ class C_Department extends BaseController
                             ];
 
                             //save
-                            // $this->competencyAstra->save($DataAstraEmpty);
+                            $this->competencyAstra->save($DataAstraEmpty);
                         }
                     }
                 } else {
@@ -237,7 +263,7 @@ class C_Department extends BaseController
                                 'score_expert' => 0
                             ];
                             // save
-                            // $this->competencyExpert->save($DataExpert);
+                            $this->competencyExpert->save($DataExpert);
                         }
                     } else {
                         $Expert = $this->expert->getAllIdExpert();
@@ -249,7 +275,7 @@ class C_Department extends BaseController
                                 'score_expert' => 0
                             ];
                             //save
-                            //  $this->competencyExpert->save($DataExpert);
+                            $this->competencyExpert->save($DataExpert);
                         }
                     }
                 }
@@ -272,7 +298,7 @@ class C_Department extends BaseController
                             'score_soft' => 0
                         ];
                         //save 
-                        //$this->competencySoft->save($DataSoft);
+                        $this->competencySoft->save($DataSoft);
                     }
                 } else {
                     $Soft = $this->soft->getAllIdSoft();
@@ -283,12 +309,18 @@ class C_Department extends BaseController
                             'score_soft' => 0
                         ];
                         //save 
-                        // $this->competencySoft->save($DataSoft);
+                        $this->competencySoft->save($DataSoft);
                     }
                 }
             }
-            //  $this->user->save($users);
+            $this->user->save($users);
         }
-        //  return redirect()->to('/database_department');
+        return redirect()->to('/database_department');
+    }
+
+
+    //function For Update Or Join Name Department
+    public function UpdateNameDepartment()
+    {
     }
 }

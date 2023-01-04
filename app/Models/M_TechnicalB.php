@@ -62,4 +62,10 @@ class M_TechnicalB extends Model
         $this->select()->where('department', $department);
         return $this->get()->getResultArray();
     }
+
+    public function getDataByDepartmentSeksi($jabatan, $department)
+    {
+        $this->select()->where('department', $department)->where('nama_jabatan', $jabatan);
+        return $this->get()->getResultArray();
+    }
 }
