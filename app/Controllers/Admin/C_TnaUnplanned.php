@@ -58,26 +58,45 @@ class C_TnaUnplanned extends BaseController
     public function unplannedMonthly()
     {
         // $date = '2022-09-30';
-        $TrainingMonthly = $this->unplanned->getUnplannedMonthly();
-        // dd($TrainingMonthly[0]);
+        $TrainingMonthly = $this->unplanned->getUnplannedMonthly(date('Y'));
+        $TrainingMothlyName = [];
+
+        foreach ($TrainingMonthly as $Month) {
+            $MONTH = [
+                'Planning Training' => date("F", mktime(0, 0, 0, $Month['Planing Training'], 10)),
+                'Jumlah Training' => $Month['Jumlah Training'],
+                'Admin Approval' => $Month['Admin Approval'],
+                'BOD Approval' => $Month['BOD Approval'],
+                'Reject' => $Month['Reject']
+            ];
+            array_push(
+                $TrainingMothlyName,
+                $MONTH
+            );
+        }
 
         $data = [
             'tittle' => 'Training Monthly Unplanned',
-            'training' => $TrainingMonthly
+            'training' => $TrainingMothlyName
         ];
         return view('admin/trainingmonthly', $data);
     }
 
-    public function kadivAccept($date)
+    public function kadivAccept($Month)
     {
+        $date = date_parse($Month);
 
-        $departemen = $this->unplanned->getKadivAcceptDistinct($date);
 
+
+        $departemen = $this->unplanned->getKadivAcceptDistinct($date['month'], date('Y'));
+
+        // dd($departemen);
         $data = [
             'tittle' => 'KADIV Training Accepted',
             'departemen' => $departemen,
             'stat' => $this->unplanned,
-            'date' => $date,
+            'date' => $date['month'],
+            'year' => date('Y'),
             'budget' => $this->budget
         ];
         return view('admin/kadivaccept', $data);

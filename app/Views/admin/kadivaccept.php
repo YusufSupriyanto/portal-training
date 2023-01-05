@@ -6,26 +6,28 @@
     </div>
     <!-- /.card-header -->
     <?php $i = 0;
+
+
     foreach ($departemen as $dept) : ?>
     <div class="card-body table-responsive p-0">
         <table class="table table-hover" id="example">
             <thead>
                 <tr>
-                    <th>Nama</th>
-                    <th>Departemen</th>
+                    <th>Name</th>
+                    <th>Department</th>
                     <th>Training</th>
                     <th>Vendor</th>
-                    <th>Mulai Training</th>
-                    <th>Selesai Training</th>
-                    <th>Planing Budget</th>
+                    <th>Start Training</th>
+                    <th>Finished Training</th>
+                    <th>Planning Budget</th>
                     <th>Actual Budget</th>
                     <th>Status</th>
                 </tr>
             </thead>
             <tbody id="admin-verify">
                 <?php
-                    $status = $stat->getKadivAccept($date, $dept['departemen']);
-
+                    $status = $stat->getKadivAccept($date, $year, $dept['departemen']);
+                    // dd($status);
                     foreach ($status as $tnas) : ?>
                 <tr>
                     <td><?= $tnas['nama'] ?></td>

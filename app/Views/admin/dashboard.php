@@ -6,10 +6,10 @@
 <div class="m-1 d-flex flex-row">
     <div class="" style="width:100%;height:100%">
         <div class="card" id="training" style="width:100%;height:100%;color:blue;"></div>
-        <div class="d-flex flex-row justify-content-between" style="width:100%;height:10%;">
-            <div class="card" id="need_approval" style="width:30%;height:30%;color:blue;"></div>
-            <div class="card" id="approval" style="width:30%;height:30%;color:blue;"></div>
-            <div class="card" id="rejected" style="width:30%;height:30%;color:blue;"></div>
+        <div class="card accent-blued-flex flex-row justify-content-between" style="width:100%;height:10%;">
+            <div class="card" id="need_approval" style="width:30%;height:100%;color:blue;"></div>
+            <div class="card" id="approval" style="width:30%;height:100%;color:blue;"></div>
+            <div class="card" id="rejected" style="width:30%;height:100%;color:blue;"></div>
         </div>
         <div class="d-flex flex-row" style="width:100%;height:100%;">
             <div class="card" id="jenis" style="width:100%;height:100%;"></div>
@@ -17,7 +17,7 @@
         </div>
     </div>
 
-    <div class="card ml-1" style="width:25%;">
+    <div class="card ml-1" style="width:40%;">
         <div class="d-flex align-content-center">
             <div style="width:100%;">
                 <center>
@@ -31,10 +31,10 @@
                     }
                     $persent = $used / $total * 100;
                     ?>
-                    <input type="text" class="form-control" style="width:70%;"
+                    <input readonly type="text" class="form-control" style="width:70%;"
                         value="<?= "Rp " . number_format($total, 0, ',', '.') ?>">
                     <h5>Used Budget (RP)</h5>
-                    <input type="text" class="form-control" style="width:70%;"
+                    <input readonly type="text" class="form-control" style="width:70%;"
                         value="<?= "Rp " . number_format($used, 0, ',', '.') ?>">
                     <h6><?= number_format($persent, 2, ',', '.') ?>%</h6>
                 </center>
@@ -46,10 +46,10 @@
                 <?php foreach ($budget as $budgets) : ?>
                 <h6><?= $budgets['department'] ?></h6>
                 <div class="mb-1" style="display:flex;justify-content:center;">
-                    <input type="text" class="form-control" style="width:50%;height:30px"
+                    <input readonly type="text" class="form-control" style="width:50%;height:30px"
                         value="<?= "Rp " . number_format($budgets['available_budget'], 0, ',', '.') ?>">
-                    <input type="text" class="form-control" style="width:30%;height:30px"
-                        value="<?= $budgets['available_budget'] / $budgets['alocated_budget'] * 100 ?>%">
+                    <input readonly type="text" class="form-control" style="width:30%;height:30px"
+                        value="<?= round($budgets['available_budget'] / $budgets['alocated_budget'] * 100) ?>%">
                 </div>
                 <?php endforeach; ?>
             </center>
@@ -99,11 +99,11 @@
                 },
                 series: [{
                     type: 'column',
-                    name: 'Target Training',
+                    name: 'Training Target',
                     data: <?= json_encode($columnDept) ?>
                 }, {
                     type: 'spline',
-                    name: 'Sudah Dilaksanakan',
+                    name: 'Has Been Done',
                     data: <?= json_encode($lineDept) ?>
 
                 }]
@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function() {
             type: 'pie'
         },
         title: {
-            text: 'Jenis Training',
+            text: 'Training Type',
             align: 'center',
             style: {
                 fontSize: '15px'
@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded', function() {
             text: 'Category',
             align: 'center',
             style: {
-                fontsize: '15px'
+                fontSize: '15px'
             }
         },
         tooltip: {
@@ -229,11 +229,11 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         series: [{
             type: 'column',
-            name: 'Target Training',
+            name: 'Training Target',
             data: <?= json_encode($column) ?>
         }, {
             type: 'spline',
-            name: 'Sudah Dilaksanakan',
+            name: 'Has Been Done',
             data: <?= json_encode($line) ?>
 
         }]
@@ -247,7 +247,7 @@ document.addEventListener('DOMContentLoaded', function() {
         title: {
             verticalAlign: 'middle',
             floating: true,
-            text: '<?= $need_approval . '% Need Approval' ?>',
+            text: '<?= '<span style="font-size: 30px">' . $need_approval . ' % </span><br><span style="font-size:15px">Need<br>Approval</span>' ?>',
         },
         plotOptions: {
             pie: {
@@ -321,7 +321,7 @@ document.addEventListener('DOMContentLoaded', function() {
         title: {
             verticalAlign: 'middle',
             floating: true,
-            text: '<?= $approved . '% Approved' ?>',
+            text: '<?= '<span style="font-size: 30px">' . $approved . ' % </span><br><span style="font-size:15px">Approved</span>' ?>',
         },
         plotOptions: {
             pie: {
@@ -396,7 +396,7 @@ document.addEventListener('DOMContentLoaded', function() {
         title: {
             verticalAlign: 'middle',
             floating: true,
-            text: '<?= $rejected . '% Rejected' ?>',
+            text: '<?= '<span style="font-size: 30px">' . $rejected . ' % </span><br><span style="font-size:15px">Rejected</span>' ?>',
         },
         plotOptions: {
             pie: {

@@ -262,6 +262,7 @@
                                         <option value="Internal">Internal</option>
                                         <option value="External">External</option>
                                         <option value="Inhouse">Inhouse</option>
+                                        <option value="Blended">Blended</option>
                                     </select>
                                 </div>
                                 <div class="form-group">

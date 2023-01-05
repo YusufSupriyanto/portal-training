@@ -113,14 +113,44 @@ class C_Dashboard extends BaseController
 
         foreach ($jenis as $Jenis) {
             $count = $this->tna->CountJenisTraining($Jenis->jenis_training, date('Y'));
-            $r = rand(0, 255);
-            $g = rand(0, 255);
-            $b = rand(0, 255);
-            $JenisTraining = [
-                'name' => $Jenis->jenis_training,
-                'y' => $count[0]->jenis_training,
-                'color' => "rgb($r , $g , $b)"
-            ];
+            if ($Jenis->jenis_training == 'Strategic Training') {
+                $JenisTraining = [
+                    'name' => $Jenis->jenis_training,
+                    'y' => $count[0]->jenis_training,
+                    'color' => "red"
+                ];
+            } elseif ($Jenis->jenis_training == 'Technical Competency Training') {
+                $JenisTraining = [
+                    'name' => $Jenis->jenis_training,
+                    'y' => $count[0]->jenis_training,
+                    'color' => "blue"
+                ];
+            } elseif ($Jenis->jenis_training == 'Cultural Training') {
+                $JenisTraining = [
+                    'name' => $Jenis->jenis_training,
+                    'y' => $count[0]->jenis_training,
+                    'color' => "green"
+                ];
+            } elseif ($Jenis->jenis_training == 'Leadership Training') {
+                $JenisTraining = [
+                    'name' => $Jenis->jenis_training,
+                    'y' => $count[0]->jenis_training,
+                    'color' => "purple"
+                ];
+            } elseif ($Jenis->jenis_training == 'Soft Competency Training') {
+                $JenisTraining = [
+                    'name' => $Jenis->jenis_training,
+                    'y' => $count[0]->jenis_training,
+                    'color' => "yellow"
+                ];
+            } else {
+                $JenisTraining = [
+                    'name' => $Jenis->jenis_training,
+                    'y' => $count[0]->jenis_training,
+                    'color' => "brown"
+                ];
+            }
+
             array_push($JenisTrainings, $JenisTraining);
         }
         return $JenisTrainings;
@@ -132,14 +162,31 @@ class C_Dashboard extends BaseController
         $category = [];
         foreach ($categories as $Categories) {
             $count = $this->tna->CountCategory($Categories->kategori_training, date('Y'));
-            $r = rand(0, 255);
-            $g = rand(0, 255);
-            $b = rand(0, 255);
-            $categori = [
-                'name' => $Categories->kategori_training,
-                'y' => $count[0]->kategori_training,
-                'color' => "rgb($r , $g , $b)"
-            ];
+            if ($Categories->kategori_training == 'Internal') {
+                $categori = [
+                    'name' => $Categories->kategori_training,
+                    'y' => $count[0]->kategori_training,
+                    'color' => "red"
+                ];
+            } elseif ($Categories->kategori_training == 'External') {
+                $categori = [
+                    'name' => $Categories->kategori_training,
+                    'y' => $count[0]->kategori_training,
+                    'color' => "blue"
+                ];
+            } elseif ($Categories->kategori_training == 'Inhouse') {
+                $categori = [
+                    'name' => $Categories->kategori_training,
+                    'y' => $count[0]->kategori_training,
+                    'color' => "green"
+                ];
+            } else {
+                $categori = [
+                    'name' => $Categories->kategori_training,
+                    'y' => $count[0]->kategori_training,
+                    'color' => "purple"
+                ];
+            }
 
             array_push($category, $categori);
         }
@@ -157,7 +204,7 @@ class C_Dashboard extends BaseController
         } else {
             $number = $rejected[0]['id_tna'] / $total[0]['id_tna'] * 100;
             $persent = number_format($number, 2, ',', '.');
-            return $persent;
+            return round((int)$persent);
         }
     }
 
@@ -172,7 +219,7 @@ class C_Dashboard extends BaseController
         } else {
             $number = $approved[0]['id_tna'] / $total[0]['id_tna'] * 100;
             $persent = number_format($number, 2, ',', '.');
-            return $persent;
+            return round((int)$persent);
         }
     }
 
@@ -185,7 +232,7 @@ class C_Dashboard extends BaseController
         } else {
             $number = $need[0]['id_tna'] / $total[0]['id_tna'] * 100;
             $persent = number_format($number, 2, ',', '.');
-            return $persent;
+            return round((int)$persent);
         }
     }
 

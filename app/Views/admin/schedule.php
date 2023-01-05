@@ -8,18 +8,18 @@
     <!-- /.card-header -->
     <div class="card-body table-responsive p-0">
         <table class="table table-hover" id="personal-schedule">
-            <thead>
-                <tr>
-                    <th>Nama</th>
-                    <th>Departemen</th>
-                    <th>Judul Training</th>
-                    <th>Jenis Training</th>
-                    <th>Kategori Training</th>
-                    <th>Metode Training</th>
-                    <th>Tujuan Training</th>
-                    <th>Rencana Training</th>
-                    <th>Action</th>
-                </tr>
+            <thead></thead>
+            <tr>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Training Title</th>
+                <th>Training Type</th>
+                <th>Training Category</th>
+                <th>Training Method</th>
+                <th>Tujuan Training</th>
+                <th>Training Implementation</th>
+                <th>Action</th>
+            </tr>
             </thead>
             <?php foreach ($schedule as $Atmps) : ?>
             <tr>
@@ -30,7 +30,8 @@
                 <td><?= $Atmps['kategori_training'] ?></td>
                 <td><?= $Atmps['metode_training'] ?></td>
                 <td><?= $Atmps['tujuan_training'] ?></td>
-                <td><?= $Atmps['rencana_training'] ?></td>
+                <td><?= date('d-F', strtotime($Atmps['mulai_training'])) . ' ---- ' . date('d-F-Y', strtotime($Atmps['rencana_training'])) ?>
+                </td>
                 <?php $page = basename($_SERVER['PHP_SELF']);
                     if ($page == 'schedule_training') : ?>
                 <td>
@@ -76,7 +77,7 @@
                 <form action="<?= base_url() ?>/schedule_not_implemented" method="post">
                     <input type="hidden" name="id_tna" id="id_tna">
                     <div class="d-flex justify-content-center">
-                        <textarea rows="4" cols="50" name="alasan"></textarea>
+                        <textarea rows="4" cols="50" name="alasan" required></textarea>
                     </div>
 
             </div>

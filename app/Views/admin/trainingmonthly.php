@@ -10,7 +10,7 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Planing Training</th>
+                    <th>Planning Training</th>
                     <th>Jumlah Training</th>
                     <th>Admin Approval</th>
                     <th>BOD Approval</th>
@@ -29,10 +29,10 @@
                                                                                                         echo $newDate   ?></a>
                 </td>
                 <?php else : ?>
-                <td></td>
-                <a
-                    href="<?= base_url() ?>/kadiv_accept_unplanned/<?= $dates['Planning Training'] ?>"><?php $newDate = date('F, Y', strtotime($dates['Planning Training']));
-                                                                                                                echo $newDate   ?></a>
+                <td>
+                    <a
+                        href="<?= base_url() ?>/kadiv_accept_unplanned/<?= $dates['Planning Training'] ?>"><?php $newDate = date('F, Y', strtotime($dates['Planning Training']));
+                                                                                                                    echo $newDate   ?></a>
                 </td>
                 <?php endif; ?>
 
@@ -41,13 +41,7 @@
                 </td>
                 <td><?= $dates['Admin Approval'] ?></td>
                 <td><?= $dates['BOD Approval'] ?></td>
-                <td><?php
-                        if ($dates['BOD Approval'] != 0) {
-                            echo $dates['Admin Approval'] - $dates['BOD Approval'];
-                        } else {
-                            echo 0;
-                        }
-                        ?>
+                <td><?= $dates['Reject'] ?>
                 </td>
             </tr>
             <?php $i++;

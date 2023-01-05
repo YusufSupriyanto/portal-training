@@ -74,7 +74,7 @@ class C_Tna extends BaseController
     public function trainingMonthly()
     {
 
-        $TrainingMonthly = $this->tna->getTrainingMonthly();
+        $TrainingMonthly = $this->tna->getTrainingMonthly(date('Y'));
 
         $TrainingMothlyName = [];
 
@@ -83,11 +83,12 @@ class C_Tna extends BaseController
                 'Planning Training' => date("F", mktime(0, 0, 0, $Month['Planing Training'], 10)),
                 'Jumlah Training' => $Month['Jumlah Training'],
                 'Admin Approval' => $Month['Admin Approval'],
-                'BOD Approval' => $Month['BOD Approval']
+                'BOD Approval' => $Month['BOD Approval'],
+                'Reject' => $Month['Reject']
             ];
             array_push($TrainingMothlyName, $MONTH);
         }
-        //   dd($TrainingMothlyName);
+        //dd($TrainingMothlyName);
 
         $data = [
             'tittle' => 'Training Monthly',
@@ -176,15 +177,20 @@ class C_Tna extends BaseController
     }
 
 
-    public function kadivAccept($date)
+    public function kadivAccept($Month)
     {
+        $date = date_parse($Month);
+        // dd($date);
 
-        $departemen = $this->tna->getKadivAcceptDistinct($date);
+
+        $departemen = $this->tna->getKadivAcceptDistinct($date['month'], date('Y'));
+
         $data = [
             'tittle' => 'KADIV Training Accepted',
             'departemen' => $departemen,
             'stat' => $this->tna,
-            'date' => $date,
+            'date' => $date['month'],
+            'year' => date('Y'),
             'budget' => $this->budget
         ];
         return view('admin/kadivaccept', $data);

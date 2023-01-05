@@ -307,19 +307,19 @@ class M_TnaUnplanned extends Model
     // }
 
 
-    public function getKadivAcceptDistinct($date)
+    public function getKadivAcceptDistinct($date, $year)
     {
 
-        $this->select('user.departemen')->where('mulai_training', $date)->where('kelompok_training', 'unplanned')->distinct();
+        $this->select('user.departemen')->where("Month(mulai_training)", $date)->where('tna.year', $year)->where('kelompok_training', 'unplanned')->distinct();
         $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_1', 'accept');
         $this->join('user', 'user.id_user = tna.id_user');
         return $this->get()->getResultArray();
     }
 
-    public function getKadivAccept($date, $departemen)
+    public function getKadivAccept($date, $year, $departemen)
     {
 
-        $this->select('tna.*,user.*,approval.*')->where('mulai_training', $date)->where('user.departemen', $departemen)->where('kelompok_training', 'unplanned');
+        $this->select('tna.*,user.*,approval.*')->where('month(mulai_training)', $date)->where('tna.year', $year)->where('user.departemen', $departemen)->where('kelompok_training', 'unplanned');
         $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_1', 'accept');
         $this->join('user', 'user.id_user = tna.id_user');
         return $this->get()->getResultArray();
@@ -348,10 +348,16 @@ class M_TnaUnplanned extends Model
 
 
 
-    public function getUnplannedMonthly()
+    public function getUnplannedMonthly($date)
     {
-        $sql =    $this->query("select tna.mulai_training as 'Planing Training', count(distinct tna.training) as 'Jumlah Training',count(distinct approval.status_approval_2) as 'Admin Approval',count(distinct approval.status_approval_3) as 'BOD Approval'
-            from tna join approval on approval.id_tna = tna.id_tna where tna.kelompok_training = 'unplanned' and approval.status_approval_1 = 'accept' group by tna.mulai_training")->getResultArray();
+        $sql = $this->query("select	MONTH(tna.mulai_training) as 'Planing Training',
+		count(tna.training) as 'Jumlah Training',
+		count(case when approval.status_approval_2 = 'accept' then 1 else null end) as 'Admin Approval',
+		count(case when approval.status_approval_3 = 'accept' then 1 else null end) as 'BOD Approval' ,
+		sum(case when approval.status_approval_2='reject' then 1 when approval.status_approval_3='reject' then 1 else 0 end) as 'Reject'
+from	tna  join	approval on approval.id_tna = tna.id_tna 
+where	tna.kelompok_training = 'unplanned' and tna.year = $date
+group by MONTH(tna.mulai_training)")->getResultArray();
 
         return $sql;
     }

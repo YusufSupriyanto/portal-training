@@ -672,36 +672,38 @@ class C_User extends BaseController
                             foreach ($department as $key => $values) {
 
                                 if (in_array($values['technical'], $all_competency[$i])) {
-
                                     array_push($DuplicateCompetency, $department[$key]);
-                                } else {
-                                    $data = [
-                                        'id_user' => $profile[0],
-                                        'id_technical' => $values['id_technical'],
-                                        'score_technical' => 0
-                                    ];
-                                    //save
+                                    unset($department[$key]);
                                 }
                             }
                         }
-                        $SameCompetency = array_map("unserialize", array_unique(array_map("serialize", $DuplicateCompetency)));
-                        foreach ($SameCompetency as $competency) {
-                            $technical_score = $this->competencyTechnical->getProfileTechnicalCompetencyValue($profile[0], $competency['technical']);
-                            $technical = [
-                                'id_user' => $profile[0],
-                                'id_technical' => $competency['id_technical'],
-                                'score_techncial' => $technical_score[0]['score_technical']
+                        // Mengecek Kembali Apakah Competenncy Department Maisih ada
+                        if (!empty($department)) {
+                            foreach ($department as $Dept) {
+                                $TechnicalNew = [
+                                    'id_user' => $profile[0],
+                                    'id_technical' => $Dept['id_technical'],
+                                    'score_technical' => 0
+                                ];
+                                $this->competencyTechnicalB->save($TechnicalNew);
+                            }
+                        }
 
-                            ];
-                            //save
+                        if (!empty($DuplicateCompetency)) {
+                            //Menyimpan Data Competency Yang Sama
+                            $SameCompetency = array_map("unserialize", array_unique(array_map("serialize", $DuplicateCompetency)));
+                            foreach ($SameCompetency as $competency) {
+                                $technical_score = $this->competencyTechnical->getProfileTechnicalCompetencyValue($profile[0], $competency['technical']);
+                                $TechnicalSame = [
+                                    'id_user' => $profile[0],
+                                    'id_technical' => $competency['id_technical'],
+                                    'score_techncial' => $technical_score[0]['score_technical']
+
+                                ];
+                                $this->competencyTechnicalB->save($TechnicalSame);
+                            }
                         }
                     }
-
-
-
-
-
-
 
                     //Jika Competency Sebelumnya Kosong
                 } else {
@@ -721,32 +723,35 @@ class C_User extends BaseController
                         foreach ($department as $key => $values) {
 
                             if (in_array($values['technical'], $all_competency[$i])) {
-                                //di push 
                                 array_push($DuplicateCompetency, $department[$key]);
-                            } else {
-                                // di save
-                                $data = [
-                                    'id_user' => $profile[0],
-                                    'id_technical' => $values['id_technical'],
-                                    'score_technical' => 0
-                                ];
-                                //
+                                unset($department[$key]);
                             }
                         }
                     }
 
+                    if (!empty($department)) {
+
+                        foreach ($department as $Department) {
+                            $TechnicalNew = [
+                                'id_user' => $profile[0],
+                                'id_technical' => $Department['id_technical'],
+                                'score_technical' => 0
+                            ];
+                            $this->competencyTechnicalB->save($TechnicalNew);
+                        }
+                    }
+
                     if (!empty($DuplicateCompetency)) {
-                        //delete duplicate data
                         $SameCompetency = array_map("unserialize", array_unique(array_map("serialize", $DuplicateCompetency)));
                         foreach ($SameCompetency as $competency) {
                             $technical_score = $this->competencyTechnical->getProfileTechnicalCompetencyValue($profile[0], $competency['technical']);
-                            $technical = [
+                            $TechnicalSame = [
                                 'id_user' => $profile[0],
                                 'id_technical' => $competency['id_technical'],
                                 'score_techncial' => $technical_score[0]['score_technical']
 
                             ];
-                            //save
+                            $this->competencyTechnicalB->save($TechnicalSame);
                         }
                     }
                 }
@@ -755,107 +760,106 @@ class C_User extends BaseController
             } else {
 
                 $old_department_competency = $this->competencyTechnicalB->getProfileTechnicalCompetencyBWithDepartment($profile[0], $compare['department']);
-
+                $all_competency = $this->competencyTechnicalB->getProfileTechnicalCompetencyB($profile[0]);
                 //Mengecek Apakah Competency Golongan B sebelumnya ada 
                 //Jika Kompetency Golongan B sebelumya adA
                 if (!empty($old_department_competency)) {
                     $check = 'Competency B Ada';
-                    // $department = $this->technicalB->getDataByDepartment($compare['department']);
+                    $department = $this->technicalB->getDataByDepartment($compare['department']);
 
-                    // for ($i = 0; $i < count($old_department_competency); $i++) {
-
-                    //     foreach ($department as $key => $values) {
-
-                    //         if (in_array($values['technicalB'], $old_department_competency[$i])) {
-
-                    //             unset($department[$key]);
-                    //         }
-                    //     }
-                    // }
-
-
-                    // foreach ($department as $Department) {
-
-                    //     $DataTechnicalB = [
-                    //         'id_technicalB' => $Department['id_technicalB'],
-                    //         'id_user' => $profile[0],
-                    //         'score' => 0
-                    //     ];
-
-                    //     //  save
-                    //     $this->competencyTechnicalB->save($DataTechnicalB);
-                    // }
-
-                    //Jika Copetency Golongan B sSebelumnya Kosong
-                } else {
-                    $technicalBKosong = [];
-                    $check = 'Competency B Kosong';
-                    $department = $this->technicalB->getDataByDepartmentSeksi($DataUser['nama_jabatan'], $compare['department']);
-
-
-                    $all_competency = $this->competencyTechnicalB->getProfileTechnicalCompetencyB($profile[0]);
-
-
-                    if (!empty($all_competency)) {
-                        $test = 'Ada';
-                    } else {
-                        $test = 'kosong';
-                    }
-
-                    echo json_encode($test);
-                    $DuplicateCompetency = [];
-
-                    for ($i = 0; $i < count($all_competency); $i++) {
-
+                    for ($i = 0; $i < count($old_department_competency); $i++) {
                         foreach ($department as $key => $values) {
-
-                            if (in_array($values['technicalB'], $all_competency[$i])) {
-                                array_push($DuplicateCompetency, $department[$key]);
-                            } else {
-                                $NewTechnical = [
-                                    'id_user' => $profile[0],
-                                    'id_technicalB' => $department['id_technicalB'],
-                                    'score' => 0
-                                ];
-                                array_push($technicalBKosong, $NewTechnical);
-
-                                // log_message('debug', 'User {id} logged into the system from {ip_address}', $data);
-                                //save
-                                //$this->competencyTechnicalB->save($data);
+                            if (in_array($values['technicalB'], $old_department_competency[$i])) {
+                                unset($department[$key]);
                             }
                         }
                     }
 
+                    //mengecek Apakah Competency Departemen Tidak Kosong
+                    if (!empty($department)) {
+                        $DuplicateCompetency = [];
+                        //searcing data same value
+                        for ($i = 0; $i < count($all_competency); $i++) {
 
+                            foreach ($department as $key => $values) {
+
+                                if (in_array($values['technicalB'], $all_competency[$i])) {
+                                    array_push($DuplicateCompetency, $department[$key]);
+                                    unset($department[$key]);
+                                }
+                            }
+                        }
+                        // Mengecek Kembali Apakah Competenncy Department Maisih ada
+                        if (!empty($department)) {
+                            foreach ($department as $Dept) {
+                                $TechnicalNew = [
+                                    'id_user' => $profile[0],
+                                    'id_technicalB' => $Dept['id_technicalB'],
+                                    'score' => 0
+                                ];
+                                $this->competencyTechnicalB->save($TechnicalNew);
+                            }
+                        }
+
+                        if (!empty($DuplicateCompetency)) {
+                            //Menyimpan Data Competency Yang Sama
+                            $SameCompetency = array_map("unserialize", array_unique(array_map("serialize", $DuplicateCompetency)));
+                            foreach ($SameCompetency as $competency) {
+                                $technical_score = $this->competencyTechnicalB->getProfileTechnicalCompetencyBValue($profile[0], $competency['technical']);
+                                $TechnicalSame = [
+                                    'id_user' => $profile[0],
+                                    'id_technicalB' => $competency['id_technicalB'],
+                                    'score' => $technical_score[0]['score']
+
+                                ];
+                                $this->competencyTechnicalB->save($TechnicalSame);
+                            }
+                        }
+                    }
+                } else {
+
+                    $check = 'Competency B Kosong';
+                    $department = $this->technicalB->getDataByDepartmentSeksi($DataUser['nama_jabatan'], $compare['department']);
+
+                    $all_competency = $this->competencyTechnicalB->getProfileTechnicalCompetencyB($profile[0]);
+
+                    $DuplicateCompetency = [];
+
+                    for ($i = 0; $i < count($all_competency); $i++) {
+                        foreach ($department as $key => $values) {
+                            if (in_array($values['technicalB'], $all_competency[$i])) {
+                                array_push($DuplicateCompetency, $department[$key]);
+                                unset($department[$key]);
+                            }
+                        }
+                    }
+
+                    if (!empty($department)) {
+                        foreach ($department as $Department) {
+                            $TechnicalNew = [
+                                'id_user' => $profile[0],
+                                'id_technicalB' => $Department['id_technicalB'],
+                                'score' => 0
+                            ];
+                            $this->competencyTechnicalB->save($TechnicalNew);
+                        }
+                    }
 
                     if (!empty($DuplicateCompetency)) {
                         //delete duplicate data
                         $SameCompetency = array_map("unserialize", array_unique(array_map("serialize", $DuplicateCompetency)));
                         foreach ($SameCompetency as $competency) {
                             $technical_score = $this->competencyTechnicalB->getTechnicalByIdCompetencyBValue($profile[0], $competency['technicalB']);
-                            $technical = [
+                            $TechnicalSame = [
                                 'id_user' => $profile[0],
                                 'id_technicalB' => $competency['id_technicalB'],
                                 'score' => $technical_score[0]['score']
 
                             ];
                             //save
-                            //$this->competencyTechnicalB->save($data);
+                            $this->competencyTechnicalB->save($TechnicalSame);
                         }
                     }
-
-
-
-                    // foreach ($department as $Department) {
-                    //     $DataTechnicalB = [
-                    //         'id_technicalB' => $Department['id_technicalB'],
-                    //         'id_user' => $profile[0],
-                    //         'score' => 0
-                    //     ];
-
-                    //     // save
-                    //     $this->competencyTechnicalB->save($DataTechnicalB);
-                    // }
                 }
             }
         }
@@ -940,8 +944,7 @@ class C_User extends BaseController
         }
         //  $changes = $this->UpdatedCompetencyUser($profile[0]);
 
-        //    echo json_encode($check);
-
+        echo json_encode($TechnicalNew);
     }
 
 

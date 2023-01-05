@@ -83,7 +83,7 @@
         <form action="<?= base_url() ?>/change_structure" method="POST">
             <label>Change Name DIVISI</label>
             <select class="form-control" name="divisi[]" required>
-                <option value="">CHOOSE Divisi</option>
+                <option value="">CHOOSE DIVISI</option>
                 <?php foreach ($divisi as $divisi) : ?>
                 <option value="<?= $divisi['divisi'] ?>"><?= $divisi['divisi'] ?></option>
                 <?php endforeach; ?>
