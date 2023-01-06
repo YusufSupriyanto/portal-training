@@ -4,7 +4,7 @@
 <div class="card">
     <div class="card m-1">
         <div class="card-header">
-            <h3 class="card-title">Technical Competency</h3>
+            <h3 class="card-title">Technical Competencies</h3>
         </div>
         <div class="card-header">
             <form action="<?= base_url() ?>/multiple_input_technicalB" method="post" enctype="multipart/form-data">

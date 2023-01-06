@@ -52,8 +52,8 @@ class EvaluasiUnplanned extends BaseController
     {
 
         $evaluasi  = $this->unplanned->getDetailEvaluasiReaksi($id);
-        // $evaluasi = $this->tna->getDataForEvaluation($id);
-        // dd($id);
+        //$evaluasi = $this->tna->getDataForEvaluation($id);
+        //dd($id);
 
 
         $data = [

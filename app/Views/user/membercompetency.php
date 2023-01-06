@@ -11,16 +11,16 @@
     <!-- /.card-header -->
     <div class="card-body table-responsive p-0">
         <table class="table table-hover" id="member">
-            <thead>
-                <tr>
-                    <th>NPK</th>
-                    <th>Nama</th>
-                    <th>Status</th>
-                    <th>Divisi</th>
-                    <th>Departemen</th>
-                    <th>Bagian</th>
-                    <th>Status</th>
-                </tr>
+            <thead></thead>
+            <tr>
+                <th>NPK</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Division</th>
+                <th>Department</th>
+                <th>Section</th>
+                <th>Status</th>
+            </tr>
             </thead>
             <tbody>
                 <?php $i = 0;

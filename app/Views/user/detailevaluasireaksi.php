@@ -5,7 +5,8 @@
     <h4>
         <center>Evaluasi Program Pelatihan</center>
     </h4>
-    <?php foreach ($data as $datas) : ?>
+    <?php
+    foreach ($data as $datas) : ?>
     <input type="hidden" value="<?= $datas['id_tna'] ?>" name="id_tna" id="id_tna">
     <div class="form-group">
         <label>Nama Training</label>
@@ -41,14 +42,14 @@
         </div>
     </div>
     <div class="form-group">
-        <label>DEPT</label>
+        <label>DEPTARTMENT</label>
         <div class="input-group">
             <div class="input-group-prepend">
                 <span class="input-group-text">
                     <i class="fa-solid fa-clipboard-user"></i>
                 </span>
             </div>
-            <input type="text" class="form-control" value="<?= $datas['bagian'] ?>" disabled>
+            <input type="text" class="form-control" value="<?= $datas['departemen'] ?>" disabled>
         </div>
     </div>
     <?php endforeach; ?>

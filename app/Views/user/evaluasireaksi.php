@@ -42,14 +42,14 @@
             </div>
         </div>
         <div class="form-group">
-            <label>DEPT</label>
+            <label>DEPARTMENT</label>
             <div class="input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text">
                         <i class="fa-solid fa-clipboard-user"></i>
                     </span>
                 </div>
-                <input type="text" class="form-control" value="<?= $datas['bagian'] ?>" disabled>
+                <input type="text" class="form-control" value="<?= $datas['departemen'] ?>" disabled>
             </div>
         </div>
         <?php endforeach; ?>

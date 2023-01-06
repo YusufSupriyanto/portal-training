@@ -529,7 +529,7 @@ group by MONTH(tna.mulai_training)")->getResultArray();
 
     public function getDetailEvaluasiReaksi($id)
     {
-        $this->select('tna.*,user.bagian,user.id_user,user.npk,evaluasi_reaksi.*')->where('tna.id_tna', $id);
+        $this->select('tna.*,user.bagian,user.id_user,user.npk,user.departemen,evaluasi_reaksi.*')->where('tna.id_tna', $id);
         $this->join('user', 'user.id_user = tna.id_user');
         $this->join('evaluasi_reaksi', 'evaluasi_reaksi.id_tna = tna.id_tna');
         return $this->get()->getResultArray();
@@ -715,7 +715,7 @@ group by MONTH(tna.mulai_training)")->getResultArray();
     {
         $this->selectCount('tna.id_tna')->where('year', $year);
         $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept');
-        $this->join('evaluasi_reaksi', 'evaluasi_reaksi.id_tna = tna.id_tna')->where('status_training', '1');
+        $this->join('evaluasi_reaksi', 'evaluasi_reaksi.id_tna = tna.id_tna');
         return $this->get()->getResultArray();
     }
 

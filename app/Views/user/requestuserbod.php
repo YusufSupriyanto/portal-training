@@ -12,16 +12,16 @@
         <table class="table table-striped overflow-auto">
             <thead></thead>
             <tr>
-                <th>Nama</th>
+                <th>Name</th>
                 <th>Training</th>
-                <th>Jenis Training</th>
-                <th>Kategori Training</th>
-                <th>Metode Training</th>
-                <th>Mulai Training</th>
-                <th>Selesai Training</th>
-                <th>Tujuan Training</th>
+                <th>Training Type</th>
+                <th>Training Category</th>
+                <th>Training Method</th>
+                <th>Training Start</th>
+                <th>Training Finished</th>
+                <th>Training Goal</th>
                 <th>Notes</th>
-                <th>Estimasi Budget</th>
+                <th>Budget Estimate</th>
                 <th>status</th>
             </tr>
             </thead>

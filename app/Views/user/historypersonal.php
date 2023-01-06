@@ -10,14 +10,14 @@
         <table class="table table-hover">
             <thead>
                 <tr></tr>
-                <th>Nama</th>
-                <th>Materi Training</th>
-                <th>Waktu</th>
-                <th>Sertifikat</th>
-                <th>Penyelenggara</th>
-                <th>Tempat</th>
-                <th>Lulus/Tidak</th>
-                <th>Sumber</th>
+                <th>Name</th>
+                <th>Training Material</th>
+                <th>Time</th>
+                <th>Certificate</th>
+                <th>Vendor</th>
+                <th>Place</th>
+                <th>Passed/Not Pass</th>
+                <th>Source</th>
                 </tr>
             </thead>
             <tbody>

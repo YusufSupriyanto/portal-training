@@ -151,13 +151,15 @@ to get the desired effect
                                     <p>Home</p>
                                 </a>
                             </li>
+                            <?php if (session()->get('bagian') == 'KADIV' || session()->get('bagian') == 'BOD' || session()->get('bagian') == 'KADEPT' || session()->get('bagian') == 'KASIE') : ?>
                             <li class="nav-item">
                                 <a href="<?= base_url() ?>/member_competency" class="nav-link  <?php if ($page == 'member_competency') : echo 'active';
-                                                                                            endif; ?>">
+                                                                                                endif; ?>">
                                     <i class="nav-icon fa-solid fa-users-gear"></i>
                                     <p>Member Profile</p>
                                 </a>
                             </li>
+                            <?php endif; ?>
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link <?php if (($page == 'list_training_user') || ($page == 'non_training_user')) : echo 'active';
                                                         endif; ?>">

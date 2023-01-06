@@ -5,7 +5,7 @@
 <div class="d-flex">
     <div class="card m-1" style="width:60%;">
         <div class="card-header d-flex justify-content-center">
-            <h3 class=" card-title">Expert Behavior Competencies</h3>
+            <h3 class=" card-title">Expert Behaviour Competencies</h3>
         </div>
         <!-- /.card-header -->
         <div class="card-body p-0">
@@ -27,7 +27,7 @@
 
                 <thead>
                     <tr>
-                        <th>Expert Behavior Competencies </th>
+                        <th>Expert Behaviour Competencies </th>
                         <th>Proficiency</th>
                         <th>Action</th>
                     </tr>
@@ -64,10 +64,10 @@
             <form role="form" action="<?= base_url() ?>/edit_competency_expert" method="post">
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="expert">Expert Behavior Competencies</label>
+                        <label for="expert">Expert Behaviour Competencies</label>
                         <input type="hidden" class="form-control" id="id_expert" name="id_expert">
                         <input type="text" class="form-control" id="expert" name="expert"
-                            placeholder="Expert Behavior Competencies" required>
+                            placeholder="Expert Behaviour Competencies" required>
                     </div>
                     <div class="form-group">
                         <label for="proficiency">Proficiency</label>

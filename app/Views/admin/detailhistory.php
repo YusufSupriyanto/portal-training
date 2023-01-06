@@ -21,16 +21,16 @@
     <!-- /.card-header -->
     <div class="card-body table-responsive p-0">
         <table class="table table-hover overflow-auto" id="example">
-            <thead>
-                <tr>
-                    <th>Nama</th>
-                    <th>Materi Training</th>
-                    <th>Mulai Training</th>
-                    <th>Selesai Training</th>
-                    <th>Penyelenggara</th>
-                    <th>Tempat</th>
-                    <th>Action</th>
-                </tr>
+            <thead></thead>
+            <tr>
+                <th>Name</th>
+                <th>Training Material</th>
+                <th>Start Training</th>
+                <th>Finished Training</th>
+                <th>Vendor</th>
+                <th>Place</th>
+                <th>Action</th>
+            </tr>
             </thead>
             <tbody>
                 <?php $i = 0;
@@ -99,7 +99,12 @@
                                     <input type="hidden" name="history" id="history">
                                 </th>
                                 <td>
-                                    <input type="text" name="keterangan" id="keterangan" required>
+                                    <div class="form-group">
+                                        <select class="form-control" name="keterangan" id="keterangan" required>
+                                            <option value='Lulus'>Lulus</option>
+                                            <option value='Tidak Lulus'>Tidak Lulus</option>
+                                        </select>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>

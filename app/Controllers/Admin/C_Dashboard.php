@@ -45,8 +45,9 @@ class C_Dashboard extends BaseController
             'department' => $this->user->DistinctDepartemen(),
             'dept' => $this
         ];
-
-        // dd($data);
+        // $test = [1 => 1, 2, 3, 4,];
+        // $test = $this->TrainingDahboardCountColumn();
+        // echo json_encode($test);
 
         return view('admin/dashboard', $data);
     }
@@ -54,6 +55,8 @@ class C_Dashboard extends BaseController
     public function TrainingDahboardMonth()
     {
         $training = $this->tna->DashboardTraining(date('Y'));
+
+        // dd($training);
         if (empty($training)) {
             return  '';
         } else {
@@ -69,25 +72,27 @@ class C_Dashboard extends BaseController
         if (empty($training)) {
             return 0;
         } else {
+            $total = [1 => null, null, null, null, null, null, null, null, null, null, null, null];
             foreach ($training as $Training) {
-
-                $total[] = $Training['total'];
+                $total[$Training['Bulan']] = $Training['total'];
             }
-            return $total;
+
+            return array_values($total);
         }
     }
 
     public function TrainingDahboardCountLine()
     {
         $training = $this->tna->DashboardTrainingLine(date('Y'));
+        //dd($training);
         if (empty($training)) {
             return 0;
         } else {
+            $total = [1 => null, null, null, null, null, null, null, null, null, null, null, null];
             foreach ($training as $Training) {
-
-                $total[] = $Training['total'];
+                $total[$Training['Bulan']] = $Training['total'];
             }
-            return $total;
+            return array_values($total);
         }
     }
 
@@ -240,29 +245,30 @@ class C_Dashboard extends BaseController
     public function TrainingDahboardCountColumnDepartment($department)
     {
         $training = $this->tna->DashboardTrainingDepartment(date('Y'), $department);
+        $total = [1 => null, null, null, null, null, null, null, null, null, null, null, null];
         if (empty($training)) {
             return  0;
         } else {
-            foreach ($training as $Training) {
 
-                $total[] = $Training['total'];
+            foreach ($training as $Training) {
+                $total[$Training['Bulan']] = $Training['total'];
             }
-            return $total;
+            return array_values($total);
         }
     }
 
     public function TrainingDahboardCountLineDepartment($department)
     {
         $training = $this->tna->DashboardTrainingLineDepartment(date('Y'), $department);
-
+        $total = [1 => null, null, null, null, null, null, null, null, null, null, null, null];
         if (empty($training)) {
             return  0;
         } else {
-            foreach ($training as $Training) {
 
-                $total[] = $Training['total'];
+            foreach ($training as $Training) {
+                $total[$Training['Bulan']] = $Training['total'];
             }
-            return $total;
+            return array_values($total);
         }
     }
 

@@ -10,15 +10,15 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Nama</th>
-                    <th>Departemen</th>
-                    <th>Judul Training</th>
-                    <th>Jenis Training</th>
-                    <th>Kategori Training</th>
-                    <th>Metode Training</th>
-                    <th>Tujuan Training</th>
-                    <th>Rencana Training</th>
-                    <th>Keterangan</th>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Training Title</th>
+                    <th>Training Type</th>
+                    <th>Training Category</th>
+                    <th>Training Method</th>
+                    <th>Training Goals</th>
+                    <th>Training Implementation</th>
+                    <th>Description</th>
                 </tr>
             </thead>
             <?php foreach ($evaluasi as $Atmps) : ?>

@@ -12,11 +12,11 @@
                 <table class="table table-head-fixed display" id="example2">
                     <thead>
                         <tr>
-                            <th>Judul Training</th>
-                            <th>Jenis Training</th>
-                            <th>Deskripsi</th>
+                            <th>Training Title</th>
+                            <th>Training Type</th>
+                            <th>Description</th>
                             <th>Vendor</th>
-                            <th>Biaya</th>
+                            <th>Cost</th>
                         </tr>
                     </thead>
                     <tbody>

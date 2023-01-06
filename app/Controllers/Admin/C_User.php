@@ -556,43 +556,103 @@ class C_User extends BaseController
             }
         }
 
-        //
+        //mengecek Apakah Divisi Diubah
         if (array_key_exists("divisi", $compare)) {
-            $old_divisi_competency = $this->competencyCompany->getProfileCompanyCompetency($profile[0]);
+            $old_divisi_competency = $this->competencyCompany->getProfileCompanyCompetencyDivision($profile[0], $compare['divisi']);
+            //mengecek apakah pernah Berada Dalam Divisi Sebelumnya
             if (!empty($old_divisi_competency)) {
+                $all_division_competency = $this->competencyCompany->getProfileCompanyCompetency($profile[0]);
+                $SameDivision = [];
 
+                //menghilangkan data yang sama 
                 $Company = $this->company->getDataCompanyDivisi($compare['divisi']);
                 for ($i = 0; $i < count($old_divisi_competency); $i++) {
-
                     foreach ($Company as $key => $values) {
-
-                        if (in_array($values['id_company'], $old_divisi_competency[$i])) {
-
+                        if (in_array($values['company'], $old_divisi_competency[$i])) {
                             unset($Company[$key]);
                         }
                     }
                 }
 
-                foreach ($Company as $CompanyUser) {
+                //mengecek apakah variable $Company Masih Ada Data
+                if (!empty($Company)) {
 
-                    $DataCompany = [
-                        'id_company' => $CompanyUser['id_company'],
-                        'id_user' => $profile[0],
-                        'score_company' => 0
-                    ];
-                    //save
-                    // $this->competencyCompany->save($DataCompany);
+                    //memisahkan mengirim data yang sama dan menghapus data $Company
+                    for ($i = 0; $i < count($all_division_competency); $i++) {
+
+                        foreach ($Company as $key => $values) {
+
+                            if (in_array($values['company'], $all_division_competency[$i])) {
+                                array_push($SameDivision, $Company[$key]);
+                                unset($Company[$key]);
+                            }
+                        }
+                    }
+
+                    //mengecek apakah variable $Company Masih Ada Data
+                    //Jika ada maka disimpan sebagai data baru
+                    if (!empty($Company)) {
+                        foreach ($Company as $CompanyUser) {
+                            $DataCompany = [
+                                'id_company' => $CompanyUser['id_company'],
+                                'id_user' => $profile[0],
+                                'score_company' => 0
+                            ];
+                            //save
+                            // $this->competencyCompany->save($DataCompany);
+                        }
+                    }
+                }
+
+                //jika ada disimpan sebagai competency yang sudah ada
+                if (!empty($SameDivision)) {
+                    $SerializeCompetency = array_map("unserialize", array_unique(array_map("serialize", $SameDivision)));
+
+                    foreach ($SerializeCompetency as $DivisionSame) {
+                        $CompanyScore = $this->competencyCompany->getProfileCompanyCompetencyValue($profile[0], $DivisionSame['company']);
+                        $CompetencyDivisionSame = [
+                            'id_user' => $profile[0],
+                            'id_company' => $DivisionSame['id_company'],
+                            'score_company' => $CompanyScore[0]['score_company']
+                        ];
+                    }
                 }
             } else {
-                $CompanyUser = $this->company->getDataCompanyDivisi($compare['divisi']);
-                foreach ($CompanyUser as $CompanyUser) {
-                    $DataCompany = [
-                        'id_company' => $CompanyUser['id_company'],
-                        'id_user' => $profile[0],
-                        'score_company' => 0
-                    ];
-                    //save
-                    // $this->competencyCompany->save($DataCompany);
+                $all_division_competency = $this->competencyCompany->getProfileCompanyCompetency($profile[0]);
+                $SameDivision = [];
+
+                $Company = $this->company->getDataCompanyDivisi($compare['divisi']);
+                for ($i = 0; $i < count($all_division_competency); $i++) {
+                    foreach ($Company as $key => $values) {
+                        if (in_array($values['company'], $all_division_competency[$i])) {
+                            array_push($SameDivision, $Company[$key]);
+                            unset($Company[$key]);
+                        }
+                    }
+                }
+
+                if (!empty($Company)) {
+                    foreach ($Company as $CompanyUser) {
+                        $DataCompany = [
+                            'id_company' => $CompanyUser['id_company'],
+                            'id_user' => $profile[0],
+                            'score_company' => 0
+                        ];
+                        //save
+                        // $this->competencyCompany->save($DataCompany);
+                    }
+                }
+
+                if (!empty($SameDivision)) {
+                    $SerializeCompetency = array_map("unserialize", array_unique(array_map("serialize", $SameDivision)));
+                    foreach ($SerializeCompetency as $DivisionSame) {
+                        $CompanyScore = $this->competencyCompany->getProfileCompanyCompetencyValue($profile[0], $DivisionSame['company']);
+                        $CompetencyDivisionSame = [
+                            'id_user' => $profile[0],
+                            'id_company' => $DivisionSame['id_company'],
+                            'score_company' => $CompanyScore[0]['score_company']
+                        ];
+                    }
                 }
             }
         }
@@ -944,7 +1004,7 @@ class C_User extends BaseController
         }
         //  $changes = $this->UpdatedCompetencyUser($profile[0]);
 
-        echo json_encode($TechnicalNew);
+        echo json_encode($CompetencyDivisionSame);
     }
 
 

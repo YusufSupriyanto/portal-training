@@ -15,15 +15,15 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Nama</th>
-                    <th>Departemen</th>
-                    <th>Judul Training</th>
-                    <th>Jenis Training</th>
-                    <th>Kategori Training</th>
-                    <th>Metode Training</th>
-                    <th>Tujuan Training</th>
-                    <th>Rencana Training</th>
-                    <th>Keterangan</th>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Training Title</th>
+                    <th>Training Type</th>
+                    <th>Training Category</th>
+                    <th>Training Method</th>
+                    <th>Training Goals</th>
+                    <th>Training Implementation</th>
+                    <th>Description</th>
                 </tr>
             </thead>
             <?php foreach ($evaluasi as $Atmps) : ?>
@@ -35,48 +35,49 @@
                 <td><?= $Atmps['kategori_training'] ?></td>
                 <td><?= $Atmps['metode_training'] ?></td>
                 <td><?= $Atmps['tujuan_training'] ?></td>
-                <td><?= $Atmps['rencana_training'] ?></td>
+                <td><?= date('d-F', strtotime($Atmps['mulai_training'])) . '----' . date('d-F-Y', strtotime($Atmps['rencana_training'])) ?>
+                </td>
                 <?php $page = basename($_SERVER['PHP_SELF']);
                     if ($page == 'evaluasi_reaksi' || $page ==  'detail_evaluasi_member') : ?>
                 <?php if ($Atmps['status_evaluasi'] == null) : ?>
                 <td>
                     <div class="d-flex justify-content-center sm">
                         <a href="<?= base_url() ?>/form_evaluasi/<?= $Atmps['id_tna'] ?>" class="btn btn-danger btn-sm"
-                            style="font-size:10px;">Belum Evaluasi</a>
+                            style="font-size:10px;">not yet evaluated</a>
                     </div>
                 </td>
                 <?php else : ?>
                 <td>
-                    <div class="d-flex justify-content-center sm">
-                        <a href="<?= base_url() ?>/form_evaluasi_selesai/<?= $Atmps['id_tna'] ?>"
-                            class="btn btn-success btn-sm" style="font-size:10px;">Sudah Evaluasi</a>
-                    </div>
-                </td>
-                <?php endif; ?>
-                <?php else : ?>
-                <?php if ($Atmps['status_evaluasi'] == null) : ?>
-                <td>
-                    <div class="d-flex justify-content-center sm">
-                        <a href="<?= base_url() ?>/form_evaluasi_unplanned/<?= $Atmps['id_tna'] ?>"
-                            class="btn btn-danger btn-sm" style="font-size:10px;">Belum Evaluasi</a>
-                    </div>
-                </td>
-                <?php else : ?>
-                <td>
-                    <div class="d-flex justify-content-center sm">
-                        <a href="<?= base_url() ?>/form_unplanned_selesai/<?= $Atmps['id_tna'] ?>"
-                            class="btn btn-success btn-sm" style="font-size:10px;">Sudah Evaluasi</a>
-                    </div>
-                </td>
-                <?php endif; ?>
-                <?php endif; ?>
-
-            </tr>
-            <?php endforeach; ?>
-            <tbody>
-            </tbody>
-        </table>
+                    <div class="d-flex justify-content-center sm"></div>
+                    <a href="<?= base_url() ?>/form_evaluasi_selesai/<?= $Atmps['id_tna'] ?>"
+                        class="btn btn-success btn-sm" style="font-size:10px;">already evaluated</a>
     </div>
-    <!-- /.card-body -->
+    </td>
+    <?php endif; ?>
+    <?php else : ?>
+    <?php if ($Atmps['status_evaluasi'] == null) : ?>
+    <td>
+        <div class="d-flex justify-content-center sm">
+            <a href="<?= base_url() ?>/form_evaluasi_unplanned/<?= $Atmps['id_tna'] ?>" class="btn btn-danger btn-sm"
+                style="font-size:10px;">not yet evaluated</a>
+        </div>
+    </td>
+    <?php else : ?>
+    <td>
+        <div class="d-flex justify-content-center sm">
+            <a href="<?= base_url() ?>/form_unplanned_selesai/<?= $Atmps['id_tna'] ?>" class="btn btn-success btn-sm"
+                style="font-size:10px;">already evaluated</a>
+        </div>
+    </td>
+    <?php endif; ?>
+    <?php endif; ?>
+
+    </tr>
+    <?php endforeach; ?>
+    <tbody>
+    </tbody>
+    </table>
+</div>
+<!-- /.card-body -->
 </div>
 <?= $this->endSection() ?>

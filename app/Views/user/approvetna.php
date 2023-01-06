@@ -10,14 +10,14 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Nama</th>
-                    <th>Jabatan</th>
-                    <th>Golongan</th>
-                    <th>Seksi</th>
-                    <th>Jenis Training</th>
-                    <th>Kategori Training</th>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Group</th>
+                    <th>Section</th>
+                    <th>Training Type</th>
+                    <th>Training Category</th>
                     <th>Training</th>
-                    <th>Metode</th>
+                    <th>Method</th>
                     <th>Rencana Training</th>
                     <th>Tujuan Training</th>
                     <th>Planing Budget</th>

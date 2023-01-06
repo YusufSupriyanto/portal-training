@@ -6,10 +6,15 @@
 <div class="m-1 d-flex flex-row">
     <div class="" style="width:100%;height:100%">
         <div class="card" id="training" style="width:100%;height:100%;color:blue;"></div>
-        <div class="card accent-blued-flex flex-row justify-content-between" style="width:100%;height:10%;">
-            <div class="card" id="need_approval" style="width:30%;height:100%;color:blue;"></div>
-            <div class="card" id="approval" style="width:30%;height:100%;color:blue;"></div>
-            <div class="card" id="rejected" style="width:30%;height:100%;color:blue;"></div>
+        <div class="card" style="width:100%;height:10%;">
+            <center>
+                <h5>Status Approval</h5>
+            </center>
+            <div class="card accent-blued-flex flex-row justify-content-between">
+                <div id="need_approval" style="width:30%;height:100%;color:blue;"></div>
+                <div id="approval" style="width:30%;height:100%;color:blue;"></div>
+                <div id="rejected" style="width:30%;height:100%;color:blue;"></div>
+            </div>
         </div>
         <div class="d-flex flex-row" style="width:100%;height:100%;">
             <div class="card" id="jenis" style="width:100%;height:100%;"></div>
@@ -87,7 +92,10 @@
                     align: 'center'
                 },
                 xAxis: {
-                    categories: <?= json_encode($monthDept) ?>
+                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov',
+                        'Dec'
+                    ],
+                    crosshair: true
                 },
                 yAxis: {
                     title: {
@@ -213,11 +221,17 @@ document.addEventListener('DOMContentLoaded', function() {
     //training chart
     Highcharts.chart('training', {
         title: {
-            text: 'Training',
-            align: 'center'
+            text: '<div class="d-flex justify-content-between" style="width:100%;height:100%"><div><h6 style="font-size:15px">Conducted Training &emsp; &emsp;</h6></div><div><h6 style="font-size:15px">&emsp; &emsp; Training Has Not Been Done</h6></div></div>',
+
+        },
+        subtitle: {
+            text: '<div class="d-flex justify-content-between" style="width:100%;height:100%"><div><h6 style="font-size:15px">60 &emsp;&emsp;&emsp; Persen &emsp; &emsp; &emsp;  &emsp; &emsp;</h6></div><div><h6 style="font-size:15px">200 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;persen</h6></div></div>'
         },
         xAxis: {
-            categories: <?= json_encode($month) ?>
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov',
+                'Dec'
+            ],
+            crosshair: true
         },
         yAxis: {
             title: {
