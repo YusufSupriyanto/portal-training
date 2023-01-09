@@ -185,8 +185,8 @@ class M_TnaUnplanned extends Model
     }
     public function getStatusWaitAdminUnplanned($departemen)
     {
-        $this->select()->where('tna.status', 'wait')->where('kelompok_training', 'unplanned')->where('tna.departemen', $departemen);
-        $this->join('user', 'user.id_user = tna.id_user');
+        $this->select()->where('tna.status', 'wait')->where('kelompok_training', 'unplanned');
+        $this->join('user', 'user.id_user = tna.id_user')->where('user.departemen', $departemen);
         $this->join('approval', 'approval.id_tna = tna.id_tna');
         return $this->get()->getResult();
     }
@@ -271,15 +271,18 @@ class M_TnaUnplanned extends Model
     public function getRequestTnaUnplanned($bagian, $member, $departemen)
     {
         if ($bagian == 'BOD') {
-            $this->select()->where('dic', $member)->where('departemen', $departemen)->where('status', 'accept')->where('status_approval_0', 'accept')->where('status_approval_1', 'accept')->where('status_approval_2', 'accept')->where('status_approval_3', null)->where('kelompok_training', 'unplanned');
+            $this->select()->where('user.dic', $member)->where('user.departemen', $departemen)->where('tna.status', 'accept')->where('status_approval_0', 'accept')->where('status_approval_1', 'accept')->where('status_approval_2', 'accept')->where('status_approval_3', null)->where('kelompok_training', 'unplanned');
+            $this->join('user', 'user.id_user = tna.id_user');
             $this->join('approval', 'approval.id_tna = tna.id_tna');
             return $this->get()->getResultArray();
         } elseif ($bagian == 'KADIV') {
-            $this->select()->where('divisi', $member)->where('departemen', $departemen)->where('status', 'accept')->where('kelompok_training', 'unplanned');
+            $this->select()->where('user.divisi', $member)->where('user.departemen', $departemen)->where('tna.status', 'accept')->where('kelompok_training', 'unplanned');
+            $this->join('user', 'user.id_user = tna.id_user');
             $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_0', 'accept')->where('status_approval_1', null);
             return $this->get()->getResultArray();
         } elseif ($bagian == 'KADEPT') {
-            $this->select()->where('departemen', $member)->where('departemen', $departemen)->where('status', 'accept')->where('kelompok_training', 'unplanned');
+            $this->select()->where('user.departemen', $member)->where('user.departemen', $departemen)->where('tna.status', 'accept')->where('kelompok_training', 'unplanned');
+            $this->join('user', 'user.id_user = tna.id_user');
             $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_0', null);
             return $this->get()->getResultArray();
         } else {
@@ -356,7 +359,7 @@ class M_TnaUnplanned extends Model
 		count(case when approval.status_approval_3 = 'accept' then 1 else null end) as 'BOD Approval' ,
 		sum(case when approval.status_approval_2='reject' then 1 when approval.status_approval_3='reject' then 1 else 0 end) as 'Reject'
 from	tna  join	approval on approval.id_tna = tna.id_tna 
-where	tna.kelompok_training = 'unplanned' and tna.year = $date
+where	tna.kelompok_training = 'unplanned' and tna.year = $date and status_approval_0 ='accept'
 group by MONTH(tna.mulai_training)")->getResultArray();
 
         return $sql;
@@ -435,7 +438,7 @@ group by MONTH(tna.mulai_training)")->getResultArray();
 
     public function getSchedule()
     {
-        $this->select('tna.*,approval.*,user.bagian,user.id_user')->where('tna.kelompok_training', 'unplanned');
+        $this->select('tna.*,approval.*,user.bagian,user.departemen,user.id_user')->where('tna.kelompok_training', 'unplanned');
         $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept')->where('status_training', null);
         $this->join('user', 'user.id_user = tna.id_user');
         return $this->get()->getResultArray();

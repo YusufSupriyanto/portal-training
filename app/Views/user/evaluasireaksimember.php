@@ -11,7 +11,7 @@
         <table class="table table-head-fixed display" id="example2">
             <thead>
                 <tr>
-                    <th>Nama</th>
+                    <th>Name</th>
                 </tr>
             </thead>
             <tbody>

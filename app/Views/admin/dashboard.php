@@ -187,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function() {
             type: 'pie'
         },
         title: {
-            text: 'Category',
+            text: 'Training Category',
             align: 'center',
             style: {
                 fontSize: '15px'
@@ -225,7 +225,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         },
         subtitle: {
-            text: '<div class="d-flex justify-content-between" style="width:100%;height:100%"><div><h6 style="font-size:15px">60 &emsp;&emsp;&emsp; Persen &emsp; &emsp; &emsp;  &emsp; &emsp;</h6></div><div><h6 style="font-size:15px">200 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;persen</h6></div></div>'
+            text: `<div class="d-flex justify-content-between" style="width:100%;height:100%"><div><h6 style="font-size:15px"><?= $CountImplemented[0]['training'] ?> &emsp;&emsp;&emsp;&emsp;&emsp;<?= number_format($PercentImplemented, 0, ',', '.') . '%'; ?> &emsp;&emsp; &emsp; &emsp; &emsp; &emsp;  &emsp; &emsp;</h6></div><div><h6 style="font-size:15px"><?= $CountNotImplemented[0]['training'] ?> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<?= number_format($PercentNotImplemented, 0, ',', '.') . '%' ?></h6></div></div>`
         },
         xAxis: {
             categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov',

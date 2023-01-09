@@ -16,15 +16,15 @@
             <thead>
                 <tr>
                     <th>Nama</th>
-                    <th>Departemen</th>
-                    <th>Judul Training</th>
-                    <th>Jenis Training</th>
-                    <th>Kategori Training</th>
-                    <th>Metode Training</th>
-                    <th>Tujuan Training</th>
-                    <th>Mulai Training</th>
-                    <th>Selesai Training</th>
-                    <th>Keterangan Training</th>
+                    <th>Department</th>
+                    <th>Training Title</th>
+                    <th>Training Type</th>
+                    <th>Training Category</th>
+                    <th>Training Method</th>
+                    <th>Training Goals</th>
+                    <th>Training Start</th>
+                    <th>Training Finished</th>
+                    <th>Training Description</th>
                 </tr>
             </thead>
             <?php foreach ($schedule as $Atmps) : ?>
@@ -42,16 +42,14 @@
                 <td>
                     <div class="d-flex justify-content-center sm"
                         style="background-color:red;width:100px;border:1px;border-radius:2px;color:white;font-size:10px;">
-                        Belum
-                        Dilaksanakan
+                        Not Implemented
                     </div>
                 </td>
                 <?php else : ?>
                 <td>
                     <div class="d-flex justify-content-center sm"
                         style="background-color:green;width:100px;border:1px;border-radius:2px;color:white;font-size:10px;">
-                        Sudah
-                        Dilaksanakan
+                        Implemented
                     </div>
                 </td>
                 <?php endif; ?>

@@ -9,7 +9,7 @@
         <?php foreach ($data as $datas) : ?>
         <input type="hidden" value="<?= $datas['id_tna'] ?>" name="id_tna">
         <div class="form-group">
-            <label>Nama Training</label>
+            <label>Training Name</label>
             <div class="input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text">
@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label>Nama</label>
+            <label>Name</label>
             <div class="input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text">

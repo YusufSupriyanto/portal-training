@@ -58,10 +58,10 @@
                     <th>Nama</th>
                     <th>Status</th>
                     <th>DIC</th>
-                    <th>Divisi</th>
-                    <th>Departemen</th>
-                    <th>Seksi</th>
-                    <th>Bagian</th>
+                    <th>Division</th>
+                    <th>Department</th>
+                    <th>Section</th>
+                    <th>Member</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -104,7 +104,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah User</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -117,187 +117,180 @@
                         <div class="card-body d-flex justify-content-between">
                             <div>
                                 <div>Form User</div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Nama</label>
-                                    <input type="text" name="nama" class="form-control" placeholder="Masukan Nama"
-                                        required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Npk</label>
-                                    <input type="text" name="npk" class="form-control" placeholder="Masukan Npk"
-                                        required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Status</label>
-                                    <input type="text" name="status" class="form-control" placeholder="Masukan Status"
-                                        required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Dic</label>
-                                    <select class="custom-select" name="dic" required>
-                                        <option>Choose</option>
-                                        <?php foreach ($DIC as $dic) : ?>
-                                        <option value="<?= $dic['dic'] ?>"><?= $dic['dic']  ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Divisi</label>
-                                    <select class="custom-select" name="divisi" required>
-                                        <option>Choose</option>
-                                        <?php foreach ($DIVISI as $div) : ?>
-                                        <option value="<?= $div['divisi'] ?>"><?= $div['divisi']  ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Departemen</label>
-                                    <select class="custom-select" name="departemen" required>
-                                        <option>Choose</option>
-                                        <?php foreach ($DEPARTEMEN as $dept) : ?>
-                                        <option value="<?= $dept['departemen'] ?>"><?= $dept['departemen'] ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Seksi</label>
-                                    <select class="custom-select" name="seksi" required>
-                                        <option>Choose</option>
-                                        <?php foreach ($SEKSI as $seksi) : ?>
-                                        <option value="<?= $seksi['seksi'] ?>"><?= $seksi['seksi'] ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Bagian</label>
-                                    <select class="custom-select" name="bagian" required>
-                                        <option>Choose</option>
-                                        <?php foreach ($BAGIAN as $bagian) : ?>
-                                        <option value="<?= $bagian['bagian'] ?>"><?= $bagian['bagian'] ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Nama Jabatan</label>
-                                    <select class="custom-select" name="jabatan" required>
-                                        <option>Choose</option>
-                                        <?php foreach ($JABATAN as $jabatan) : ?>
-                                        <option value="<?= $jabatan['nama_jabatan'] ?>"><?= $jabatan['nama_jabatan'] ?>
-                                        </option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Level</label>
-                                    <select class="custom-select" name="level" required>
-                                        <option>Choose</option>
-                                        <option value="USER">USER</option>
-                                        <option value="ADMIN">ADMIN</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Username</label>
-                                    <input type="text" name="username" class="form-control"
-                                        placeholder="Masukan Username" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" name="password" class="form-control"
-                                        placeholder="Masukan Password" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Email</label>
-                                    <input type="email" name="email" class="form-control" placeholder="Masukan Email"
-                                        required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="singleInputFile">Masukan Foto</label>
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" name="image" class="custom-file-input"
-                                                id="singleInputFile">
-                                            <label class="custom-file-label" for="singleInputFile">Choose file</label>
-                                        </div>
+                                <div class="form-group"></div>
+                                <label for="exampleInputEmail1">Name</label>
+                                <input type="text" name="nama" class="form-control" placeholder="Masukan Nama" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">NPK</label>
+                                <input type="text" name="npk" class="form-control" placeholder="Masukan Npk" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Status</label>
+                                <input type="text" name="status" class="form-control" placeholder="Masukan Status"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label>Dic</label>
+                                <select class="custom-select" name="dic" required>
+                                    <option>Choose</option>
+                                    <?php foreach ($DIC as $dic) : ?>
+                                    <option value="<?= $dic['dic'] ?>"><?= $dic['dic']  ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Divisi</label>
+                                <select class="custom-select" name="divisi" required>
+                                    <option>Choose</option>
+                                    <?php foreach ($DIVISI as $div) : ?>
+                                    <option value="<?= $div['divisi'] ?>"><?= $div['divisi']  ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Department</label>
+                                <select class="custom-select" name="departemen" required>
+                                    <option>Choose</option>
+                                    <?php foreach ($DEPARTEMEN as $dept) : ?>
+                                    <option value="<?= $dept['departemen'] ?>"><?= $dept['departemen'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Section</label>
+                                <select class="custom-select" name="seksi" required>
+                                    <option>Choose</option>
+                                    <?php foreach ($SEKSI as $seksi) : ?>
+                                    <option value="<?= $seksi['seksi'] ?>"><?= $seksi['seksi'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Member</label>
+                                <select class="custom-select" name="bagian" required>
+                                    <option>Choose</option>
+                                    <?php foreach ($BAGIAN as $bagian) : ?>
+                                    <option value="<?= $bagian['bagian'] ?>"><?= $bagian['bagian'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Position Name</label>
+                                <select class="custom-select" name="jabatan" required>
+                                    <option>Choose</option>
+                                    <?php foreach ($JABATAN as $jabatan) : ?>
+                                    <option value="<?= $jabatan['nama_jabatan'] ?>"><?= $jabatan['nama_jabatan'] ?>
+                                    </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Level</label>
+                                <select class="custom-select" name="level" required>
+                                    <option>Choose</option>
+                                    <option value="USER">USER</option>
+                                    <option value="ADMIN">ADMIN</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Username</label>
+                                <input type="text" name="username" class="form-control" placeholder="Masukan Username"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Password</label>
+                                <input type="password" name="password" class="form-control"
+                                    placeholder="Masukan Password" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Email</label>
+                                <input type="email" name="email" class="form-control" placeholder="Masukan Email"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label for="singleInputFile">Input Profile</label>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" name="image" class="custom-file-input" id="singleInputFile">
+                                        <label class="custom-file-label" for="singleInputFile">Choose file</label>
                                     </div>
                                 </div>
                             </div>
-                            <div>
-                                <div>Form Education</div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Grade</label>
-                                    <input type="text" name="grade" class="form-control" placeholder="Masukan Grade">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Year</label>
-                                    <input type="text" name="year" class="form-control" placeholder="Masukan Year">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Institution</label>
-                                    <input type="text" name="institution" class="form-control"
-                                        placeholder="Masukan Institution">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Major</label>
-                                    <input type="text" name="major" class="form-control" placeholder="Masukan Major">
-                                </div>
-                                <div>Form Career</div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Year Start</label>
-                                    <input type="text" name="year_start" class="form-control"
-                                        placeholder="Masukan Year Start">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Year End</label>
-                                    <input type="text" name="year_end" class="form-control"
-                                        placeholder="Masukan Year End">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Position</label>
-                                    <input type="text" name="position" class="form-control"
-                                        placeholder="Masukan Position">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Department</label>
-                                    <input type="text" name="department" class="form-control"
-                                        placeholder="Masukan Department">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Division</label>
-                                    <input type="text" name="division" class="form-control"
-                                        placeholder="Masukan Division">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Company</label>
-                                    <input type="text" name="company" class="form-control"
-                                        placeholder="Masukan Company">
-                                </div>
-                                <div class="form-group">
-                                    <label>Group</label>
-                                    <select class="form-control" name="group">
-                                        <option>Choose...</option>
-                                        <option value="A">A</option>
-                                        <option value="B">B</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Type User</label>
-                                    <select class="form-control" name="type_user">
-                                        <option>Choose...</option>
-                                        <option value="REGULAR">REGULAR</option>
-                                        <option value="EXPERT">EXPERT</option>
-                                    </select>
-                                </div>
+                        </div>
+                        <div>
+                            <div>Form Education</div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Grade</label>
+                                <input type="text" name="grade" class="form-control" placeholder="Masukan Grade">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Year</label>
+                                <input type="text" name="year" class="form-control" placeholder="Masukan Year">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Institution</label>
+                                <input type="text" name="institution" class="form-control"
+                                    placeholder="Masukan Institution">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Major</label>
+                                <input type="text" name="major" class="form-control" placeholder="Masukan Major">
+                            </div>
+                            <div>Form Career</div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Year Start</label>
+                                <input type="text" name="year_start" class="form-control"
+                                    placeholder="Masukan Year Start">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Year End</label>
+                                <input type="text" name="year_end" class="form-control" placeholder="Masukan Year End">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Position</label>
+                                <input type="text" name="position" class="form-control" placeholder="Masukan Position">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Department</label>
+                                <input type="text" name="department" class="form-control"
+                                    placeholder="Masukan Department">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Division</label>
+                                <input type="text" name="division" class="form-control" placeholder="Masukan Division">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Company</label>
+                                <input type="text" name="company" class="form-control" placeholder="Masukan Company">
+                            </div>
+                            <div class="form-group">
+                                <label>Group</label>
+                                <select class="form-control" name="group">
+                                    <option>Choose...</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Type User</label>
+                                <select class="form-control" name="type_user">
+                                    <option>Choose...</option>
+                                    <option value="REGULAR">REGULAR</option>
+                                    <option value="EXPERT">EXPERT</option>
+                                </select>
                             </div>
                         </div>
                     </div>
-                    <!-- /.card-body -->
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </form>
             </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            </form>
         </div>
     </div>
+</div>
 </div>
 <div class="modal fade" id="education" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">

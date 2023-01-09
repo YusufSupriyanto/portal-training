@@ -49,9 +49,10 @@ class C_Schedule extends BaseController
         return redirect()->to('/schedule_training');
     }
 
-    public function unplannedSedule()
+    public function unplannedSchedule()
     {
         $schedule  = $this->unplanned->getSchedule();
+        //dd($schedule);
 
         $data = [
             'tittle' => 'Schedule Unplanned Training',
@@ -79,7 +80,7 @@ class C_Schedule extends BaseController
         $id = $this->request->getPost('id_tna');
         $reason = $this->request->getPost('alasan');
         $false  = $this->approval->getIdApproval($id);
-        $status = $this->approval->getTrainingNotImplemented();
+        $status = $this->tna->getTrainingNotImplemented();
         $data = [
             'id_approval' => $false['id_approval'],
             'alasan' => $reason,

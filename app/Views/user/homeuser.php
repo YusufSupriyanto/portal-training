@@ -27,10 +27,10 @@
                                 <thead>
                                     <tr>
                                         <th>Training</th>
-                                        <th>Pendaftar</th>
-                                        <th>Tanggal Mulai</th>
-                                        <th>Tanggal Selesai</th>
-                                        <th>Kategori</th>
+                                        <th>Registrants</th>
+                                        <th>Start Date</th>
+                                        <th>Date of completion</th>
+                                        <th>Category</th>
                                         <th>Notes</th>
                                     </tr>
                                 </thead>
@@ -53,14 +53,14 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="user">Daftar Unplanned Training</h5>
+                    <h5 class="modal-title" id="user">List of Unplanned Training</h5>
                 </div>
                 <div class="modal-body">
 
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Nama</th>
+                                <th>Name</th>
                             </tr>
                         </thead>
                         <tbody>

@@ -63,7 +63,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Category</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Add Category</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -87,7 +87,7 @@
                                 name="filter">
                         </div>
                         <div class="form-group">
-                            <label>Deskripsi</label>
+                            <label>Description</label>
                             <textarea class="form-control" rows="3" placeholder="Enter ..." name="deskripsi"></textarea>
                         </div>
                         <div class="form-group">

@@ -17,16 +17,16 @@
 
             </thead>
             <tr>
-                <th>Nama</th>
+                <th>Name</th>
                 <th>Training</th>
-                <th>Jenis Training</th>
-                <th>Kategori Training</th>
-                <th>Metode Training</th>
-                <th>Mulai Training</th>
-                <th>Selesai Training</th>
-                <th>Tujuan Training</th>
+                <th>Training Type</th>
+                <th>Training Category</th>
+                <th>Training Method</th>
+                <th>Training Start</th>
+                <th>Training Finished</th>
+                <th>Training Goals</th>
                 <th>Notes</th>
-                <th>Estimasi Budget</th>
+                <th>Budget Estimation</th>
                 <th>status</th>
             </tr>
             </thead>
@@ -55,6 +55,7 @@
                             $stat = $status->getRequestTnaUnplanned($bagian, $departemen, $dept['departemen']);
                         }
                     }
+
 
                     foreach ($stat as $statuses) : ?>
                 <tr>
@@ -86,14 +87,14 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Masukan Alasan Di Reject</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Rejected Reason</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
                                 <div class="d-flex flex-column">
-                                    <label for="alasan">Alasan</label>
+                                    <label for="alasan">Reason</label>
                                     <textarea id="alasan<?= $i ?>" class="mt-1" name="alasan<?= $i ?>"
                                         required></textarea>
                                 </div>

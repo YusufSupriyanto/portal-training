@@ -256,7 +256,7 @@ class C_User extends BaseController
                 }
             }
         }
-        session()->setFlashdata('success', 'Data Berhasil Di Simpan');
+        session()->setFlashdata('success', 'Data Saved Successfully');
         return redirect()->to('/user');
     }
 

@@ -27,7 +27,7 @@
                         name="deskripsi"><?= $category['deskripsi'] ?></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputFile">Input gambar</label>
+                    <label for="exampleInputFile">Input Image</label>
                     <div class="input-group">
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" value="<?= $category['path'] ?>" name="file">

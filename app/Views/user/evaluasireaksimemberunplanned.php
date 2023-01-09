@@ -3,11 +3,7 @@
 <?= $this->section('content') ?>
 <div class="card m-1">
     <div class="card-header">
-
-
         <h3 class="card-title">Evaluasi Reaksi Member Unplanned</h3>
-
-
     </div>
     <div class="card-body table-responsive p-0" style="height: 400px;">
         <table class="table table-head-fixed display" id="example2">

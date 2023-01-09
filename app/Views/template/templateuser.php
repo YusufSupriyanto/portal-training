@@ -165,7 +165,7 @@ to get the desired effect
                                                         endif; ?>">
                                     <i class="nav-icon fa-solid fa-list"></i>
                                     <p>
-                                        List Pengembangan
+                                        Development List
                                         <i class="right fas fa-angle-left"></i>
                                     </p>
                                 </a>
@@ -377,7 +377,7 @@ to get the desired effect
                                                 endif; ?>">
                                     <i class="nav-icon fa-solid fa-file-lines"></i>
                                     <p>
-                                        Evaluasi Reaksi
+                                        Reaction Evaluation
                                         <i class="right fas fa-angle-left"></i>
                                     </p>
                                 </a>
@@ -424,7 +424,7 @@ to get the desired effect
                                                 endif; ?>">
                                     <i class="nav-icon fa-regular fa-file-lines"></i>
                                     <p>
-                                        Evaluasi Efektivitas
+                                        Effectiveness Evaluation
                                         <i class="right fas fa-angle-left"></i>
                                     </p>
                                 </a>

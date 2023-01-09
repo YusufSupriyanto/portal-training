@@ -10,13 +10,13 @@
         <table class="table table-hover" id="example">
             <thead>
                 <tr>
-                    <th>Nama</th>
-                    <th>Departemen</th>
+                    <th>Name</th>
+                    <th>Department</th>
                     <th>Training</th>
-                    <th>Mulai Training</th>
-                    <th>Selesai Training</th>
-                    <th>Planing Budget</th>
-                    <th>Actual Budget</th>
+                    <th>Training Start</th>
+                    <th>Training Finished</th>
+                    <th>Budget Planning</th>
+                    <th>Budget Actual</th>
                     <th>Status</th>
                 </tr>
             </thead>
@@ -63,7 +63,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="d-flex flex-column">
-                        <label for="alasan">Alasan</label>
+                        <label for="alasan">Reason</label>
                         <textarea id="alasan" class="alasan" name="alasan" readonly></textarea>
                     </div>
                 </div>

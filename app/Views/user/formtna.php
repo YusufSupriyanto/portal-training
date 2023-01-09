@@ -14,10 +14,10 @@
         <div class="card-header">
             <h3 class="card-title">
                 <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#terdaftar">
-                    Training Terdaftar
+                    Training Registered
                 </button>
                 <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#exampleModal">
-                    History Training
+                    Training History
                 </button>
                 <h6><input class="form-control" value="Nama                  :<?= "  " . $user['nama'] ?>" readonly>
                 </h6>
@@ -252,11 +252,11 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="jenis_training">Jenis Training<span style="color:red;">*</span></label>
+                                    <label for="jenis_training">Training Type<span style="color:red;">*</span></label>
                                     <input class="form-control" id="jenis_training" readonly></input>
                                 </div>
                                 <div class="form-group">
-                                    <label>Kategori Training<span style="color:red;">*</span></label>
+                                    <label>Training Category<span style="color:red;">*</span></label>
                                     <select class="form-control" name="kategori" id="kategori">
                                         <option value="">Choose</option>
                                         <option value="Internal">Internal</option>
@@ -266,7 +266,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label>Metode<span style="color:red;">*</span></label>
+                                    <label>Method<span style="color:red;">*</span></label>
                                     <select class="custom-select" name="metode" id="metode">
                                         <option value="">Choose</option>
                                         <option value="Online">Online</option>
@@ -275,7 +275,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="datepicker">Request Training<span style="color:red;">*</span></label>
+                                    <label for="datepicker">Training Request<span style="color:red;">*</span></label>
                                     <div class="input-group date" id="datepicker">
                                         <input type="text" class="form-control" name="request">
                                         <span class="input-group-append">
@@ -286,7 +286,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Tujuan<span style="color:red;">*</span></label>
+                                    <label>Goals<span style="color:red;">*</span></label>
                                     <textarea class="form-control" id="validationTextarea"
                                         placeholder="Required example textarea" required name="tujuan"></textarea>
 
@@ -297,7 +297,7 @@
                                         placeholder="Permintaan Khusus"></textarea></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="biaya">Estimasi Budget<span style="color:red;">*</span></label>
+                                    <label for="biaya">Budget Estimation<span style="color:red;">*</span></label>
                                     <input class="form-control" id="biaya" readonly></input>
                                 </div>
                             </div>
@@ -326,14 +326,14 @@
                                         <thead>
                                             <tr>
                                                 <th>Training</th>
-                                                <th>Jenis Training</th>
-                                                <th>Kategori Training</th>
-                                                <th>Metode Training</th>
-                                                <th>Start Training</th>
-                                                <th>End Training</th>
-                                                <th>Tujuan Training</th>
+                                                <th>Training Type</th>
+                                                <th>Training Category</th>
+                                                <th>Training Method</th>
+                                                <th>Training Start</th>
+                                                <th>Training Finished</th>
+                                                <th>Training Goals</th>
                                                 <th>Notes</th>
-                                                <th>Estimasi Budget</th>
+                                                <th>Budget Estimation</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -365,25 +365,25 @@
                         <div class="modal-dialog modal-xl" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Training Terdaftar</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Training Registered</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
                                     <table class="table table-striped" id="mytable">
-                                        <thead>
-                                            <tr>
-                                                <th>Training</th>
-                                                <th>Jenis Training</th>
-                                                <th>Kategori Training</th>
-                                                <th>Metode Training</th>
-                                                <th>Start Training</th>
-                                                <th>End Training</th>
-                                                <th>Tujuan Training</th>
-                                                <th>Notes</th>
-                                                <th>Estimasi Budget</th>
-                                            </tr>
+                                        <thead></thead>
+                                        <tr>
+                                            <th>Training</th>
+                                            <th>Training Type</th>
+                                            <th>Training Category</th>
+                                            <th>Training Method</th>
+                                            <th>Training Start</th>
+                                            <th>Training Finished</th>
+                                            <th>Training Goals</th>
+                                            <th>Notes</th>
+                                            <th>Budget Estimation</th>
+                                        </tr>
                                         </thead>
                                         <tbody>
                                             <?php foreach ($terdaftar as $Forms) : ?>

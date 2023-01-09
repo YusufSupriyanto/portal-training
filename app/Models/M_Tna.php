@@ -367,7 +367,7 @@ class M_Tna extends Model
 		count(case when approval.status_approval_3 = 'accept' then 1 else null end) as 'BOD Approval' ,
 		sum(case when approval.status_approval_2='reject' then 1 when approval.status_approval_3='reject' then 1 else 0 end) as 'Reject'
 from	tna  join	approval on approval.id_tna = tna.id_tna 
-where	tna.kelompok_training = 'training' and tna.year = $date
+where	tna.kelompok_training = 'training' and tna.year = $date and status_approval_0 ='accept'
 group by MONTH(tna.mulai_training)")->getResultArray();
 
         return $sql;
@@ -654,7 +654,7 @@ group by MONTH(tna.mulai_training)")->getResultArray();
     {
         $this->select('tna.kategori_training')->Distinct();
         $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept');
-        $this->join('evaluasi_reaksi', 'evaluasi_reaksi.id_tna = tna.id_tna')->where('status_evaluasi', '1');
+        $this->join('evaluasi_reaksi', 'evaluasi_reaksi.id_tna = tna.id_tna')->where('status_training', '1');
         return $this->get()->getResult();
     }
 
@@ -662,7 +662,7 @@ group by MONTH(tna.mulai_training)")->getResultArray();
     {
         $this->selectCount('tna.kategori_training')->where('tna.kategori_training', $category)->where('tna.year', $date);
         $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept');
-        $this->join('evaluasi_reaksi', 'evaluasi_reaksi.id_tna = tna.id_tna')->where('status_evaluasi', '1');
+        $this->join('evaluasi_reaksi', 'evaluasi_reaksi.id_tna = tna.id_tna')->where('status_training', '1');
         return $this->get()->getResult();
     }
 
@@ -724,6 +724,37 @@ group by MONTH(tna.mulai_training)")->getResultArray();
         $this->selectCount('tna.id_tna')->where('year', $year);
         $this->join('approval', 'approval.id_tna = tna.id_tna')->Where('status_approval_1', NULL)->orWhere('status_approval_3', NULL);
         $this->join('user', 'user.id_user = tna.id_user');
+        return $this->get()->getResultArray();
+    }
+
+    public function CountAllTraining($year)
+    {
+        $this->selectCount('training')->where('year', $year);
+        $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept');
+        return $this->get()->getResultArray();
+    }
+
+
+    public function CountTrainingImplemented($year)
+    {
+        $this->selectCount('training')->where('year', $year);
+        $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_training', 1);
+        return $this->get()->getResultArray();
+    }
+
+
+    public function CountTrainingNotImplemented($year)
+    {
+        $this->selectCount('training')->where('year', $year);
+        $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept')->where('status_training', null);
+        return $this->get()->getResultArray();
+    }
+
+    public function getTrainingNotImplemented()
+    {
+        $this->select()->where('status_training', 0);
+        $this->join('user', 'user.id_user = tna.id_user');
+        $this->join('approval', 'approval.id_tna = tna.id_tna');
         return $this->get()->getResultArray();
     }
 

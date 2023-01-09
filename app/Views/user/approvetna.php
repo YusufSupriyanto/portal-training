@@ -18,8 +18,8 @@
                     <th>Training Category</th>
                     <th>Training</th>
                     <th>Method</th>
-                    <th>Rencana Training</th>
-                    <th>Tujuan Training</th>
+                    <th>Training Implemented</th>
+                    <th>Training Goals</th>
                     <th>Planing Budget</th>
                     <th>Actual Budget</th>
                     <th>Status</th>

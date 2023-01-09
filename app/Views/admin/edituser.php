@@ -156,7 +156,7 @@
                         <th>Year Start</th>
                         <th>Year End</th>
                         <th>Position</th>
-                        <th>Departemen</th>
+                        <th>Department</th>
                         <th>Division</th>
                         <th>Company</th>
                         <th>Action</th>

@@ -39,11 +39,11 @@
             <table class="table table-head-fixed display" id="example2">
                 <thead>
                     <tr>
-                        <th>Judul Training</th>
-                        <th>Jenis Training</th>
-                        <th>Deskripsi</th>
+                        <th>Training Title</th>
+                        <th>Training Type</th>
+                        <th>Description</th>
                         <th>Vendor</th>
-                        <th>Biaya</th>
+                        <th>Budget</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -88,7 +88,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Tambah Training</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Add Training</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -99,41 +99,41 @@
 
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Judul Training</label>
+                            <label for="exampleInputEmail1">Training Title</label>
                             <input type="text" class="form-control" name="add" placeholder="Masukan Judul">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Jenis Training</label>
+                            <label for="exampleInputPassword1">Training Type</label>
                             <input type="text" class="form-control" id="exampleInputPassword1"
                                 placeholder="Jenis Training" name="add" value="<?= $category ?>" readonly>
                         </div>
                         <div class="form-group">
-                            <label>Deskripsi</label>
+                            <label>Description</label>
                             <textarea class="form-control" rows="3" placeholder="Enter ..." name="deskripsi"></textarea>
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Vendor</label>
-                            <input type="text" class="form-control" name="add" placeholder="Masukan Vendor">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Biaya</label>
-                            <input type="text" class="form-control" id="biaya" name="add" placeholder="Biaya"
-                                onclick="formatted()">
-                        </div>
+                        <div class="form-group"></div>
+                        <label for="exampleInputPassword1">Vendor</label>
+                        <input type="text" class="form-control" name="add" placeholder="Masukan Vendor">
                     </div>
-                    <!-- /.card-body -->
-
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-primary" onclick="sendTraining()">Submit</button>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Budget</label>
+                        <input type="text" class="form-control" id="biaya" name="add" placeholder="Biaya"
+                            onclick="formatted()">
                     </div>
-
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary" onclick="sendTraining()">Submit</button>
+                </div>
+
             </div>
         </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
     </div>
+</div>
 </div>
 <!-- Modal -->
 <div class="modal fade" id="editTraining" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -141,7 +141,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Training</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Training Edited</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -151,18 +151,18 @@
                     <div class="card-body">
                         <div class="form-group">
                             <input type="hidden" class="form-control" name="edit[]" id="id" ">
-                            <label for=" exampleInputEmail1">Judul Training</label>
+                            <label for=" exampleInputEmail1">Training Title</label>
                             <input type="text" class="form-control" name="edit[]" id="judul"
                                 placeholder="Masukan Judul">
 
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Jenis Training</label>
+                            <label for="exampleInputPassword1">Training Type</label>
                             <input type="text" class="form-control" placeholder="Jenis Training" name="edit[]"
                                 id="jenis">
                         </div>
                         <div class="form-group">
-                            <label>Deskripsi</label>
+                            <label>Description</label>
                             <textarea class="form-control" rows="3" placeholder="Enter ..." name="edit[]"
                                 id="deskripsi"></textarea>
                         </div>
@@ -172,7 +172,7 @@
                                 id="vendor">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Biaya</label>
+                            <label for="exampleInputPassword1">Budget</label>
                             <input type="text" class="form-control" id="biayaedit" name="edit[]" placeholder="Biaya"
                                 onclick="formattedEdit()">
                         </div>

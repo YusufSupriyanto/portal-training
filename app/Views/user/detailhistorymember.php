@@ -9,14 +9,13 @@
     <div class="card-body table-responsive p-0">
         <table class="table table-hover">
             <thead>
-                <tr></tr>
-                <th>Nama</th>
-                <th>Materi Training</th>
-                <th>Waktu</th>
-                <th>Sertifikat</th>
-                <th>Penyelenggara</th>
-                <th>Tempat</th>
-                <th>Lulus/Tidak</th>
+                <th>Name</th>
+                <th>Training Material</th>
+                <th>Time</th>
+                <th>Certificate</th>
+                <th>Organizer</th>
+                <th>Place</th>
+                <th>Passed/Not Pass</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,12 +38,12 @@
 
                     </td>
                     <?php else : ?>
-                    <td>Sertifikat Sudah Dikirim</td>
+                    <td>Certificate Sent</td>
                     <?php endif; ?>
                     <td><?= $histories['vendor'] ?></td>
                     <td><?= $histories['tempat'] ?></td>
                     <?php if ($histories['keterangan'] == null) : ?>
-                    <td>Belum Diputuskan</td>
+                    <td>Not yet decided</td>
                     <?php else : ?>
                     <td><?= $histories['keterangan'] ?></td>
                     <?php endif; ?>

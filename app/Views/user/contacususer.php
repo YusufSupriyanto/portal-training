@@ -13,7 +13,7 @@
             <form role="form" action="<?= base_url() ?>/send_massage" method="post">
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Nama Lengkap</label>
+                        <label for="exampleInputEmail1">Full Name</label>
                         <input type="text" class="form-control" name="nama" placeholder="Masukan Nama"
                             value="<?= session()->get('nama') ?>" disabled>
                     </div>
@@ -30,7 +30,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Kirim</button>
+                    <button type="submit" class="btn btn-primary">Send</button>
                 </div>
             </form>
         </div>

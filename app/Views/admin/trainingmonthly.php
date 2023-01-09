@@ -11,7 +11,7 @@
             <thead>
                 <tr>
                     <th>Planning Training</th>
-                    <th>Jumlah Training</th>
+                    <th>Number of Trainings</th>
                     <th>Admin Approval</th>
                     <th>BOD Approval</th>
                     <th style="color:red;">Reject</th>

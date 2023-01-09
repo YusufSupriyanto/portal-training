@@ -13,11 +13,11 @@
             <table class="table table-head-fixed display" id="example2">
                 <thead>
                     <tr>
-                        <th>Nama</th>
-                        <th>Judul Training</th>
-                        <th>Jenis Training</th>
-                        <th>Tanggal Pelaksanaan</th>
-                        <th>Keterangan</th>
+                        <th>Name</th>
+                        <th>Training Title</th>
+                        <th>Training Type</th>
+                        <th>Implementation date</th>
+                        <th>Description</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,14 +31,12 @@
                         <?php if ($evaluation['status'] == null) : ?>
                         <td>
                             <a href="<?= base_url() ?>/form_efektivitas_unplanned/<?= $evaluation['id_tna'] ?>"
-                                class="btn btn-danger btn-sm" style="color:white">Belum
-                                dievaluasi</a>
+                                class="btn btn-danger btn-sm" style="color:white">Not Evaluated</a>
                         </td>
                         <?php else : ?>
                         <td>
                             <a href="<?= base_url() ?>/detail_efektivitas_unplanned/<?= $evaluation['id_tna'] ?>"
-                                class="btn btn-success btn-sm" style="color:white">Sudah
-                                dievaluasi</a>
+                                class="btn btn-success btn-sm" style="color:white">Evaluated</a>
                         </td>
                         <?php endif; ?>
                     </tr>

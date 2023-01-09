@@ -26,7 +26,7 @@
         <?php foreach ($evaluasi as $evaluation) : ?>
         <input type="hidden" value="<?= $evaluation['id_tna'] ?>" name="id_tna">
         <div class="form-group">
-            <label>Nama Peserta Training</label>
+            <label>Name of Training Participant</label>
             <div class="input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text">
@@ -37,7 +37,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label>Npk/Dept/Seksi</label>
+            <label>Npk/Dept/Section</label>
             <div class="input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text">
@@ -50,7 +50,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label>Jabatan</label>
+            <label>Position</label>
             <div class="input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text">
@@ -61,7 +61,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label>Nama Training </label>
+            <label>Training Name</label>
             <div class="input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text">
@@ -72,7 +72,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label>Tanggal Pelaksanaan</label>
+            <label>Implementation Date</label>
             <div class="input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text">
@@ -85,7 +85,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label>Lembaga Penyelenggara </label>
+            <label>Organizing Agency </label>
             <div class="input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text">

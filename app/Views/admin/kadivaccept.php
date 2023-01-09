@@ -78,14 +78,14 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Masukan Alasan Di Reject</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Reject Reason</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
                                 <div class="d-flex flex-column">
-                                    <label for="alasan">Alasan</label>
+                                    <label for="alasan">Reason</label>
                                     <textarea id="alasan<?= $i ?>" class="mt-1" name="alasan<?= $i ?>"></textarea>
                                 </div>
                             </div>

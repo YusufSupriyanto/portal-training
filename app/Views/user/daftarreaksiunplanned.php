@@ -35,14 +35,14 @@
                 <td>
                     <div class="d-flex justify-content-center sm">
                         <a href="<?= base_url() ?>/form_evaluasi_unplanned/<?= $Atmps['id_tna'] ?>"
-                            class="btn btn-danger btn-sm" style="font-size:10px;">Belum Evaluasi</a>
+                            class="btn btn-danger btn-sm" style="font-size:10px;">Not Evaluated</a>
                     </div>
                 </td>
                 <?php else : ?>
                 <td>
                     <div class="d-flex justify-content-center sm">
                         <a href="<?= base_url() ?>/form_unplanned_selesai/<?= $Atmps['id_tna'] ?>"
-                            class="btn btn-success btn-sm" style="font-size:10px;">Sudah Evaluasi</a>
+                            class="btn btn-success btn-sm" style="font-size:10px;">Evaluated</a>
                     </div>
                 </td>
                 <?php endif; ?>

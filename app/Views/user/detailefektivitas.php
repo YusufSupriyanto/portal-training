@@ -23,18 +23,18 @@
     $page = basename($_SERVER['PHP_SELF']);
     if ($page  == 'detail_efektivitas') : ?>
     <h4>
-        <center>Form Evaluasi Efektivitas Training</center>
+        <center>Form Effectiveness Evaluation Training</center>
     </h4>
     <?php else : ?>
     <h4>
-        <center>Form Evaluasi Unplanned Training</center>
+        <center>Form Effectiveness Unplanned Training</center>
     </h4>
     <?php endif; ?>
 
     <?php foreach ($evaluasi as $evaluation) : ?>
     <input type="hidden" value="<?= $evaluation['id_tna'] ?>" name="id_tna" id="id_tna">
     <div class="form-group">
-        <label>Nama Peserta Training</label>
+        <label>Nama Training Participant</label>
         <div class="input-group">
             <div class="input-group-prepend">
                 <span class="input-group-text">
@@ -45,7 +45,7 @@
         </div>
     </div>
     <div class="form-group">
-        <label>Npk/Dept/Seksi</label>
+        <label>Npk/Dept/Section</label>
         <div class="input-group">
             <div class="input-group-prepend">
                 <span class="input-group-text">
@@ -58,7 +58,7 @@
         </div>
     </div>
     <div class="form-group">
-        <label>Jabatan</label>
+        <label>Position</label>
         <div class="input-group">
             <div class="input-group-prepend">
                 <span class="input-group-text">
@@ -69,7 +69,7 @@
         </div>
     </div>
     <div class="form-group">
-        <label>Nama Training </label>
+        <label>Training Name</label>
         <div class="input-group">
             <div class="input-group-prepend">
                 <span class="input-group-text">
@@ -80,7 +80,7 @@
         </div>
     </div>
     <div class="form-group">
-        <label>Tanggal Pelaksanaan</label>
+        <label>Implementation Date</label>
         <div class="input-group">
             <div class="input-group-prepend">
                 <span class="input-group-text">
@@ -93,7 +93,7 @@
         </div>
     </div>
     <div class="form-group">
-        <label>Lembaga Penyelenggara </label>
+        <label>Organizing Agency</label>
         <div class="input-group">
             <div class="input-group-prepend">
                 <span class="input-group-text">
@@ -425,7 +425,7 @@ function adding(i) {
             </div>
             <div>
                 <button type="button" class="btn btn-success btn-sm mt-2" onclick="adding(${i})" style="margin-left:38px;"><i
-                        class="fa-solid fa-plus"></i>Tambah Sasaran Kompetensi</button>
+                        class="fa-solid fa-plus"></i>Add Competency Target</button>
                         <button type="button" class="btn btn-danger btn-sm mt-2" id="removed${i}" onclick="removed(${i})"><i
                         class="fa fa-close"></i></button>
             </div>

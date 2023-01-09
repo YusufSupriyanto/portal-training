@@ -14,10 +14,10 @@
                 <thead>
                     <tr>
                         <th>Nama</th>
-                        <th>Judul Training</th>
-                        <th>Jenis Training</th>
-                        <th>Tanggal Pelaksanaan</th>
-                        <th>Keterangan</th>
+                        <th>Training Title</th>
+                        <th>Training Type</th>
+                        <th>Implementation Date</th>
+                        <th>Description</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,14 +30,12 @@
 
                         <?php if ($evaluation['status'] == null) : ?>
                         <td>
-                            <a class="btn btn-danger btn-sm" style="color:white">Belum
-                                dievaluasi</a>
+                            <a class="btn btn-danger btn-sm" style="color:white">Not Implemented</a>
                         </td>
                         <?php else : ?>
                         <td>
                             <a href="<?= base_url() ?>/detail_efektivitas/<?= $evaluation['id_tna'] ?>"
-                                class="btn btn-success btn-sm" style="color:white">Sudah
-                                dievaluasi</a>
+                                class="btn btn-success btn-sm" style="color:white">Implemented</a>
                         </td>
                         <?php endif; ?>
                     </tr>

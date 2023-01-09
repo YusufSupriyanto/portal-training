@@ -10,17 +10,18 @@
         <table class="table table-striped overflow-auto" id="example">
             <thead>
                 <tr>
-                    <th>Nama</th>
+                    <th>Name</th>
                     <th>Training</th>
-                    <th>Jenis Training</th>
-                    <th>Kategori Training</th>
-                    <th>Metode Training</th>
-                    <th>Request Training</th>
-                    <th>Mulai Training</th>
-                    <th>Selesai Training</th>
-                    <th>Tujuan Training</th>
+                    <th>Training Type</th>
+                    <th>Training Category</th>
+                    <th>Training Method</th>
+                    <th>Training Requests</th>
+                    <th>Training Start</th>
+                    <th>Training Finished</th>
+                    <th>Training Goal</th>
                     <th>Notes</th>
-                    <th>Budget</th>
+                    <th>Budget Estimate</th>
+                    <th>Approval KADEPT</th>
                     <th>Approval KADIV</th>
                     <th>Approval Admin</th>
                     <th>Approval BOD</th>

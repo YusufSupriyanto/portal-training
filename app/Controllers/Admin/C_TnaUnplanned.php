@@ -33,7 +33,6 @@ class C_TnaUnplanned extends BaseController
     {
         $departemen = $this->unplanned->getStatusWaitAdminUnplannedDistinct();
 
-        // dd($tna);
         $data = [
             'tittle' => 'Form TNA',
             'dept' => $departemen,
@@ -42,6 +41,7 @@ class C_TnaUnplanned extends BaseController
 
 
         ];
+
         return view('admin/tnaunplanned', $data);
     }
 
@@ -85,8 +85,6 @@ class C_TnaUnplanned extends BaseController
     public function kadivAccept($Month)
     {
         $date = date_parse($Month);
-
-
 
         $departemen = $this->unplanned->getKadivAcceptDistinct($date['month'], date('Y'));
 

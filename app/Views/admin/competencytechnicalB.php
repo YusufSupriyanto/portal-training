@@ -13,7 +13,7 @@
     <div class="d-flex">
         <div class="card m-1">
             <div class="card-header d-flex justify-content-center">
-                <h3 class=" card-title">Technical Competency Departemen <?= $department ?></h3>
+                <h3 class=" card-title">Technical Competency Department <?= $department ?></h3>
             </div>
             <!-- /.card-header -->
 
@@ -77,7 +77,7 @@
                             name="proficiency" required>
                     </div>
                     <div class="form-group">
-                        <label>Nama Jabatan</label>
+                        <label>Section Name</label>
                         <input type="text" class="form-control" placeholder="Nama Jabatan" id="nama_jabatan" disabled>
                     </div>
                 </div>

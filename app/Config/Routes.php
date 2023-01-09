@@ -181,7 +181,7 @@ $routes->get('/unplanned_monthly', 'Admin\C_TnaUnplanned::unplannedMonthly', ['f
 $routes->get('/kadiv_accept_unplanned/(:any)', 'Admin\C_TnaUnplanned::kadivAccept/$1', ['filter' => 'Auth']);
 
 //unplanned Schedule admin
-$routes->get('/schedule_unplanned', 'Admin\C_Schedule::unplannedSedule', ['filter' => 'Auth']);
+$routes->get('/schedule_unplanned', 'Admin\C_Schedule::unplannedSchedule', ['filter' => 'Auth']);
 $routes->get('/schedule_action_unplanned/(:num)', 'Admin\C_Schedule::askForEvaluationUnplanned/$1', ['filter' => 'Auth']);
 
 

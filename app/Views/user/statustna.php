@@ -17,7 +17,6 @@
         <h3 class="card-title">Status Unplanned Personal</h3>
         <?php endif; ?>
         <?php endif; ?>
-
     </div>
     <!-- /.card-header -->
     <div class="card-body p-0 overflow-auto">

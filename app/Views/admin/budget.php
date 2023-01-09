@@ -43,7 +43,7 @@
                             name="temporary" placeholder="Temporary Calculation" required>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputtahun1">Tahun Training</label>
+                        <label for="exampleInputtahun1">Training Year</label>
                         <input type="text" class="form-control" name="year" id="year" required placeholder="Tahun">
                     </div>
                 </div>

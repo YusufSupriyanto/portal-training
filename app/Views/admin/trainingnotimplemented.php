@@ -8,7 +8,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Alasan</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Reason</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -33,14 +33,14 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Nama</th>
-                    <th>Departemen</th>
+                    <th>Name</th>
+                    <th>Department</th>
                     <th>Training</th>
-                    <th>Mulai Training</th>
-                    <th>Selesai Training</th>
-                    <th>Planing Budget</th>
-                    <th>Actual Budget</th>
-                    <th>Alasan</th>
+                    <th>Training Start</th>
+                    <th>Training Finished</th>
+                    <th>Budget Planning</th>
+                    <th>Budget Actual</th>
+                    <th>Reason</th>
                 </tr>
             </thead>
 

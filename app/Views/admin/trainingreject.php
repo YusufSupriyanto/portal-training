@@ -11,15 +11,15 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Nama</th>
-                    <th>Departemen</th>
+                    <th>Name</th>
+                    <th>Department</th>
                     <th>Training</th>
-                    <th>Mulai Training</th>
-                    <th>Selesai Training</th>
-                    <th>Planing Budget</th>
-                    <th>Actual Budget</th>
+                    <th>Training Start</th>
+                    <th>Training Finished</th>
+                    <th>Budget Planned</th>
+                    <th>Budget Actual</th>
                     <th>Status</th>
-                    <th>Alasan</th>
+                    <th>Reason</th>
                     <th>Action</th>
                 </tr>
             </thead>

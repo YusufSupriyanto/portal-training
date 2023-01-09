@@ -38,11 +38,11 @@
             <thead>
                 <tr>
                     <th>NPK</th>
-                    <th>Nama</th>
+                    <th>Name</th>
                     <th>Status</th>
-                    <th>Divisi</th>
-                    <th>Departemen</th>
-                    <th>Bagian</th>
+                    <th>Division</th>
+                    <th>Department</th>
+                    <th>Section</th>
                     <th>Status</th>
                 </tr>
             </thead>
@@ -80,103 +80,103 @@
     aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
         <form method="post" action="<?= base_url() ?>\tna\send">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">TNA Tersimpan</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
+            <div class="modal-content"></div>
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">TNA Save</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
 
-                    <div class="card-body p-0 table-wrapper-scroll-y my-custom-scrollbar">
-                        <table class=" table table-striped table-bordered mb-0 overflow-auto">
-                            <thead>
-                                <tr>
-                                    <th>Nama</th>
-                                    <th>Training</th>
-                                    <th>Jenis Training</th>
-                                    <th>Kategori Training</th>
-                                    <th>Metode Training</th>
-                                    <th>Request Training</th>
-                                    <th>Tujuan Training</th>
-                                    <th>Notes</th>
-                                    <th>Estimasi Budget</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $sum = 0;
-                                foreach ($tna as $Forms) : ?>
-                                <tr>
-                                    <td><?= $Forms->nama ?></td>
-                                    <td><?= $Forms->training ?></td>
-                                    <td><?= $Forms->jenis_training ?></td>
-                                    <td><?= $Forms->kategori_training ?></td>
-                                    <td><?= $Forms->metode_training ?></td>
-                                    <td><?= $Forms->request_training ?></td>
-                                    <td><?= $Forms->tujuan_training ?></td>
-                                    <td><?= $Forms->notes ?></td>
-                                    <td>
-                                        <div><?= "Rp " . number_format($Forms->biaya, 0, ',', '.') ?></div>
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-danger btn-sm"
-                                            onclick="DeleteTnaOther(<?= $Forms->id_tna ?>)">
-                                            <i class="fa fa-fw fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <input type="hidden" value="<?= $Forms->id_tna ?>" name="training[]">
-                                <?php
-                                    $sum += $Forms->biaya;
-                                endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="d-flex justify-content-around">
-                        <div class="ml-4">
-                            <div><strong>Alocated
-                                    Budget :</strong>
-                                <?php if ($budget != null) {
-                                    echo "Rp " . number_format($budget['alocated_budget'], 0, ',', '.');
-                                } else {
-                                    echo 0;
-                                } ?>
-                            </div>
-                        </div>
-                        <div>
-                            <strong>Available
+                <div class="card-body p-0 table-wrapper-scroll-y my-custom-scrollbar">
+                    <table class=" table table-striped table-bordered mb-0 overflow-auto">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Training</th>
+                                <th>Training Type</th>
+                                <th>Training Category</th>
+                                <th>Training Method</th>
+                                <th>Training Request</th>
+                                <th>Training Goals</th>
+                                <th>Notes</th>
+                                <th>Budget Estimation</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $sum = 0;
+                            foreach ($tna as $Forms) : ?>
+                            <tr>
+                                <td><?= $Forms->nama ?></td>
+                                <td><?= $Forms->training ?></td>
+                                <td><?= $Forms->jenis_training ?></td>
+                                <td><?= $Forms->kategori_training ?></td>
+                                <td><?= $Forms->metode_training ?></td>
+                                <td><?= $Forms->request_training ?></td>
+                                <td><?= $Forms->tujuan_training ?></td>
+                                <td><?= $Forms->notes ?></td>
+                                <td></td>
+                                <div><?= "Rp " . number_format($Forms->biaya, 0, ',', '.') ?></div>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger btn-sm"
+                                        onclick="DeleteTnaOther(<?= $Forms->id_tna ?>)">
+                                        <i class="fa fa-fw fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <input type="hidden" value="<?= $Forms->id_tna ?>" name="training[]">
+                            <?php
+                                $sum += $Forms->biaya;
+                            endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="d-flex justify-content-around">
+                    <div class="ml-4">
+                        <div><strong>Alocated
                                 Budget :</strong>
                             <?php if ($budget != null) {
-                                echo "Rp " . number_format($budget['available_budget'], 0, ',', '.');
+                                echo "Rp " . number_format($budget['alocated_budget'], 0, ',', '.');
                             } else {
                                 echo 0;
                             } ?>
                         </div>
-                        <div class="mr-4">
-                            <strong>Used
-                                Budget :</strong>
-                            <?php if ($budget != null) {
-                                echo "Rp " . number_format($budget['used_budget'], 0, ',', '.');
-                            } else {
-                                echo 0;
-                            } ?>
-                        </div>
-                        <div class="ml-4"><strong>Total Estimasi Budget :
-                            </strong><?= "Rp " . number_format($sum, 0, ',', '.') ?>
-                        </div>
-
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-send"></i>Submit TNA</button>
+                    <div>
+                        <strong>Available
+                            Budget :</strong>
+                        <?php if ($budget != null) {
+                            echo "Rp " . number_format($budget['available_budget'], 0, ',', '.');
+                        } else {
+                            echo 0;
+                        } ?>
+                    </div>
+                    <div class="mr-4">
+                        <strong>Used
+                            Budget :</strong>
+                        <?php if ($budget != null) {
+                            echo "Rp " . number_format($budget['used_budget'], 0, ',', '.');
+                        } else {
+                            echo 0;
+                        } ?>
+                    </div>
+                    <div class="ml-4"><strong>Total Budget Estimation:
+                        </strong><?= "Rp " . number_format($sum, 0, ',', '.') ?>
+                    </div>
+
                 </div>
             </div>
-        </form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-send"></i>Submit TNA</button>
+            </div>
     </div>
+    </form>
+</div>
 </div>
 <!-- Modal -->
 <div class="modal fade" id="DeleteModalOther" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
@@ -184,18 +184,18 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <form action="<?= base_url() ?>\delete_training_user" method="post">
-                <div class="modal-body">
-                    <input type="hidden" name="id" id="id">
-                    <input type="hidden" name="url" id="url" value="0">
-                    <h6><strong>Apakah Anda Ingin Menghapus TNA User!</strong></h6>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                    <button type="submit" class="btn btn-danger">Yes!</button>
-                </div>
-            </form>
+                <div class="modal-body"></div>
+                <input type="hidden" name="id" id="id">
+                <input type="hidden" name="url" id="url" value="0">
+                <h6><strong>Are You Sure !</strong></h6>
         </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            <button type="submit" class="btn btn-danger">Yes!</button>
+        </div>
+        </form>
     </div>
+</div>
 </div>
 <!-- Modal -->
 <div class="modal fade" id="exampleModalKadiv" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
@@ -204,7 +204,7 @@
         <form method="post" action="<?= base_url() ?>\tna\send">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">TNA Tersimpan</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">TNA Save</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -214,15 +214,15 @@
                         <table class=" table table-bordered mb-0 overflow-auto">
                             <thead>
                                 <tr>
-                                    <th>Nama</th>
+                                    <th>Name</th>
                                     <th>Training</th>
-                                    <th>Jenis Training</th>
-                                    <th>Kategori Training</th>
-                                    <th>Metode Training</th>
-                                    <th>Request Training</th>
-                                    <th>Tujuan Training</th>
+                                    <th>Training Type</th>
+                                    <th>Training Category</th>
+                                    <th>Training Method</th>
+                                    <th>Training Request</th>
+                                    <th>Training Goals</th>
                                     <th>Notes</th>
-                                    <th>Estimasi Budget</th>
+                                    <th>Budget Estimation</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -265,7 +265,7 @@
                                     <td><?= "Rp " . number_format($budgets['available_budget'], 0, ',', '.') ?></td>
                                     <td><strong>Used Budget</strong></td>
                                     <td><?= "Rp " . number_format($budgets['used_budget'], 0, ',', '.') ?></td>
-                                    <td><strong>Total Estimasi Budget</strong></td>
+                                    <td><strong>Total Budget Estimation</strong></td>
                                     <td><?= "Rp " . number_format($sum, 0, ',', '.') ?></td>
 
                                 </tr>
@@ -278,7 +278,7 @@
                                     <td><?= "Rp " . number_format(0, 0, ',', '.') ?></td>
                                     <td><strong>Used Budget</strong></td>
                                     <td><?= "Rp " . number_format(0, 0, ',', '.') ?></td>
-                                    <td><strong>Total Estimasi Budget</strong></td>
+                                    <td><strong>Total Budget Estimation</strong></td>
                                     <td><?= "Rp " . number_format(0, 0, ',', '.') ?></td>
                                 </tr>
                                 <?php endif; ?>
@@ -305,7 +305,7 @@
                 <div class="modal-body">
                     <input type="hidden" name="id" id="idkadiv">
                     <input type="hidden" name="url" id="url" value="0">
-                    <h6><strong>Apakah Anda Ingin Menghapus TNA User!</strong></h6>
+                    <h6><strong>Are You Sure!</strong></h6>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>

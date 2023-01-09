@@ -20,6 +20,7 @@ class M_Approval extends Model
     public function getTrainingNotImplemented()
     {
         $this->select()->where('status_training', 0);
+        $this->join('user', 'user.id_user = tna.id_user');
         $this->join('tna', 'tna.id_tna = approval.id_tna');
         return $this->get()->getResultArray();
     }

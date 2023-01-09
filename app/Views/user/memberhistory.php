@@ -12,8 +12,8 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Nama</th>
-                    <th>Jumlah Training</th>
+                    <th>Name</th>
+                    <th>Training Total</th>
                 </tr>
             </thead>
             <tbody>

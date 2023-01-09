@@ -10,17 +10,17 @@
         <table class="table table-hover" id="example">
             <thead>
                 <tr>
-                    <th>Nama</th>
-                    <th>Npk</th>
-                    <th>Departemen</th>
-                    <th>Judul Training</th>
-                    <th>Jenis Training</th>
-                    <th>Kategori Training</th>
-                    <th>Metode Training</th>
-                    <th>Tujuan Training</th>
-                    <th>Mulai Training</th>
-                    <th>Selesai Training</th>
-                    <th>Biaya</th>
+                    <th>Name</th>
+                    <th>NPK</th>
+                    <th>Department</th>
+                    <th>Training Title</th>
+                    <th>Training Type</th>
+                    <th>Training Category</th>
+                    <th>Training Method</th>
+                    <th>Training Goals</th>
+                    <th>Training Start</th>
+                    <th>Training Finished</th>
+                    <th>Budget</th>
                 </tr>
             </thead>
             <?php foreach ($Atmp as $Atmps) : ?>

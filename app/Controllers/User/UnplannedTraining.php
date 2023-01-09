@@ -317,6 +317,7 @@ class UnplannedTraining extends BaseController
         $divisi = session()->get('divisi');
         $departemen = session()->get('departemen');
 
+
         if ($bagian == 'BOD') {
             $dept = $this->unplanned->getRequestTnaUnplannedDistinct($bagian, $dic);
         } elseif ($bagian == 'KADIV') {
@@ -326,7 +327,6 @@ class UnplannedTraining extends BaseController
         } else {
             $dept  =  array();
         }
-
 
         $data = [
             'tittle' => 'Request Unplanned',
@@ -380,7 +380,7 @@ class UnplannedTraining extends BaseController
         $unplannedHistory = $this->unplanned->getHistoryUnplanned($id);
         $unplannedTerdaftar = $this->unplanned->getUnplannedTerdaftar($id);
 
-        if ($user['type_golongan'] == 'A         ' && $user['type_user'] == 'REGULAR             ') {
+        if (trim($user['type_golongan']) == 'A' && trim($user['type_user']) == 'REGULAR') {
             //Filter Astra Competency
             $datas  = $this->competencyAstra->getProfileAstraCompetency($id);
             $astra = [];
@@ -443,7 +443,7 @@ class UnplannedTraining extends BaseController
                 'target' => $target,
                 'validation' => \Config\Services::validation(),
             ];
-        } elseif ($user['type_golongan'] == 'A         ' && $user['type_user'] == 'EXPERT              ') {
+        } elseif (trim($user['type_golongan']) == 'A' && trim($user['type_user']) == 'EXPERT') {
             //Filter Expert Competency
             $dataExpert  = $this->competencyExpert->getProfileExpertCompetency($id);
             $Expert = [];

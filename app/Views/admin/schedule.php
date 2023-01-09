@@ -16,7 +16,7 @@
                 <th>Training Type</th>
                 <th>Training Category</th>
                 <th>Training Method</th>
-                <th>Tujuan Training</th>
+                <th>Training Goals</th>
                 <th>Training Implementation</th>
                 <th>Action</th>
             </tr>
@@ -37,10 +37,9 @@
                 <td>
                     <div class="d-flex flex-column">
                         <a href="<?= base_url() ?>/schedule_action/<?= $Atmps['id_tna'] ?>"
-                            class="btn btn-success btn-sm" style="font-size:10px;">Sudah Terlaksana</a>
+                            class="btn btn-success btn-sm" style="font-size:10px;">Has Been Done</a>
                         <button onclick="ModalReasons(<?= $Atmps['id_tna'] ?>)" class="btn btn-danger btn-sm mt-2"
-                            style="font-size:10px;">Tidak
-                            Terlaksana</button>
+                            style="font-size:10px;">Not implemented</button>
                     </div>
 
                 </td>
@@ -48,10 +47,9 @@
                 <td>
                     <div>
                         <a href="<?= base_url() ?>/schedule_action_unplanned/<?= $Atmps['id_tna'] ?>"
-                            class="btn btn-success btn-sm" style="font-size:10px;">Sudah Terlaksana</a>
+                            class="btn btn-success btn-sm" style="font-size:10px;">Has Been Done</a>
                         <button onclick="ModalReasons(<?= $Atmps['id_tna'] ?>)" class="btn btn-danger btn-sm mt-2"
-                            style="font-size:10px;">Tidak
-                            Terlaksana</button>
+                            style="font-size:10px;">Not implemented</button>
                 </td>
                 <?php endif; ?>
             </tr>
@@ -68,7 +66,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Alasan</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Reason</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

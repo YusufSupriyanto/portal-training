@@ -11,10 +11,10 @@
             <thead>
                 <tr>
                     <th>Training</th>
-                    <th>Pendaftar</th>
-                    <th>Tanggal</th>
-                    <th>Kategori</th>
-                    <th>Daftar</th>
+                    <th>Registrants</th>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>List</th>
                 </tr>
             </thead>
             <tbody>

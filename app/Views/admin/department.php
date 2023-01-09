@@ -115,7 +115,7 @@
     </div>
     <div class="form-group m-2">
         <form action="<?= base_url() ?>/change_structure" method="POST">
-            <label>Change Name Seksi</label>
+            <label>Change Section Name</label>
             <select class="form-control" name="seksi[]" required>
                 <option value="">CHOOSE SEKSI</option>
                 <?php foreach ($seksi as $seksi) : ?>

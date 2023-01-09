@@ -26,16 +26,16 @@
             <table class="table table-hover table-striped table-bordered mb-0 overflow-auto">
                 <thead>
                     <tr>
-                        <th>Nama</th>
-                        <th>Departemen</th>
+                        <th>Name</th>
+                        <th>Department</th>
                         <th>Training</th>
-                        <th>Request Training</th>
-                        <th>Mulai Training</th>
-                        <th>Selesai Training</th>
-                        <th>Planing Budget</th>
-                        <th>Actual Budget</th>
+                        <th>Training Request</th>
+                        <th>Training Start</th>
+                        <th>Training Finished</th>
+                        <th>Budget Planning</th>
+                        <th>Budget Actual</th>
                         <th>Vendor</th>
-                        <th>Tempat</th>
+                        <th>Place</th>
                         <th>Status</th>
                     </tr>
                 </thead>
@@ -118,27 +118,27 @@
                 </div>
                 <div class="modal-body">
                     <div class="d-flex flex-column">
-                        <label for="nama">Nama</label>
+                        <label for="nama">Name</label>
                         <input id="nama" class="nama" name="nama" readonly></input>
                         <label for="dic">Dic</label>
                         <input id="dic" class="dic" name="dic" readonly></input>
                         <label for="divisi">Divisi</label>
                         <input id="divisi" class="divisi" name="divisi" readonly></input>
-                        <label for="departemen">Departemen</label>
+                        <label for="departemen">Department</label>
                         <input id="departemen" class="departemen" name="departemen" readonly></input>
                         <label for="training">Training</label>
                         <input id="training" class="mt-1" name="training" readonly></input>
-                        <label for="jenis-training">Jenis Training</label>
+                        <label for="jenis-training">Training Type</label>
                         <input id="jenis-training" class="mt-1" name="jenis-training" readonly></input>
-                        <label for="kategori-training">Kategori Training</label>
+                        <label for="kategori-training">Training Category</label>
                         <input id="kategori-training" class="mt-1" name="kategori-training" readonly></input>
-                        <label for="metode-training">Metode Training</label>
+                        <label for="metode-training">Training Method</label>
                         <input id="metode-training" class="mt-1" name="metode-training" readonly></input>
-                        <label for="mulai-training">Mulai Training</label>
+                        <label for="mulai-training">Training Start</label>
                         <input id="mulai-training" class="mt-1" name="mulai-training" readonly></input>
-                        <label for="Selesai-training">Selesai Training</label>
+                        <label for="Selesai-training">Training Finished</label>
                         <input id="Selesai-training" class="mt-1" name="Selesai-training" readonly></input>
-                        <label for="tujuan-training">Tujuan Training</label>
+                        <label for="tujuan-training">Training Goals</label>
                         <input id="tujuan-training" class="mt-1" name="tujuan-training" readonly></input>
                         <label for="notes">Note</label>
                         <textarea id="notes" class="mt-1" name="notes" readonly></textarea>

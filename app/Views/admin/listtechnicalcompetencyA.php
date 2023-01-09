@@ -34,7 +34,7 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>Departemen</th>
+                        <th>Department</th>
                     </tr>
                 </thead>
                 <tbody>

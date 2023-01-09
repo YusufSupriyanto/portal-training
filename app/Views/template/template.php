@@ -240,7 +240,7 @@ to get the desired effect
                                                         endif; ?>">
                                     <i class="nav-icon fa fa-fw fa-list"></i>
                                     <p>
-                                        List Pengembangan
+                                        Development List
                                         <i class="right fas fa-angle-left"></i>
                                     </p>
                                 </a>
@@ -278,14 +278,14 @@ to get the desired effect
                                         <a href="<?= base_url() ?>/tna" class="nav-link  <?php if ($page == 'tna') : echo 'active';
                                                                                         endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>Daftar Training</p>
+                                            <p>List Training</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="<?= base_url() ?>/tna_unplanned" class="nav-link  <?php if ($page == 'tna_unplanned') : echo 'active';
                                                                                                 endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>Daftar Training Unplanned</p>
+                                            <p>List Training Unplanned</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
@@ -431,7 +431,7 @@ to get the desired effect
                                         <a href="<?= base_url() ?>/training_ditolak" class="nav-link  <?php if ($page == 'training_diolak') : echo 'active';
                                                                                                     endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>Daftar Training Di Reject</p>
+                                            <p>List Training Rejected</p>
                                         </a>
                                     </li>
                                 </ul>
@@ -440,7 +440,7 @@ to get the desired effect
                                         <a href="<?= base_url() ?>/training_not_implemented" class="nav-link  <?php if ($page == 'training_not_implemented') : echo 'active';
                                                                                                             endif; ?>">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>Training Tidak Dilaksanakan</p>
+                                            <p>Training Not Implemented</p>
                                         </a>
                                     </li>
                                 </ul>

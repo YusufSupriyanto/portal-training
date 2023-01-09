@@ -17,89 +17,89 @@
                 </div>
                 <div class="modal-body" id="modalBody">
                     <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Jadwal Training</h3>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body p-0">
-                            <div></div>
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Training</th>
-                                        <th>Pendaftar</th>
-                                        <th>Tanggal Mulai</th>
-                                        <th>Tanggal Selesai</th>
-                                        <th>Kategori</th>
-                                        <th>Notes</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="home_table">
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- /.card-body -->
+                        <div class="card-header"></div>
+                        <h3 class="card-title">Training Schedule</h3>
                     </div>
+                    <!-- /.card-header -->
+                    <div class="card-body p-0">
+                        <div></div>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Training</th>
+                                    <th>Registrants</th>
+                                    <th>Date Start</th>
+                                    <th>Date Finished</th>
+                                    <th>Category</th>
+                                    <th>Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody id="home_table">
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="user" tabindex="-1" aria-labelledby="user" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="user">Daftar Unplanned Training</h5>
-                </div>
-                <div class="modal-body">
+<!-- Modal -->
+<div class="modal fade" id="user" tabindex="-1" aria-labelledby="user" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="user">Unplanned Training List</h5>
+            </div>
+            <div class="modal-body">
 
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Nama</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php $i = 0;
-                            foreach ($user as $users) : ?>
-                            <tr>
-                                <td>
-                                    <form action="<?= base_url() ?>\unplanned" id="dataform<?= $i ?>" method="post">
-                                        <input type="hidden" name="member" id="member<?= $i ?>"
-                                            value="<?= $users->id_user ?>">
-                                        <input type="hidden" name="training" id="training">
-                                        <input type="hidden" name="id_training" id="id_training">
-                                        <input type="hidden" name="jenis" id="jenis">
-                                        <input type="hidden" name="kategori" id="kategori">
-                                        <input type="hidden" name="metode" id="metode">
-                                        <input type="hidden" name="start" id="start">
-                                        <input type="hidden" name="end" id="end">
-                                        <input type="hidden" name="budget" id="budget">
-                                    </form>
-                                    <?php if (session()->get('id') == $users->nama) : ?>
-                                    <h6><?= $users->nama ?></h6>
-                                    <?php else : ?>
-                                    <a href="#"
-                                        onclick="document.getElementById('dataform<?= $i ?>').submit();"><?= $users->nama ?></a>
-                                    <?php endif; ?>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $i = 0;
+                        foreach ($user as $users) : ?>
+                        <tr>
+                            <td>
+                                <form action="<?= base_url() ?>\unplanned" id="dataform<?= $i ?>" method="post">
+                                    <input type="hidden" name="member" id="member<?= $i ?>"
+                                        value="<?= $users->id_user ?>">
+                                    <input type="hidden" name="training" id="training">
+                                    <input type="hidden" name="id_training" id="id_training">
+                                    <input type="hidden" name="jenis" id="jenis">
+                                    <input type="hidden" name="kategori" id="kategori">
+                                    <input type="hidden" name="metode" id="metode">
+                                    <input type="hidden" name="start" id="start">
+                                    <input type="hidden" name="end" id="end">
+                                    <input type="hidden" name="budget" id="budget">
+                                </form>
+                                <?php if (session()->get('id') == $users->nama) : ?>
+                                <h6><?= $users->nama ?></h6>
+                                <?php else : ?>
+                                <a href="#"
+                                    onclick="document.getElementById('dataform<?= $i ?>').submit();"><?= $users->nama ?></a>
+                                <?php endif; ?>
 
-                                </td>
-                            </tr>
-                            <?php $i++;
-                            endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closed">Close</button>
-                </div>
+                            </td>
+                        </tr>
+                        <?php $i++;
+                        endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closed">Close</button>
             </div>
         </div>
     </div>
+</div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
 <script>

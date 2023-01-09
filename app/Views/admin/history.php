@@ -8,11 +8,11 @@
     <!-- /.card-header -->
     <div class="card-body table-responsive p-0">
         <table class="table table-hover" id="History">
-            <thead>
-                <tr>
-                    <th>Nama</th>
-                    <th>Jumlah Training</th>
-                </tr>
+            <thead></thead>
+            <tr>
+                <th>Name</th>
+                <th>Training Totals</th>
+            </tr>
             </thead>
             <tbody>
                 <?php

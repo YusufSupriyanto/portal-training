@@ -333,11 +333,11 @@ class C_Tna extends BaseController
 
     public function TrainingNotImplemented()
     {
-        $training = $this->approval->getTrainingNotImplemented();
+        $training = $this->tna->getTrainingNotImplemented();
         //dd($training);
 
         $data = [
-            'tittle' => 'Training Tidak Terlaksana',
+            'tittle' => 'Training Not Implemented',
             'training' => $training
         ];
         return view('admin/trainingnotimplemented', $data);

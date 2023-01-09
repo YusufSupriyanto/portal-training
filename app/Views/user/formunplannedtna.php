@@ -12,7 +12,7 @@
         <div class="card-header">
             <h3 class="card-title">
                 <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#terdaftar">
-                    Unplanned Terdaftar
+                    Registered Unplanned
                 </button>
                 <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#exampleModal">
                     History Unplanned

@@ -43,7 +43,11 @@ class C_Dashboard extends BaseController
             'approved' => $this->DashboardApproved(),
             'rejected' => $this->DashboardRejected(),
             'department' => $this->user->DistinctDepartemen(),
-            'dept' => $this
+            'dept' => $this,
+            'CountImplemented' => $this->tna->CountTrainingImplemented(date('Y')),
+            'PercentImplemented' => $this->percentTrainingImplemented(),
+            'CountNotImplemented' => $this->tna->CountTrainingNotImplemented(date('Y')),
+            'PercentNotImplemented' => $this->PercentTrainingNOtImplemented()
         ];
         // $test = [1 => 1, 2, 3, 4,];
         // $test = $this->TrainingDahboardCountColumn();
@@ -122,37 +126,43 @@ class C_Dashboard extends BaseController
                 $JenisTraining = [
                     'name' => $Jenis->jenis_training,
                     'y' => $count[0]->jenis_training,
-                    'color' => "red"
+                    'color' => "red",
+                    'sliced' => true
                 ];
             } elseif ($Jenis->jenis_training == 'Technical Competency Training') {
                 $JenisTraining = [
                     'name' => $Jenis->jenis_training,
                     'y' => $count[0]->jenis_training,
-                    'color' => "blue"
+                    'color' => "blue",
+                    'sliced' => true
                 ];
             } elseif ($Jenis->jenis_training == 'Cultural Training') {
                 $JenisTraining = [
                     'name' => $Jenis->jenis_training,
                     'y' => $count[0]->jenis_training,
-                    'color' => "green"
+                    'color' => "green",
+                    'sliced' => true
                 ];
             } elseif ($Jenis->jenis_training == 'Leadership Training') {
                 $JenisTraining = [
                     'name' => $Jenis->jenis_training,
                     'y' => $count[0]->jenis_training,
-                    'color' => "purple"
+                    'color' => "purple",
+                    'sliced' => true
                 ];
             } elseif ($Jenis->jenis_training == 'Soft Competency Training') {
                 $JenisTraining = [
                     'name' => $Jenis->jenis_training,
                     'y' => $count[0]->jenis_training,
-                    'color' => "yellow"
+                    'color' => "yellow",
+                    'sliced' => true
                 ];
             } else {
                 $JenisTraining = [
                     'name' => $Jenis->jenis_training,
                     'y' => $count[0]->jenis_training,
-                    'color' => "brown"
+                    'color' => "brown",
+                    'sliced' => true
                 ];
             }
 
@@ -164,6 +174,8 @@ class C_Dashboard extends BaseController
     public function CategoryDashboard()
     {
         $categories = $this->tna->getCategory();
+
+        //  dd($categories);
         $category = [];
         foreach ($categories as $Categories) {
             $count = $this->tna->CountCategory($Categories->kategori_training, date('Y'));
@@ -171,30 +183,37 @@ class C_Dashboard extends BaseController
                 $categori = [
                     'name' => $Categories->kategori_training,
                     'y' => $count[0]->kategori_training,
-                    'color' => "red"
+                    'color' => "red",
+                    'sliced' => true
+
                 ];
             } elseif ($Categories->kategori_training == 'External') {
                 $categori = [
                     'name' => $Categories->kategori_training,
                     'y' => $count[0]->kategori_training,
-                    'color' => "blue"
+                    'color' => "blue",
+                    'sliced' => true
                 ];
             } elseif ($Categories->kategori_training == 'Inhouse') {
                 $categori = [
                     'name' => $Categories->kategori_training,
                     'y' => $count[0]->kategori_training,
-                    'color' => "green"
+                    'color' => "green",
+                    'sliced' => true
                 ];
             } else {
                 $categori = [
                     'name' => $Categories->kategori_training,
                     'y' => $count[0]->kategori_training,
-                    'color' => "purple"
+                    'color' => "purple",
+                    'sliced' => true
                 ];
             }
 
             array_push($category, $categori);
         }
+
+        //dd($categori);
         return $category;
     }
 
@@ -269,6 +288,32 @@ class C_Dashboard extends BaseController
                 $total[$Training['Bulan']] = $Training['total'];
             }
             return array_values($total);
+        }
+    }
+
+    public function percentTrainingImplemented()
+    {
+        $implemented  = $this->tna->CountTrainingImplemented(date('Y'));
+        $allTraining = $this->tna->CountAllTraining(date('Y'));
+
+        if (!empty($implemented)) {
+            $count = $implemented[0]['training'] / $allTraining[0]['training'] * 100;
+            return $count;
+        } else {
+            return 0;
+        }
+    }
+
+
+    public function PercentTrainingNOtImplemented()
+    {
+        $NotImplemented = $this->tna->CountTrainingNotImplemented(date('Y'));
+        $allTraining = $this->tna->CountAllTraining(date('Y'));
+        if (!empty($NotImplemented)) {
+            $count = $NotImplemented[0]['training'] / $allTraining[0]['training'] * 100;
+            return $count;
+        } else {
+            return 0;
         }
     }
 

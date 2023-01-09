@@ -213,15 +213,15 @@
                         <table class=" table table-striped table-bordered mb-0 overflow-auto">
                             <thead>
                                 <tr>
-                                    <th>Nama</th>
+                                    <th>Name</th>
                                     <th>Training</th>
-                                    <th>Jenis Training</th>
-                                    <th>Kategori Training</th>
-                                    <th>Metode Training</th>
-                                    <th>Request Training</th>
-                                    <th>Tujuan Training</th>
+                                    <th>Training Type</th>
+                                    <th>Training Category</th>
+                                    <th>Training Method</th>
+                                    <th>Training Request</th>
+                                    <th>Training Goals</th>
                                     <th>Notes</th>
-                                    <th>Estimasi Budget</th>
+                                    <th>Budget Estimation</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -278,7 +278,7 @@
                                     <td><?= "Rp " . number_format(0, 0, ',', '.') ?></td>
                                     <td><strong>Used Budget</strong></td>
                                     <td><?= "Rp " . number_format(0, 0, ',', '.') ?></td>
-                                    <td><strong>Total Estimasi Budget</strong></td>
+                                    <td><strong>Total Budget Estimation</strong></td>
                                     <td><?= "Rp " . number_format(0, 0, ',', '.') ?></td>
                                 </tr>
                                 <?php endif; ?>
@@ -304,7 +304,7 @@
                 <div class="modal-body">
                     <input type="hidden" name="id" id="idkadiv">
                     <input type="hidden" name="url" id="url" value="1">
-                    <h6><strong>Apakah Anda Ingin Menghapus TNA Unplanned User!</strong></h6>
+                    <h6><strong>Are You Sure!</strong></h6>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>

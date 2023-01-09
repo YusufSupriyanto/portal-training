@@ -10,9 +10,9 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Nama</th>
+                    <th>Name</th>
                     <th>Email</th>
-                    <th>Pesan</th>
+                    <th>Message</th>
                     <th>Action</th>
                 </tr>
             </thead>
