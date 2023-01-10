@@ -25,8 +25,19 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="<?= base_url() ?>/update_department" method="POST">
-
+                    <form action="<?= base_url() ?>/update_department" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="exampleInputFile">File input</label>
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" name="update">
+                                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                </div>
+                                <div class="input-group-append">
+                                    <button class="input-group-text" id="">Upload</span>
+                                </div>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>

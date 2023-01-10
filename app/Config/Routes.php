@@ -205,7 +205,7 @@ $routes->post('/save_budget', 'Admin\C_Budget::SaveBudget', ['filter' => 'Auth']
 $routes->get('/database_department', 'Admin\C_Department::index', ['filter' => 'Auth']);
 $routes->post('/change_structure', 'Admin\C_Department::ChangeStructure', ['filter' => 'Auth']);
 $routes->post('/new_department', 'Admin\C_Department::NewDepartment', ['filter' => 'Auth']);
-
+$routes->post('/update_department', 'Admin\C_Department::UpdateNameDepartment', ['filter' => 'Auth']);
 
 //USER
 

@@ -35,6 +35,10 @@ class C_Department extends BaseController
     private M_CompetencyAstra $competencyAstra;
     private M_CompetencyExpert $competencyExpert;
     private M_CompetencySoft $competencySoft;
+    private M_CompetencyTechnical $competencyTechnical;
+
+    private M_CompetencyTechnicalB $competencyTechnicalB;
+
     public function __construct()
     {
         $this->tna = new M_Tna();
@@ -48,6 +52,8 @@ class C_Department extends BaseController
         $this->competencyAstra = new M_CompetencyAstra();
         $this->competencyExpert = new M_CompetencyExpert();
         $this->competencySoft = new M_CompetencySoft();
+        $this->competencyTechnical = new M_CompetencyTechnical();
+        $this->competencyTechnicalB = new M_CompetencyTechnicalB();
     }
 
     public function index()
@@ -215,21 +221,25 @@ class C_Department extends BaseController
                     //check data sudah ada atau belum
                     if (!empty($old_competency)) {
                         $Astra = $this->astra->getAllIdAstra();
+
                         for ($i = 0; $i < count($old_competency); $i++) {
                             foreach ($Astra as $key => $values) {
-                                if (in_array($values['id_astra'], $old_competency[$i])) {
+                                if (in_array($values['astra'], $old_competency[$i])) {
                                     unset($Astra[$key]);
                                 }
                             }
                         }
-                        foreach ($Astra as $astra) {
-                            $DataAstra = [
-                                'id_user' => $user['id_user'],
-                                'id_astra' => $astra['id_astra'],
-                                'score_astra' => 0
-                            ];
-                            $this->competencyAstra->save($DataAstra);
-                            //dd($DataAstra);
+
+                        if (!empty($Astra)) {
+                            foreach ($Astra as $astra) {
+                                $DataAstra = [
+                                    'id_user' => $user['id_user'],
+                                    'id_astra' => $astra['id_astra'],
+                                    'score_astra' => 0
+                                ];
+                                $this->competencyAstra->save($DataAstra);
+                                //dd($DataAstra);
+                            }
                         }
                     } else {
                         $Astra = $this->astra->getAllIdAstra();
@@ -256,14 +266,17 @@ class C_Department extends BaseController
                                 }
                             }
                         }
-                        foreach ($Expert as $expert) {
-                            $DataExpert = [
-                                'id_user' => $user['id_user'],
-                                'id_astra' => $expert['id_expert'],
-                                'score_expert' => 0
-                            ];
-                            // save
-                            $this->competencyExpert->save($DataExpert);
+
+                        if (!empty($Expert)) {
+                            foreach ($Expert as $expert) {
+                                $DataExpert = [
+                                    'id_user' => $user['id_user'],
+                                    'id_astra' => $expert['id_expert'],
+                                    'score_expert' => 0
+                                ];
+                                // save
+                                $this->competencyExpert->save($DataExpert);
+                            }
                         }
                     } else {
                         $Expert = $this->expert->getAllIdExpert();
@@ -291,14 +304,17 @@ class C_Department extends BaseController
                             }
                         }
                     }
-                    foreach ($Soft as $soft) {
-                        $DataSoft = [
-                            'id_user' => $user['id_user'],
-                            'id_soft' => $soft['id_soft'],
-                            'score_soft' => 0
-                        ];
-                        //save 
-                        $this->competencySoft->save($DataSoft);
+
+                    if (!empty($Soft)) {
+                        foreach ($Soft as $soft) {
+                            $DataSoft = [
+                                'id_user' => $user['id_user'],
+                                'id_soft' => $soft['id_soft'],
+                                'score_soft' => 0
+                            ];
+                            //save 
+                            $this->competencySoft->save($DataSoft);
+                        }
                     }
                 } else {
                     $Soft = $this->soft->getAllIdSoft();
@@ -322,5 +338,212 @@ class C_Department extends BaseController
     //function For Update Or Join Name Department
     public function UpdateNameDepartment()
     {
+        $file = $this->request->getFile('update');
+
+        if ($file == "") {
+            return redirect()->to('/database_department');
+        }
+        $ext = $file->getClientExtension();
+        if ($ext == 'xls') {
+            $render = new
+                \PhpOffice\PhpSpreadsheet\Reader\Xls();
+        } else {
+            $render = new
+                \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+        }
+        $spreadsheet = $render->load($file);
+        $sheet = $spreadsheet->getActiveSheet()->toArray();
+
+
+
+        for ($i = 1; $i < count($sheet); $i++) {
+            $user = $this->user->GetUserByNPK($sheet[$i][0]);
+
+            $users = [
+                'id_user' => $user['id_user'],
+                'dic' => $sheet[$i][2],
+                'divisi' => $sheet[$i][3],
+                'departemen' => $sheet[$i][4],
+                'type_golongan' => $sheet[$i][5],
+                'type_user' => $sheet[$i][6]
+            ];
+
+            //cek apakah type golongan di Update
+            if (trim($user['type_golongan']) != trim($sheet[$i][5])) {
+                if (trim($sheet[$i][5]) == 'A') {
+                    if (trim($sheet[$i][6]) == 'REGULAR') {
+                        $Astra = $this->competencyAstra->getProfileAstraCompetency($user['id_user']);
+                        if (empty($Astra)) {
+                            $AstraCompetency = $this->astra->getAllIdAstra();
+
+                            foreach ($AstraCompetency as $CompetencyUser) {
+                                $AstraUser = [
+                                    'id_user' => $user['id_user'],
+                                    'id_astra' => $CompetencyUser['id_astra'],
+                                    'score_astra' => 0
+                                ];
+                                //$this->competencyAstra->save($AstraUser);
+                            }
+                        } else {
+
+                            $AstraCompetency = $this->astra->getAllIdAstra();
+                            for ($i = 0; $i < count($Astra); $i++) {
+                                foreach ($AstraCompetency as $key => $values) {
+                                    if (in_array($values['astra'], $Astra[$i])) {
+                                        unset($AstraCompetency[$key]);
+                                    }
+                                }
+                            }
+
+                            if (!empty($AstraCompetency)) {
+                                foreach ($AstraCompetency as $CompetencyUser) {
+                                    $AstraUser = [
+                                        'id_user' => $user['id_user'],
+                                        'id_astra' => $CompetencyUser['id_astra'],
+                                        'score_astra' => 0
+                                    ];
+                                    //$this->competencyAstra->save($AstraUser);
+                                }
+                            }
+                        }
+                    } else {
+                        $Expert  = $this->competencyExpert->getProfileExpertCompetency($user['id_user']);
+                        if (empty($Expert)) {
+                            $ExpertCompetency = $this->expert->getAllIdExpert();
+                            foreach ($ExpertCompetency as $CompetencyUser) {
+                                $ExpertUser = [
+                                    'id_user' => $user['id_user'],
+                                    'id_expert' => $CompetencyUser['id_expert'],
+                                    'score_expert' => 0
+                                ];
+                                //$this->competencyExpert->save($ExpertUser);
+                            }
+                        } else {
+                            $ExpertCompetency = $this->expert->getAllIdExpert();
+                            for ($i = 0; $i < count($Expert); $i++) {
+                                foreach ($ExpertCompetency as $key => $values) {
+                                    if (in_array($values['expert'], $Expert[$i])) {
+                                        unset($ExpertCompetency[$key]);
+                                    }
+                                }
+                            }
+
+                            if (!empty($$ExpertCompetency)) {
+                                foreach ($ExpertCompetency as $CompetencyUser) {
+                                    $ExpertUser = [
+                                        'id_user' => $user['id_user'],
+                                        'id_expert' => $CompetencyUser['id_expert'],
+                                        'score_expert' => 0
+                                    ];
+                                    // $this->competencyExpert->save($ExpertUser);
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    $Soft = $this->competencySoft->getProfileSoftCompetency($user['id_user']);
+                    if (empty($Soft)) {
+                        $SoftCompetency = $this->soft->getAllIdSoft();
+                        foreach ($SoftCompetency as $CompetencyUser) {
+                            $SoftUser = [
+                                'id_user' => $user['id_user'],
+                                'id_soft' => $CompetencyUser['id_soft'],
+                                'score_soft' => 0
+                            ];
+                            //$this->competencyAstra->save($AstraUser);
+                        }
+                    }
+                }
+            }
+
+            if (trim($user['departemen']) != trim($sheet[$i][4])) {
+                if (trim($sheet[$i][5]) == 'A') {
+                    $CompetencyUser  = $this->competencyTechnical->getProfileTechnicalCompetencyDept($user['id_user'], trim($sheet[$i][4]));
+                    $all_technical_competency = $this->competencyTechnical->getProfileTechnicalCompetency($user['id_user']);
+
+                    if (!empty($CompetencyUser)) {
+                        $CompetencyDepartment = $this->technical->getDataTechnicalDepartemen(trim($sheet[$i][4]));
+                        for ($i = 0; $i < count($CompetencyUser); $i++) {
+                            foreach ($CompetencyDepartment as $key => $values) {
+                                if (in_array($values['technical'], $CompetencyUser[$i])) {
+                                    unset($CompetencyDepartment[$key]);
+                                }
+                            }
+                        }
+
+                        $DuplicateCompetency = [];
+                        if (!empty($CompetencyDepartment)) {
+                            for ($i = 0; $i < count($all_technical_competency); $i++) {
+                                foreach ($CompetencyDepartment as $key => $values) {
+                                    if (in_array($values['technical'], $all_technical_competency[$i])) {
+                                        array_push($DuplicateCompetency, $CompetencyDepartment[$key]);
+                                        unset($CompetencyDepartment[$key]);
+                                    }
+                                }
+                            }
+                        }
+
+
+                        if (!empty($DuplicateCompetency)) {
+
+                            $SameCompetency = array_map("unserialize", array_unique(array_map("serialize", $DuplicateCompetency)));
+
+                            foreach ($SameCompetency as $competency) {
+                                $technical_score = $this->competencyTechnical->getProfileTechnicalCompetencyValue($user['id_user'], $competency['technical']);
+                                $TechnicalSame = [
+                                    'id_user' => $user['id_user'],
+                                    'id_technical' => $competency['id_technical'],
+                                    'score_techncial' => $technical_score[0]['score_technical']
+
+                                ];
+                                // $this->competencyTechnical->save($TechnicalSame);
+                            }
+                        }
+                    } else {
+
+                        $CompetencyDepartment = $this->technical->getDataTechnicalDepartemen(trim($sheet[$i][4]));
+
+                        $DuplicateCompetency = [];
+                        for ($i = 0; $i < count($all_technical_competency); $i++) {
+                            foreach ($CompetencyDepartment as $key => $values) {
+                                if (in_array($values['technical'], $all_technical_competency[$i])) {
+                                    array_push($DuplicateCompetency, $CompetencyDepartment[$key]);
+                                }
+                            }
+                        }
+
+                        if (!empty($CompetencyDepartment)) {
+                            foreach ($CompetencyDepartment as $Competency) {
+                                $DataTechnical = [
+                                    'id_user' => $user['id_user'],
+                                    'id_technical' => $Competency['id_technical'],
+                                    'score_technical' => 0
+                                ];
+
+                                //save
+                            }
+                        }
+
+                        if (!empty($DuplicateCompetency)) {
+                            $SameCompetency = array_map("unserialize", array_unique(array_map("serialize", $DuplicateCompetency)));
+
+                            foreach ($SameCompetency as $competency) {
+                                $technical_score = $this->competencyTechnical->getProfileTechnicalCompetencyValue($user['id_user'], $competency['technical']);
+                                $TechnicalSame = [
+                                    'id_user' => $user['id_user'],
+                                    'id_technical' => $competency['id_technical'],
+                                    'score_techncial' => $technical_score[0]['score_technical']
+
+                                ];
+                                // $this->competencyTechnical->save($TechnicalSame);
+                            }
+                        }
+                    }
+                } else {
+                }
+            }
+            // if (trim($user['divisi']) == trim($sheet[$i][3])) {
+            // }
+        }
     }
 }

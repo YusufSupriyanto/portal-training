@@ -746,7 +746,7 @@ group by MONTH(tna.mulai_training)")->getResultArray();
     public function CountTrainingNotImplemented($year)
     {
         $this->selectCount('training')->where('year', $year);
-        $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept')->where('status_training', null);
+        $this->join('approval', 'approval.id_tna = tna.id_tna')->where('status_approval_3', 'accept')->where('status_training', 0);
         return $this->get()->getResultArray();
     }
 

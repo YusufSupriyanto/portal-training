@@ -737,7 +737,7 @@ class C_User extends BaseController
                                 }
                             }
                         }
-                        // Mengecek Kembali Apakah Competenncy Department Maisih ada
+                        // Mengecek Kembali Apakah Competenncy Department Masih ada
                         if (!empty($department)) {
                             foreach ($department as $Dept) {
                                 $TechnicalNew = [
@@ -745,7 +745,7 @@ class C_User extends BaseController
                                     'id_technical' => $Dept['id_technical'],
                                     'score_technical' => 0
                                 ];
-                                $this->competencyTechnicalB->save($TechnicalNew);
+                                $this->competencyTechnical->save($TechnicalNew);
                             }
                         }
 
@@ -760,7 +760,7 @@ class C_User extends BaseController
                                     'score_techncial' => $technical_score[0]['score_technical']
 
                                 ];
-                                $this->competencyTechnicalB->save($TechnicalSame);
+                                $this->competencyTechnical->save($TechnicalSame);
                             }
                         }
                     }
