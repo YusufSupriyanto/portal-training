@@ -180,7 +180,7 @@ class Evaluasi extends BaseController
     {
 
         $evaluasi  = $this->tna->getDetailEvaluasiReaksi($id);
-        //  dd('test');
+
         // $evaluasi = $this->tna->getDataForEvaluation($id);
 
 

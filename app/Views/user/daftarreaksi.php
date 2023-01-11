@@ -56,11 +56,11 @@
     <?php endif; ?>
     <?php else : ?>
     <?php if ($Atmps['status_evaluasi'] == null) : ?>
-    <td>
-        <div class="d-flex justify-content-center sm">
-            <a href="<?= base_url() ?>/form_evaluasi_unplanned/<?= $Atmps['id_tna'] ?>" class="btn btn-danger btn-sm"
-                style="font-size:10px;">not yet evaluated</a>
-        </div>
+    <td></td>
+    <div class="d-flex justify-content-center sm">
+        <a href="<?= base_url() ?>/form_evaluasi_unplanned/<?= $Atmps['id_tna'] ?>" class="btn btn-danger btn-sm"
+            style="font-size:10px;">not yet evaluated</a>
+    </div>
     </td>
     <?php else : ?>
     <td>

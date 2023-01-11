@@ -85,29 +85,31 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <table></table>
-                    <thead class="table">
-                        <tr>
-                            <th scope="col">Certificate</th>
-                            <th scope="col">Description Passed/Not Pass</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th>
-                                <input type="file" name="file" Accept="Application/Pdf" id="file">
-                                <input type="hidden" name="history" id="history">
-                            </th>
-                            <td>
-                                <div class="form-group">
-                                    <select class="form-control" name="keterangan" id="keterangan" required>
-                                        <option value='Lulus'>Lulus</option>
-                                        <option value='Tidak Lulus'>Tidak Lulus</option>
-                                    </select>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
+                    <table>
+                        <thead class="table">
+                            <tr>
+                                <th scope="col">Certificate</th>
+                                <th scope="col">Description Passed/Not Pass</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="file" name="file" Accept="Application/Pdf" id="file">
+                                        <input type="hidden" name="history" id="history">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <select class="form-control" name="keterangan" id="keterangan" required>
+                                            <option value='Lulus'>Lulus</option>
+                                            <option value='Tidak Lulus'>Tidak Lulus</option>
+                                        </select>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
                 <div class="modal-footer">
